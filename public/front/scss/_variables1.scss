@@ -1,0 +1,148 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
+@import "bootstrap.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900|Poppins:400,500,600,700,800,900|Titillium+Web:400,600,700&subset=cyrillic,cyrillic-ext,devanagari,latin-ext,vietnamese');
+
+$font:  'Montserrat';
+
+$theme-color:#eb834e;
+$themes-color:#dc861c;
+$cyan: #60daaa;
+$yellow: #fbca67;
+$orange: #ff8a30;
+$red: #dc3545;
+$purple: #6477b9;
+$blue: #0eb7da;
+$teal:#38d2a1;
+$green:#92c14d;
+$darkgreen:#377b00;
+
+
+@mixin border-radius($radius){
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+    -moz-transition-property:    $duration;
+    -o-transition-property:      $duration;
+    -webkit-transition-property: $duration;
+    transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
+}
+
+
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+      -o-transform: $transforms;
+     -ms-transform: $transforms;
+ -webkit-transform: $transforms;
+       transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+    @include transform(rotate(#{$deg}deg));
+  }
+   
+  // scale
+  @mixin scale($scale) {
+       @include transform(scale($scale));
+  } 
+  // translate
+  @mixin translate ($x, $y) {
+     @include transform(translate($x, $y));
+  }
+  // skew
+  @mixin skew ($x, $y) {
+     @include transform(skew(#{$x}deg, #{$y}deg));
+  }
+  //transform origin
+  @mixin transform-origin ($origin) {
+      moz-transform-origin: $origin;
+           -o-transform-origin: $origin;
+          -ms-transform-origin: $origin;
+      -webkit-transform-origin: $origin;
+            transform-origin: $origin;
+  }
+  
+@mixin box-shadow ($shadow) {
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow:    $shadow;
+    box-shadow:         $shadow;
+}
+
+@mixin gradient ($startColor: #eee, $endColor: white) {
+    background-color: $startColor;
+    background: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+    background: -webkit-linear-gradient(top, $startColor, $endColor);
+    background: -moz-linear-gradient(top, $startColor, $endColor);
+    background: -ms-linear-gradient(top, $startColor, $endColor);
+    background: -o-linear-gradient(top, $startColor, $endColor);
+}
+
+@mixin transform($transform){
+    -webkit-transform: $transform;
+    -moz-transform: 	 $transform;
+    -ms-transform: 		 $transform;
+    -o-transform: 		 $transform;
+}
+$fullwidth:100%;
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6{
+    // font-family: $mon;
+    color: #1a1a1a;
+    span{
+        color:darken($theme-color, 10%);
+        font-weight: bold;
+    }
+}
+@mixin equilateral-triangle($direction, $size, $color) {
+    width: 0;
+    height: 0;
+    @if $direction == 'up' {
+        border-left: em($size) solid transparent;
+        border-right: em($size) solid transparent;
+        border-bottom: em($size) solid $color;
+    }
+    @else if $direction == 'down' {
+        border-left: em($size) solid transparent;
+        border-right: em($size) solid transparent;
+        border-top: em($size) solid $color;
+    }
+    @else if $direction == 'right' {
+        border-top: em($size) solid transparent;
+        border-bottom: em($size) solid transparent;
+        border-left: em($size) solid $color;
+    }
+    @else if $direction == 'left' {
+        border-top: em($size) solid transparent;
+        border-bottom: em($size) solid transparent;
+        border-right: em($size) solid $color;
+    }
+}

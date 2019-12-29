@@ -106,8 +106,13 @@ trait AuthenticatesUsers
 
         $this->clearLoginAttempts($request);
 
+        $notification = array(
+            'message' => 'Login successfully!',
+            'alert-type' => 'success',
+        );
+
         return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath());
+                ?: redirect()->intended($this->redirectPath())->with($notification);
     }
 
     /**
@@ -135,6 +140,13 @@ trait AuthenticatesUsers
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
         ]);
+
+        // $notification = array(
+        //     'message' => 'Login Failed!',
+        //     'alert-type' => 'danger',
+        // );
+
+        // return redirect()->with($notification);
     }
 
     /**

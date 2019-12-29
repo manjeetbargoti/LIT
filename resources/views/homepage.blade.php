@@ -63,7 +63,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
                                 <div class="multiselect">
                                     <div class="selectBox" onclick="showCheckboxes()">
-                                        <select>
+                                        <select class="form-control">
                                             <option>Country</option>
                                         </select>
                                         <div class="overSelect"></div>

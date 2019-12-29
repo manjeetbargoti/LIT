@@ -15,27 +15,27 @@
             <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
             <div class="row align-items-center">
                 <div class="col-lg-2">
-                    <a href="#">
+                    <a href="{{ url('/') }}">
                         <img class="default_logo" src="{{ asset('front/dist/img/logo.png') }}" alt="">
                     </a>
                 </div>
                 <div class="col-lg-10">
                     <ul id="respMenu" class="ace-responsive-menu  float-right" data-menu-style="horizontal">
                         <li>
-                            <a href="index.html"><span class="title">ABOUT us</span></a>
+                            <a href="#"><span class="title">ABOUT us</span></a>
                         </li>
                         <li>
-                            <a href="mmj-card.html"><span class="title">CSR MARKET PLACE</span></a>
+                            <a href="#"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
-                            <a href="how-it-works.html"><span class="title">SUCCESS STORY</span></a>
+                            <a href="#"><span class="title">SUCCESS STORY</span></a>
                         </li>
                         <li>
-                            <a href="our-story.html"><span class="title">CONTACT US</span></a>
+                            <a href="#"><span class="title">CONTACT US</span></a>
                         </li>
                         @guest
                         <li>
-                            <a href="#" class="btn"><span class="title">Sign in/Register</span></a>
+                            <a href="{{ route('login') }}" class="btn"><span class="title">Sign in/Register</span></a>
                         </li>
                         @else
                         <li>
@@ -43,10 +43,13 @@
                                         class="usericon" /></span></a>
                             <!-- Level Two-->
                             <ul>
-                                <li><a href="#">Sub Item One</a></li>
-                                <li><a href="#">Sub Item Two</a></li>
-                                <li><a href="#">Sub Item Three</a></li>
-                                <li><a href="#">Sub Item Four</a></li>
+                                <li><a href="#">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a></li>
+                                <li><a href="#">My Account</a></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form></li>
                             </ul>
                         </li>
                         @endguest

@@ -21,6 +21,20 @@
     <!-- Font CSS -->
     <link rel="stylesheet" href="{{ asset('front/font/font.css') }}" type="text/css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Login/Register Page CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/animate/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/css-hamburgers/hamburgers.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/animsition/css/animsition.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/select2/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/front/css/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
 </head>
 
 <body>
@@ -39,9 +53,20 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src="{{ asset('front/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('front/dist/js/custom.js') }}"></script>
+
+    <!-- jQuery for Login/Register -->
+    <script src="{{ asset('front/vendor/animsition/js/animsition.min.js') }}"></script>
+    <script src="{{ asset('front/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('front/vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('front/vendor/daterangepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('front/vendor/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('front/vendor/countdowntime/countdowntime.js') }}"></script>
+    <script src="{{ asset('front/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
     <script>
     // Iterate over each select element
-    $('select').each(function() {
+    $('').each(function() {
 
         // Cache the number of options
         var $this = $(this),
@@ -117,6 +142,30 @@
             expanded = false;
         }
     }
+    </script>
+
+    <!-- Notification -->
+    <script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{ Session::get('message') }}");
+            break;
+
+        case 'warning':
+            toastr.warning("{{ Session::get('message') }}");
+            break;
+
+        case 'success':
+            toastr.success("{{ Session::get('message') }}");
+            break;
+
+        case 'error':
+            toastr.error("{{ Session::get('message') }}");
+            break;
+    }
+    @endif
     </script>
 </body>
 

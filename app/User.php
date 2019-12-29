@@ -2,13 +2,15 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username','first_name','last_name','title','email','phone','password','avatar',
     ];
 
     /**
@@ -36,4 +38,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Protecting Password by converting into hash
+    public function setPasswordAttribute($value)
+    {
+        if($value)
+        {
+            $this->attributes['password'] = app('hash')->needsRehash($value)?Hash::make($value):$value;
+        }
+    }
+
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
 }

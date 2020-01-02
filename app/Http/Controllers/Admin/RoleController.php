@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-// use App\Http\Requests;
+use Gate;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoleController extends Controller
 {
@@ -17,6 +18,8 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $keyword = $request->get('search');
         $perPage = 25;
 
@@ -37,6 +40,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('role_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $permission = Permission::get();
 
         return view('admin.role.create', compact('permission'));
@@ -51,6 +56,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('role_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
         $requestData = $request->except('permissions');
         $permissions = $request->permissions;
@@ -92,6 +98,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $role = Role::findOrFail($id);
 
         $roleName = $role->permissions->pluck('name')->toArray();
@@ -113,6 +121,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
         $requestData = $request->except('permissions');
         $permissions = $request->permissions;
@@ -139,6 +148,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         Role::destroy($id);
 
         return redirect('admin/user/role')->with('flash_message', 'Role deleted!');

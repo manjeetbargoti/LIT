@@ -7,7 +7,7 @@
             <div class="col-6">
                 <h4 class="m-t-5">
                     <i class="fa fa-home"></i>
-                    Error 401
+                    Error 403
                 </h4>
             </div>
         </div>
@@ -18,8 +18,8 @@
         <div class="row">
             <div class='col-lg-4 m-auto'>
                 <h3>
-                    <center>401<br>
-                        <small>ACCESS DENIED</small></center>
+                    <center>403<br>
+                        <small>You do not have right permission.</small></center>
                 </h3>
             </div>
         </div>
@@ -27,7 +27,7 @@
 </div> -->
 
 <div class="row m-t-35">
-    <img src="{{ url('/images/error/401.png') }}" alt="" class="img-responsive m-auto" width="800">
+    <img src="{{ url('/images/error/403.png') }}" alt="" class="img-responsive m-auto" width="800">
 </div>
 
 @endsection

@@ -7,7 +7,7 @@
             <div class="col-6">
                 <h4 class="m-t-5">
                     <i class="fa fa-home"></i>
-                    Users
+                    Pages
                 </h4>
             </div>
         </div>
@@ -16,22 +16,22 @@
 <div class="outer">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">User {{ $user->id }}</div>
+                    <div class="card-header">Page {{ $page->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i
+                        <a href="{{ url('/admin/pages') }}" title="Back"><button class="btn btn-warning btn-sm"><i
                                     class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/users/' . $user->id . '/edit') }}"
-                            title="Edit user"><button class="btn btn-primary btn-sm"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/pages/' . $page->id . '/edit') }}" title="Edit Page"><button
+                                class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Edit</button></a>
 
-                        <form method="POST" action="{{ url('admin/users' . '/' . $user->id) }}"
-                            accept-charset="UTF-8" style="display:inline">
+                        <form method="POST" action="{{ url('admin/pages' . '/' . $page->id) }}" accept-charset="UTF-8"
+                            style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete user"
+                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Page"
                                 onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o"
                                     aria-hidden="true"></i> Delete</button>
                         </form>
@@ -43,28 +43,23 @@
                                 <tbody>
                                     <tr>
                                         <th>ID</th>
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $page->id }}</td>
                                     </tr>
                                     <tr>
                                         <th> Name </th>
-                                        <td> {{ $user->title }} {{ $user->first_name }} {{ $user->last_name }} </td>
+                                        <td> {{ $page->name }} </td>
                                     </tr>
                                     <tr>
-                                        <th> Email </th>
-                                        <td> {{ $user->email }} </td>
+                                        <th> URL </th>
+                                        <td> <a href="{{ url('/'.$page->slug) }}">{{ url('/'.$page->slug) }}</a> </td>
                                     </tr>
                                     <tr>
-                                        <th> Phone </th>
-                                        <td> {{ $user->phone }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Role </th>
-                                        <td> {{ implode(', ', $user->getRoleNames()->toArray()) }} </td>
+                                        <th> Content </th>
+                                        <td> {!! strip_tags($page->content) !!} </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -303,16 +303,16 @@
                     <div class="user-settings no-bg">
                         <button type="button" class="btn btn-default no-bg micheal_btn" data-toggle="dropdown">
 
-                            @if(!empty(Auth::user()->image))<img src="{{ asset('/images/user/large/'.Auth::user()->image) }}" class="admin_img2 rounded-circle avatar-img"
+                            @if(!empty(Auth::user()->avatar))<img src="{{ asset('/images/user/large/'.Auth::user()->avatar) }}" class="admin_img2 rounded-circle avatar-img"
                                 alt="Test">@else
                                     <img src="{{ asset('/images/user/user.png/') }}" class="admin_img2 rounded-circle avatar-img"
                                 alt="Test">
                                 @endif
-                            <strong>Name</strong>
+                            <strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
                             <span class="fa fa-sort-down white_bg"></span>
                         </button>
                         <div class="dropdown-menu admire_admin">
-                            <div class="popover-header">Name</div>
+                            <div class="popover-header">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
                             <a class="dropdown-item" href="{{ url('/admin/profile') }}"><i class="fa fa-cogs"></i>
                                 Profile Settings</a>
                             <a class="dropdown-item" href="#">

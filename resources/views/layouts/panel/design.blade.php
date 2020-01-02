@@ -64,6 +64,14 @@
 
     <link rel="stylesheet" href="{{ asset('admin/css/pages/profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/css/pages/gallery.css') }}" />
+    <!-- Datatables -->
+    <!-- <link rel="stylesheet" href="{{ asset('admin/vendors/datatables/css/colReorder.bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/vendors/datatables/css/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/css/pages/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/css/plugincss/responsive.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/css/pages/tables.css') }}" /> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <!-- /.Datatables -->
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 
@@ -167,11 +175,35 @@
     <script src="{{ asset('admin/vendors/fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/fileinput/js/theme.js') }}"></script>
 
+    <!-- Datatables -->
+    <!-- <script src="{{ asset('admin/vendors/datatables/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/js/pluginjs/dataTables.tableTools.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/js/pluginjs/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/dataTables.responsive.min.js') }}"></script>
+    
+    <script src="{{ asset('admin/vendors/datatables/js/dataTables.rowReorder.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/buttons.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('admin/js/pages/datatable.js') }}"></script> -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
+    </script>
+    <!-- /.Datatables -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
     <script src="{{ asset('admin/js/pages/file_upload.js') }}"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    
+
+    <script>
+    $(document).ready(function() {
+        $('#table_id').DataTable();
+    });
+    </script>
+
     <script id="template-upload" type="text/x-tmpl">
         {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-upload fade">

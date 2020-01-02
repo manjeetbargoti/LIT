@@ -8,12 +8,12 @@
             </div>
             <div class="user-wrapper">
                 <a class="user-link" href="#">
-                    @if(!empty(Auth::user()->image))<img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
-                        src="{{ asset('/images/user/large/'.Auth::user()->image) }}">@else
+                    @if(!empty(Auth::user()->avatar))<img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
+                        src="{{ asset('/images/user/large/'.Auth::user()->avatar) }}">@else
                         <img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
                         src="{{ asset('/images/user/user.png') }}">
                         @endif
-                    <p class="text-white user-info">Test</p>
+                    <p class="text-white user-info">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                 </a>
             </div>
         </div>
@@ -44,6 +44,11 @@
                     <li class="{{ (request()->is('admin/system/contact-info')) ? 'active':'' }}">
                         <a href="{{ url('admin/system/contact-info') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; Contact info
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/system/social-links')) ? 'active':'' }}">
+                        <a href="{{ url('admin/system/social-links') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Social Links
                         </a>
                     </li>
                     <li class="{{ (request()->is('admin/system/robots.txt')) ? 'active':'' }}">

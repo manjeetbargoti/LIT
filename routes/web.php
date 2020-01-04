@@ -21,6 +21,9 @@ Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
     // Page Management
     Route::resource('admin/pages', 'PagesController');
 
+    // Social Impact Initiative/Project/Activity Job Management
+    Route::resource('admin/social-impact/initiatives', 'SocialInitiativeController');
+
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');
     Route::post('admin/system/options', 'SystemController@postOption');
@@ -38,6 +41,10 @@ Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
     Route::get('/admin/system/social-links', 'SystemController@getSocialLinks');
     Route::post('/admin/system/social-links', 'SystemController@postSocialLinks');
 
+    // Get State City List
+    Route::get('/get-state-list', 'AdminController@getStateList');
+    Route::get('/get-city-list', 'AdminController@getCityList');
+
 });
 
 // Routes for all Autorized Users
@@ -46,9 +53,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/dashboard', 'AdminController@dashboard')->name('dashboard');
 
     // Profile Access
-    Route::match(['get','post'], '/admin/profile', 'Admin\\UserController@profile');
-    Route::match(['get','post'], '/admin/profile/{id}/edit', 'Admin\\UserController@profileEdit');
-    Route::match(['get','post'], '/admin/profile/{id}/change-password', 'Admin\\UserController@changePassword');
+    Route::match(['get','post'], '/admin/profile', 'UserController@profile');
+    Route::match(['get','post'], '/admin/profile/{id}/edit', 'UserController@profileEdit');
+    Route::match(['get','post'], '/admin/profile/{id}/change-password', 'UserController@changePassword');
 
     // Email and Username velidation
     Route::match(['get', 'post'], '/checkemail', 'AdminController@checkEmail');
@@ -59,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // User Address Management
     Route::resource('/admin/user/address', 'UserAddressController');
+
+    
 });
 
 

@@ -1,4 +1,4 @@
-@extends('layouts.panel.design')
+@extends('layouts.front.design')
 
 @section('content')
 <!-- <header class="head">

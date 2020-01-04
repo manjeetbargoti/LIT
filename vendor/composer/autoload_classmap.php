@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\BusinessInfo' => $baseDir . '/app/BusinessInfo.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
@@ -16,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
+    'App\\Http\\Controllers\\BusinessInfoController' => $baseDir . '/app/Http/Controllers/BusinessInfoController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\PagesController' => $baseDir . '/app/Http/Controllers/PagesController.php',
@@ -36,6 +38,9 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\SDGs' => $baseDir . '/app/SDGs.php',
+    'App\\SocialInitiative' => $baseDir . '/app/SocialInitiative.php',
+    'App\\SocialInitiativeImages' => $baseDir . '/app/SocialInitiativeImages.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Appzcoder\\CrudGenerator\\Commands\\CrudApiCommand' => $vendorDir . '/appzcoder/crud-generator/src/Commands/CrudApiCommand.php',
     'Appzcoder\\CrudGenerator\\Commands\\CrudApiControllerCommand' => $vendorDir . '/appzcoder/crud-generator/src/Commands/CrudApiControllerCommand.php',

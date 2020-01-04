@@ -463,6 +463,62 @@
     tinymce.init(editor_config);
     </script>
 
+    <script>
+    $('#country').change(function() {
+        var countryID = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        if (countryID) {
+            $.ajax({
+                type: "get",
+                url: "/get-state-list?country_name=" + countryID,
+                data: {
+                    _token: _token
+                },
+                success: function(res) {
+                    if (res) {
+                        $("#state").empty();
+                        $("#state").append('<option>Select State</option>');
+                        $.each(res, function(key, value) {
+                            $("#state").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    } else {
+                        $("#state").empty();
+                    }
+                }
+            });
+        } else {
+            $("#state").empty();
+            $("#city").empty();
+        }
+    });
+    // Get City List According to state
+    $('#state').on('change', function() {
+        var stateID = $(this).val();
+        if (stateID) {
+            $.ajax({
+                type: "GET",
+                url: "/get-city-list?state_name=" + stateID,
+                success: function(res) {
+                    if (res) {
+                        $("#city").empty();
+                        $("#city").append('<option>Select City</option>');
+                        $.each(res, function(key, value) {
+                            $("#city").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+
+                    } else {
+                        $("#city").empty();
+                    }
+                }
+            });
+        } else {
+            $("#city").empty();
+        }
+    });
+    </script>
+
 </body>
 
 </html>

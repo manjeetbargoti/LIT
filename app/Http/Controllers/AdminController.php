@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\City;
+use App\State;
+use App\Country;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -55,5 +58,27 @@ class AdminController extends Controller
                 echo 'unique';
             }
         }
+    }
+
+    // Getting State List according to Country
+    public function getStateList(Request $request)
+    {
+        $country_id = Country::where('name', $request->country_name)->first();
+
+        // dd($country_id);
+
+        $states = State::where("country_id", $country_id->id)->pluck("name", "name");
+        return response()->json($states);
+    }
+
+    // Getting City List according to State
+    public function getCityList(Request $request)
+    {
+        $state_id = State::where('name', $request->state_name)->first();
+
+        // dd($state_id);
+
+        $cities = City::where("state_id", $state_id->id)->pluck("name", "name");
+        return response()->json($cities);
     }
 }

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Gate;
+use Image;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -152,5 +156,78 @@ class UserController extends Controller
         User::destroy($id);
 
         return redirect('admin/users')->with('flash_message', 'User deleted!');
+    }
+
+    // Profile Access
+    public function profile()
+    {
+        $auth_user = Auth::user();
+        $user = User::findOrFail($auth_user['id']);
+
+        $roleName = implode(', ', $user->getRoleNames()->toArray());
+
+        return view('admin.profile.view', compact('user','roleName'));
+    }
+
+    // Edit Profile Information
+    public function profileEdit(Request $request, $id)
+    {
+
+        if ($request->isMethod('post')) {
+
+            $requestData = $request->all();
+            // dd($requestData);
+
+            if ($request->hasFile('file')) {
+                $image_array = Input::file('file');
+                // if($image_array->isValid()){
+                $array_len = count($image_array);
+                // dd($array_len);
+                for ($i = 0; $i < $array_len; $i++) {
+                    // $image_name = $image_array[$i]->getClientOriginalName();
+                    $image_size = $image_array[$i]->getClientSize();
+                    $extension = $image_array[$i]->getClientOriginalExtension();
+                    $filename = 'user' . $requestData['first_name'] . '_' . rand(0, 99999) . '.' . $extension;
+                    $large_image_path = public_path('/images/user/large/' . $filename);
+                    // Resize image
+                    Image::make($image_array[$i])->save($large_image_path);
+
+                    // dd($filename);
+
+                    // Store image in property folder
+                    $requestData['avatar'] = $filename;
+                    // }
+                }
+            }
+
+            DB::beginTransaction();
+            try {
+                // dd($requestData);
+
+                $user = User::findOrFail($id);
+                $user->update($requestData);
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return Redirect()->back()->withErrors($e->getErrors())->withInput();
+            } catch (\Exception $e) {
+                DB::rollback();
+            }
+
+            DB::commit();
+
+            $notification = array(
+                'message' => 'Profile Updated!',
+                'alert-type' => 'success',
+            );
+
+            return redirect('/admin/profile')->with($notification);
+        }
+
+        $auth_user = Auth::user();
+        $user = User::findOrFail($auth_user['id']);
+
+        $roleName = implode(', ', $user->getRoleNames()->toArray());
+
+        return view('admin.profile.edit', compact('user', 'roleName'));
     }
 }

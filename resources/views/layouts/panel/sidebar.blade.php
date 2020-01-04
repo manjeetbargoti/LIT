@@ -8,11 +8,12 @@
             </div>
             <div class="user-wrapper">
                 <a class="user-link" href="#">
-                    @if(!empty(Auth::user()->avatar))<img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
+                    @if(!empty(Auth::user()->avatar))<img
+                        class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
                         src="{{ asset('/images/user/large/'.Auth::user()->avatar) }}">@else
-                        <img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
+                    <img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="Test"
                         src="{{ asset('/images/user/user.png') }}">
-                        @endif
+                    @endif
                     <p class="text-white user-info">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
                 </a>
             </div>
@@ -131,57 +132,31 @@
             <!-- /.Page Management -->
 
             <!-- Product Management -->
-            <li class="dropdown_menu {{ (request()->is('admin/product*')) ? 'active':'' }}">
-                <a href="{{ url('/admin/product') }}">
+            <li class="dropdown_menu {{ (request()->is('admin/social-impact*')) ? 'active':'' }}">
+                <a href="{{ url('/admin/social-impact') }}">
                     <i class="fa fa-file-text-o"></i>
-                    <span class="link-title menu_hide">&nbsp; Product Management</span>
+                    <span class="link-title menu_hide">&nbsp; Social Impact</span>
                     <span class="fa arrow menu_hide"></span>
                 </a>
                 <ul>
-                    <li class="{{ (request()->is('admin/product')) ? 'active':'' }}">
-                        <a href="{{ url('admin/product') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Products
+                    <li class="{{ (request()->is('admin/social-impact/initiatives')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/initiatives') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Initiatives
                         </a>
                     </li>
-                    <li class="{{ (request()->is('admin/product-category*')) ? 'active':'' }}">
-                        <a href="{{ url('admin/product-category') }}">
-                            <i class="fa fa-angle-right"></i>
-                            <span class="link-title"> &nbsp; Product Category</span>
+                    <li class="{{ (request()->is('admin/social-impact/projects')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/projects') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Projects
                         </a>
                     </li>
-                    <li class="{{ (request()->is('admin/product-vendor*')) ? 'active':'' }}">
-                        <a href="{{ url('admin/product-vendor') }}">
-                            <i class="fa fa-angle-right"></i>
-                            <span class="link-title"> &nbsp; Product Seller</span>
+                    <li class="{{ (request()->is('admin/social-impact/activity-job')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/activity-job') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Activity Job
                         </a>
                     </li>
                 </ul>
             </li>
             <!-- /.Product Management -->
-
-            <!-- Suppliers Management -->
-            <li class="dropdown_menu {{ (request()->is('admin/supplier*')) ? 'active':'' }}">
-                <a href="{{ url('/admin/supplier') }}">
-                    <i class="fa fa-file-text-o"></i>
-                    <span class="link-title menu_hide">&nbsp; Supplier Management</span>
-                    <span class="fa arrow menu_hide"></span>
-                </a>
-                <ul>
-                    <li class="{{ (request()->is('admin/supplier*')) ? 'active':'' }}">
-                        <a href="{{ url('admin/supplier') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Suppliers
-                        </a>
-                    </li>
-            </li>
-            <li class="{{ (request()->is('admin/supplier-category*')) ? 'active':'' }}">
-                <a href="{{ url('admin/supplier-category') }}">
-                    <i class="fa fa-angle-right"></i>
-                    <span class="link-title"> &nbsp; Supplier Category</span>
-                </a>
-            </li>
-        </ul>
-        </li>
-        <!-- /.Suppliers Management -->
 
         <!-- Support Center -->
         <li class="dropdown_menu {{ (request()->is('admin/support*')) ? 'active':'' }}">

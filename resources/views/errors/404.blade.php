@@ -1,4 +1,4 @@
-@extends('layouts.panel.design')
+@extends('layouts.front.design')
 
 @section('content')
 <!-- <header class="head">
@@ -25,8 +25,8 @@
         </div>
     </div>
 </div> -->
-<div class="row m-auto">
-    <img src="{{ url('/images/error/404.jpg') }}" alt="" class="img-responsive m-auto" width="800">
+<div class="row m-center">
+    <img src="{{ url('/images/error/404.png') }}" alt="" class="img-responsive m-auto" width="800">
 </div>
 
 @endsection

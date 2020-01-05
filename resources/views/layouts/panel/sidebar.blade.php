@@ -139,7 +139,7 @@
                     <span class="fa arrow menu_hide"></span>
                 </a>
                 <ul>
-                    <li class="{{ (request()->is('admin/social-impact/initiatives')) ? 'active':'' }}">
+                    <li class="{{ (request()->is('admin/social-impact/initiatives*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/initiatives') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; Initiatives
                         </a>

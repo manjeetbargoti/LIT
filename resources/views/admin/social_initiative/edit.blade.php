@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-md-12 m-auto">
                 <div class="card">
-                    <div class="card-header">Create New Initiative</div>
+                    <div class="card-header">Edit Initiative</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/social-impact/initiatives') }}" title="Back"><button
                                 class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -90,9 +90,11 @@
                         </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/admin/social-impact/initiatives') }}"
+                        <form method="POST"
+                            action="{{ url('/admin/social-impact/initiatives/' . $socialInitiative->id) }}"
                             accept-charset="UTF-8" class="form-horizontal login_validator" enctype="multipart/form-data"
                             id="form_inline_validator">
+                            {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
                             <div class="form-group row">
@@ -103,7 +105,7 @@
                                 <div class="col-xl-9 {{ $errors->has('initiative_name') ? 'has-error' : ''}}">
                                     <input class="form-control @error('initiative_name') is-invalid @enderror"
                                         name="initiative_name" type="text" id="initiative_name"
-                                        value="{{ old('initiative_name') }}" required>
+                                        value="{{ $socialInitiative->initiative_name }}" required>
                                     {!! $errors->first('initiative_name', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
@@ -116,7 +118,8 @@
                                 <div class="col-xl-9 {{ $errors->has('initiative_description') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('initiative_description') is-invalid @enderror"
                                         name="initiative_description" id="initiative_description"
-                                        value="{{ old('initiative_description') }}" required></textarea>
+                                        value="{{ old('initiative_description') }}" rows="5"
+                                        required>{{ $socialInitiative->initiative_description }}</textarea>
                                     {!! $errors->first('initiative_description', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -130,23 +133,24 @@
                                 <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
                                     <input class="form-control @error('beneficiaries') is-invalid @enderror"
                                         name="beneficiaries" type="text" id="Beneficiaries"
-                                        value="{{ old('beneficiaries') }}" placeholder="no. of Beneficieries" required>
+                                        value="{{ $socialInitiative->beneficiaries }}"
+                                        placeholder="no. of Beneficieries" required>
                                     {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>') !!}
                                 </div>
 
                                 <div class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}">
                                     <span class="input-group-addon">AED</span>
                                     <input class="form-control @error('budget') is-invalid @enderror" name="budget"
-                                        type="text" id="Budget" value="{{ old('budget') }}" placeholder="Budget"
-                                        required>
+                                        type="text" id="Budget" value="{{ $socialInitiative->budget }}"
+                                        placeholder="Budget" required>
                                     {!! $errors->first('budget', '<p class="help-block">:message</p>') !!}
                                 </div>
 
                                 <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
                                     <span class="input-group-addon">months</span>
                                     <input class="form-control @error('duration') is-invalid @enderror" name="duration"
-                                        type="text" id="Duration" value="{{ old('duration') }}" placeholder="Duration"
-                                        required>
+                                        type="text" id="Duration" value="{{ $socialInitiative->duration }}"
+                                        placeholder="Duration" required>
                                     {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
@@ -157,14 +161,15 @@
                                 </div>
                                 <div class="col-xl-5 {{ $errors->has('region') ? 'has-error' : ''}}">
                                     <input class="form-control @error('region') is-invalid @enderror" name="region"
-                                        type="text" id="Region" value="{{ old('region') }}" placeholder="Locality"
-                                        required>
+                                        type="text" id="Region" value="{{ $socialInitiative->region }}"
+                                        placeholder="Locality" required>
                                     {!! $errors->first('region', '<p class="help-block">:message</p>') !!}
                                 </div>
 
                                 <div class="col-xl-4 {{ $errors->has('street') ? 'has-error' : ''}}">
                                     <input class="form-control @error('street') is-invalid @enderror" name="street"
-                                        type="text" id="Street" value="{{ old('street') }}" placeholder="Street">
+                                        type="text" id="Street" value="{{ $socialInitiative->street }}"
+                                        placeholder="Street">
                                     {!! $errors->first('street', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
@@ -177,10 +182,7 @@
                                     <select name="country" id="country"
                                         class="form-control @error('country') is-invalid @enderror chzn-select"
                                         value="{{ old('country') }}" required>
-                                        <option value="" selected> -- Select Country -- </option>
-                                        @foreach($country as $coun)
-                                        <option value="{{ $coun->name }}">{{ $coun->name }}</option>
-                                        @endforeach
+                                        <?php echo $country_dropdown; ?>
                                     </select>
                                     {!! $errors->first('country', '<p class="help-block">:message</p>') !!}
                                 </div>
@@ -189,7 +191,7 @@
                                     <select name="state" id="state"
                                         class="form-control @error('state') is-invalid @enderror"
                                         value="{{ old('state') }}" required>
-                                        <option value="" selected> -- Select State -- </option>
+                                        <?php echo $state_dropdown; ?>
                                     </select>
                                     {!! $errors->first('state', '<p class="help-block">:message</p>') !!}
                                 </div>
@@ -198,7 +200,7 @@
                                     <select name="city" id="city"
                                         class="form-control @error('city') is-invalid @enderror"
                                         value="{{ old('city') }}" required>
-                                        <option value="" selected> -- Select City -- </option>
+                                        <?php echo $city_dropdown; ?>
                                     </select>
                                     {!! $errors->first('city', '<p class="help-block">:message</p>') !!}
                                 </div>
@@ -213,6 +215,19 @@
                                     <div class="add_image">
                                         <input type="button" id="add_more" class="btn btn-info" value="Select Image" />
                                         <!-- <i class="fas fa-camera"></i> -->
+                                        <!-- <input type="text" id="CurrentImage" name="current_image[]"
+                                            value="{{ $socialInitiative->image }}" class="d-none" /> -->
+                                    </div>
+
+                                    <div id="abcd1" class="abcd col-sm-12 m-t-5">
+                                        @foreach(\App\SocialInitiativeImages::where('social_initiative_id',
+                                        $socialInitiative->id)->get() as $sIimg)
+                                        <img class="img-responsive" width="100"
+                                            src="{{ asset('/images/initiative/large/'.$sIimg->image_name) }}"
+                                            alt="{{ $socialInitiative->initiative_name }}" style="padding: 0 0.1em;">
+                                        <a href="{{ url('/admin/initiative/image/' . $sIimg->id . '/delete') }}"><i
+                                                id="close" alt="delete" class="fa fa-close"></i></a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

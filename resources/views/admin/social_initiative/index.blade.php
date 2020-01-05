@@ -58,28 +58,28 @@
                                     @foreach($socialInitiative as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->feature_image }}</td>
-                                        <td><a href="{{ url('/'.$item->slug) }}" target="_blank">{{ $item->initiative_name }}</a>
+                                        <td>@if(!empty($item->feature_image))<img src="{{ url('/images/initiative/large/'.$item->feature_image) }}" width="60">@else <img src="{{ url('/images/logo/'.config('app.logo')) }}" width="60"> @endif</td>
+                                        <td><a href="{{ url('/initiatives/'.$item->slug) }}" target="_blank">{{ $item->initiative_name }}</a>
                                         </td>
                                         <td>{{ $item->beneficiaries }}</td>
-                                        <td>{{ $item->duration }}</td>
-                                        <td>{{ $item->budget }}</td>
+                                        <td>{{ $item->duration }} months</td>
+                                        <td>AED {{ $item->budget }}</td>
                                         <td>{{ $item->city }}, {{ $item->country }}</td>
                                         <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white">Enable</a> @else <a class="btn btn-sm btn-danger text-white">Disable</a> @endif</td>
                                         <td>
-                                            <a href="{{ url('/admin/pages/' . $item->id) }}" title="View Page"><button
+                                            <a href="{{ url('/admin/social-impact/initiatives/' . $item->id) }}" title="View Initiative"><button
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"
                                                         aria-hidden="true"></i> </button></a>
-                                            <a href="{{ url('/admin/pages/' . $item->id . '/edit') }}"
-                                                title="Edit Page"><button class="btn btn-primary btn-sm"><i
+                                            <a href="{{ url('/admin/social-impact/initiatives/' . $item->id . '/edit') }}"
+                                                title="Edit Initiative"><button class="btn btn-primary btn-sm"><i
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </button></a>
 
-                                            <form method="POST" action="{{ url('/admin/pages' . '/' . $item->id) }}"
+                                            <form method="POST" action="{{ url('/admin/social-impact/initiatives' . '/' . $item->id) }}"
                                                 accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Page"
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Initiative"
                                                     onclick="return confirm('Confirm delete?')"><i
                                                         class="fa fa-trash-o" aria-hidden="true"></i></button>
                                             </form>

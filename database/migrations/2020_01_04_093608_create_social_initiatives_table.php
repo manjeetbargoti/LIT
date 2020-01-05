@@ -16,6 +16,7 @@ class CreateSocialInitiativesTable extends Migration
         Schema::create('social_initiatives', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('initiative_name')->nullable();
+            $table->string('initiative_url')->nullable();
             $table->text('initiative_description')->nullable();
             $table->string('beneficiaries')->nullable();
             $table->string('duration')->nullable();

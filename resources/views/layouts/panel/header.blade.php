@@ -21,13 +21,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url('/admin/user') }}">
+                        <a class="nav-link text-white" href="{{ url('/admin/users') }}">
                             <i class="fa fa fa-edit"></i> <span class="quick_text">Users</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url('/admin/product') }}">
-                            <i class="fa fa-map-marker"></i> <span class="quick_text">Products</span>
+                        <a class="nav-link text-white" href="{{ url('/admin/social-impact/initiatives') }}">
+                            <i class="fa fa-map-marker"></i> <span class="quick_text">Social Initiatives</span>
                         </a>
                     </li>
                     <li class="nav-item">

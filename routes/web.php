@@ -23,6 +23,7 @@ Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
 
     // Social Impact Initiative/Project/Activity Job Management
     Route::resource('admin/social-impact/initiatives', 'SocialInitiativeController');
+    Route::get('/admin/initiative/image/{id}/delete','SocialInitiativeController@deleteInitiativeImage');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');

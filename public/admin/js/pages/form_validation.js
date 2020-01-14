@@ -30,10 +30,63 @@ $(document).ready(function() {
     $(':contains(* Invalid email address)').remove('.formErrorContent');
     $('#form_block_validator').bootstrapValidator({
         fields: {
-            Name2: {
+            business_name: {
                 validators: {
                     notEmpty: {
-                        message: 'Enter your name'
+                        message: 'Enter business name'
+                    }
+                }
+            },
+            business_description: {
+                validators: {
+                    notEmpty: {
+                        message: 'Enter business description'
+                    }
+                }
+            },
+            priority_sdg: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please Select Priority SDGs'
+                    }
+                }
+            },
+            contact_person_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please type contact person name'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    regexp: {
+                        regexp: /^\S+@\S{1,}\.\S{1,}$/,
+                        message: 'The is not a valid email address.'
+                    },
+                    notEmpty: {
+                        message: 'Enter contact person email address'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'Enter phone of contact person'
+                    }
+                }
+            },
+            country: {
+                validators: {
+                    notEmpty: {
+                        message: 'Select your business country'
+                    }
+                }
+            },
+            sdg_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Enter SDG Name'
                     }
                 }
             },

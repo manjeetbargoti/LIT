@@ -109,18 +109,10 @@
             <div class="col-md-6 col-lg-6 pb-3 px-2 instabg">
                 <h2 class="h2"> Lorem Ipsum Dummy </h2>
             </div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta1.jpg') }}"
-                    class="img-fluid" /></div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta2.jpg') }}"
-                    class="img-fluid" /></div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta3.jpg') }}"
-                    class="img-fluid" /></div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta4.jpg') }}"
-                    class="img-fluid" /></div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta5.jpg') }}"
-                    class="img-fluid" /></div>
-            <div class="col-md-6 col-lg-3 pb-3 px-2"><img src="{{ asset('front/dist/img/home/insta6.jpg') }}"
-                    class="img-fluid" /></div>
+            @foreach($instaImages->data as $instaImg)
+            <div class="col-md-6 col-lg-3 pb-3 px-2"><a href="{{ $instaImg->link }}" target="_blank"><img src="{{ $instaImg->images->low_resolution->url }}"
+                    class="img-fluid" /></a></div>
+            @endforeach
             
         </div>
     </div>

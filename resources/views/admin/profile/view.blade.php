@@ -26,6 +26,13 @@
                         <a href="{{ url('/admin/profile/' . $user->id . '/edit') }}" title="Edit user"><button
                                 class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit</button></a>
+                        @if($businessData_count > 0)
+                            <a href="{{ url('/admin/profile/business/' . $businessData->id . '/update') }}" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
+                                    class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
+                        @else
+                            <a href="{{ url('/admin/profile/add-business') }}" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
+                                    class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
+                        @endif
                         <a href="{{ url('/admin/profile/' . $user->id . '/change-password') }}"
                             title="Change Password"><button class="btn btn-primary btn-sm pull-right"><i
                                     class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -73,7 +80,7 @@
                                             <a class="nav-link active" href="#user" id="home-tab" data-toggle="tab"
                                                 aria-expanded="true">User Details</a>
                                         </li>
-                                        @if($roleName == "Supplier" || $roleName == "Vendor")
+                                        @if($roleName == "NGO")
                                         <li class="nav-item card_nav_hover">
                                             <a class="nav-link" href="#business" id="hats-tab"
                                                 data-toggle="tab">Business
@@ -130,16 +137,6 @@
                                         <div role="tabpanel" class="tab-pane fade" id="business">
                                             <div class="card_nav_body_padding">
                                                 <table class="table" id="users">
-                                                    <tr>
-                                                        <td>Business Image</td>
-                                                        <td class="inline_edit">
-                                                            <span>@if(!empty($supplierData->image)) <img
-                                                                    src="{{ asset('/images/business/large/'.$supplierData->image) }}"
-                                                                    alt="@if(!empty($supplierData->business_name)){{ $supplierData->business_name }}
-                                                                @endif" class="img-responsive" width="100">
-                                                                @endif</span>
-                                                        </td>
-                                                    </tr>
                                                     <tr>
                                                         <td>Business Name</td>
                                                         <td class="inline_edit">
@@ -199,9 +196,8 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>@if(!empty($supplierData))<a
-                                                                href="{{ url('/supplier-info/'.$supplierData->id.'/edit') }}"
-                                                                class="btn btn-sm btn-info pull-right">Edit</a>@endif
+                                                        <td><a href="#"
+                                                                class="btn btn-sm btn-info pull-right">Edit</a> 
                                                         </td>
                                                     </tr>
                                                 </table>

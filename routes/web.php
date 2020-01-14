@@ -9,7 +9,7 @@
 Auth::routes();
 
 // Super Sadmin Routes
-Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
     // Route::get('/admin/dashboard', 'AdminController@dashboard')->name('dashboard');
 
@@ -24,6 +24,8 @@ Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
     // Social Impact Initiative/Project/Activity Job Management
     Route::resource('admin/social-impact/initiatives', 'SocialInitiativeController');
     Route::get('/admin/initiative/image/{id}/delete','SocialInitiativeController@deleteInitiativeImage');
+    Route::get('/admin/initiative/{id}/enable','SocialInitiativeController@enableInitiative');
+    Route::get('/admin/initiative/{id}/disable','SocialInitiativeController@disableInitiative');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');
@@ -46,10 +48,10 @@ Route::group(['middleware' => 'role:Super Admin', 'auth'], function () {
     Route::get('/get-state-list', 'AdminController@getStateList');
     Route::get('/get-city-list', 'AdminController@getCityList');
 
-});
+// });
 
 // Routes for all Autorized Users
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
     
     Route::get('/admin/dashboard', 'AdminController@dashboard')->name('dashboard');
 
@@ -62,12 +64,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::match(['get', 'post'], '/checkemail', 'AdminController@checkEmail');
     Route::match(['get', 'post'], '/checkusername', 'AdminController@checkUsername');
 
-    // Edit Supplier Business info
-    Route::match(['get','post'], '/supplier-info/{id}/edit', 'Admin\\UserController@editBusinessInfo');
+    // Update Business info
+    Route::match(['get','post'], '/admin/profile/add-business', 'BusinessInfoController@addBusinessInfo');
+    Route::match(['get','post'], '/admin/profile/business/{id}/update', 'BusinessInfoController@updateBusinessInfo');
 
     // User Address Management
     Route::resource('/admin/user/address', 'UserAddressController');
 
+    // Social Goals (SDG's) Management
+    Route::resource('/admin/sdgs', 'SDGController');
+    Route::match(['get','post'], '/admin/sdgs/{id}/disable', 'SDGController@disableSDG');
+    Route::match(['get','post'], '/admin/sdgs/{id}/enable', 'SDGController@enableSDG');
     
 });
 

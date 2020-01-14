@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BusinessInfo;
 use DB;
 use Gate;
 use Image;
@@ -92,7 +93,19 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.user.show', compact('user'));
+        // $business_count = BusinessInfo::where('user_id',$id)->count();
+        // $business_id = BusinessInfo::where('user_id',$id)->first();
+
+        // if($business_count > 0)
+        // {
+        //     $bid = $business_id->id;
+        // }else{
+        //     $bid = "";
+        // }
+
+        $business = BusinessInfo::where('user_id',$id)->first();
+
+        return view('admin.user.show', compact('user','business'));
     }
 
     /**
@@ -164,9 +177,18 @@ class UserController extends Controller
         $auth_user = Auth::user();
         $user = User::findOrFail($auth_user['id']);
 
+        $businessData_count = BusinessInfo::where('user_id',$auth_user->id)->count();
+
+        if($businessData_count > 0)
+        {
+            $businessData = BusinessInfo::where('user_id',$auth_user->id)->first();
+        }else{
+            $businessData = "";
+        }
+
         $roleName = implode(', ', $user->getRoleNames()->toArray());
 
-        return view('admin.profile.view', compact('user','roleName'));
+        return view('admin.profile.view', compact('user','roleName','businessData_count','businessData'));
     }
 
     // Edit Profile Information

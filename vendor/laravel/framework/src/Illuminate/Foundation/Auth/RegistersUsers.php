@@ -41,7 +41,7 @@ trait RegistersUsers
         try {
 
             event(new Registered($user = $this->create($requestData)));
-            // event(new Registered($user->assignRole($roles)));
+            event(new Registered($user->assignRole($roles)));
 
         } catch (ValidationException $e) {
             DB::rollback();

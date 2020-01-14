@@ -61,15 +61,14 @@
     <link rel="stylesheet" href="{{ asset('admin/vendors/blueimp_file_upload/css/jquery.fileupload.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/vendors/blueimp_file_upload/css/jquery.fileupload-ui.css') }}" />
 
+    <!-- Date & Time picker -->
+    <link rel="stylesheet" href="{{ asset('admin/vendors/daterangepicker/css/daterangepicker.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('admin/vendors/datepicker/css/bootstrap-datepicker.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('admin/vendors/inputlimiter/css/jquery.inputlimiter.css') }}"/>
 
     <link rel="stylesheet" href="{{ asset('admin/css/pages/profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/css/pages/gallery.css') }}" />
-    <!-- Datatables -->
-    <!-- <link rel="stylesheet" href="{{ asset('admin/vendors/datatables/css/colReorder.bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/vendors/datatables/css/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/css/pages/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/css/plugincss/responsive.dataTables.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/css/pages/tables.css') }}" /> -->
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <!-- /.Datatables -->
 
@@ -175,20 +174,13 @@
     <script src="{{ asset('admin/vendors/fileinput/js/fileinput.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/fileinput/js/theme.js') }}"></script>
 
-    <!-- Datatables -->
-    <!-- <script src="{{ asset('admin/vendors/datatables/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('admin/js/pluginjs/dataTables.tableTools.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('admin/js/pluginjs/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/dataTables.responsive.min.js') }}"></script>
-    
-    <script src="{{ asset('admin/vendors/datatables/js/dataTables.rowReorder.min.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/buttons.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('admin/vendors/datatables/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('admin/js/pages/datatable.js') }}"></script> -->
+    <!-- Date & Time picker -->
+    <script src="{{ asset('admin/vendors/jquery.uniform/js/jquery.uniform.js') }}"></script>
+    <script src="{{ asset('admin/vendors/inputlimiter/js/jquery.inputlimiter.js') }}"></script>
+    <script src="{{ asset('admin/js/pluginjs/jquery.validVal.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('admin/js/pages/datetime_piker.js') }}"></script>
+
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js">
     </script>
     <!-- /.Datatables -->

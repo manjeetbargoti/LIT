@@ -9,6 +9,7 @@ use App\SocialInitiativeImages;
 use App\State;
 use App\User;
 use DB;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -24,24 +25,49 @@ class SocialInitiativeController extends Controller
      */
     public function index(Request $request)
     {
-        // abort_if(Gate::denies('social_initiative_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $keyword = $request->get('search');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $socialInitiative = SocialInitiative::where('initiative_name', 'LIKE', "%$keyword%")
-                ->orWhere('initiative_description', 'LIKE', "%$keyword%")
-                ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
-                ->orWhere('duration', 'LIKE', "%$keyword%")
-                ->orWhere('budget', 'LIKE', "%$keyword%")
-                ->orWhere('region', 'LIKE', "%$keyword%")
-                ->orWhere('country', 'LIKE', "%$keyword%")
-                ->orWhere('state', 'LIKE', "%$keyword%")
-                ->orWhere('city', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+        $userData = Auth::user();
+
+        $userRole = $userData->roles->pluck('name')->toArray();
+
+        // dd($userData->id);
+
+        if ($userRole[0] == "Super Admin") {
+            if (!empty($keyword)) {
+                $socialInitiative = SocialInitiative::where('initiative_name', 'LIKE', "%$keyword%")
+                    ->orWhere('initiative_description', 'LIKE', "%$keyword%")
+                    ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
+                    ->orWhere('duration', 'LIKE', "%$keyword%")
+                    ->orWhere('budget', 'LIKE', "%$keyword%")
+                    ->orWhere('region', 'LIKE', "%$keyword%")
+                    ->orWhere('country', 'LIKE', "%$keyword%")
+                    ->orWhere('state', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%")
+                    ->latest()->paginate($perPage);
+            } else {
+                $socialInitiative = SocialInitiative::latest()->paginate($perPage);
+            }
         } else {
-            $socialInitiative = SocialInitiative::latest()->paginate($perPage);
+            if (!empty($keyword)) {
+                $socialInitiative = SocialInitiative::where('user_id',$userData->id)
+                    ->orWhere('initiative_name', 'LIKE', "%$keyword%")
+                    ->orWhere('initiative_description', 'LIKE', "%$keyword%")
+                    ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
+                    ->orWhere('duration', 'LIKE', "%$keyword%")
+                    ->orWhere('budget', 'LIKE', "%$keyword%")
+                    ->orWhere('region', 'LIKE', "%$keyword%")
+                    ->orWhere('country', 'LIKE', "%$keyword%")
+                    ->orWhere('state', 'LIKE', "%$keyword%")
+                    ->orWhere('city', 'LIKE', "%$keyword%")
+                    ->latest()->paginate($perPage);
+                // dd($socialInitiative);
+            } else {
+                $socialInitiative = SocialInitiative::where('user_id',$userData->id)->latest()->paginate($perPage);
+            }
         }
 
         // $socialInitiative = json_decode(json_encode($socialInitiative));
@@ -64,7 +90,7 @@ class SocialInitiativeController extends Controller
      */
     public function create()
     {
-        // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $country = Country::orderBy('name', 'asc')->get();
 
@@ -80,7 +106,7 @@ class SocialInitiativeController extends Controller
      */
     public function store(Request $request)
     {
-        // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -190,7 +216,7 @@ class SocialInitiativeController extends Controller
      */
     public function edit($id)
     {
-        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $socialInitiative = SocialInitiative::findOrFail($id);
 
@@ -245,7 +271,7 @@ class SocialInitiativeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -335,7 +361,7 @@ class SocialInitiativeController extends Controller
      */
     public function destroy($id)
     {
-        // abort_if(Gate::denies('social_initiative_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('social_initiative_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         SocialInitiative::destroy($id);
 
@@ -348,14 +374,47 @@ class SocialInitiativeController extends Controller
     }
 
     // Delete Initiative Image
-    public function deleteInitiativeImage($id=null)
+    public function deleteInitiativeImage($id = null)
     {
-        if($id)
-        {
-            SocialInitiativeImages::where('id',$id)->delete();
+        if ($id) {
+            SocialInitiativeImages::where('id', $id)->delete();
 
             $notification = array(
                 'message' => 'Image deleted successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    // Enable Social initiative
+    public function enableInitiative($id = null)
+    {
+        abort_if(Gate::denies('social_initiative_enable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        if (!empty($id)) {
+            SocialInitiative::where('id', $id)->update(['status' => 1]);
+
+            $notification = array(
+                'message' => 'Initiative enabled successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    // Disable Social initiative
+    public function disableInitiative($id = null)
+    {
+        abort_if(Gate::denies('social_initiative_disable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        if (!empty($id)) {
+            SocialInitiative::where('id', $id)->update(['status' => 0]);
+
+            $notification = array(
+                'message' => 'Initiative disable successfully!',
                 'alert-type' => 'success',
             );
 

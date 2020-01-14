@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
 use Image;
 use App\Option;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SystemController extends Controller
 {
     // Get System Options
     public function getOptions()
     {
+        abort_if(Gate::denies('site_option_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['options'] = Option::get();
         return view('admin.system.options', $data);
     }
@@ -18,6 +22,8 @@ class SystemController extends Controller
     // Update System Options
     public function postOption(Request $request)
     {
+        abort_if(Gate::denies('site_option_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         $option = Option::where('key', '=', 'app.name')->first();
         $option->value = $request->site_name ?: $option->value;
         $option->save();
@@ -61,6 +67,8 @@ class SystemController extends Controller
     // Get Robots.txt
     public function getRobot()
     {
+        abort_if(Gate::denies('robot_txt_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['robots'] = file_get_contents(public_path('robots.txt'));
         return view('admin.system.robots', $data);
     }
@@ -68,6 +76,8 @@ class SystemController extends Controller
     // Save Robots.txt
     public function postRobot(Request $request)
     {
+        abort_if(Gate::denies('robot_txt_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         file_put_contents(public_path('robots.txt'), $request->robots_txt);
         return back();
     }
@@ -75,6 +85,8 @@ class SystemController extends Controller
     // Get .htaccess
     public function getHtaccess()
     {
+        abort_if(Gate::denies('htaccess_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['htaccess'] = file_get_contents(public_path('.htaccess'));
         return view('admin.system.htaccess', $data);
     }
@@ -82,6 +94,8 @@ class SystemController extends Controller
     // Save .htaccess
     public function postHtaccess(Request $request)
     {
+        abort_if(Gate::denies('htaccess_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         file_put_contents(public_path('.htaccess'), $request->htaccess);
         return back();
     }
@@ -89,6 +103,8 @@ class SystemController extends Controller
     // Get Custom Codes
     public function getCode()
     {
+        abort_if(Gate::denies('customcode_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['header'] = file_get_contents(resource_path('views/admin/system/partials/code_header.blade.php'));
         $data['footer'] = file_get_contents(resource_path('views/admin/system/partials/code_footer.blade.php'));
         return view('admin.system.code', $data);
@@ -97,6 +113,8 @@ class SystemController extends Controller
     // Save Custom Codes
     public function postCodes(Request $request)
     {
+        abort_if(Gate::denies('customcode_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         file_put_contents(resource_path('views/admin/system/partials/code_header.blade.php'), $request->custom_code_header);
         file_put_contents(resource_path('views/admin/system/partials/code_footer.blade.php'), $request->custom_code_footer);
         return back();
@@ -105,6 +123,8 @@ class SystemController extends Controller
     // Get Terms & Conditions
     public function getTerms()
     {
+        abort_if(Gate::denies('terms_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['terms'] = file_get_contents(resource_path('views/admin/system/partials/terms_condition.blade.php'));
         return view('admin.system.terms_condition', $data);
     }
@@ -112,6 +132,8 @@ class SystemController extends Controller
     // Save Terms & Conditions
     public function postTerms(Request $request)
     {
+        abort_if(Gate::denies('terms_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         file_put_contents(resource_path('views/admin/system/partials/terms_condition.blade.php'), $request->custom_code_terms);
         $option = Option::where('key', '=', 'app.terms')->first();
         $option->value = $request->custom_code_terms ?: $option->value;
@@ -122,6 +144,8 @@ class SystemController extends Controller
     // Get Website Contact Details
     public function getContactInfo()
     {
+        abort_if(Gate::denies('contact_info_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['options'] = Option::get();
         return view('admin.system.contact_info', $data);
     }
@@ -129,6 +153,8 @@ class SystemController extends Controller
     // Post Contact Details
     public function postContactInfo(Request $request)
     {
+        abort_if(Gate::denies('contact_info_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $option = Option::where('key', '=', 'app.phone')->first();
         $option->value = $request->phone ?: $option->value;
         $option->save();
@@ -150,6 +176,8 @@ class SystemController extends Controller
     // Get Social Links Details
     public function getSocialLinks()
     {
+        abort_if(Gate::denies('social_links_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $data['options'] = Option::get();
         return view('admin.system.social_links', $data);
     }
@@ -157,6 +185,8 @@ class SystemController extends Controller
     // Post Social Links Details
     public function postSocialLinks(Request $request)
     {
+        abort_if(Gate::denies('social_link_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $option = Option::where('key', '=', 'app.fb')->first();
         $option->value = $request->facebook ?: $option->value;
         $option->save();

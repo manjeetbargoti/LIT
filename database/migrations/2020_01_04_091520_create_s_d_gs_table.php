@@ -18,6 +18,7 @@ class CreateSDGsTable extends Migration
             $table->string('sdg_name')->nullable();
             $table->text('sdg_description')->nullable();
             $table->boolean('status')->default(1)->nullable();
+            $table->string('add_by')->nullable();
             $table->timestamps();
         });
     }

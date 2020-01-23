@@ -93,16 +93,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // $business_count = BusinessInfo::where('user_id',$id)->count();
-        // $business_id = BusinessInfo::where('user_id',$id)->first();
-
-        // if($business_count > 0)
-        // {
-        //     $bid = $business_id->id;
-        // }else{
-        //     $bid = "";
-        // }
-
         $business = BusinessInfo::where('user_id',$id)->first();
 
         return view('admin.user.show', compact('user','business'));

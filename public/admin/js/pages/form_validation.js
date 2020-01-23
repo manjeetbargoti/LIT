@@ -37,6 +37,55 @@ $(document).ready(function() {
                     }
                 }
             },
+            business_id: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please Select your Company'
+                    }
+                }
+            },
+            project_name: {
+                validators: {
+                    notEmpty: {
+                        message: 'Enter project name'
+                    }
+                }
+            },  
+            company_background: {
+                validators: {
+                    notEmpty: {
+                        message: 'Write something about your company'
+                    }
+                }
+            },  
+            project_description: {
+                validators: {
+                    notEmpty: {
+                        message: 'Write something about this project'
+                    }
+                }
+            },
+            project_goals: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please write Project goals'
+                    }
+                }
+            },
+            budget: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter project budget'
+                    }
+                }
+            },
+            project_timeline: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please enter project duration'
+                    }
+                }
+            },
             business_description: {
                 validators: {
                     notEmpty: {

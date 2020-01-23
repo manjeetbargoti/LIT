@@ -29,6 +29,34 @@
             </li>
             <!-- /.Dashboard -->
 
+            <!-- User Management -->
+            <li class="dropdown_menu {{ (request()->is('admin/profile*')) ? 'active':'' }}">
+                <a href="{{ url('/admin/profile') }}">
+                    <i class="fa fa-users"></i>
+                    <span class="link-title menu_hide">&nbsp; Account Settings</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+                <ul>
+                    <li class="{{ (request()->is('admin/profile')) ? 'active':'' }}">
+                        <a href="{{ url('admin/profile') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; My Profile
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/profile/company')) ? 'active':'' }}">
+                        <a href="{{ url('admin/profile/company') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Company Profile
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/profile/address')) ? 'active':'' }}">
+                        <a href="{{ url('admin/profile/address') }}">
+                            <i class="fa fa-angle-right"></i>
+                            <span class="link-title"> &nbsp; Address</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.User Management -->
+
             <!-- System Settings -->
             <li class="dropdown_menu {{ (request()->is('admin/system*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/system') }}">
@@ -131,6 +159,23 @@
             </li>
             <!-- /.Page Management -->
 
+            <!-- Social Goals Management -->
+            <li class="dropdown_menu {{ (request()->is('admin/sdgs*')) ? 'active':'' }}">
+                <a href="{{ url('/admin/sdgs') }}">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="link-title menu_hide">&nbsp; Social Goals (SDG's)</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+                <ul>
+                    <li class="{{ (request()->is('admin/sdgs*')) ? 'active':'' }}">
+                        <a href="{{ url('/admin/sdgs') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; SDG's
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.Social Goals Management -->
+
             <!-- Product Management -->
             <li class="dropdown_menu {{ (request()->is('admin/social-impact*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/social-impact') }}">
@@ -141,17 +186,22 @@
                 <ul>
                     <li class="{{ (request()->is('admin/social-impact/initiatives*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/initiatives') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Initiatives
+                            <i class="fa fa-angle-right"></i> &nbsp; Social Initiatives
                         </a>
                     </li>
-                    <li class="{{ (request()->is('admin/social-impact/projects')) ? 'active':'' }}">
-                        <a href="{{ url('admin/social-impact/projects') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Projects
+                    <li class="{{ (request()->is('admin/social-impact/proposals*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/proposals') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Proposals (RFP)
                         </a>
                     </li>
-                    <li class="{{ (request()->is('admin/social-impact/activity-job')) ? 'active':'' }}">
+                    <li class="{{ (request()->is('admin/social-impact/activity-job*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/activity-job') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; Activity Job
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/social-impact/instagram-campaign*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/instagram-campaign') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Instagram Campaigns
                         </a>
                     </li>
                 </ul>

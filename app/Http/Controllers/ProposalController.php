@@ -1,0 +1,202 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\BusinessInfo;
+use App\Country;
+use App\Proposal;
+use App\User;
+use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class ProposalController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        // abort_if(Gate::denies('proposal_project_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        $userData = Auth::user();
+
+        $userRole = $userData->roles->pluck('name')->toArray();
+
+        // dd($userData->id);
+
+        if ($userRole[0] == "Super Admin") {
+            if (!empty($keyword)) {
+                $proposal = Proposal::where('project_name', 'LIKE', "%$keyword%")
+                    ->orWhere('submission_time', 'LIKE', "%$keyword%")
+                    ->orWhere('project_timeline', 'LIKE', "%$keyword%")
+                    ->orWhere('budget', 'LIKE', "%$keyword%")
+                    ->latest()->paginate($perPage);
+            } else {
+                $proposal = Proposal::latest()->paginate($perPage);
+            }
+        } else {
+            if (!empty($keyword)) {
+                $proposal = Proposal::where('project_name', 'LIKE', "%$keyword%")
+                    ->orWhere('submission_time', 'LIKE', "%$keyword%")
+                    ->orWhere('project_timeline', 'LIKE', "%$keyword%")
+                    ->orWhere('budget', 'LIKE', "%$keyword%")
+                    ->where('user_id', $userData->id)
+                    ->latest()->paginate($perPage);
+                // dd($proposal);
+            } else {
+                $proposal = Proposal::where('user_id', $userData->id)->latest()->paginate($perPage);
+            }
+        }
+
+        return view('admin.proposals.index', compact('proposal'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        // abort_if(Gate::denies('proposal_project_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $uid = Auth::user()->id;
+
+        $country = Country::orderBy('name', 'asc')->get();
+        $company = BusinessInfo::where('user_id', $uid)->get();
+
+        return view('admin.proposals.create', compact('country', 'company'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(Request $request)
+    {
+        // abort_if(Gate::denies('proposal_project_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $requestData = $request->all();
+
+        $user_id = Auth::user()->id;
+
+        // dd($requestData);
+
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));
+
+        // dd($slug);
+
+        $requestData['slug'] = $slug;
+        $requestData['user_id'] = $user_id;
+
+        // dd($requestData);
+
+        DB::beginTransaction();
+
+        try {
+
+            $proposal = Proposal::create($requestData);
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return Redirect()->back()->withErrors($e->getErrors())->withInput();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+
+        $notification = array(
+            'message' => 'Project added successfully!',
+            'alert-type' => 'success',
+        );
+
+        return redirect('admin/social-impact/proposals')->with($notification);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        // abort_if(Gate::denies('proposal_project_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        $proposals = Proposal::findOrFail($id);
+
+        $userData = User::findOrFail($proposals['user_id']);
+
+        $userRole = $userData->roles->pluck('name')->toArray();
+
+        // dd($userData);
+
+        return view('admin.proposals.show', compact('proposals', 'userData', 'userRole'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy($id)
+    {
+        // abort_if(Gate::denies('proposal_project_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        Proposal::destroy($id);
+
+        $notification = array(
+            'message' => 'Project deleted successfully!',
+            'alert-type' => 'success',
+        );
+
+        return redirect('admin/social-impact/proposals')->with($notification);
+    }
+
+    // Enable Proposals
+    public function enableProposal($id=null)
+    {
+        if($id)
+        {
+            Proposal::where('id', $id)->update(['status' => 1]);
+
+            $notification = array(
+                'message' => 'Project enable successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect('admin/social-impact/proposals')->with($notification);
+        }
+    }
+
+    // Disable Proposal
+    public function disableProposal($id=null)
+    {
+        if($id)
+        {
+            Proposal::where('id', $id)->update(['status' => 0]);
+
+            $notification = array(
+                'message' => 'Project disable successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect('admin/social-impact/proposals')->with($notification);
+        }
+    }
+}

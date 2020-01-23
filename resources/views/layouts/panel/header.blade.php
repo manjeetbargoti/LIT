@@ -31,8 +31,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url('/admin/dashboard') }}">
-                            <i class="fa fa-picture-o"></i> <span class="quick_text">Suppliers</span>
+                        <a class="nav-link text-white" href="{{ url('/admin/social-impact/proposals') }}">
+                            <i class="fa fa-picture-o"></i> <span class="quick_text">Proposals (RFP)</span>
                         </a>
                     </li>
                     <li class="nav-item">

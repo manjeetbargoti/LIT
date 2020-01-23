@@ -21,11 +21,16 @@ Route::group(['middleware' => 'auth'], function () {
     // Page Management
     Route::resource('admin/pages', 'PagesController');
 
-    // Social Impact Initiative/Project/Activity Job Management
+    // Social Impact Initiative  Management
     Route::resource('admin/social-impact/initiatives', 'SocialInitiativeController');
     Route::get('/admin/initiative/image/{id}/delete','SocialInitiativeController@deleteInitiativeImage');
     Route::get('/admin/initiative/{id}/enable','SocialInitiativeController@enableInitiative');
     Route::get('/admin/initiative/{id}/disable','SocialInitiativeController@disableInitiative');
+
+    // Request for Proposal Management
+    Route::resource('admin/social-impact/proposals', 'ProposalController');
+    Route::get('admin/proposal/{id}/enable', 'ProposalController@enableProposal');
+    Route::get('admin/proposal/{id}/disable', 'ProposalController@disableProposal');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');
@@ -59,6 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::match(['get','post'], '/admin/profile', 'UserController@profile');
     Route::match(['get','post'], '/admin/profile/{id}/edit', 'UserController@profileEdit');
     Route::match(['get','post'], '/admin/profile/{id}/change-password', 'UserController@changePassword');
+
+    // Company info
+    Route::match(['get','post'], '/admin/profile/company', 'BusinessInfoController@companyProfile');
 
     // Email and Username velidation
     Route::match(['get', 'post'], '/checkemail', 'AdminController@checkEmail');

@@ -16,63 +16,9 @@
 <div class="outer">
     <div class="container">
         <div class="row">
-            <!-- User Basic Details -->
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">User #{{ $user->id }} [{{ $user->first_name }} {{ $user->last_name }}]</div>
-                    <div class="card-body">
-
-                        <a href="{{ url('/admin/users') }}" title="Back"><button class="btn btn-warning btn-sm"><i
-                                    class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/users/' . $user->id . '/edit') }}"
-                            title="Edit user"><button class="btn btn-primary btn-sm"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
-                        <form method="POST" action="{{ url('admin/users' . '/' . $user->id) }}"
-                            accept-charset="UTF-8" style="display:inline">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete user"
-                                onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o"
-                                    aria-hidden="true"></i> Delete</button>
-                        </form>
-                        <br />
-                        <br />
-
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <td>{{ $user->id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th> Name </th>
-                                        <td> {{ $user->title }} {{ $user->first_name }} {{ $user->last_name }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Email </th>
-                                        <td> {{ $user->email }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Phone </th>
-                                        <td> {{ $user->phone }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Type </th>
-                                        <td> <button class="btn btn-success btn-sm">{{ implode(', ', $user->getRoleNames()->toArray()) }}</button> </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /. User Basic Details -->
 
             <!-- User Business Profile -->
-            <div class="col-md-7">
+            <div class="col-md-9 m-auto">
                 <div class="card">
                     <div class="card-header">Business @if(!empty($business->id))#{{ $business->id }} [{{ $business->business_name }}] @endif</div>
                     <div class="card-body">
@@ -81,9 +27,9 @@
                                     class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
 
                         @if(!empty($business->id))
-                        <!-- <a href="{{ url('/admin/profile/business/' . $business->id . '/update') }}"
+                        <a href="{{ url('/admin/profile/business/' . $business->id . '/update') }}"
                             title="Edit user"><button class="btn btn-primary btn-sm"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>             -->
+                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>            
 
                         <form method="POST" action="{{ url('admin/business' . '/' . $business->id) }}"
                             accept-charset="UTF-8" style="display:inline">
@@ -177,7 +123,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

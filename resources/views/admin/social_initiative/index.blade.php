@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12 m-auto">
                 <div class="card">
-                    <div class="card-header">Initiatives</div>
+                    <div class="card-header">Social Initiatives</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/social-impact/initiatives/create') }}" class="btn btn-success btn-sm" title="Add New Page">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New

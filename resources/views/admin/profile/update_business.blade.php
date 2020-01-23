@@ -281,7 +281,7 @@
                                             <input id="input-21" type="file" accept="image/*" name="trade_license_image"
                                                 class="form-control file-loading"
                                                 value="{{ old('trade_license_image') }}">
-                                                <img src="{{ url('/images/tradeLicense/large/'.$businessData->trade_license_image) }}" alt="{{ $businessData->business_name }}">
+                                                <img src="{{ url('/images/tradeLicense/large/'.$businessData->trade_license_image) }}" class="img-responsive" width="250" alt="{{ $businessData->business_name }}">
                                         </div>
                                     </div>
                                     <!-- /. Trade License Image -->

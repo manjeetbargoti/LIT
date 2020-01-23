@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BusinessInfo;
+use App\User;
 use App\City;
 use App\Country;
 use App\SDGs;
@@ -119,7 +120,7 @@ class BusinessInfoController extends Controller
                 'alert-type' => 'success',
             );
 
-            return redirect('admin/profile')->with($notification);
+            return redirect('admin/profile/company')->with($notification);
         }
 
         // Country Dropdown
@@ -161,5 +162,17 @@ class BusinessInfoController extends Controller
         }
 
         return view('admin.profile.update_business', compact('sdg', 'businessData', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
+    }
+
+    // Company profile information
+    public function companyProfile()
+    {
+        $id = Auth::user()->id;
+
+        $user = User::findOrFail($id);
+
+        $business = BusinessInfo::where('user_id',$id)->first();
+
+        return view('admin.profile.company', compact('user','business'));
     }
 }

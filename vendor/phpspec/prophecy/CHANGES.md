@@ -1,3 +1,13 @@
+1.10.2 / 2020/01/20
+===================
+
+* [added] support for new versions of (@sebastianbergmann)
+
+1.10.1 / 2019/12/22
+===================
+
+* [fixed] identical callables no longer match as arguments (@ciaranmcnulty)
+
 1.10.0 / 2019/12/17
 ===================
 

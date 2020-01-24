@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\BusinessInfo;
 use App\Country;
+use App\State;
+use App\City;
 use App\Proposal;
 use App\User;
 use DB;
@@ -145,6 +147,110 @@ class ProposalController extends Controller
         // dd($userData);
 
         return view('admin.proposals.show', compact('proposals', 'userData', 'userRole'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        // abort_if(Gate::denies('proposal_project_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $uid = Auth::user()->id;
+
+        $proposal = Proposal::findOrFail($id);
+        $company = BusinessInfo::where('user_id', $uid)->get();
+
+        // Country Dropdown
+        $countryname = Country::get();
+        $country_dropdown = "<option selected value=''>Select Country</option>";
+        foreach ($countryname as $cont) {
+            if ($cont->name == $proposal['country']) {
+                $selected = "selected";
+            } else {
+                $selected = "";
+            }
+            $country_dropdown .= "<option value='" . $cont->name . "' " . $selected . ">" . $cont->name . "</option>";
+        }
+
+        // State Dropdown
+        $countryname = Country::where('name', $proposal['country'])->first();
+        $statename = State::where(['country_id' => $countryname->id])->get();
+        $state_dropdown = "<option selected value=''>Select State</option>";
+        foreach ($statename as $stn) {
+            if ($stn->name == $proposal->state) {
+                $selected = "selected";
+            } else {
+                $selected = "";
+            }
+            $state_dropdown .= "<option value='" . $stn->name . "' " . $selected . ">" . $stn->name . "</option>";
+        }
+
+        // City Dropdown
+        $statename = State::where('name', $proposal['state'])->first();
+        $cityname = City::where(['state_id' => $statename->id])->get();
+        $city_dropdown = "<option selected value=''>Select City</option>";
+        foreach ($cityname as $city) {
+            if ($city->name == $proposal->city) {
+                $selected = "selected";
+            } else {
+                $selected = "";
+            }
+            $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
+        }
+
+        return view('admin.proposals.edit', compact('proposal','company', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+        // abort_if(Gate::denies('proposal_project_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $requestData = $request->all();
+
+        // dd($requestData);
+
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));
+
+        // dd($slug);
+
+        $requestData['slug'] = $slug;
+
+        DB::beginTransaction();
+
+        try {
+
+            $proposal = Proposal::findOrFail($id);
+            $proposal->update($requestData);
+
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return Redirect()->back()->withErrors($e->getErrors())->withInput();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        DB::commit();
+
+        $notification = array(
+            'message' => 'Project updated successfully!',
+            'alert-type' => 'success',
+        );
+
+        return redirect('admin/social-impact/proposals')->with($notification);
     }
 
     /**

@@ -1677,3 +1677,106 @@ div#litslidercontact h3 {
 }
 
 /*# sourceMappingURL=main.css.map */
+.topnav .ace-responsive-menu li ul.sub-menu{
+	right:0;
+}
+ul.sub-menu li {
+    padding: 10px;
+    display: flex;
+}
+.topnav .ace-responsive-menu li ul.sub-menu {
+    background: #fff !important;
+    top: 97px;
+	width:320px;
+	box-shadow:0 5px 5px 0 rgba(0,0,0,0.2)
+}
+.topnav .ace-responsive-menu > li > a.icon b {
+    top: -18px;
+}
+a.btn.regbtn {
+    padding: 11px !important;
+    margin-top: 27px !important;
+}
+
+a.icon .title {
+    position: relative;
+}
+.topnav .header_search-button {
+    margin-top: 41px;
+}
+.topnav .ace-responsive-menu li ul.sub-menu > li {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+.topnav .ace-responsive-menu > li > a.icon {
+    padding: 38px 0;
+    margin: 0 15px 0 0;
+}
+.topnav .ace-responsive-menu > li > a{
+	padding: 38px 18px;
+}
+span.itemimg {
+    width: 80px;
+    min-width: 80px;
+	margin-right:10px;
+}
+.itemimg img{
+    width: 80px;
+    min-width: 80px;
+}
+
+.carttext h5 {
+    font-size: 14px;
+    font-weight: 800;
+    margin: 0 0 4px 0;
+}
+
+.carttext p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 18px;
+}
+a.button_link {
+    padding: 5px 10px !important;
+    background: #59baaf !important;
+    display: inline-block !important;
+    font-size: 13px !important;
+    color: #fff !important;
+    width: auto !important;
+    min-width: auto !important;
+    max-width: auto !important;
+    border-radius: 4px;
+    margin-top: 10px !important;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 3%;
+    z-index: 99;
+}
+.insta_imgbox {
+    position: relative;
+    display: block;
+}
+.likecomment {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px 10px 30px 10px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+91 */
+background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 91%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 91%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 91%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+
+}
+a.like_left {
+    color: #fff;
+}
+
+a.comment_right {
+    color: #fff;
+    float: right;
+}
+.likecomment i {
+    margin-right: 5px;
+}

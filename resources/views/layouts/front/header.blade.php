@@ -25,17 +25,18 @@
                             <a href="#"><span class="title">ABOUT us</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">CSR MARKET PLACE</span></a>
+                            <a href="{{ url('/csr-market-place') }}"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">SUCCESS STORY</span></a>
+                            <a href="{{ url('/success-stories') }}"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
                             <a href="#"><span class="title">CONTACT US</span></a>
                         </li>
                         @guest
                         <li>
-                            <a href="{{ route('login') }}" class="btn"><span class="title">Sign in/Register</span></a>
+                            <!-- <a href="{{ route('login') }}" class="btn"><span class="title">Sign in/Register</span></a> -->
+                            <a href="{{ route('login') }}" class="btn regbtn"><span class="title">Sign in/Register</span></a>
                         </li>
                         @else
                         <li>
@@ -43,7 +44,7 @@
                                         class="usericon" /></span></a>
                             <!-- Level Two-->
                             <ul>
-                                <li><a href="#">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a></li>
+                                <li><a href="{{ url('/admin/profile') }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a></li>
                                 <li><a href="#">My Account</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
@@ -54,16 +55,37 @@
                         </li>
                         @endguest
                         <li>
-                            <a href="#" class="icon"><span class="title"> <img src="{{ asset('front/dist/img/shopping-cart.png') }}"
-                                        class="carticon" alt="shopping-cart" /> <b>95 </b> </span></a>
-                            <!-- Level Two-->
-                            <ul>
-                                <li><a href="#">Sub Item One</a></li>
-                                <li><a href="#">Sub Item Two</a></li>
-                                <li><a href="#">Sub Item Three</a></li>
-                                <li><a href="#">Sub Item Four</a></li>
-                            </ul>
-                        </li>
+                                <a class="icon"><span class="title"> <img src="{{ asset('front/dist/img/shopping-cart.png') }}" class="carticon" alt="shopping-cart" /></span><sup class="badge badge-primary">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</sup></a>
+                                <!-- Level Two-->
+                                @if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0)
+                                <ul class="@if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0) d-block @endif">
+                                    <?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
+                                    @foreach($itmes as $item)
+                                    <li>
+                                        <!-- <span class="itemimg">
+                                            <img src="{{ asset('front/dist/img/home/blog2.jpg') }}">
+                                        </span> -->
+                                        <div class="carttext">
+                                            <h5>{{ $loop->iteration }}. {{ $item['item']->initiative_name }}, {{ $item['item']->beneficiaries }} Beneficiaries, Duration: {{ $item['item']->duration }} Months </h5>
+                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED {{ $item['item']->budget }}</p>
+                                            <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $item['item']->beneficiaries }}</p>
+                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $item['item']->duration }} Months</p>
+                                            <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> {{ number_format($item['item']->budget / $item['item']->beneficiaries / $item['item']->duration, 2) }} per person/month</p>
+                                            <a href="#" class="button_link">Express Interest</a> <a href="{{ url('/cart-item/'.$item['item']->id.'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                    <li>
+                                    <table class="table table-bordered table-hover">
+                                        <tr>
+                                            <td>Total Spend</td>
+                                            <td>AED {{ Session::has('cart') ? Session::get('cart')->totalPrice : '' }}</td>
+                                        </tr>
+                                    </table>
+                                    </li>
+                                </ul>
+                                @endif
+                            </li>
                         <li>
                             <div class="header_search  float-right">
                                 <div class="header_search-button"></div>

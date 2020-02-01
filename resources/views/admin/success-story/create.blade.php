@@ -106,7 +106,7 @@
                             <hr>
                             <div class="form-group">
                                 <input class="btn btn-warning pull-left" type="reset" value="Reset">
-                                <input class="btn btn-primary pull-right" type="submit" value="Create Page">
+                                <input class="btn btn-primary pull-right" type="submit" value="Create Story">
                             </div>
                         </form>
                     </div>

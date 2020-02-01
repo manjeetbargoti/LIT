@@ -105,6 +105,22 @@ class SuccessStoryController extends Controller
         return view('admin.success-story.show', compact('successStory'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        // abort_if(Gate::denies('success_story_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $successStory = SuccessStory::findOrFail($id);
+
+        return view('admin.success-story.edit', compact('successStory'));
+    }
+
     // List All Stories on website
     public function listStories()
     {

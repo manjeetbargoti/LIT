@@ -208,6 +208,16 @@
             </li>
             <!-- /.Product Management -->
 
+            <!-- Success Story Management -->
+            <li class="dropdown_menu {{ (request()->is('admin/success-stories*')) ? 'active':'' }}">
+                <a href="{{ url('/admin/success-stories') }}">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="link-title menu_hide">&nbsp; Success Story</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+            </li>
+            <!-- /.Page Management -->
+
         <!-- Support Center -->
         <li class="dropdown_menu {{ (request()->is('admin/support*')) ? 'active':'' }}">
             <a href="{{ url('/admin/supports') }}">

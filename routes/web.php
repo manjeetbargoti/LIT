@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/initiative/{id}/enable','SocialInitiativeController@enableInitiative');
     Route::get('/admin/initiative/{id}/disable','SocialInitiativeController@disableInitiative');
 
+    // Success Stories
+    Route::resource('admin/success-stories', 'SuccessStoryController');
+
     // Request for Proposal Management
     Route::resource('admin/social-impact/proposals', 'ProposalController');
     Route::get('admin/proposal/{id}/enable', 'ProposalController@enableProposal');

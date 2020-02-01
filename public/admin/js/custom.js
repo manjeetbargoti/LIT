@@ -554,3 +554,10 @@ $('#CMSPageName').keyup(function() {
     var rservice_url = trims.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
     $('#CMSPageSlug').val(rservice_url.toLowerCase());
 });
+
+$('#StoryTitle').keyup(function() {
+    var str = $(this).val();
+    var trims = $.trim(str);
+    var story_url = trims.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+    $('#StorySlug').val(story_url.toLowerCase());
+});

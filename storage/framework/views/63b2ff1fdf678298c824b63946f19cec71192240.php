@@ -208,6 +208,16 @@
             </li>
             <!-- /.Product Management -->
 
+            <!-- Success Story Management -->
+            <li class="dropdown_menu <?php echo e((request()->is('admin/success-stories*')) ? 'active':''); ?>">
+                <a href="<?php echo e(url('/admin/success-stories')); ?>">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="link-title menu_hide">&nbsp; Success Story</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+            </li>
+            <!-- /.Page Management -->
+
         <!-- Support Center -->
         <li class="dropdown_menu <?php echo e((request()->is('admin/support*')) ? 'active':''); ?>">
             <a href="<?php echo e(url('/admin/supports')); ?>">

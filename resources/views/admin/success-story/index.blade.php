@@ -54,9 +54,9 @@
                                     @foreach($successStory as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->feature_image }}</td>
+                                        <td>@if(!empty($item->feature_image)) <img width="150" class="img-responsive" src="{{ asset('/images/successStory/large/'.$item->feature_image) }}" alt="{{ $item->title }}"> @endif</td>
                                         <td><a href="{{ url('/success-story/'.$item->slug) }}" target="_blank">{{ $item->title }}</a></td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white" href="{{ url('/admin/success-story/'.$item->id.'/disable') }}">Enable</a> @else <a class="btn btn-sm btn-danger text-white" href="{{ url('/admin/success-story/'.$item->id.'/enable') }}">Disable</a> @endif</td>
                                         <td>
                                             <a href="{{ url('/admin/success-stories/' . $item->id) }}" title="View Page"><button
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Gate;
+use Image;
 use App\SuccessStory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Response;
 
 class SuccessStoryController extends Controller
@@ -59,7 +62,24 @@ class SuccessStoryController extends Controller
         
         $requestData = $request->all();
 
-        dd($requestData);
+        if ($request->hasFile('feature_image')) {
+            $image_array = Input::file('feature_image');
+            $image_name = $image_array->getClientOriginalName();
+            $image_size = $image_array->getClientSize();
+            $extension = $image_array->getClientOriginalExtension();
+            $filename = 'successStory' . rand(0, 9999999) . '.' . $extension;
+            $large_image_path = public_path('/images/successStory/large/' . $filename);
+            // Storing image in folder
+            Image::make($image_array)->save($large_image_path);
+
+            $requestData['feature_image'] = $filename;
+        }
+
+        $user_id = Auth::user()->id;
+
+        $requestData['add_by'] = $user_id;
+
+        // dd($requestData);
         
         SuccessStory::create($requestData);
 
@@ -69,6 +89,20 @@ class SuccessStoryController extends Controller
         );
 
         return redirect('admin/success-stories')->with($notification);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $successStory = SuccessStory::findOrFail($id);
+
+        return view('admin.success-story.show', compact('successStory'));
     }
 
     // List All Stories on website

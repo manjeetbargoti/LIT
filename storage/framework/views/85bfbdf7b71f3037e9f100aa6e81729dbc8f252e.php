@@ -52,9 +52,9 @@
                                     <?php $__currentLoopData = $successStory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($loop->iteration); ?></td>
-                                        <td><?php echo e($item->feature_image); ?></td>
+                                        <td><?php if(!empty($item->feature_image)): ?> <img width="150" class="img-responsive" src="<?php echo e(asset('/images/successStory/large/'.$item->feature_image)); ?>" alt="<?php echo e($item->title); ?>"> <?php endif; ?></td>
                                         <td><a href="<?php echo e(url('/success-story/'.$item->slug)); ?>" target="_blank"><?php echo e($item->title); ?></a></td>
-                                        <td><?php echo e($item->status); ?></td>
+                                        <td><?php if($item->status == 1): ?> <a class="btn btn-sm btn-success text-white" href="<?php echo e(url('/admin/success-story/'.$item->id.'/disable')); ?>">Enable</a> <?php else: ?> <a class="btn btn-sm btn-danger text-white" href="<?php echo e(url('/admin/success-story/'.$item->id.'/enable')); ?>">Disable</a> <?php endif; ?></td>
                                         <td>
                                             <a href="<?php echo e(url('/admin/success-stories/' . $item->id)); ?>" title="View Page"><button
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"

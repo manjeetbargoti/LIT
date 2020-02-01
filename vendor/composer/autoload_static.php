@@ -425,6 +425,7 @@ class ComposerStaticInit98b447fc725e821a3453818d4a7033e1
 
     public static $classMap = array (
         'App\\BusinessInfo' => __DIR__ . '/../..' . '/app/BusinessInfo.php',
+        'App\\Cart' => __DIR__ . '/../..' . '/app/Cart.php',
         'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Country' => __DIR__ . '/../..' . '/app/Country.php',
@@ -438,6 +439,7 @@ class ComposerStaticInit98b447fc725e821a3453818d4a7033e1
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\BusinessInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/BusinessInfoController.php',
+        'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InstaCampController' => __DIR__ . '/../..' . '/app/Http/Controllers/InstaCampController.php',

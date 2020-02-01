@@ -1,0 +1,1 @@
+<?php /**PATH D:\GITHUB\LIT\resources\views/layouts/panel/footer.blade.php ENDPATH**/ ?>

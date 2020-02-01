@@ -86,11 +86,25 @@ Route::group(['middleware' => 'auth'], function () {
     
 });
 
-
 //#################################################################################//
 //           ###########            Frontend Routes           ##########           //
 //#################################################################################//
 
 Route::get('/', 'HomeController@index')->name('homepage');
 
-Route::match(['get','post'],'/verify/token={token}/code={code}','Auth\VerificationController@verifyEmail');
+Route::match(['get', 'post'], '/verify/token={token}/code={code}', 'Auth\VerificationController@verifyEmail');
+
+Route::match(['get', 'post'], '/on-ground/search', 'HomeController@homeSearch');
+
+Route::match(['get','post'], '/social-initiative/{url}', 'HomeController@detailSocialInitiative');
+
+// Get State City List
+Route::get('/get-state', 'AdminController@getStateList');
+Route::get('/get-city', 'AdminController@getCityList');
+
+// Success Stories
+Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
+
+// Add to cart functionality
+Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addInitiativeToCart');
+Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');

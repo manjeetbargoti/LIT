@@ -16,7 +16,7 @@
 <div class="outer">
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6 m-auto">
                 <div class="card">
                     <div class="card-header">Create New SDG</div>
                     <div class="card-body">
@@ -42,6 +42,17 @@
                                 <input class="form-control" name="sdg_name" type="text" id="sdg_name"
                                     value="{{ old('sdg_name') }}" required>
                                 {!! $errors->first('sdg_name', '<p class="help-block">:message</p>') !!}
+                            </div>
+
+                            <div class="form-group {{ $errors->has('sdg_category') ? 'has-error' : ''}}">
+                                <label for="SDG Category" class="control-label">{{ 'SDG Category' }}</label>
+                                <select class="form-control" name="sdg_category" id="sdg_category"
+                                    value="{{ old('sdg_category') }}" required>
+                                    <option value=""> -- Select Category -- </option>
+                                    <option value="Onground"> Onground Activity Goal </option>
+                                    <option value="360"> 360ْ Digital Marketing </option>
+                                </select>
+                                {!! $errors->first('sdg_category', '<p class="help-block">:message</p>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('sdg_description') ? 'has-error' : ''}}">

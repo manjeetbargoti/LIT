@@ -102,11 +102,22 @@
                                     <label for="Initiative Name"
                                         class="col-form-label">{{ __('Initiative Name *') }}</label>
                                 </div>
-                                <div class="col-xl-9 {{ $errors->has('initiative_name') ? 'has-error' : ''}}">
+                                <div class="col-xl-5 {{ $errors->has('initiative_name') ? 'has-error' : ''}}">
                                     <input class="form-control @error('initiative_name') is-invalid @enderror"
                                         name="initiative_name" type="text" id="initiative_name"
                                         value="{{ $socialInitiative->initiative_name }}" required>
                                     {!! $errors->first('initiative_name', '<p class="help-block">:message</p>') !!}
+                                </div>
+
+                                <div class="col-xl-4 {{ $errors->has('area_impact_sdg') ? 'has-error' : ''}}">
+                                    <select class="form-control @error('area_impact_sdg') is-invalid @enderror"
+                                        name="area_impact_sdg" id="area_impact_sdg" value="{{ old('area_impact_sdg') }}" required>
+                                        <option value=""> -- Select SDG -- </option>
+                                        @foreach($sdgs->where('sdg_category','Onground') as $s)
+                                        <option value="{{ $s->sdg_name }}" @if($s->sdg_name == $socialInitiative->area_impact_sdg) selected @endif>{{ $loop->iteration }}. {{ $s->sdg_name }} </option>
+                                        @endforeach
+                                    <select>
+                                    {!! $errors->first('area_impact_sdg', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
 
@@ -237,7 +248,7 @@
                             <div class="form-group">
                                 <div class="col-xl-10 m-auto">
                                     <input class="btn btn-danger pull-left" type="reset" value="Reset Details">
-                                    <input class="btn btn-success pull-right" type="submit" value="Create Initiative">
+                                    <input class="btn btn-success pull-right" type="submit" value="Update Initiative">
                                 </div>
                             </div>
 

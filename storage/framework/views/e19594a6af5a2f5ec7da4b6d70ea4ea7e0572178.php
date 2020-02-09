@@ -23,40 +23,43 @@
     </a>
     <section class="search-sec">
         <div class="container">
-            <form action="<?php echo e(url('/on-ground/search')); ?>" method="post" novalidate="novalidate">
-                <?php echo e(csrf_field()); ?>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 pl-0 text-center mb-4">
-                                <img src="dist/img/home/heading-icon.png" class="mb-5" alt="" />
-                                <h1 class="h1 text-uppercase"> Build your own </h1>
-                                <h4 class="h4"> Sustainability Program </h4>
-                                <ul class="nav slidenav mt-5" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="On-ground-tab" data-toggle="tab"
-                                            href="#On-ground" role="tab" aria-controls="On-ground"
-                                            aria-selected="true">Onground Sustainability Initiatives</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="engagement-tab" data-toggle="tab" href="#engagement"
-                                            role="tab" aria-controls="engagement" aria-selected="false">360<sup>o</sup> Digital Marketing Services</a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                            <a class="nav-link" id="Both-tab" data-toggle="tab" href="#Both" role="tab" aria-controls="Both" aria-selected="false">Both</a>
-                                        </li> -->
-                                </ul>
-                            </div>
-                            <div class="tab-content w-100" id="myTabContent">
-                                <div class="tab-pane fade show active" id="On-ground" role="tabpanel"
-                                    aria-labelledby="On-ground-tab">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 pl-0 text-center mb-4">
+                            <img src="dist/img/home/heading-icon.png" class="mb-5" alt="" />
+                            <h1 class="h1 text-uppercase"> Build your own </h1>
+                            <h4 class="h4"> Sustainability Program </h4>
+                            <ul class="nav slidenav mt-5" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="On-ground-tab" data-toggle="tab" href="#On-ground"
+                                        role="tab" aria-controls="On-ground" aria-selected="true">Onground
+                                        Sustainability Initiatives</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="engagement-tab" data-toggle="tab" href="#engagement"
+                                        role="tab" aria-controls="engagement" aria-selected="false">360<sup>o</sup>
+                                        Digital Marketing Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="Both-tab" data-toggle="tab" href="#Both" role="tab"
+                                        aria-controls="Both" aria-selected="false">Both</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content w-100" id="myTabContent">
+                            <div class="tab-pane fade show active" id="On-ground" role="tabpanel"
+                                aria-labelledby="On-ground-tab">
+                                <form action="<?php echo e(url('/on-ground/search')); ?>" method="post" novalidate="novalidate">
+                                    <?php echo e(csrf_field()); ?>
+
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="sdgs"
                                                 value="<?php echo e(request('sdgs')); ?>" id="exampleFormControlSelect1">
                                                 <option value=""> Select Area of Impact </option>
-                                                <?php $__currentLoopData = $sdgs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sdg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php $__currentLoopData = $sdgs->where('sdg_category', 'Onground'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sdg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option value="<?php echo e($sdg->sdg_name); ?>"><?php echo e($sdg->sdg_name); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
@@ -98,81 +101,137 @@
                                             <button type="submit" class="btn btn-primary wrn-btn">Search</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="engagement" role="tabpanel"
-                                    aria-labelledby="engagement-tab">
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="engagement" role="tabpanel" aria-labelledby="engagement-tab">
+                                <form action="<?php echo e(url('/digital-service/search')); ?>" method="post"
+                                    novalidate="novalidate">
+                                    <?php echo e(csrf_field()); ?>
+
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option> -- Select Campaign -- </option>
-                                                <option>GOAL 1: No Poverty</option>
-                                                <option>GOAL 2: Zero Hunger</option>
-                                                <option>GOAL 3: Good Health and Well-being</option>
-                                                <option>GOAL 4: Quality Education</option>
-                                                <option>GOAL 5: Gender Equality</option>
-                                                <option>GOAL 6: Clean Water and Sanitation</option>
+                                            <select class="form-control search-slt" name="sdgs"
+                                                value="<?php echo e(request('sdgs')); ?>" id="exampleFormControlSelect1">
+                                                <option value=""> Select Campaign </option>
+                                                <?php $__currentLoopData = $sdgs->where('sdg_category', '360'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sdg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($sdg->sdg_name); ?>"><?php echo e($sdg->sdg_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option> -- Budget -- </option>
-                                                <option>$5,000-$10,000</option>
-                                                <option>$10,000-$20,000</option>
-                                                <option>$20,000-$30,000</option>
-                                                <option>$30,000-$40,000</option>
-                                                <option>$40,000-$50,000</option>
-                                                <option>$50,000 and Above</option>
+                                            <select class="form-control search-slt" name="budget"
+                                                value="<?php echo e(request('budget')); ?>" id="exampleFormControlSelect1">
+                                                <option value=""> -- Budget -- </option>
+                                                <option value="5000,1000">$5,000-$10,000</option>
+                                                <option value="10001,15000">$10,001-$15,000</option>
+                                                <option value="15001,20000">$15,001-$20,000</option>
+                                                <option value="20001,25000">$20,001-$25,000</option>
+                                                <option value="25001,50000">$25,001-$50,000</option>
+                                                <option value="50000,100000">$50,000 and Above</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option> -- Select Country -- </option>
-                                                <option>Country 1</option>
-                                                <option>Country 2</option>
-                                                <option>Country 3</option>
-                                                <option>Country 4</option>
-                                                <option>Country 5</option>
-                                                <option>Country 6</option>
+                                            <select class="form-control search-slt" name="country"
+                                                value="<?php echo e(request('country')); ?>" id="country2">
+                                                <option value=""> -- Select Country -- </option>
+                                                <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($c->name); ?>"><?php echo e($c->name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option> -- Select State -- </option>
-                                                <option>State 1</option>
-                                                <option>State 2</option>
-                                                <option>State 3</option>
-                                                <option>State 4</option>
-                                                <option>State 5</option>
-                                                <option>State 6</option>
+                                            <select class="form-control search-slt" name="state" id="state2"
+                                                value="<?php echo e(request('state')); ?>">
+                                                <option value=""> -- Select State -- </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                                <option>City</option>
-                                                <option>City one</option>
-                                                <option>City two</option>
-                                                <option>City three</option>
-                                                <option>City four</option>
-                                                <option>City five</option>
-                                                <option>City six</option>
+                                            <select class="form-control search-slt" name="city" id="city2"
+                                                value="<?php echo e(request('city')); ?>">
+                                                <option value="">City</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-1 col-md-1 col-sm-12 pl-0 pr-0">
                                             <button type="submit" class="btn btn-primary wrn-btn">Search</button>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- <div class="tab-pane fade" id="Both" role="tabpanel" aria-labelledby="Both-tab">sdfdsf</div> -->
+                                </form>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 pl-0 text-center">
-                                <p class="text-uppercase pt-5"> creativity for impact </p>
+                            <div class="tab-pane fade" id="Both" role="tabpanel" aria-labelledby="Both-tab">
+                                <form action="<?php echo e(url('/all-search/result')); ?>" method="post" novalidate="novalidate">
+                                    <?php echo e(csrf_field()); ?>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="sdgs"
+                                                value="<?php echo e(request('sdgs')); ?>" id="exampleFormControlSelect1">
+                                                <option value=""> Select area of impact </option>
+                                                <?php $__currentLoopData = $sdgs->where('sdg_category', 'Onground'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sdg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($sdg->sdg_name); ?>"><?php echo e($sdg->sdg_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="sdgs2"
+                                                value="<?php echo e(request('sdgs2')); ?>" id="exampleFormControlSelect1">
+                                                <option value=""> Select 360 Digital Service </option>
+                                                <?php $__currentLoopData = $sdgs->where('sdg_category', '360'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sdg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($sdg->sdg_name); ?>"><?php echo e($sdg->sdg_name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="budget"
+                                                value="<?php echo e(request('budget')); ?>" id="exampleFormControlSelect1">
+                                                <option value=""> -- Budget -- </option>
+                                                <option value="5000,1000">$5,000-$10,000</option>
+                                                <option value="10001,15000">$10,001-$15,000</option>
+                                                <option value="15001,20000">$15,001-$20,000</option>
+                                                <option value="20001,25000">$20,001-$25,000</option>
+                                                <option value="25001,50000">$25,001-$50,000</option>
+                                                <option value="50000,100000">$50,000 and Above</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="country"
+                                                value="<?php echo e(request('country')); ?>" id="country3">
+                                                <option value=""> -- Select Country -- </option>
+                                                <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($c->name); ?>"><?php echo e($c->name); ?></option>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </select>
+                                        </div>
+                                        <div cSlass="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="state" id="state3"
+                                                value="<?php echo e(request('state')); ?>">
+                                                <option value=""> -- Select State -- </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                            <select class="form-control search-slt" name="city" id="city3"
+                                                value="<?php echo e(request('city')); ?>">
+                                                <option value="">City</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-12 pl-0 pr-0">
+                                            <button type="submit" class="btn btn-primary wrn-btn">Search</button>
+                                        </div>
+                                    </div>
                             </div>
+                            </form>
                         </div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 pl-0 text-center">
+                        <p class="text-uppercase pt-5"> creativity for impact </p>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </section>
+
+</div>
+</section>
 </div>
 <!-- Instagram Box -->
 <section id="insta">
@@ -186,11 +245,15 @@
                         src="<?php echo e($instaImg->images->low_resolution->url); ?>" class="img-fluid" /></a></div> -->
             <div class="col-md-6 col-lg-3 pb-3 px-2">
                 <div class="insta_imgbox">
-                    <img src="<?php echo e(asset('front/dist/img/home/insta5.jpg')); ?>" class="img-fluid" />
-                    <div class="likecomment">
-                        <a class="like_left" href="#"><i class="fa fa-thumbs-up"> </i><span><?php echo e($instaImg->likes->count); ?></span></a>
-                        <a class="comment_right" href="#"><i class="fa fa-comments"> </i><span><?php echo e($instaImg->comments->count); ?></span></a>
-                    </div>
+                    <a href="<?php echo e($instaImg->link); ?>" target="_blank">
+                        <img src="<?php echo e($instaImg->images->low_resolution->url); ?>" class="img-fluid" />
+                        <div class="likecomment">
+                            <a class="like_left" href="<?php echo e($instaImg->link); ?>"><i class="fa fa-thumbs-up">
+                                </i><span><?php echo e($instaImg->likes->count); ?></span></a>
+                            <a class="comment_right" href="<?php echo e($instaImg->link); ?>"><i class="fa fa-comments">
+                                </i><span><?php echo e($instaImg->comments->count); ?></span></a>
+                        </div>
+                    </a>
                 </div>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

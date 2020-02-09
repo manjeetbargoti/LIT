@@ -45,6 +45,17 @@
                                 {!! $errors->first('sdg_name', '<p class="help-block">:message</p>') !!}
                             </div>
 
+                            <div class="form-group {{ $errors->has('sdg_category') ? 'has-error' : ''}}">
+                                <label for="SDG Category" class="control-label">{{ 'SDG Category' }}</label>
+                                <select class="form-control" name="sdg_category" id="sdg_category"
+                                    value="{{ old('sdg_category') }}" required>
+                                    <option value=""> -- Select Category -- </option>
+                                    <option value="Onground" @if($sdg->sdg_category == "Onground") selected @endif> Onground Activity Goal </option>
+                                    <option value="360" @if($sdg->sdg_category == "360") selected @endif> 360ْ Digital Marketing </option>
+                                </select>
+                                {!! $errors->first('sdg_category', '<p class="help-block">:message</p>') !!}
+                            </div>
+
                             <div class="form-group {{ $errors->has('sdg_description') ? 'has-error' : ''}}">
                                 <label for="Permissions" class="control-label">{{ 'SDG Description' }}</label>
                                 <textarea name="sdg_description" id="SDGDescription" rows="5" class="form-control">{{ $sdg->sdg_description }}</textarea>

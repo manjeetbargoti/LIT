@@ -139,4 +139,12 @@ class PagesController extends Controller
 
         return redirect('admin/pages')->with('flash_message', 'Page deleted!');
     }
+
+    // Single Page
+    public function singlePage($url=null)
+    {
+        $data = Page::where(['status'=>1,'slug'=>$url])->first();
+
+        return view('front.pages.single', compact('data'));
+    }
 }

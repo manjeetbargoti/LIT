@@ -1,62 +1,118 @@
 <!-- footer Box -->
-		
+
 <footer>
-			<div class="container"> 
-				<div class="row "> 
-					<div class="col-md-12 col-lg-3 pr-5">
-						<img src="<?php echo e(asset('front/dist/img/logo.png')); ?>" class="mb-3" alt="" />
-						<p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
-						<p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-12 col-lg-3 pr-5">
+                <img src="<?php echo e(asset('front/dist/img/logo.png')); ?>" class="mb-3" alt="" />
+                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
+                    web designs.</p>
+                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
+                    web designs.</p>
+            </div>
+
+            <div class="col-md-12 col-lg-3 pr-5">
+                <h5 class="h5"> Address: </h5>
+                <address>
+                    <p> <?php echo config('app.address'); ?> </p>
+                </address>
+
+                <h5 class="h5"> Email: </h5>
+                <p> <?php echo e(config('app.email')); ?> </p>
+
+                <h5 class="h5"> Follow: </h5>
+                <ul class="social">
+                    <li> <a href="<?php echo e(config('app.twitter')); ?>"> <i class="fa fa-twitter"> </i> </a> </li>
+                    <li> <a href="<?php echo e(config('app.fb')); ?>"> <i class="fa fa-facebook"> </i> </a> </li>
+                    <li> <a href="<?php echo e(config('app.insta')); ?>"> <i class="fa fa-instagram"> </i> </a> </li>
+                </ul>
+            </div>
+
+            <div class="col-md-12 col-lg-4">
+                <h5 class="h5"> Instagram: </h5>
+                <div class="instabx">
+                    <img src="<?php echo e(asset('front/dist/img/home/insta1.jpg')); ?>" class="img-fluid" />
+                    <img src="<?php echo e(asset('front/dist/img/home/insta2.jpg')); ?>" class="img-fluid" />
+                    <img src="<?php echo e(asset('front/dist/img/home/insta3.jpg')); ?>" class="img-fluid" />
+                    <img src="<?php echo e(asset('front/dist/img/home/insta4.jpg')); ?>" class="img-fluid" />
+                    <img src="<?php echo e(asset('front/dist/img/home/insta5.jpg')); ?>" class="img-fluid" />
+                    <img src="<?php echo e(asset('front/dist/img/home/insta6.jpg')); ?>" class="img-fluid" />
+                </div>
+            </div>
+
+            <div class="col-md-12 col-lg-2">
+                <h5 class="h5"> Useful Links: </h5>
+                <ul class="ulinks">
+                    <li> <a href="<?php echo e(url('/about-us')); ?>"> About us </a> </li>
+                    <li> <a href="<?php echo e(url('/csr-market-place')); ?>">CSR Market Place</a> </li>
+                    <li> <a href="<?php echo e(url('/success-stories')); ?>"> Success Story </a> </li>
+                    <li> <a href="<?php echo e(url('/contact-us')); ?>"> Contact Us </a> </li>
+                </ul>
+            </div>
+
+            <div class="col-md-12 col-lg-12 btmfooter mt-5">
+                <p> <?php echo config('app.copyright'); ?> </p>
+                <ul class="ulinks">
+                    <li> <a href="#"> Privacy Policy </a> </li>
+                    <li> <a href="#"> | </a> </li>
+                    <li> <a href="#"> Terms Of Services</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- Modal -->
+<?php if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0): ?>
+<?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
+<?php $__currentLoopData = $itmes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="modal fade" id="QueryForm-<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->initiative_name); ?> [On-ground]<?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->service_name); ?> [Digital Service]<?php endif; ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo e(url('/submit-query')); ?>" method="Post">
+					<?php echo e(csrf_field()); ?>
+
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" placeholder="Full Name">
 					</div>
-					
-					<div class="col-md-12 col-lg-3 pr-5">
-						<h5 class="h5"> Address: </h5>
-						<address>
-							<p> Dubai World Trade Center, 26th Floor, Office 57 </p>
-						</address>
-						
-						<h5 class="h5"> Email: </h5>
-						<p> partnership@itdxb.com </p>
-						
-						<h5 class="h5"> Follow: </h5>
-						<ul class="social"> 
-							<li> <a href="#"> <i class="fa fa-twitter"> </i> </a> </li>
-							<li> <a href="#"> <i class="fa fa-facebook"> </i> </a> </li>
-							<li> <a href="#"> <i class="fa fa-youtube"> </i> </a> </li>
-						</ul>
+					<div class="form-group">
+						<input type="email" name="email" class="form-control" placeholder="Email Address">
 					</div>
-					
-					<div class="col-md-12 col-lg-4">
-						<h5 class="h5"> Instagram: </h5>
-						<div class="instabx"> 
-							<img src="<?php echo e(asset('front/dist/img/home/insta1.jpg')); ?>" class="img-fluid" />
-							<img src="<?php echo e(asset('front/dist/img/home/insta2.jpg')); ?>" class="img-fluid" />
-							<img src="<?php echo e(asset('front/dist/img/home/insta3.jpg')); ?>" class="img-fluid" />
-							<img src="<?php echo e(asset('front/dist/img/home/insta4.jpg')); ?>" class="img-fluid" />
-							<img src="<?php echo e(asset('front/dist/img/home/insta5.jpg')); ?>" class="img-fluid" />
-							<img src="<?php echo e(asset('front/dist/img/home/insta6.jpg')); ?>" class="img-fluid" />
-						</div>
+					<div class="form-group">
+						<input type="tel" name="phone" class="form-control" placeholder="Phone Number">
 					</div>
-					
-					<div class="col-md-12 col-lg-2">
-						<h5 class="h5"> Useful Links: </h5>
-						<ul class="ulinks"> 
-							<li> <a href="#"> About us </a> </li>
-							<li> <a href="#">CSR Market Place</a> </li>
-							<li> <a href="#"> Success Story </a> </li>
-							<li> <a href="#"> Contact Us </a> </li>
-						</ul>
+					<div class="form-group">
+						<input type="text" name="position" class="form-control" placeholder="Position">
 					</div>
-					
-					<div class="col-md-12 col-lg-12 btmfooter mt-5"> 
-						<p> &copy; Copyright @ 2019 Lit </p>
-						<ul class="ulinks"> 
-							<li> <a href="#"> Privacy Policy  </a> </li>
-							<li> <a href="#"> |  </a> </li>
-							<li> <a href="#"> Terms Of Services</a> </li>
-						</ul>
+					<div class="form-group">
+						<input type="text" name="organization" class="form-control" placeholder="Organization">
 					</div>
-				</div>
-			</div>
-		
-		</footer><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/footer.blade.php ENDPATH**/ ?>
+					<div class="form-group d-none">
+						<input type="text" name="type" class="form-control" value="<?php if(!empty($item['item']->initiative_name)): ?><?php echo e('Onground'); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e('360'); ?><?php endif; ?>">
+					</div>
+					<div class="form-group d-none">
+						<input type="text" name="impact_id" class="form-control" value="<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>">
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="Submit">
+					</div>
+				</form>
+            </div>
+            <!-- <div class="modal-footer"> -->
+                <!-- <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button> -->
+                <!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
+            <!-- </div> -->
+        </div>
+    </div>
+</div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endif; ?><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/footer.blade.php ENDPATH**/ ?>

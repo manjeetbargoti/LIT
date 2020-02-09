@@ -1678,8 +1678,14 @@ a.btn.btn-primary.text-uppercase {
 }
 .box{
 	    box-shadow: 0px 0px 3px #ccc;
-		padding: 15px 15px 30px 15px;
+		padding: 15px 15px 15px 15px;
    }
+
+.box:hover{
+    box-shadow: 0px 3px 6px #ccc;
+    padding: 15px 15px 15px 15px;
+}
+
 .range {
         background: #233865;
     color: #fff;

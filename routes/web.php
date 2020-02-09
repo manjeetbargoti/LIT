@@ -27,6 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/initiative/{id}/enable','SocialInitiativeController@enableInitiative');
     Route::get('/admin/initiative/{id}/disable','SocialInitiativeController@disableInitiative');
 
+    // Insta Campaign Management
+    Route::resource('admin/social-impact/digital-service', 'InstaCampController');
+    Route::get('/admin/digital-service/image/{id}/delete','InstaCampController@deleteDigitalServiceImage');
+    Route::get('/admin/digital-service/{id}/enable','InstaCampController@enableDigitalService');
+    Route::get('/admin/digital-service/{id}/disable','InstaCampController@disableDigitalService');
+
     // Success Stories
     Route::resource('admin/success-stories', 'SuccessStoryController');
 
@@ -98,8 +104,11 @@ Route::get('/', 'HomeController@index')->name('homepage');
 Route::match(['get', 'post'], '/verify/token={token}/code={code}', 'Auth\VerificationController@verifyEmail');
 
 Route::match(['get', 'post'], '/on-ground/search', 'HomeController@homeSearch');
+Route::match(['get', 'post'], '/digital-service/search', 'HomeController@homeDigitalServiceSearch');
+Route::match(['get', 'post'], '/all-search/result', 'HomeController@allSearchModule');
 
 Route::match(['get','post'], '/social-initiative/{url}', 'HomeController@detailSocialInitiative');
+Route::match(['get','post'], '/digital-service/{url}', 'HomeController@detailDigitalService');
 
 // Get State City List
 Route::get('/get-state', 'AdminController@getStateList');
@@ -110,4 +119,14 @@ Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listSt
 
 // Add to cart functionality
 Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addInitiativeToCart');
+Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addDgitalServiceToCart');
 Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');
+
+// Query form submission
+Route::match(['get','post'], '/submit-query', 'QueryController@submitQuery');
+
+// List all CSR
+Route::match(['get','post'], 'csr-market-place', 'HomeController@csrList');
+
+// CMS Pages
+Route::match(['get','post'], '/{url}', 'PagesController@singlePage');

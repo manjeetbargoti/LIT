@@ -196,12 +196,12 @@
                     </li>
                     <li class="{{ (request()->is('admin/social-impact/activity-job*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/activity-job') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Activity Job
+                            <i class="fa fa-angle-right"></i> &nbsp; Volunteers
                         </a>
                     </li>
-                    <li class="{{ (request()->is('admin/social-impact/instagram-campaign*')) ? 'active':'' }}">
-                        <a href="{{ url('admin/social-impact/instagram-campaign') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Instagram Campaigns
+                    <li class="{{ (request()->is('admin/social-impact/digital-service*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/social-impact/digital-service') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; 360 Digital Marketing Services
                         </a>
                     </li>
                 </ul>

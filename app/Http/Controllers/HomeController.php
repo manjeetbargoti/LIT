@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Country;
+use App\InstaCampaigns;
+use App\InstaCampImages;
+use App\Proposal;
 use App\SDGs;
 use App\SocialInitiative;
 use App\SocialInitiativeImages;
@@ -41,14 +44,14 @@ class HomeController extends Controller
             return json_decode($json_return); // decode and return
         }
 
-        $access_token = '1640620387.1677ed0.637cb861b9e7488b8e9fa36785063f06';
-        $username = 'ig_m29';
+        $access_token = '8736863878.1677ed0.4fb5060f1eef440e9fab2cdc4b22c6a1';
+        $username = 'lightupwithlit';
         $count = 6;
-        $userid = '1640620387';
+        $userid = '8736863878';
         $instaImages = rudr_instagram_api_curl_connect('https://api.instagram.com/v1/users/' . $userid . '/media/recent?access_token=' . $access_token . '&count=' . $count);
 
         $country = Country::get();
-        $sdgs = SDGs::where('status', 1)->get();
+        $sdgs = SDGs::where(['status' =>  1])->get();
 
         $social_initiatives = SocialInitiative::where('status',1)->latest()->limit(3)->get();
 
@@ -104,6 +107,10 @@ class HomeController extends Controller
 
         $data = $data->where('status', 1)->latest()->paginate($perPage);
 
+        $data_count = $data->count();
+
+        // dd($data_count);
+
         // $data = json_decode(json_encode($data));
 
         foreach ($data as $key => $val) {
@@ -116,7 +123,179 @@ class HomeController extends Controller
 
         // dd($data);
 
-        return view('front.social_initiatives.all_initiatives', compact('data'));
+        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count'));
+
+    }
+
+    /**
+     * Search function for social intiative
+     * and
+     * Instagram Campaigns
+     */
+    public function homeDigitalServiceSearch(Request $request)
+    {
+        $perPage = 24;
+
+        $sdgs = $request['sdgs'];
+        $budget = $request['budget'];
+        $country = $request['country'];
+        $state = $request['state'];
+        $city = $request['city'];
+        // dd($country);
+
+        if (!empty($budget)) {
+
+            $budget = explode(',', $budget);
+
+            $b1 = (int) $budget[0];
+            $b2 = (int) $budget[1];
+        } else {
+            $b1 = 0;
+            $b2 = 10000000000000;
+        }
+
+        $data = DB::table('insta_campaigns');
+
+        // dd($data);
+
+        if ($sdgs) {
+            $data = $data->where('area_impact_sdg', 'LIKE', "%" . $sdgs . "%");
+        }
+        if ($budget) {
+            $data = $data->whereBetween('budget', [$b1, $b2]);
+        }
+        if ($country) {
+            $data = $data->where('country', 'LIKE', "%" . $country . "%");
+        }
+        if ($state) {
+            $data = $data->where('state', 'LIKE', "%" . $state . "%");
+        }
+        if ($city) {
+            $data = $data->where('city', 'LIKE', "%" . $city . "%");
+        }
+
+        $data = $data->where('status', 1)->latest()->paginate($perPage);
+
+        $data_count = $data->count();
+
+        // dd($data_count);
+
+        // $data = json_decode(json_encode($data));
+
+        foreach ($data as $key => $val) {
+            $instaCampImage_count = InstaCampImages::where('insta_camp_id', $val->id)->count();
+            if ($instaCampImage_count > 0) {
+                $instaCampImage = InstaCampImages::where('insta_camp_id', $val->id)->first();
+                $data[$key]->image = $instaCampImage->image_name;
+            }
+        }
+
+        // dd($data);
+
+        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count'));
+
+    }
+
+    /**
+     * Search function for social intiative
+     * and
+     * Instagram Campaigns
+     */
+    public function allSearchModule(Request $request)
+    {
+        $perPage = 24;
+
+        // dd($request->all());
+
+        $sdgs = $request['sdgs'];
+        $sdgs2 = $request['sdgs2'];
+        $budget = $request['budget'];
+        $country = $request['country'];
+        $state = $request['state'];
+        $city = $request['city'];
+        // dd($country);
+
+        if (!empty($budget)) {
+
+            $budget = explode(',', $budget);
+
+            $b1 = (int) $budget[0];
+            $b2 = (int) $budget[1];
+        } else {
+            $b1 = 0;
+            $b2 = 10000000000000;
+        }
+
+        $data = DB::table('social_initiatives');
+
+        // dd($data);
+
+        if ($sdgs) {
+            $data = $data->where('area_impact_sdg', 'LIKE', "%" . $sdgs . "%");
+        }
+        if ($budget) {
+            $data = $data->whereBetween('budget', [$b1, $b2]);
+        }
+        if ($country) {
+            $data = $data->where('country', 'LIKE', "%" . $country . "%");
+        }
+        if ($state) {
+            $data = $data->where('state', 'LIKE', "%" . $state . "%");
+        }
+        if ($city) {
+            $data = $data->where('city', 'LIKE', "%" . $city . "%");
+        }
+
+        $data = $data->where('status', 1)->latest()->paginate($perPage);
+
+        $data_count = $data->count();
+
+        foreach ($data as $key => $val) {
+            $socialInitiativeImage_count = SocialInitiativeImages::where('social_initiative_id', $val->id)->count();
+            if ($socialInitiativeImage_count > 0) {
+                $socialInitiativeImage = SocialInitiativeImages::where('social_initiative_id', $val->id)->first();
+                $data[$key]->image = $socialInitiativeImage->image_name;
+            }
+        }
+
+        // Digital Marketing Services
+        $data2 = DB::table('insta_campaigns');
+
+        if ($sdgs2) {
+            $data2 = $data2->where('area_impact_sdg', 'LIKE', "%" . $sdgs2 . "%");
+        }
+        if ($budget) {
+            $data2 = $data2->whereBetween('budget', [$b1, $b2]);
+        }
+        if ($country) {
+            $data2 = $data2->where('country', 'LIKE', "%" . $country . "%");
+        }
+        if ($state) {
+            $data2 = $data2->where('state', 'LIKE', "%" . $state . "%");
+        }
+        if ($city) {
+            $data2 = $data2->where('city', 'LIKE', "%" . $city . "%");
+        }
+
+        $data2 = $data2->where('status', 1)->latest()->paginate($perPage);
+
+        $data2_count = $data2->count();
+
+        // dd($data_count);
+
+        // $data = json_decode(json_encode($data));
+
+        foreach ($data2 as $key => $val) {
+            $instaCampImage_count = InstaCampImages::where('insta_camp_id', $val->id)->count();
+            if ($instaCampImage_count > 0) {
+                $instaCampImage = InstaCampImages::where('insta_camp_id', $val->id)->first();
+                $data2[$key]->image = $instaCampImage->image_name;
+            }
+        }
+
+        // dd($data);
+
+        return view('front.social_initiatives.all_search_result', compact('data','data_count','data2','data2_count'));
 
     }
 
@@ -159,6 +338,36 @@ class HomeController extends Controller
         }
 
         return view('front.social_initiatives.single_initiative', compact('data', 'siImage', 'benefit_per_person'));
+    }
+
+    // Digital Service Deatils Page
+    public function detailDigitalService(Request $request, $url = null)
+    {
+
+        $data = InstaCampaigns::where('slug', $url)->first();
+
+        $benefit_per_person = $data->budget / $data->beneficiaries;
+
+        // dd($benefit_per_person);
+
+        $siImage_count = InstaCampImages::where('insta_camp_id', $data->id)->count();
+
+        if ($siImage_count > 0) {
+            $siImage = InstaCampImages::where('insta_camp_id', $data->id)->first();
+        }
+
+        return view('front.social_initiatives.single_initiative', compact('data', 'siImage', 'benefit_per_person'));
+    }
+
+    // CSR Market Place List
+    public function csrList()
+    {
+        $perpage = 25;
+
+        $data = Proposal::where('status', 1)->latest()->paginate($perpage);
+        // dd($data);
+
+        return view('front.csr.list_csr',compact('data'));
     }
 
 }

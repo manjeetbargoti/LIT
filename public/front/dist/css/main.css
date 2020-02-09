@@ -1606,7 +1606,11 @@ div#litslidercontact h3 {
 }
 #program .box {
   box-shadow: 0px 0px 3px #ccc;
-  padding: 15px 15px 30px 15px;
+  padding: 15px 15px 15px 15px;
+}
+#program .box:hover {
+  box-shadow: 0px 3px 6px #ccc;
+  padding: 15px 15px 15px 15px;
 }
 #program .range {
   background: #233865;

@@ -22,7 +22,7 @@
                 <div class="col-lg-10">
                     <ul id="respMenu" class="ace-responsive-menu  float-right" data-menu-style="horizontal">
                         <li>
-                            <a href="#"><span class="title">ABOUT us</span></a>
+                            <a href="<?php echo e(url('/about-us')); ?>"><span class="title">ABOUT us</span></a>
                         </li>
                         <li>
                             <a href="<?php echo e(url('/csr-market-place')); ?>"><span class="title">CSR MARKET PLACE</span></a>
@@ -31,7 +31,7 @@
                             <a href="<?php echo e(url('/success-stories')); ?>"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">CONTACT US</span></a>
+                            <a href="<?php echo e(url('/contact-us')); ?>"><span class="title">CONTACT US</span></a>
                         </li>
                         <?php if(auth()->guard()->guest()): ?>
                         <li>
@@ -66,12 +66,12 @@
                                             <img src="<?php echo e(asset('front/dist/img/home/blog2.jpg')); ?>">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5><?php echo e($loop->iteration); ?>. <?php echo e($item['item']->initiative_name); ?>, <?php echo e($item['item']->beneficiaries); ?> Beneficiaries, Duration: <?php echo e($item['item']->duration); ?> Months </h5>
+                                            <h5><?php echo e($loop->iteration); ?>. <?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->initiative_name); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->service_name); ?><?php endif; ?>, <?php echo e($item['item']->beneficiaries); ?> Beneficiaries, Duration: <?php echo e($item['item']->duration); ?> Months </h5>
                                             <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED <?php echo e($item['item']->budget); ?></p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> <?php echo e($item['item']->beneficiaries); ?></p>
                                             <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($item['item']->duration); ?> Months</p>
                                             <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> <?php echo e(number_format($item['item']->budget / $item['item']->beneficiaries / $item['item']->duration, 2)); ?> per person/month</p>
-                                            <a href="#" class="button_link">Express Interest</a> <a href="<?php echo e(url('/cart-item/'.$item['item']->id.'/remove/')); ?>" class="button_link btn-danger pull-right">Remove</a>
+                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm-<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>">Express Interest</a> <a href="<?php echo e(url('/cart-item/'.$item['item']->id.'/remove/')); ?>" class="button_link btn-danger pull-right">Remove</a>
                                         </div>
                                     </li>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -86,7 +86,7 @@
                                 </ul>
                                 <?php endif; ?>
                             </li>
-                        <li>
+                        <!-- <li>
                             <div class="header_search  float-right">
                                 <div class="header_search-button"></div>
                                 <div class="header_search-field">
@@ -97,7 +97,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
         </nav>
     </div>

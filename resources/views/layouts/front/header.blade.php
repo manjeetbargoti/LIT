@@ -22,7 +22,7 @@
                 <div class="col-lg-10">
                     <ul id="respMenu" class="ace-responsive-menu  float-right" data-menu-style="horizontal">
                         <li>
-                            <a href="#"><span class="title">ABOUT us</span></a>
+                            <a href="{{ url('/about-us') }}"><span class="title">ABOUT us</span></a>
                         </li>
                         <li>
                             <a href="{{ url('/csr-market-place') }}"><span class="title">CSR MARKET PLACE</span></a>
@@ -31,7 +31,7 @@
                             <a href="{{ url('/success-stories') }}"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
-                            <a href="#"><span class="title">CONTACT US</span></a>
+                            <a href="{{ url('/contact-us') }}"><span class="title">CONTACT US</span></a>
                         </li>
                         @guest
                         <li>
@@ -66,12 +66,12 @@
                                             <img src="{{ asset('front/dist/img/home/blog2.jpg') }}">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5>{{ $loop->iteration }}. {{ $item['item']->initiative_name }}, {{ $item['item']->beneficiaries }} Beneficiaries, Duration: {{ $item['item']->duration }} Months </h5>
+                                            <h5>{{ $loop->iteration }}. @if(!empty($item['item']->initiative_name)){{ $item['item']->initiative_name }}@elseif(!empty($item['item']->service_name)){{ $item['item']->service_name }}@endif, {{ $item['item']->beneficiaries }} Beneficiaries, Duration: {{ $item['item']->duration }} Months </h5>
                                             <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED {{ $item['item']->budget }}</p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $item['item']->beneficiaries }}</p>
                                             <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $item['item']->duration }} Months</p>
                                             <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> {{ number_format($item['item']->budget / $item['item']->beneficiaries / $item['item']->duration, 2) }} per person/month</p>
-                                            <a href="#" class="button_link">Express Interest</a> <a href="{{ url('/cart-item/'.$item['item']->id.'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>
+                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm-@if(!empty($item['item']->initiative_name)){{ $item['item']->id }}@elseif(!empty($item['item']->service_name)){{ $item['item']->id }}@endif">Express Interest</a> <a href="{{ url('/cart-item/'.$item['item']->id.'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>
                                         </div>
                                     </li>
                                     @endforeach
@@ -86,7 +86,7 @@
                                 </ul>
                                 @endif
                             </li>
-                        <li>
+                        <!-- <li>
                             <div class="header_search  float-right">
                                 <div class="header_search-button"></div>
                                 <div class="header_search-field">
@@ -97,7 +97,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
         </nav>
     </div>

@@ -50,9 +50,13 @@
                                     </tr>
                                     <tr>
                                         <th> Name </th>
-                                        <td> <a
+                                        <td> <a class="text-primary"
                                                 href="{{ url('/initiatives/'.$socialInitiative->slug) }}" target="_blank">{{ $socialInitiative->initiative_name }}</a>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Impact SDG </th>
+                                        <td class="text-success"> {{ $socialInitiative->area_impact_sdg }} </td>
                                     </tr>
                                     <tr>
                                         <th> Beneficiaries </th>

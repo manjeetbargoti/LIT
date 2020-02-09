@@ -45,6 +45,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>SDG Name</th>
+                                        <th>Category</th>
                                         <th>Add by</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -55,6 +56,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->sdg_name }}</td>
+                                        <td>{{ $item->sdg_category }}</td>
                                         <td>{{ $item->add_by }}</td>
                                         <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white" href="{{ url('/admin/sdgs/'.$item->id.'/disable') }}">Enable</a> @else <a class="btn btn-sm btn-danger text-white" href="{{ url('/admin/sdgs/'.$item->id.'/enable') }}">Disable</a> @endif</td>
                                         <td>

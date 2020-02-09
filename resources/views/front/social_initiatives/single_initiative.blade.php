@@ -21,18 +21,22 @@
             </div>
             <div class="col-md-12 col-lg-6 pl-4">
                 <img src="{{ asset('front/dist/img/home/heading-icon.png') }}" class="mb-2 mx-auto" alt="">
-                <h2> {{ $data->initiative_name }} </h2>
+                <h2> @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif </h2>
                 <span class="pricebx"> AED {{ $data->budget }} </span>
                 <ul class="p-0">
-                    <li> <b>Title</b>: {{ $data->initiative_name }}</li>
+                    <li> <b>Title</b>: @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif </li>
                     <li> <b>Location</b>: {{ $data->city }}, {{ $data->state }}, {{ $data->country }}</li>
                     <li> <b>Beneficiaries</b>: {{ $data->beneficiaries }} [AED {{ round($benefit_per_person, 2) }} /person]</li>
                     <li> <b>Duration</b>: {{ $data->duration }} months</li>
                     <li> <b>SDG</b>: {{ $data->area_impact_sdg }}</li>
-                    <li> <b>Description</b>: {{ $data->initiative_description }}</li>
+                    <li> <b>Description</b>: @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name))@endif</li>
                 </ul>
                 <div class="btnbx">
+                @if(!empty($data->initiative_name))
                     <a href="{{ url('/social-initiative/add-to-cart/'.$data->id) }}" class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                @elseif(!empty($data->service_name))
+                    <a href="{{ url('/digital-service/add-to-cart/'.$data->id) }}" class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                @endif
                     <a href="#" class="btn btn-primary text-uppercase"> Learn More</a>
                 </div>
             </div>

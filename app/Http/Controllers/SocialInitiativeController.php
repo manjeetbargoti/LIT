@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Country;
+use App\SDGs;
 use App\SocialInitiative;
 use App\SocialInitiativeImages;
 use App\State;
@@ -25,7 +26,7 @@ class SocialInitiativeController extends Controller
      */
     public function index(Request $request)
     {
-        abort_if(Gate::denies('social_initiative_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $keyword = $request->get('search');
         $perPage = 25;
@@ -90,11 +91,12 @@ class SocialInitiativeController extends Controller
      */
     public function create()
     {
-        abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $country = Country::orderBy('name', 'asc')->get();
+        $sdgs = SDGs::where('status',1)->get();
 
-        return view('admin.social_initiative.create', compact('country'));
+        return view('admin.social_initiative.create', compact('country','sdgs'));
     }
 
     /**
@@ -106,7 +108,7 @@ class SocialInitiativeController extends Controller
      */
     public function store(Request $request)
     {
-        abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -216,7 +218,7 @@ class SocialInitiativeController extends Controller
      */
     public function edit($id)
     {
-        abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $socialInitiative = SocialInitiative::findOrFail($id);
 
@@ -258,7 +260,9 @@ class SocialInitiativeController extends Controller
             $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
         }
 
-        return view('admin.social_initiative.edit', compact('socialInitiative', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
+        $sdgs = SDGs::where('status',1)->get();
+
+        return view('admin.social_initiative.edit', compact('socialInitiative', 'sdgs', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
     }
 
     /**
@@ -271,7 +275,7 @@ class SocialInitiativeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -361,7 +365,7 @@ class SocialInitiativeController extends Controller
      */
     public function destroy($id)
     {
-        abort_if(Gate::denies('social_initiative_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         SocialInitiative::destroy($id);
 
@@ -391,7 +395,7 @@ class SocialInitiativeController extends Controller
     // Enable Social initiative
     public function enableInitiative($id = null)
     {
-        abort_if(Gate::denies('social_initiative_enable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_enable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!empty($id)) {
             SocialInitiative::where('id', $id)->update(['status' => 1]);
@@ -408,7 +412,7 @@ class SocialInitiativeController extends Controller
     // Disable Social initiative
     public function disableInitiative($id = null)
     {
-        abort_if(Gate::denies('social_initiative_disable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('social_initiative_disable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!empty($id)) {
             SocialInitiative::where('id', $id)->update(['status' => 0]);

@@ -23,7 +23,8 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Login/Register Page CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/front/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('/front/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/front/fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/animate/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/front/vendor/css-hamburgers/hamburgers.min.css') }}">
@@ -168,7 +169,7 @@
     @endif
     </script>
 
-<script>
+    <script>
     $('#country').change(function() {
         var countryID = $(this).val();
         var _token = $('input[name="_token"]').val();
@@ -220,6 +221,118 @@
             });
         } else {
             $("#city").empty();
+        }
+    });
+    </script>
+
+    <script>
+    $('#country2').change(function() {
+        var countryID = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        if (countryID) {
+            $.ajax({
+                type: "get",
+                url: "/get-state?country_name=" + countryID,
+                data: {
+                    _token: _token
+                },
+                success: function(res) {
+                    if (res) {
+                        $("#state2").empty();
+                        $("#state2").append('<option value="">Select State</option>');
+                        $.each(res, function(key, value) {
+                            $("#state2").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    } else {
+                        $("#state2").empty();
+                    }
+                }
+            });
+        } else {
+            $("#state2").empty();
+            $("#city2").empty();
+        }
+    });
+    // Get City List According to state
+    $('#state2').on('change', function() {
+        var stateID = $(this).val();
+        if (stateID) {
+            $.ajax({
+                type: "GET",
+                url: "/get-city?state_name=" + stateID,
+                success: function(res) {
+                    if (res) {
+                        $("#city2").empty();
+                        $("#city2").append('<option value="">Select City</option>');
+                        $.each(res, function(key, value) {
+                            $("#city2").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+
+                    } else {
+                        $("#city2").empty();
+                    }
+                }
+            });
+        } else {
+            $("#city2").empty();
+        }
+    });
+    </script>
+
+    <script>
+    $('#country3').change(function() {
+        var countryID = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        if (countryID) {
+            $.ajax({
+                type: "get",
+                url: "/get-state?country_name=" + countryID,
+                data: {
+                    _token: _token
+                },
+                success: function(res) {
+                    if (res) {
+                        $("#state3").empty();
+                        $("#state3").append('<option value="">Select State</option>');
+                        $.each(res, function(key, value) {
+                            $("#state3").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    } else {
+                        $("#state3").empty();
+                    }
+                }
+            });
+        } else {
+            $("#state3").empty();
+            $("#city3").empty();
+        }
+    });
+    // Get City List According to state
+    $('#state3').on('change', function() {
+        var stateID = $(this).val();
+        if (stateID) {
+            $.ajax({
+                type: "GET",
+                url: "/get-city?state_name=" + stateID,
+                success: function(res) {
+                    if (res) {
+                        $("#city3").empty();
+                        $("#city3").append('<option value="">Select City</option>');
+                        $.each(res, function(key, value) {
+                            $("#city3").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+
+                    } else {
+                        $("#city3").empty();
+                    }
+                }
+            });
+        } else {
+            $("#city3").empty();
         }
     });
     </script>

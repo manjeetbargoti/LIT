@@ -20,18 +20,22 @@
             </div>
             <div class="col-md-12 col-lg-6 pl-4">
                 <img src="<?php echo e(asset('front/dist/img/home/heading-icon.png')); ?>" class="mb-2 mx-auto" alt="">
-                <h2> <?php echo e($data->initiative_name); ?> </h2>
+                <h2> <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php echo e($data->service_name); ?><?php endif; ?> </h2>
                 <span class="pricebx"> AED <?php echo e($data->budget); ?> </span>
                 <ul class="p-0">
-                    <li> <b>Title</b>: <?php echo e($data->initiative_name); ?></li>
+                    <li> <b>Title</b>: <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php echo e($data->service_name); ?><?php endif; ?> </li>
                     <li> <b>Location</b>: <?php echo e($data->city); ?>, <?php echo e($data->state); ?>, <?php echo e($data->country); ?></li>
                     <li> <b>Beneficiaries</b>: <?php echo e($data->beneficiaries); ?> [AED <?php echo e(round($benefit_per_person, 2)); ?> /person]</li>
                     <li> <b>Duration</b>: <?php echo e($data->duration); ?> months</li>
                     <li> <b>SDG</b>: <?php echo e($data->area_impact_sdg); ?></li>
-                    <li> <b>Description</b>: <?php echo e($data->initiative_description); ?></li>
+                    <li> <b>Description</b>: <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php endif; ?></li>
                 </ul>
                 <div class="btnbx">
+                <?php if(!empty($data->initiative_name)): ?>
                     <a href="<?php echo e(url('/social-initiative/add-to-cart/'.$data->id)); ?>" class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                <?php elseif(!empty($data->service_name)): ?>
+                    <a href="<?php echo e(url('/digital-service/add-to-cart/'.$data->id)); ?>" class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                <?php endif; ?>
                     <a href="#" class="btn btn-primary text-uppercase"> Learn More</a>
                 </div>
             </div>

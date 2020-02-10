@@ -46,13 +46,13 @@
                             {{ csrf_field() }}
 
                             <div class="form-group row">
-                                <div class="col-sm-6 {{ $errors->has('title') ? 'has-error' : ''}}">
+                                <div class="col-sm-12 {{ $errors->has('title') ? 'has-error' : ''}}">
                                     <label for="title" class="control-label">{{ 'Story Title' }}</label>
                                     <input class="form-control" name="title" type="text" id="StoryTitle"
                                         value="{{ old('title') }}" required>
                                     {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                                 </div>
-                                <div class="col-sm-6 {{ $errors->has('slug') ? 'has-error' : ''}}">
+                                <div class="col-sm-12 {{ $errors->has('slug') ? 'has-error' : ''}} d-none">
                                     <label for="slug" class="control-label">{{ 'Slug' }}</label>
                                     <input class="form-control" name="slug" type="text" id="StorySlug"
                                         value="{{ isset($page->slug) ? $page->slug : ''}}" required>
@@ -61,8 +61,16 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 {{ $errors->has('content') ? 'has-error' : ''}}">
+                                    <label for="Short Description" class="control-label">{{ 'Short Description' }}</label>
+                                    <textarea class="form-control" rows="2" name="short_content" maxlength="150" type="textarea" id="shortContent"
+                                        required>{{ old('short_content') }}</textarea>
+                                    {!! $errors->first('short_content', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 {{ $errors->has('content') ? 'has-error' : ''}}">
                                     <label for="content" class="control-label">{{ 'Content' }}</label>
-                                    <textarea class="form-control my-editor" rows="5" name="content" type="textarea" id="content"
+                                    <textarea class="form-control my-editor" maxlength="750" rows="5" name="content" type="textarea" id="content"
                                         required>{{ old('content') }}</textarea>
                                     {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
                                 </div>

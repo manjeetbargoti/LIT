@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class SuccessStory extends Model
 {
     protected $fillable = [
-    	'title','slug','content','feature_image','add_by'
+    	'title','slug','short_content','content','feature_image','add_by'
     ];
 }

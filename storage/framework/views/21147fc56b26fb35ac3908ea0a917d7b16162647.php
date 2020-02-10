@@ -45,14 +45,14 @@
 
 
                             <div class="form-group row">
-                                <div class="col-sm-6 <?php echo e($errors->has('title') ? 'has-error' : ''); ?>">
+                                <div class="col-sm-12 <?php echo e($errors->has('title') ? 'has-error' : ''); ?>">
                                     <label for="title" class="control-label"><?php echo e('Story Title'); ?></label>
                                     <input class="form-control" name="title" type="text" id="StoryTitle"
                                         value="<?php echo e(old('title')); ?>" required>
                                     <?php echo $errors->first('title', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
-                                <div class="col-sm-6 <?php echo e($errors->has('slug') ? 'has-error' : ''); ?>">
+                                <div class="col-sm-12 <?php echo e($errors->has('slug') ? 'has-error' : ''); ?> d-none">
                                     <label for="slug" class="control-label"><?php echo e('Slug'); ?></label>
                                     <input class="form-control" name="slug" type="text" id="StorySlug"
                                         value="<?php echo e(isset($page->slug) ? $page->slug : ''); ?>" required>
@@ -62,8 +62,17 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 <?php echo e($errors->has('content') ? 'has-error' : ''); ?>">
+                                    <label for="Short Description" class="control-label"><?php echo e('Short Description'); ?></label>
+                                    <textarea class="form-control" rows="2" name="short_content" maxlength="150" type="textarea" id="shortContent"
+                                        required><?php echo e(old('short_content')); ?></textarea>
+                                    <?php echo $errors->first('short_content', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12 <?php echo e($errors->has('content') ? 'has-error' : ''); ?>">
                                     <label for="content" class="control-label"><?php echo e('Content'); ?></label>
-                                    <textarea class="form-control my-editor" rows="5" name="content" type="textarea" id="content"
+                                    <textarea class="form-control my-editor" maxlength="750" rows="5" name="content" type="textarea" id="content"
                                         required><?php echo e(old('content')); ?></textarea>
                                     <?php echo $errors->first('content', '<p class="help-block">:message</p>'); ?>
 
@@ -113,7 +122,7 @@
                             <hr>
                             <div class="form-group">
                                 <input class="btn btn-warning pull-left" type="reset" value="Reset">
-                                <input class="btn btn-primary pull-right" type="submit" value="Create Page">
+                                <input class="btn btn-primary pull-right" type="submit" value="Create Story">
                             </div>
                         </form>
                     </div>

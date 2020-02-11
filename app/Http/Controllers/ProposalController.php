@@ -8,8 +8,10 @@ use App\State;
 use App\City;
 use App\Proposal;
 use App\User;
+use App\ProposalQuery;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,15 +47,17 @@ class ProposalController extends Controller
             }
         } else {
             if (!empty($keyword)) {
-                $proposal = Proposal::where('project_name', 'LIKE', "%$keyword%")
-                    ->orWhere('submission_time', 'LIKE', "%$keyword%")
-                    ->orWhere('project_timeline', 'LIKE', "%$keyword%")
-                    ->orWhere('budget', 'LIKE', "%$keyword%")
-                    ->where('user_id', $userData->id)
-                    ->latest()->paginate($perPage);
+                $proposal = Proposal::where(['user_id'=>$userData->id, 'status'=>1])
+                    ->where(function ($query) use ($keyword){
+                        $query->where('project_name', 'LIKE', "%$keyword%")
+                        ->orWhere('submission_time', 'LIKE', "%$keyword%")
+                        ->orWhere('project_timeline', 'LIKE', "%$keyword%")
+                        ->orWhere('budget', 'LIKE', "%$keyword%");
+                    })
+                        ->latest()->paginate($perPage);
                 // dd($proposal);
             } else {
-                $proposal = Proposal::where('user_id', $userData->id)->latest()->paginate($perPage);
+                $proposal = Proposal::where(['user_id'=>$userData->id, 'status'=>1])->latest()->paginate($perPage);
             }
         }
 
@@ -115,6 +119,21 @@ class ProposalController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
+        }
+
+        try {
+            // Sending mail to user regarding proposal add
+            $email = config('app.email');
+
+            $messageData = ['email' => $email, 'name' => Auth::user()->first_name];
+            Mail::send('emails.admin_proposal_added', $messageData, function ($message) use ($email) {
+                $message->to($email)->subject('New Proposal Added!');
+            });
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return Redirect()->back()->withErrors($e->getErrors())->withInput();
+        } catch (\Exception $e) {
+            DB::rollback();
         }
 
         DB::commit();
@@ -305,4 +324,6 @@ class ProposalController extends Controller
             return redirect('admin/social-impact/proposals')->with($notification);
         }
     }
+
+    
 }

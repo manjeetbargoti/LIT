@@ -35,11 +35,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Success Stories
     Route::resource('admin/success-stories', 'SuccessStoryController');
+    Route::get('/admin/success-story/{id}/enable', 'SuccessStoryController@enableStory');
+    Route::get('/admin/success-story/{id}/disable', 'SuccessStoryController@disableStory');
 
     // Request for Proposal Management
     Route::resource('admin/social-impact/proposals', 'ProposalController');
     Route::get('admin/proposal/{id}/enable', 'ProposalController@enableProposal');
     Route::get('admin/proposal/{id}/disable', 'ProposalController@disableProposal');
+
+    // Submited Proposals
+    Route::get('admin/support/submit-proposals', 'QueryController@proposals');
+    Route::get('admin/support/initiative-query', 'QueryController@initiativeQuery');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');
@@ -124,6 +130,7 @@ Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFro
 
 // Query form submission
 Route::match(['get','post'], '/submit-query', 'QueryController@submitQuery');
+Route::match(['get','post'], '/csr-market/submit-proposal', 'QueryController@submitProposal');
 
 // List all CSR
 Route::match(['get','post'], 'csr-market-place', 'HomeController@csrList');

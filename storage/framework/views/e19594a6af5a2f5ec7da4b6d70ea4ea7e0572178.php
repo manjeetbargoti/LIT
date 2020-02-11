@@ -267,23 +267,23 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-lg-4">
                 <span class="titlesm text-uppercase"> suggested programs</span>
-                <h2 class="h2"> Lorem Ipsum Dummy </h2>
+                <h2 class="h2"> Initiative Project Campaigns </h2>
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <span class="numbtitle"> Number of Initiatives</span>
+                <h3 class="h3"><?php echo e(\App\SocialInitiative::where('status', 1)->count()); ?></h3>
             </div>
             <div class="col-md-6 col-lg-2">
                 <span class="numbtitle"> Number of Projects</span>
-                <h3 class="h3">23</h3>
+                <h3 class="h3"><?php echo e(\App\Proposal::where('status', 1)->count()); ?></h3>
             </div>
             <div class="col-md-6 col-lg-2">
                 <span class="numbtitle"> Number of Campaigns</span>
-                <h3 class="h3">15</h3>
+                <h3 class="h3"><?php echo e(\App\InstaCampaigns::where('status', 1)->count()); ?></h3>
             </div>
             <div class="col-md-6 col-lg-2">
-                <span class="numbtitle"> Number of Events</span>
-                <h3 class="h3">54</h3>
-            </div>
-            <div class="col-md-6 col-lg-2">
-                <span class="numbtitle">Awards of Exellency</span>
-                <h3 class="h3">10</h3>
+                <span class="numbtitle"> Number of Activists</span>
+                <h3 class="h3"><?php echo e(\App\User::where('status', 1)->count()); ?></h3>
             </div>
         </div>
     </div>
@@ -294,7 +294,7 @@
         <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/home/program.jpg')); ?>" alt="Second slide">
     </div>
     <div class="col-md-12 col-lg-7 offset-lg-5 px-0 projbg">
-        <h2 class="h2"> Lorem Ipsum Dummy </h2>
+        <h2 class="h2"> Social Impact Programs </h2>
         <div id="projslider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <?php $__currentLoopData = $social_initiatives; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $si): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -331,29 +331,19 @@
             <img src="<?php echo e(asset('front/dist/img/home/heading-icon.png')); ?>" class="mb-5" alt="" />
         </div>
         <div class="row align-items-center">
+            <?php $__currentLoopData = $success_story; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ss): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-md-6 col-lg-6">
-                <img src="<?php echo e(asset('front/dist/img/home/blog1.jpg')); ?>" class="mb-3" alt="" />
-                <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
-                    web designs.</p>
+                <img src="<?php echo e(asset('/images/successStory/large/'.$ss->feature_image)); ?>" class="mb-3" alt="<?php echo e($ss->title); ?>" />
+                <h3 class="h3"><?php echo e($ss->title); ?></h3>
+                <p><?php echo e($ss->short_content); ?></p>
                 <ul class="numbtitle text-uppercase">
-                    <li> <span>1</span> comments</li>
-                    <li>|</li>
-                    <li> By <a href="#"> Author </a> </li>
+                    <!-- <li> <span>1</span> comments</li> -->
+                    <!-- <li>|</li> -->
+                    <li> By <a href="#"> <?php echo e($ss->first_name); ?> <?php echo e($ss->last_name); ?> </a> </li>
                 </ul>
             </div>
-            <div class="col-md-6 col-lg-6">
-                <img src="<?php echo e(asset('front/dist/img/home/blog2.jpg')); ?>" class="mb-3" alt="" />
-                <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
-                    web designs.</p>
-                <ul class="numbtitle text-uppercase">
-                    <li> <span>1</span> comments</li>
-                    <li>|</li>
-                    <li> By <a href="#"> Author </a> </li>
-                </ul>
-            </div>
-            <div class="col-md-12 col-lg-12 text-center mt-4"> <a href="#" class="btn btnwhite"> READ MORE </a></div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <div class="col-md-12 col-lg-12 text-center mt-4"> <a href="<?php echo e(url('/success-stories')); ?>" class="btn btnwhite"> READ MORE </a></div>
         </div>
     </div>
 </section>
@@ -362,7 +352,7 @@
     <div class="container">
         <div class="row align-items-center">
             <span class="titlesm text-uppercase"> Changemakers</span>
-            <h2 class="h2"> Lorem Ipsum </h2>
+            <h2 class="h2"> Our Partners </h2>
             <img src="<?php echo e(asset('front/dist/img/home/heading-icon.png')); ?>" class="mb-5" alt="" />
         </div>
         <div class="row align-items-center">

@@ -121,9 +121,83 @@ class SuccessStoryController extends Controller
         return view('admin.success-story.edit', compact('successStory'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(Request $request, $id)
+    {
+        // abort_if(Gate::denies('success_story_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        if ($request->hasFile('feature_image')) {
+            $image_array = Input::file('feature_image');
+            $image_name = $image_array->getClientOriginalName();
+            $image_size = $image_array->getClientSize();
+            $extension = $image_array->getClientOriginalExtension();
+            $filename = 'successStory' . rand(0, 9999999) . '.' . $extension;
+            $large_image_path = public_path('/images/successStory/large/' . $filename);
+            // Storing image in folder
+            Image::make($image_array)->save($large_image_path);
+
+            $requestData['feature_image'] = $filename;
+        }
+
+        $requestData = $request->all();
+
+        // dd($requestData);
+        
+        $page = SuccessStory::findOrFail($id);
+        $page->update($requestData);
+
+        $notification = array(
+            'message' => 'Story updated successfully!',
+            'alert-type' => 'success',
+        );
+
+        return redirect('admin/success-stories')->with($notification);
+    }
+
+    // Enable Success Story
+    public function enableStory($id=null)
+    {
+        if($id)
+        {
+            SuccessStory::where('id', $id)->update(['status' => 1]);
+
+            $notification = array(
+                'message' => 'Story enable successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect()->back()->with($notification);
+        }
+    }
+
+    // Disable Success Story
+    public function disableStory($id=null)
+    {
+        if($id)
+        {
+            SuccessStory::where('id', $id)->update(['status' => 0]);
+
+            $notification = array(
+                'message' => 'Story disable successfully!',
+                'alert-type' => 'success',
+            );
+
+            return redirect()->back()->with($notification);
+        }
+    }
+
     // List All Stories on website
     public function listStories()
     {
-        return view('front.success-story.all_story');
+        $data = SuccessStory::where('status', 1)->get();
+
+        return view('front.success-story.all_story', compact('data'));
     }
 }

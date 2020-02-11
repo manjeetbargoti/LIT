@@ -9,6 +9,7 @@ use App\Country;
 use App\SDGs;
 use App\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -114,6 +115,14 @@ class BusinessInfoController extends Controller
             // dd($requestData);
 
             BusinessInfo::where('id', $id)->update($requestData);
+
+            // Sending mail to user regarding business profile update
+            $email = Auth::user()->email;
+
+            $messageData = ['email' => $email, 'name' => Auth::user()->first_name];
+            Mail::send('emails.user_business_profile_update', $messageData, function ($message) use ($email) {
+                $message->to($email)->subject('Businees Profile Updated!');
+            });
 
             $notification = array(
                 'message' => 'Business Profile updated successfully!',

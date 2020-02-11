@@ -8,6 +8,7 @@ use Gate;
 use Image;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -218,6 +219,21 @@ class UserController extends Controller
 
                 $user = User::findOrFail($id);
                 $user->update($requestData);
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return Redirect()->back()->withErrors($e->getErrors())->withInput();
+            } catch (\Exception $e) {
+                DB::rollback();
+            }
+
+            try {
+                // Sending mail to user regarding business profile update
+                $email = Auth::user()->email;
+
+                $messageData = ['email' => $email, 'name' => Auth::user()->first_name];
+                Mail::send('emails.user_profile_update', $messageData, function ($message) use ($email) {
+                    $message->to($email)->subject('Profile Updated Successfully!');
+                });
             } catch (ValidationException $e) {
                 DB::rollback();
                 return Redirect()->back()->withErrors($e->getErrors())->withInput();

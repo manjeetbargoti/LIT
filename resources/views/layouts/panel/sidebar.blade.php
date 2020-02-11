@@ -226,24 +226,14 @@
                 <span class="fa arrow menu_hide"></span>
             </a>
             <ul>
-                <li class="{{ (request()->is('admin/support/product-query*')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/product-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Product Queries
+                <li class="{{ (request()->is('admin/support/submit-proposals*')) ? 'active':'' }}">
+                    <a href="{{ url('admin/support/submit-proposals') }}">
+                        <i class="fa fa-angle-right"></i> &nbsp; Submit Proposals
                     </a>
                 </li>
-                <li class="{{ (request()->is('admin/support/supplier-query')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/supplier-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Supplier Queries
-                    </a>
-                </li>
-                <li class="{{ (request()->is('admin/support/contact-query')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/contact-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Contact Queries
-                    </a>
-                </li>
-                <li class="{{ (request()->is('admin/support/subscribers')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/subscribers') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Subscribers
+                <li class="{{ (request()->is('admin/support/initiative-query*')) ? 'active':'' }}">
+                    <a href="{{ url('admin/support/initiative-query') }}">
+                        <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
                     </a>
                 </li>
             </ul>

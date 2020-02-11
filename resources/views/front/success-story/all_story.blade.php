@@ -21,60 +21,16 @@
             </div>
         </div>
         <div class="row">
+            @foreach($data as $d)
             <div class="col-md-4 col-lg-4 mb-5">
                 <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
+                    <img src="{{ asset('/images/successStory/large/'.$d->feature_image) }}" class="mb-3  img-fluid" alt="">
+                    <h3 class="h3">{{ $d->title }}</h3>
+                    <p>{{ $d->short_content }}</p>
+                    <a href="{{ url('/success-story/'.$d->slug) }}" class="btn btn-primary text-uppercase"> Read More</a>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-4 mb-5">
-                <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 mb-5">
-                <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 mb-5">
-                <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 mb-5">
-                <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 mb-5">
-                <div class="box">
-                    <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3  img-fluid" alt="">
-                    <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                    <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic
-                        or web designs.</p>
-                    <a href="#" class="btn btn-primary text-uppercase"> Read More</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

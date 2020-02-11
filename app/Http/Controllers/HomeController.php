@@ -11,6 +11,7 @@ use App\SDGs;
 use App\SocialInitiative;
 use App\SocialInitiativeImages;
 use App\State;
+use App\SuccessStory;
 use DB;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,11 @@ class HomeController extends Controller
 
         $social_initiatives = SocialInitiative::where('status',1)->latest()->limit(3)->get();
 
-        return view('homepage', compact('instaImages', 'country', 'sdgs','social_initiatives'));
+        $success_story = SuccessStory::select('success_stories.title','success_stories.short_content','success_stories.feature_image','users.first_name','users.last_name')->where('success_stories.status', 1)
+                            ->leftJoin('users', 'users.id','=','success_stories.add_by')
+                            ->latest('success_stories.created_at')->limit(2)->get();
+
+        return view('homepage', compact('instaImages','country','sdgs','social_initiatives','success_story'));
     }
 
     /**

@@ -47,6 +47,7 @@ return array(
     'App\\Option' => $baseDir . '/app/Option.php',
     'App\\Page' => $baseDir . '/app/Page.php',
     'App\\Proposal' => $baseDir . '/app/Proposal.php',
+    'App\\ProposalQuery' => $baseDir . '/app/ProposalQuery.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

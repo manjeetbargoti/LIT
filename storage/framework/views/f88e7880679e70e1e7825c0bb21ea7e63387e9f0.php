@@ -45,7 +45,7 @@
                             <!-- Level Two-->
                             <ul>
                                 <li><a href="<?php echo e(url('/admin/profile')); ?>"><?php echo e(Auth::user()->first_name); ?> <?php echo e(Auth::user()->last_name); ?></a></li>
-                                <li><a href="#">My Account</a></li>
+                                <li><a href="<?php echo e(url('/admin/profile')); ?>">My Account</a></li>
                                 <li><a class="dropdown-item" href="<?php echo e(route('logout')); ?>"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">

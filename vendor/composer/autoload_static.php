@@ -465,6 +465,7 @@ class ComposerStaticInit98b447fc725e821a3453818d4a7033e1
         'App\\Option' => __DIR__ . '/../..' . '/app/Option.php',
         'App\\Page' => __DIR__ . '/../..' . '/app/Page.php',
         'App\\Proposal' => __DIR__ . '/../..' . '/app/Proposal.php',
+        'App\\ProposalQuery' => __DIR__ . '/../..' . '/app/ProposalQuery.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

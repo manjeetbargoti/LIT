@@ -12,6 +12,7 @@ use App\User;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Image;
@@ -54,20 +55,22 @@ class SocialInitiativeController extends Controller
             }
         } else {
             if (!empty($keyword)) {
-                $socialInitiative = SocialInitiative::where('user_id',$userData->id)
-                    ->orWhere('initiative_name', 'LIKE', "%$keyword%")
-                    ->orWhere('initiative_description', 'LIKE', "%$keyword%")
-                    ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
-                    ->orWhere('duration', 'LIKE', "%$keyword%")
-                    ->orWhere('budget', 'LIKE', "%$keyword%")
-                    ->orWhere('region', 'LIKE', "%$keyword%")
-                    ->orWhere('country', 'LIKE', "%$keyword%")
-                    ->orWhere('state', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%")
+                $socialInitiative = SocialInitiative::where(['user_id'=>$userData->id, 'status'=>1])
+                    ->where(function ($query) use ($keyword){
+                        $query->where('initiative_name', 'LIKE', "%$keyword%")
+                            ->orWhere('initiative_description', 'LIKE', "%$keyword%")
+                            ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
+                            ->orWhere('duration', 'LIKE', "%$keyword%")
+                            ->orWhere('budget', 'LIKE', "%$keyword%")
+                            ->orWhere('region', 'LIKE', "%$keyword%")
+                            ->orWhere('country', 'LIKE', "%$keyword%")
+                            ->orWhere('state', 'LIKE', "%$keyword%")
+                            ->orWhere('city', 'LIKE', "%$keyword%");
+                    })                    
                     ->latest()->paginate($perPage);
                 // dd($socialInitiative);
             } else {
-                $socialInitiative = SocialInitiative::where('user_id',$userData->id)->latest()->paginate($perPage);
+                $socialInitiative = SocialInitiative::where(['user_id'=>$userData->id, 'status'=>1])->latest()->paginate($perPage);
             }
         }
 
@@ -177,6 +180,21 @@ class SocialInitiativeController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
+        }
+
+        try {
+            // Sending mail to user regarding initiative add
+            $email = config('app.email');
+
+            $messageData = ['email' => $email, 'name' => Auth::user()->first_name];
+            Mail::send('emails.admin_initiative_added', $messageData, function ($message) use ($email) {
+                $message->to($email)->subject('New Initiative Added!');
+            });
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return Redirect()->back()->withErrors($e->getErrors())->withInput();
+        } catch (\Exception $e) {
+            DB::rollback();
         }
 
         DB::commit();

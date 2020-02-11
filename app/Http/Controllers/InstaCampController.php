@@ -54,20 +54,22 @@ class InstaCampController extends Controller
             }
         } else {
             if (!empty($keyword)) {
-                $instaCamp = InstaCampaigns::where('user_id',$userData->id)
-                    ->orWhere('service_name', 'LIKE', "%$keyword%")
-                    ->orWhere('service_description', 'LIKE', "%$keyword%")
-                    ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
-                    ->orWhere('duration', 'LIKE', "%$keyword%")
-                    ->orWhere('budget', 'LIKE', "%$keyword%")
-                    ->orWhere('region', 'LIKE', "%$keyword%")
-                    ->orWhere('country', 'LIKE', "%$keyword%")
-                    ->orWhere('state', 'LIKE', "%$keyword%")
-                    ->orWhere('city', 'LIKE', "%$keyword%")
+                $instaCamp = InstaCampaigns::where(['user_id'=>$userData->id, 'status'=>1])
+                    ->where(function ($query) use ($keyword){
+                        $query->where('service_name', 'LIKE', "%$keyword%")
+                        ->orWhere('service_description', 'LIKE', "%$keyword%")
+                        ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
+                        ->orWhere('duration', 'LIKE', "%$keyword%")
+                        ->orWhere('budget', 'LIKE', "%$keyword%")
+                        ->orWhere('region', 'LIKE', "%$keyword%")
+                        ->orWhere('country', 'LIKE', "%$keyword%")
+                        ->orWhere('state', 'LIKE', "%$keyword%")
+                        ->orWhere('city', 'LIKE', "%$keyword%");
+                    })
                     ->latest()->paginate($perPage);
                 // dd($socialInitiative);
             } else {
-                $instaCamp = InstaCampaigns::where('user_id',$userData->id)->latest()->paginate($perPage);
+                $instaCamp = InstaCampaigns::where(['user_id'=>$userData->id, 'status'=>1])->latest()->paginate($perPage);
             }
         }
 

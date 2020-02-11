@@ -265,23 +265,23 @@
         <div class="row align-items-center">
             <div class="col-md-12 col-lg-4">
                 <span class="titlesm text-uppercase"> suggested programs</span>
-                <h2 class="h2"> Lorem Ipsum Dummy </h2>
+                <h2 class="h2"> Initiative Project Campaigns </h2>
+            </div>
+            <div class="col-md-6 col-lg-2">
+                <span class="numbtitle"> Number of Initiatives</span>
+                <h3 class="h3">{{ \App\SocialInitiative::where('status', 1)->count() }}</h3>
             </div>
             <div class="col-md-6 col-lg-2">
                 <span class="numbtitle"> Number of Projects</span>
-                <h3 class="h3">23</h3>
+                <h3 class="h3">{{ \App\Proposal::where('status', 1)->count() }}</h3>
             </div>
             <div class="col-md-6 col-lg-2">
                 <span class="numbtitle"> Number of Campaigns</span>
-                <h3 class="h3">15</h3>
+                <h3 class="h3">{{ \App\InstaCampaigns::where('status', 1)->count() }}</h3>
             </div>
             <div class="col-md-6 col-lg-2">
-                <span class="numbtitle"> Number of Events</span>
-                <h3 class="h3">54</h3>
-            </div>
-            <div class="col-md-6 col-lg-2">
-                <span class="numbtitle">Awards of Exellency</span>
-                <h3 class="h3">10</h3>
+                <span class="numbtitle"> Number of Activists</span>
+                <h3 class="h3">{{ \App\User::where('status', 1)->count() }}</h3>
             </div>
         </div>
     </div>
@@ -292,7 +292,7 @@
         <img class="d-block w-100" src="{{ asset('front/dist/img/home/program.jpg') }}" alt="Second slide">
     </div>
     <div class="col-md-12 col-lg-7 offset-lg-5 px-0 projbg">
-        <h2 class="h2"> Lorem Ipsum Dummy </h2>
+        <h2 class="h2"> Social Impact Programs </h2>
         <div id="projslider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach($social_initiatives as $si)
@@ -329,29 +329,19 @@
             <img src="{{ asset('front/dist/img/home/heading-icon.png') }}" class="mb-5" alt="" />
         </div>
         <div class="row align-items-center">
+            @foreach($success_story as $ss)
             <div class="col-md-6 col-lg-6">
-                <img src="{{ asset('front/dist/img/home/blog1.jpg') }}" class="mb-3" alt="" />
-                <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
-                    web designs.</p>
+                <img src="{{ asset('/images/successStory/large/'.$ss->feature_image) }}" class="mb-3" alt="{{ $ss->title }}" />
+                <h3 class="h3">{{ $ss->title }}</h3>
+                <p>{{ $ss->short_content }}</p>
                 <ul class="numbtitle text-uppercase">
-                    <li> <span>1</span> comments</li>
-                    <li>|</li>
-                    <li> By <a href="#"> Author </a> </li>
+                    <!-- <li> <span>1</span> comments</li> -->
+                    <!-- <li>|</li> -->
+                    <li> By <a href="#"> {{ $ss->first_name }} {{ $ss->last_name }} </a> </li>
                 </ul>
             </div>
-            <div class="col-md-6 col-lg-6">
-                <img src="{{ asset('front/dist/img/home/blog2.jpg') }}" class="mb-3" alt="" />
-                <h3 class="h3">My Story 2 -Lorem Ipsum </h3>
-                <p> Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or
-                    web designs.</p>
-                <ul class="numbtitle text-uppercase">
-                    <li> <span>1</span> comments</li>
-                    <li>|</li>
-                    <li> By <a href="#"> Author </a> </li>
-                </ul>
-            </div>
-            <div class="col-md-12 col-lg-12 text-center mt-4"> <a href="#" class="btn btnwhite"> READ MORE </a></div>
+            @endforeach
+            <div class="col-md-12 col-lg-12 text-center mt-4"> <a href="{{ url('/success-stories') }}" class="btn btnwhite"> READ MORE </a></div>
         </div>
     </div>
 </section>
@@ -360,7 +350,7 @@
     <div class="container">
         <div class="row align-items-center">
             <span class="titlesm text-uppercase"> Changemakers</span>
-            <h2 class="h2"> Lorem Ipsum </h2>
+            <h2 class="h2"> Our Partners </h2>
             <img src="{{ asset('front/dist/img/home/heading-icon.png') }}" class="mb-5" alt="" />
         </div>
         <div class="row align-items-center">

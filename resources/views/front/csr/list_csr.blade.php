@@ -35,11 +35,57 @@
                                         {{ $d->time_period }} | Social Impact Points: {{ $d->social_impact_points }}</p>
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary text-uppercase">Submit Proposal</a>
+                                    <a href="#" data-toggle="modal" data-target="#submitProposal-{{ $d->id }}" class="btn btn-primary text-uppercase">Submit Proposal</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Model -->
+                    <div class="modal fade" id="submitProposal-{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ $d->project_name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url('/csr-market/submit-proposal') }}" method="Post">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="position" class="form-control" placeholder="Position" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="organization" class="form-control" placeholder="Organization" required>
+                                        </div>
+                                        <div class="form-group d-none">
+                                            <input type="text" name="proposal_id" class="form-control" value="{{ $d->id }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Submit">
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- <div class="modal-footer"> -->
+                                    <!-- <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button> -->
+                                    <!-- <input type="submit" class="btn btn-primary" value="Submit"> -->
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+
                     @endforeach
 
                 </div>

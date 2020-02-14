@@ -332,7 +332,9 @@ class HomeController extends Controller
 
         $data = SocialInitiative::where('slug', $url)->first();
 
-        $benefit_per_person = $data->budget / $data->beneficiaries;
+        $budget_new = preg_replace('/[ ,]+/', '', $data->budget);
+
+        $benefit_per_person = $budget_new / $data->beneficiaries;
 
         // dd($benefit_per_person);
 

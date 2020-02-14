@@ -25,7 +25,7 @@
                     <div class="col-sm-6 col-md-6 col-lg-6" style="border-right: 1px dashed #000;">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h4 class="text-center mb-5">360ْ Digital Marketing Services</h4>
+                                <h4 class="text-center mb-5">360 Digital Marketing Services</h4>
                             </div>
                             
                             @if($data2_count == 0)

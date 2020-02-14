@@ -124,8 +124,8 @@ Route::get('/get-city', 'AdminController@getCityList');
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
 
 // Add to cart functionality
-Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addInitiativeToCart');
-Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addDgitalServiceToCart');
+Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addToCart');
+Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addToCart360');
 Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');
 
 // Query form submission

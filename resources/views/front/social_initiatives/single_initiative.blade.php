@@ -1,4 +1,5 @@
 @extends('layouts.front.design')
+@section('title', 'Single Title')
 @section('content')
 
 <!-- slider start -->

@@ -1,3 +1,4 @@
+<?php $__env->startSection('title', 'Single Title'); ?>
 <?php $__env->startSection('content'); ?>
 
 <!-- slider start -->

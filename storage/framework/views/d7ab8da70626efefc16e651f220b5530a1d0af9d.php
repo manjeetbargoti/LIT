@@ -55,33 +55,45 @@
                         </li>
                         <?php endif; ?>
                         <li>
-                                <a class="icon"><span class="title"> <img src="<?php echo e(asset('front/dist/img/shopping-cart.png')); ?>" class="carticon" alt="shopping-cart" /></span><sup class="badge badge-primary"><?php echo e(Session::has('cart') ? Session::get('cart')->totalQty : '0'); ?></sup></a>
+                            <?php $totals = 0; ?>
+                            <?php $__currentLoopData = (array) session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $totals += $details['qty']; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <a class="icon"><span class="title"> <img src="<?php echo e(asset('front/dist/img/shopping-cart.png')); ?>" class="carticon" alt="shopping-cart" /></span>
+                                <sup class="badge badge-primary">
+                                    <?php echo e($totals); ?>
+
+                                </sup>
+                            </a>
                                 <!-- Level Two-->
-                                <?php if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0): ?>
-                                <ul class="<?php if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0): ?> d-block <?php endif; ?>">
-                                    <?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
-                                    <?php $__currentLoopData = $itmes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(session('cart')): ?>
+                                <ul class="<?php if($totals > 0): ?> d-block <?php endif; ?>">
+                                    <?php $total = 0 ?>
+                                    <?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <?php $total += $details['qty']; ?>
                                     <li>
                                         <!-- <span class="itemimg">
                                             <img src="<?php echo e(asset('front/dist/img/home/blog2.jpg')); ?>">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5><?php echo e($loop->iteration); ?>. <?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->initiative_name); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->service_name); ?><?php endif; ?>, <?php echo e($item['item']->beneficiaries); ?> Beneficiaries, Duration: <?php echo e($item['item']->duration); ?> Months </h5>
-                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED <?php echo e($item['item']->budget); ?></p>
-                                            <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> <?php echo e($item['item']->beneficiaries); ?></p>
-                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($item['item']->duration); ?> Months</p>
-                                            <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> <?php echo e(number_format($item['item']->budget / $item['item']->beneficiaries / $item['item']->duration, 2)); ?> per person/month</p>
-                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm-<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>">Express Interest</a> <a href="<?php echo e(url('/cart-item/'.$item['item']->id.'/remove/')); ?>" class="button_link btn-danger pull-right">Remove</a>
+                                            <h5><?php echo e($loop->iteration); ?>. <?php echo e($details['name']); ?>, <?php echo e($details['beneficiaries']); ?> Beneficiaries, Duration: <?php echo e($details['duration']); ?> Months </h5>
+                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED <?php echo e($details['budget']); ?></p>
+                                            <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> <?php echo e($details['beneficiaries']); ?></p>
+                                            <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> <?php echo e($total); ?></p> -->
+                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($details['duration']); ?> Months</p>
+                                            <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> <?php echo e(number_format(preg_replace('/[ ,]+/', '', $details['budget']) / $details['beneficiaries'] / preg_replace('/[ ,]+/', '', $details['duration']), 2)); ?> per person/month</p>
+                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm<?php echo e($details['rid']); ?>">Express Interest</a>
+                                            <a href="<?php echo e(url('/cart-item/'.$details['rid'].'/remove/')); ?>" class="button_link btn-danger pull-right">Remove</a>
                                         </div>
                                     </li>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <li>
-                                    <table class="table table-bordered table-hover">
-                                        <tr>
-                                            <td>Total Spend</td>
-                                            <td>AED <?php echo e(Session::has('cart') ? Session::get('cart')->totalPrice : ''); ?></td>
-                                        </tr>
-                                    </table>
+                                        <table class="table-responsive">
+                                            <tr>
+                                                <td><a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm<?php echo e($details['rid']); ?>">Express Interest</a></td>
+                                            </tr>
+                                        </table>
                                     </li>
                                 </ul>
                                 <?php endif; ?>
@@ -103,4 +115,4 @@
     </div>
 </div>
 </div>
-<!-- Responsive Menu --><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/header.blade.php ENDPATH**/ ?>
+<!-- Responsive Menu --><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/header2.blade.php ENDPATH**/ ?>

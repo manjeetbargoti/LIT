@@ -28,6 +28,9 @@
                             <a href="{{ url('/csr-market-place') }}"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
+                            <a href="{{ url('/users/activists') }}"><span class="title">ACTIVISTS</span></a>
+                        </li>
+                        <li>
                             <a href="{{ url('/success-stories') }}"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
@@ -55,34 +58,38 @@
                         </li>
                         @endguest
                         <li>
-                                <a class="icon"><span class="title"> <img src="{{ asset('front/dist/img/shopping-cart.png') }}" class="carticon" alt="shopping-cart" /></span><sup class="badge badge-primary">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</sup></a>
+                            <?php $totals = 0; ?>
+                            @foreach((array) session('cart') as $id => $details)
+                                <?php $totals += $details['qty']; ?>
+                            @endforeach
+                            <a class="icon"><span class="title"> <img src="{{ asset('front/dist/img/shopping-cart.png') }}" class="carticon" alt="shopping-cart" /></span>
+                                <sup class="badge badge-primary">
+                                    {{ $totals }}
+                                </sup>
+                            </a>
                                 <!-- Level Two-->
-                                @if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0)
-                                <ul class="@if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0) d-block @endif">
-                                    <?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
-                                    @foreach($itmes as $item)
+                                @if(session('cart'))
+                                <ul class="@if($totals > 0) d-block @endif">
+                                    <?php $total = 0 ?>
+                                    @foreach(session('cart') as $id => $details)
+
+                                    <?php $total += $details['qty']; ?>
                                     <li>
                                         <!-- <span class="itemimg">
                                             <img src="{{ asset('front/dist/img/home/blog2.jpg') }}">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5>{{ $loop->iteration }}. @if(!empty($item['item']->initiative_name)){{ $item['item']->initiative_name }}@elseif(!empty($item['item']->service_name)){{ $item['item']->service_name }}@endif, {{ $item['item']->beneficiaries }} Beneficiaries, Duration: {{ $item['item']->duration }} Months </h5>
-                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED {{ $item['item']->budget }}</p>
-                                            <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $item['item']->beneficiaries }}</p>
-                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $item['item']->duration }} Months</p>
-                                            <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> {{ number_format(preg_replace('/[ ,]+/', '', $item['item']->budget) / $item['item']->beneficiaries / preg_replace('/[ ,]+/', '', $item['item']->duration), 2) }} per person/month</p>
-                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm-@if(!empty($item['item']->initiative_name)){{ $item['item']->id }}@elseif(!empty($item['item']->service_name)){{ $item['item']->id }}@endif">Express Interest</a> <a href="{{ url('/cart-item/'.$item['item']->id.'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>
+                                            <h5>{{ $loop->iteration }}. {{ $details['name'] }}, {{ $details['beneficiaries'] }} Beneficiaries, Duration: {{ $details['duration'] }} Months </h5>
+                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED {{ $details['budget'] }}</p>
+                                            <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $details['beneficiaries'] }}</p>
+                                            <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> {{ $total }}</p> -->
+                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $details['duration'] }} Months</p>
+                                            <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> {{ number_format(preg_replace('/[ ,]+/', '', $details['budget']) / $details['beneficiaries'] / preg_replace('/[ ,]+/', '', $details['duration']), 2) }} per person/month</p>
+                                            <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm{{ $details['rid'] }}">Express Interest</a>
+                                            <a href="{{ url('/cart-item/'.$details['rid'].'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>
                                         </div>
                                     </li>
                                     @endforeach
-                                    <li>
-                                    <table class="table table-bordered table-hover">
-                                        <tr>
-                                            <td>Total Spend</td>
-                                            <td>AED {{ Session::has('cart') ? Session::get('cart')->totalPrice : '' }}</td>
-                                        </tr>
-                                    </table>
-                                    </li>
                                 </ul>
                                 @endif
                             </li>

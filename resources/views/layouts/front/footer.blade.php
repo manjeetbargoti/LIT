@@ -63,48 +63,47 @@
 
 </footer>
 
-<!-- Modal -->
-@if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0)
-<?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
-@foreach($itmes as $item)
-<div class="modal fade" id="QueryForm-@if(!empty($item['item']->initiative_name)){{ $item['item']->id }}@elseif(!empty($item['item']->service_name)){{ $item['item']->id }}@endif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+@if(session('cart'))
+
+@foreach(session('cart') as $id => $details)
+<div class="modal fade" id="QueryForm{{ $details['rid'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@if(!empty($item['item']->initiative_name)){{ $item['item']->initiative_name }} [On-ground]@elseif(!empty($item['item']->service_name)){{ $item['item']->service_name }} [Digital Service]@endif</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ $details['name'] }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form action="{{ url('/submit-query') }}" method="Post">
-					{{ csrf_field() }}
-					<div class="form-group">
-						<input type="text" name="name" class="form-control" placeholder="Full Name">
-					</div>
-					<div class="form-group">
-						<input type="email" name="email" class="form-control" placeholder="Email Address">
-					</div>
-					<div class="form-group">
-						<input type="tel" name="phone" class="form-control" placeholder="Phone Number">
-					</div>
-					<div class="form-group">
-						<input type="text" name="position" class="form-control" placeholder="Position">
-					</div>
-					<div class="form-group">
-						<input type="text" name="organization" class="form-control" placeholder="Organization">
-					</div>
-					<div class="form-group d-none">
-						<input type="text" name="type" class="form-control" value="@if(!empty($item['item']->initiative_name)){{ 'Onground' }}@elseif(!empty($item['item']->service_name)){{ '360' }}@endif">
-					</div>
-					<div class="form-group d-none">
-						<input type="text" name="impact_id" class="form-control" value="@if(!empty($item['item']->initiative_name)){{ $item['item']->id }}@elseif(!empty($item['item']->service_name)){{ $item['item']->id }}@endif">
-					</div>
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary" value="Submit">
-					</div>
-				</form>
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="position" class="form-control" placeholder="Position">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="organization" class="form-control" placeholder="Organization">
+                    </div>
+                    <div class="form-group d-none">
+                        <input type="text" name="type" class="form-control" value="{{ $details['type'] }}">
+                    </div>
+                    <div class="form-group d-none">
+                        <input type="text" name="impact_id" class="form-control" value="{{ $details['id'] }}">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
             </div>
             <!-- <div class="modal-footer"> -->
                 <!-- <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button> -->

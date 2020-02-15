@@ -137,3 +137,7 @@ Route::match(['get','post'], 'csr-market-place', 'HomeController@csrList');
 
 // CMS Pages
 Route::match(['get','post'], '/{url}', 'PagesController@singlePage');
+
+// Activists
+Route::match(['get','post'], '/users/activists', 'ActivistController@index');
+Route::match(['get','post'], '/users/activists/{id}', 'ActivistController@singleActivist');

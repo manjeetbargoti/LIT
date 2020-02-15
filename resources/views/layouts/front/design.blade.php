@@ -41,13 +41,13 @@
 <body>
 
 
-    @include('layouts.front.header2')
+    @include('layouts.front.header')
 
 
     @yield('content')
 
 
-    @include('layouts.front.footer2')
+    @include('layouts.front.footer')
 
 
     <!-- jQuery first then Bootstrap JS -->

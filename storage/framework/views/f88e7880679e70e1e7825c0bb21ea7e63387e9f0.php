@@ -111,4 +111,4 @@
     </div>
 </div>
 </div>
-<!-- Responsive Menu --><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/header2.blade.php ENDPATH**/ ?>
+<!-- Responsive Menu --><?php /**PATH D:\GITHUB\LIT\resources\views/layouts/front/header.blade.php ENDPATH**/ ?>

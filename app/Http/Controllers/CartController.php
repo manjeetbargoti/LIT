@@ -98,7 +98,7 @@ class CartController extends Controller
                 'On'.$id => [
                     'id' => $addInitiative->id,
                     'rid' => 'On'.$addInitiative->id,
-                    'type' => 'On-ground',
+                    'type' => 'Onground',
                     'name' => $addInitiative->initiative_name,
                     'budget' => $addInitiative->budget,
                     'duration' => $addInitiative->duration,
@@ -126,7 +126,7 @@ class CartController extends Controller
         $cart['On'.$id] = [
             'id' => $addInitiative->id,
             'rid' => 'On'.$addInitiative->id,
-            'type' => 'On-ground',
+            'type' => 'Onground',
             'name' => $addInitiative->initiative_name,
             'budget' => $addInitiative->budget,
             'duration' => $addInitiative->duration,

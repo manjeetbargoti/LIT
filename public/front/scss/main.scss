@@ -791,6 +791,21 @@ p {
     border-color: #1c2c4e;
     }
 }
+
+.btn-green {
+    color: #fff;
+    background: #38dea9;
+    border-color: #38dea9;
+    font-weight: 600;
+    margin-top: 1em;
+    border-radius: 50px;
+    padding: 5px 10px;
+    &:hover {
+        color: #fff;
+        background: #38dea9;
+        border-color: #38dea9;
+    }
+}
 .border-none{
     border:none;
 }

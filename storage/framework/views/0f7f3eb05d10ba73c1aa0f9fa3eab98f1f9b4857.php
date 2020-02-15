@@ -41,13 +41,13 @@
 <body>
 
 
-    <?php echo $__env->make('layouts.front.header2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('layouts.front.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
     <?php echo $__env->yieldContent('content'); ?>
 
 
-    <?php echo $__env->make('layouts.front.footer2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('layouts.front.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
     <!-- jQuery first then Bootstrap JS -->

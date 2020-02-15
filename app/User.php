@@ -48,6 +48,10 @@ class User extends Authenticatable
         }
     }
 
+    // public function roles() {
+    //     return $this->belongsTo('Spatie\Permission\Traits\HasRoles');
+    // }
+
     // public function products()
     // {
     //     return $this->hasMany(Product::class);

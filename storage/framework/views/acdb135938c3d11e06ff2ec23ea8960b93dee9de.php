@@ -63,49 +63,48 @@
 
 </footer>
 
-<!-- Modal -->
-<?php if(Session::has('cart') ? Session::get('cart')->totalQty : '0' > 0): ?>
-<?php $itmes = Session::has('cart') ? Session::get('cart')->items : '' ?>
-<?php $__currentLoopData = $itmes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<div class="modal fade" id="QueryForm-<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<?php if(session('cart')): ?>
+
+<?php $__currentLoopData = session('cart'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $details): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="modal fade" id="QueryForm<?php echo e($details['rid']); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->initiative_name); ?> [On-ground]<?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->service_name); ?> [Digital Service]<?php endif; ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo e($details['name']); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form action="<?php echo e(url('/submit-query')); ?>" method="Post">
-					<?php echo e(csrf_field()); ?>
+                    <?php echo e(csrf_field()); ?>
 
-					<div class="form-group">
-						<input type="text" name="name" class="form-control" placeholder="Full Name">
-					</div>
-					<div class="form-group">
-						<input type="email" name="email" class="form-control" placeholder="Email Address">
-					</div>
-					<div class="form-group">
-						<input type="tel" name="phone" class="form-control" placeholder="Phone Number">
-					</div>
-					<div class="form-group">
-						<input type="text" name="position" class="form-control" placeholder="Position">
-					</div>
-					<div class="form-group">
-						<input type="text" name="organization" class="form-control" placeholder="Organization">
-					</div>
-					<div class="form-group d-none">
-						<input type="text" name="type" class="form-control" value="<?php if(!empty($item['item']->initiative_name)): ?><?php echo e('Onground'); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e('360'); ?><?php endif; ?>">
-					</div>
-					<div class="form-group d-none">
-						<input type="text" name="impact_id" class="form-control" value="<?php if(!empty($item['item']->initiative_name)): ?><?php echo e($item['item']->id); ?><?php elseif(!empty($item['item']->service_name)): ?><?php echo e($item['item']->id); ?><?php endif; ?>">
-					</div>
-					<div class="form-group">
-						<input type="submit" class="btn btn-primary" value="Submit">
-					</div>
-				</form>
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Full Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="position" class="form-control" placeholder="Position">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="organization" class="form-control" placeholder="Organization">
+                    </div>
+                    <div class="form-group d-none">
+                        <input type="text" name="type" class="form-control" value="<?php echo e($details['type']); ?>">
+                    </div>
+                    <div class="form-group d-none">
+                        <input type="text" name="impact_id" class="form-control" value="<?php echo e($details['id']); ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
             </div>
             <!-- <div class="modal-footer"> -->
                 <!-- <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button> -->

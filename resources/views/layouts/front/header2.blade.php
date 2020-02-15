@@ -28,6 +28,9 @@
                             <a href="{{ url('/csr-market-place') }}"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
+                            <a href="{{ url('/users/activists') }}"><span class="title">ACTIVISTS</span></a>
+                        </li>
+                        <li>
                             <a href="{{ url('/success-stories') }}"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
@@ -87,13 +90,6 @@
                                         </div>
                                     </li>
                                     @endforeach
-                                    <li>
-                                        <table class="table-responsive">
-                                            <tr>
-                                                <td><a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm{{ $details['rid'] }}">Express Interest</a></td>
-                                            </tr>
-                                        </table>
-                                    </li>
                                 </ul>
                                 @endif
                             </li>

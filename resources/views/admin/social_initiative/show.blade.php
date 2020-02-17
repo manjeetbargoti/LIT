@@ -63,8 +63,20 @@
                                         <td> {{ $socialInitiative->beneficiaries }} </td>
                                     </tr>
                                     <tr>
+                                        <th> Out Reach </th>
+                                        <td> {{ $socialInitiative->outreach }} </td>
+                                    </tr>
+                                    <tr>
                                         <th> Duration </th>
-                                        <td> {{ $socialInitiative->duration }} months </td>
+                                        <td> {{ $socialInitiative->duration }} {{ $socialInitiative->time_period }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Start Date </th>
+                                        <td class="text-success"> {{ date('l, j F Y', strtotime($socialInitiative->start_date)) }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> End Date </th>
+                                        <td class="text-success"> {{ date('l, j F Y', strtotime($socialInitiative->end_date)) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Budget </th>

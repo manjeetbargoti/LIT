@@ -63,8 +63,20 @@
                                         <td> {{ $instaCamp->beneficiaries }} </td>
                                     </tr>
                                     <tr>
+                                        <th> Out Reach </th>
+                                        <td> {{ $instaCamp->outreach }} </td>
+                                    </tr>
+                                    <tr>
                                         <th> Duration </th>
                                         <td> {{ $instaCamp->duration }} months </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Start Date </th>
+                                        <td class="text-success"> {{ date('l, j F Y', strtotime($instaCamp->start_date)) }} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> End Date </th>
+                                        <td class="text-success"> {{ date('l, j F Y', strtotime($instaCamp->end_date)) }} </td>
                                     </tr>
                                     <tr>
                                         <th> Budget </th>

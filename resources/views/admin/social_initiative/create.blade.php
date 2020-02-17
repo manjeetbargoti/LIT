@@ -290,8 +290,8 @@
                                 </div>
                                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                                     <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="promote" value="1">
-                                        <label class="label-checkbox100" for="ckb1">
+                                        <input class="input-checkbox100" id="ckb2" type="checkbox" name="promote" value="1">
+                                        <label class="label-checkbox100" for="ckb2">
                                             I would like to promote the program to encourage participation and registration.
                                         </label>
                                     </div>

@@ -51,7 +51,7 @@
                             <h5 class="h5">USD {{ $d->budget }}</h5>
                             <ul class="p-0">
                                 <li> <b>Beneficiaries</b>: {{ $d->beneficiaries }}</li>
-                                <li> <b>Duration</b>: {{ $d->duration }}</li>
+                                <li> <b>Duration</b>: {{ $d->duration }} {{ $d->time_period }}</li>
                             </ul>
                             @if(!empty($d->initiative_name))
                             <a href="{{ url('/social-initiative/'.$d->slug) }}" class="btn btn-primary text-uppercase">

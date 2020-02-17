@@ -28,7 +28,7 @@
                     <li> <b>Title</b>: @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif </li>
                     <li> <b>Location</b>: {{ $data->city }}, {{ $data->state }}, {{ $data->country }}</li>
                     <li> <b>Beneficiaries</b>: {{ $data->beneficiaries }} [USD {{ round($benefit_per_person, 2) }} /person]</li>
-                    <li> <b>Duration</b>: {{ $data->duration }} months</li>
+                    <li> <b>Duration</b>: {{ $data->duration }} {{ $data->time_period }}</li>
                     <li> <b>SDG</b>: {{ $data->area_impact_sdg }}</li>
                     <li> <b>Description</b>: @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name))@endif</li>
                 </ul>

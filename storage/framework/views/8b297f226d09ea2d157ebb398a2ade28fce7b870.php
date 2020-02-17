@@ -22,12 +22,12 @@
             <div class="col-md-12 col-lg-6 pl-4">
                 <img src="<?php echo e(asset('front/dist/img/home/heading-icon.png')); ?>" class="mb-2 mx-auto" alt="">
                 <h2> <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php echo e($data->service_name); ?><?php endif; ?> </h2>
-                <span class="pricebx"> AED <?php echo e($data->budget); ?> </span>
+                <span class="pricebx">USD <?php echo e($data->budget); ?> </span>
                 <ul class="p-0">
                     <li> <b>Title</b>: <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php echo e($data->service_name); ?><?php endif; ?> </li>
                     <li> <b>Location</b>: <?php echo e($data->city); ?>, <?php echo e($data->state); ?>, <?php echo e($data->country); ?></li>
-                    <li> <b>Beneficiaries</b>: <?php echo e($data->beneficiaries); ?> [AED <?php echo e(round($benefit_per_person, 2)); ?> /person]</li>
-                    <li> <b>Duration</b>: <?php echo e($data->duration); ?> months</li>
+                    <li> <b>Beneficiaries</b>: <?php echo e($data->beneficiaries); ?> [USD <?php echo e(round($benefit_per_person, 2)); ?> /person]</li>
+                    <li> <b>Duration</b>: <?php echo e($data->duration); ?> <?php echo e($data->time_period); ?></li>
                     <li> <b>SDG</b>: <?php echo e($data->area_impact_sdg); ?></li>
                     <li> <b>Description</b>: <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php endif; ?></li>
                 </ul>

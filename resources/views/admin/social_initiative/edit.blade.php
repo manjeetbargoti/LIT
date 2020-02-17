@@ -139,6 +139,38 @@
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
                                     <label for="Initiative info"
+                                        class="col-form-label">{{ __('Time Duration *') }}</label>
+                                </div>
+                                <div class="input-group col-xl-3 {{ $errors->has('start_date') ? 'has-error' : ''}}">
+                                    <span class="input-group-addon">Start</span>
+                                    <input class="form-control @error('start_date') is-invalid @enderror"
+                                        name="start_date" type="text" data-date-format="yyyy-mm-dd" id="dp2"
+                                        value="{{ $socialInitiative->start_date }}" placeholder="Start Date" required>
+                                    {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
+                                </div>
+
+                                <div class="input-group col-xl-3 {{ $errors->has('end_date') ? 'has-error' : ''}}">
+                                    <span class="input-group-addon">End</span>
+                                    <input class="form-control @error('end_date') is-invalid @enderror" name="end_date" type="text" data-date-format="yyyy-mm-dd" id="dp2-1" value="{{ $socialInitiative->end_date }}" placeholder="End Date"
+                                        required>
+                                    {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
+                                </div>
+
+                                <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
+                                    <!-- <span class="input-group-addon">months</span> -->
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Out Reach</span>
+                                        <input class="form-control @error('outreach') is-invalid @enderror" name="outreach"
+                                        type="text" id="outreach" value="{{ $socialInitiative->outreach }}" placeholder="No. of People"
+                                        required>
+                                    </div>
+                                    {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Initiative info"
                                         class="col-form-label">{{ __('Initiative info *') }}</label>
                                 </div>
                                 <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
@@ -158,11 +190,34 @@
                                 </div>
 
                                 <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
-                                    <span class="input-group-addon">months</span>
-                                    <input class="form-control @error('duration') is-invalid @enderror" name="duration"
-                                        type="text" id="Duration" value="{{ $socialInitiative->duration }}"
-                                        placeholder="Duration" required>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <select class="time-period" name="time_period">
+                                                <option value="Days" @if($socialInitiative->time_period == 'Days') selected @endif>Days</option>
+                                                <option value="Month" @if($socialInitiative->time_period == 'Month') selected @endif>Months</option>
+                                                <option value="Year" @if($socialInitiative->time_period == 'Year') selected @endif>Year</option>
+                                            </select>
+                                        </div>
+                                        <input class="form-control @error('duration') is-invalid @enderror" name="duration"
+                                        type="text" id="Duration" value="{{ $socialInitiative->duration }}" placeholder="Duration"
+                                        required>
+                                    </div>
                                     {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image"
+                                        class="col-form-label">{{ __('') }}</label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" @if($socialInitiative->in_partnership == 1) checked @endif value="1">
+                                        <label class="label-checkbox100" for="ckb1">
+                                            In kind Partnership.
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 

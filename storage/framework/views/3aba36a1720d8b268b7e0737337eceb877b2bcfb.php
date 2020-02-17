@@ -67,7 +67,7 @@
 	                    <img src="<?php echo e(asset('/images/user/user.png')); ?>" class="mb-3 img-fluid" alt="<?php echo e($d->first_name); ?> <?php echo e($d->last_name); ?>">
 	                    <?php endif; ?>
 	                    <h3 class="h3"><?php echo e($d->title); ?> <?php echo e($d->first_name); ?> <?php echo e($d->last_name); ?></h3>
-	                    <p><?php echo e('$d->location'); ?></p>
+	                    <p><b>Location</b>: <?php echo e($d->city); ?>, <?php echo e($d->country); ?></p>
 	                    <p><strong>Social Impact Points: <?php echo e($d->sip_points); ?></strong></p>
 	                    <a href="<?php echo e(url('/users/activists/'.$d->id)); ?>" class="btn btn-success mt-2 btn-sm text-uppercase"> Read More</a>
 	                </div>

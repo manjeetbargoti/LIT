@@ -7,6 +7,9 @@ use DB;
 use Gate;
 use Image;
 use App\User;
+use App\Country;
+use App\State;
+use App\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
@@ -256,6 +259,46 @@ class UserController extends Controller
 
         $roleName = implode(', ', $user->getRoleNames()->toArray());
 
-        return view('admin.profile.edit', compact('user', 'roleName'));
+        // Country Dropdown
+        $countryname = Country::get();
+        $country_dropdown = "<option selected value=''>Select Country</option>";
+        foreach ($countryname as $cont) {
+            if ($cont->name == $user['country']) {
+                $selected = "selected";
+            } else {
+                $selected = "";
+            }
+            $country_dropdown .= "<option value='" . $cont->name . "' " . $selected . ">" . $cont->name . "</option>";
+        }
+
+        // State Dropdown
+        // $countryname = Country::where('name', $user['country'])->first();
+        // $statename = State::where(['country_id' => $countryname->id])->get();
+        // $state_dropdown = "<option selected value=''>Select State</option>";
+        // foreach ($statename as $stn) {
+        //     if ($stn->name == $user['state']) {
+        //         $selected = "selected";
+        //     } else {
+        //         $selected = "";
+        //     }
+        //     $state_dropdown .= "<option value='" . $stn->name . "' " . $selected . ">" . $stn->name . "</option>";
+        // }
+
+        // City Dropdown
+        // $statename = State::where('name', $user['state'])->first();
+        // $cityname = City::where(['state_id' => $statename->id])->get();
+        // $city_dropdown = "<option selected value=''>Select City</option>";
+        // foreach ($cityname as $city) {
+        //     if ($city->name == $user['city']) {
+        //         $selected = "selected";
+        //     } else {
+        //         $selected = "";
+        //     }
+        //     $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
+        // }
+
+        $country = Country::get();
+
+        return view('admin.profile.edit', compact('user', 'roleName', 'country'));
     }
 }

@@ -68,7 +68,7 @@
 	                    <img src="{{ asset('/images/user/user.png') }}" class="mb-3 img-fluid" alt="{{ $d->first_name }} {{ $d->last_name }}">
 	                    @endif
 	                    <h3 class="h3">{{ $d->title }} {{ $d->first_name }} {{ $d->last_name }}</h3>
-	                    <p>{{ '$d->location' }}</p>
+	                    <p><b>Location</b>: {{ $d->city }}, {{ $d->country }}</p>
 	                    <p><strong>Social Impact Points: {{ $d->sip_points }}</strong></p>
 	                    <a href="{{ url('/users/activists/'.$d->id) }}" class="btn btn-success mt-2 btn-sm text-uppercase"> Read More</a>
 	                </div>

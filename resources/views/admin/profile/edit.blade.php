@@ -186,6 +186,72 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <div class="col-lg-3 text-lg-right">
+                                            <label for="Bio" class="col-form-label">Bio
+                                                *</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-file-o text-primary"></i></span>
+                                                <textarea placeholder=" " rows="2" id="bio" name="bio"
+                                                    class="form-control">{{ $user->bio }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 text-lg-right">
+                                            <label for="Country" class="col-form-label">Country
+                                                *</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-globe text-primary"></i></span>
+                                                <select id="country" name="country"
+                                                    class="form-control" value="{{ $user->country }}">
+                                                    <option value="">Select Country</option>
+                                                    @foreach($country as $ctry)
+                                                        <option value="{{ $ctry->name }}">{{ $ctry->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 text-lg-right">
+                                            <label for="State" class="col-form-label">State
+                                                *</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-globe text-primary"></i></span>
+                                                <select id="state" name="state"
+                                                    class="form-control" value="{{ $user->state }}">
+                                                    <option value="">Select State</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 text-lg-right">
+                                            <label for="City" class="col-form-label">City
+                                                *</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i
+                                                        class="fa fa-globe text-primary"></i></span>
+                                                <select id="city" name="city"
+                                                    class="form-control" value="{{ $user->city }}">
+                                                    <option value="">Select City</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="col-lg-6 m-auto">
                                             <button class="btn btn-warning" type="reset" id="clear">
                                                 <i class="fa fa-refresh"></i>

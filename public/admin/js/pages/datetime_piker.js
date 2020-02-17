@@ -14,6 +14,11 @@ $(document).ready(function () {
         autoclose: true,
         orientation:"bottom"
     });
+    $('#dp2-1').datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        orientation:"bottom"
+    });
     $('#dp3').datepicker({
         todayHighlight: true,
         autoclose: true,

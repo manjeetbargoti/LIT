@@ -150,7 +150,7 @@
                                 </div>
 
                                 <div class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}">
-                                    <span class="input-group-addon">AED</span>
+                                    <span class="input-group-addon">$</span>
                                     <input class="form-control @error('budget') is-invalid @enderror" name="budget"
                                         type="text" id="Budget" value="{{ $socialInitiative->budget }}"
                                         placeholder="Budget" required>

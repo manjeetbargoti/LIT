@@ -1,6 +1,4 @@
-@extends('layouts.panel.design')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
 .product_image_upload .fileinput-upload-button {
     display: none;
@@ -74,17 +72,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Edit Project</div>
+                    <div class="card-header">Add New Project</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/social-impact/proposals') }}" title="Back"><button
+                        <a href="<?php echo e(url('/admin/social-impact/proposals')); ?>" title="Back"><button
                                 class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                                 Back</button></a>
                         <form method="POST" class="form-horizontal login_validator" id="form_block_validator"
-                            action="{{ url('/admin/social-impact/proposals/'.$proposal->id) }}" accept-charset="UTF-8"
+                            action="<?php echo e(url('/admin/social-impact/proposals')); ?>" accept-charset="UTF-8"
                             enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            {{ csrf_field() }}
+
+                            <?php echo e(csrf_field()); ?>
+
 
                             <div class="row">
                                 <div class="col-12">
@@ -100,11 +99,11 @@
                                                         class="fa fa-chevron-down text-primary"></i>
                                                 </span>
                                                 <select name="business_id" id="CompanyName" class="form-control"
-                                                    value="{{ old('business_id') }}" required>
+                                                    value="<?php echo e(old('business_id')); ?>" required>
                                                     <option value=""> -- Select Company -- </option>
-                                                    @foreach($company as $comp)
-                                                    <option value="{{ $comp->id }}" @if($comp->id == $proposal->business_id) selected @endif>{{ $comp->business_name }}</option>
-                                                    @endforeach
+                                                    <?php $__currentLoopData = $company; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($comp->id); ?>"><?php echo e($comp->business_name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -122,7 +121,7 @@
                                                         class="fa fa-building text-primary"></i>
                                                 </span>
                                                 <input type="text" name="project_name" id="project_name"
-                                                    class="form-control" value="{{ $proposal->project_name }}" required>
+                                                    class="form-control" value="<?php echo e(old('project_name')); ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +138,7 @@
                                                 <span class="input-group-addon"> <i class="fa fa-user text-primary"></i>
                                                 </span>
                                                 <input type="text" name="contact_person_name" id="contact_person_name"
-                                                    class="form-control" value="{{ $proposal->contact_person_name }}"
+                                                    class="form-control" value="<?php echo e(old('contact_person_name')); ?>"
                                                     required>
                                             </div>
                                         </div>
@@ -158,7 +157,7 @@
                                                         class="fa fa-envelope text-primary"></i>
                                                 </span>
                                                 <input type="email" name="email" id="email" class="form-control"
-                                                    value="{{ $proposal->email }}" required>
+                                                    value="<?php echo e(old('email')); ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -176,7 +175,7 @@
                                                         class="fa fa-phone text-primary"></i>
                                                 </span>
                                                 <input type="tel" name="phone" id="phone" class="form-control"
-                                                    value="{{ $proposal->phone }}" required>
+                                                    value="<?php echo e(old('phone')); ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +192,7 @@
                                                         class="fa fa-phone text-primary"></i>
                                                 </span>
                                                 <input type="tel" name="fax_number" id="fax_number" class="form-control"
-                                                    value="{{ $proposal->fax_number }}">
+                                                    value="<?php echo e(old('fax_number')); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -207,8 +206,8 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <textarea name="company_background" id="company_background"
-                                                class="form-control" rows="3"
-                                                required>{{ $proposal->company_background }}</textarea>
+                                                class="form-control" value="<?php echo e(old('company_background')); ?>" rows="3"
+                                                required></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Company Background -->
@@ -221,8 +220,8 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <textarea name="project_description" id="project_description"
-                                                class="form-control" rows="5"
-                                                required>{{ $proposal->project_description }}</textarea>
+                                                class="form-control" value="<?php echo e(old('project_description')); ?>" rows="5"
+                                                required></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Project Description -->
@@ -233,7 +232,8 @@
                                             <label for="Project Goals" class="col-form-label">Project Goals *</label>
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
-                                            <textarea name="project_goals" id="project_goals" class="form-control" rows="3" required>{{ $proposal->project_goals }}</textarea>
+                                            <textarea name="project_goals" id="project_goals" class="form-control"
+                                                value="<?php echo e(old('project_goals')); ?>" rows="3" required></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Project Goals -->
@@ -246,7 +246,8 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <textarea name="proposal_elements" id="proposal_elements"
-                                                class="form-control" rows="3">{{ $proposal->proposal_elements }}</textarea>
+                                                class="form-control" value="<?php echo e(old('proposal_elements')); ?>"
+                                                rows="3"></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Project Elements -->
@@ -259,7 +260,8 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <textarea name="evolution_criteria" id="evolution_criteria"
-                                                class="form-control" rows="2">{{ $proposal->evolution_criteria }}</textarea>
+                                                class="form-control" value="<?php echo e(old('evolution_criteria')); ?>"
+                                                rows="2"></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Evolution Criteria -->
@@ -272,7 +274,8 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <textarea name="possible_challanges" id="possible_challanges"
-                                                class="form-control" rows="2">{{ $proposal->possible_challanges }}</textarea>
+                                                class="form-control" value="<?php echo e(old('possible_challanges')); ?>"
+                                                rows="2"></textarea>
                                         </div>
                                     </div>
                                     <!-- /. Possible Challanges -->
@@ -287,7 +290,7 @@
                                                 <span class="input-group-addon">$</i>
                                                 </span>
                                                 <input type="text" name="budget" id="budget" class="form-control"
-                                                    value="{{ $proposal->budget }}" required>
+                                                    value="<?php echo e(old('budget')); ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +307,7 @@
                                                         class="fa fa-calendar text-primary"></i></span>
                                                 <input type="text" class="form-control" placeholder="yyyy-mm-dd"
                                                     data-date-format="yyyy-mm-dd" id="dp2" name="submission_time"
-                                                    value="{{ $proposal->submission_time }}">
+                                                    value="<?php echo e(old('submission_time')); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -320,13 +323,13 @@
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <select class="time-period" name="time_period">
-                                                        <option value="Days" @if($proposal->time_period == 'Days') selected @endif>Days</option>
-                                                        <option value="Month" @if($proposal->time_period == 'Month') selected @endif>Months</option>
-                                                        <option value="Year" @if($proposal->time_period == 'Year') selected @endif>Year</option>
+                                                        <option value="Days">Days</option>
+                                                        <option value="Month">Months</option>
+                                                        <option value="Year">Year</option>
                                                     </select>
                                                 </div>
                                                 <input type="text" name="project_timeline" id="project_timeline"
-                                                    class="form-control" value="{{ $proposal->project_timeline }}" required>
+                                                    class="form-control" value="<?php echo e(old('project_timeline')); ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -344,7 +347,7 @@
                                                 <span class="input-group-addon"> SIP</i>
                                                 </span>
                                                 <input type="text" name="social_impact_points" id="social_impact_points"
-                                                    class="form-control" value="{{ $proposal->social_impact_points }}"
+                                                    class="form-control" value="<?php echo e(old('social_impact_points')); ?>"
                                                     required>
                                             </div>
                                         </div>
@@ -362,9 +365,11 @@
                                                         class="fa fa-globe text-primary"></i>
                                                 </span>
                                                 <select name="country" id="country" class="form-control"
-                                                    value="{{ old('country') }}" required>
+                                                    value="<?php echo e(old('country')); ?>" required>
                                                     <option value=""> -- Select Country -- </option>
-                                                    <?php echo $country_dropdown; ?>
+                                                    <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coun): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <option value="<?php echo e($coun->name); ?>"><?php echo e($coun->name); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -382,8 +387,8 @@
                                                         class="fa fa-globe text-primary"></i>
                                                 </span>
                                                 <select name="state" id="state" class="form-control"
-                                                    value="{{ old('state') }}" required>
-                                                    <?php echo $state_dropdown; ?>
+                                                    value="<?php echo e(old('state')); ?>" required>
+                                                    <option value=""> -- Select State -- </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -401,8 +406,8 @@
                                                         class="fa fa-globe text-primary"></i>
                                                 </span>
                                                 <select name="city" id="city" class="form-control"
-                                                    value="{{ old('city') }}" required>
-                                                    <?php echo $city_dropdown; ?>
+                                                    value="<?php echo e(old('city')); ?>" required>
+                                                    <option value=""> -- Select City -- </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -416,7 +421,7 @@
                                                 Reset
                                             </button>
                                             <button class="btn btn-primary pull-right" type="submit">
-                                                Update Project
+                                                Add Project
                                             </button>
                                         </div>
                                     </div>
@@ -429,4 +434,5 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.panel.design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\GITHUB\LIT\resources\views/admin/proposals/create.blade.php ENDPATH**/ ?>

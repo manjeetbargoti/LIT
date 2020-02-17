@@ -194,16 +194,20 @@
                             <i class="fa fa-angle-right"></i> &nbsp; Proposals (RFP)
                         </a>
                     </li>
+                    @can('activist_access')
                     <li class="{{ (request()->is('admin/social-impact/activity-job*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/activity-job') }}">
-                            <i class="fa fa-angle-right"></i> &nbsp; Volunteers
+                            <i class="fa fa-angle-right"></i> &nbsp; Volunteers Job
                         </a>
                     </li>
+                    @endcan
+                    @can('digital_service_access')
                     <li class="{{ (request()->is('admin/social-impact/digital-service*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/digital-service') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; 360 Digital Marketing Services
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
             <!-- /.Product Management -->

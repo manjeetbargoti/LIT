@@ -25,8 +25,8 @@
                         <label for="customRange">Budget</label>
                         <input type="range" class="custom-range" id="customRange">
                     </form>
-                    <div id="result"> <span> <b></b> AED</span> </div>
-                    <div id="end"> <span> <b>10,000</b> AED</span></div>
+                    <div id="result"> <span> <b></b> USD</span> </div>
+                    <div id="end"> <span> <b>10,000</b> USD</span></div>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                                 alt="@if(!empty($d->initiative_name)){{ $d->initiative_name }}@elseif(!empty($d->service_name))@endif">
                             @endif
                             <h4 class="h4">@if(!empty($d->initiative_name)){{ $d->initiative_name }}@elseif(!empty($d->service_name))@endif</h4>
-                            <h5 class="h5">{{ $d->budget }} AED </h5>
+                            <h5 class="h5">USD {{ $d->budget }}</h5>
                             <ul class="p-0">
                                 <li> <b>Beneficiaries</b>: {{ $d->beneficiaries }}</li>
                                 <li> <b>Duration</b>: {{ $d->duration }}</li>

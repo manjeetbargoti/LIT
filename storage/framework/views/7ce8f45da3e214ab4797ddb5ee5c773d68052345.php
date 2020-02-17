@@ -24,8 +24,8 @@
                         <label for="customRange">Budget</label>
                         <input type="range" class="custom-range" id="customRange">
                     </form>
-                    <div id="result"> <span> <b></b> AED</span> </div>
-                    <div id="end"> <span> <b>10,000</b> AED</span></div>
+                    <div id="result"> <span> <b></b> USD</span> </div>
+                    <div id="end"> <span> <b>10,000</b> USD</span></div>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                                 alt="<?php if(!empty($d->initiative_name)): ?><?php echo e($d->initiative_name); ?><?php elseif(!empty($d->service_name)): ?><?php endif; ?>">
                             <?php endif; ?>
                             <h4 class="h4"><?php if(!empty($d->initiative_name)): ?><?php echo e($d->initiative_name); ?><?php elseif(!empty($d->service_name)): ?><?php endif; ?></h4>
-                            <h5 class="h5"><?php echo e($d->budget); ?> AED </h5>
+                            <h5 class="h5">USD <?php echo e($d->budget); ?></h5>
                             <ul class="p-0">
                                 <li> <b>Beneficiaries</b>: <?php echo e($d->beneficiaries); ?></li>
                                 <li> <b>Duration</b>: <?php echo e($d->duration); ?></li>

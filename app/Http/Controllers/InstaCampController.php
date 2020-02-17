@@ -26,7 +26,7 @@ class InstaCampController extends Controller
      */
     public function index(Request $request)
     {
-        // abort_if(Gate::denies('digital_service_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $keyword = $request->get('search');
         $perPage = 25;
@@ -93,7 +93,7 @@ class InstaCampController extends Controller
      */
     public function create()
     {
-        // abort_if(Gate::denies('digital_service_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $country = Country::orderBy('name', 'asc')->get();
         $sdgs = SDGs::where('status',1)->get();
@@ -110,7 +110,7 @@ class InstaCampController extends Controller
      */
     public function store(Request $request)
     {
-        // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -222,7 +222,7 @@ class InstaCampController extends Controller
      */
     public function edit($id)
     {
-        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $instaCamp = InstaCampaigns::findOrFail($id);
 
@@ -279,7 +279,7 @@ class InstaCampController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // abort_if(Gate::denies('social_initiative_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $requestData = $request->all();
 
@@ -369,7 +369,7 @@ class InstaCampController extends Controller
      */
     public function destroy($id)
     {
-        // abort_if(Gate::denies('social_initiative_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         InstaCampaigns::destroy($id);
 
@@ -400,7 +400,7 @@ class InstaCampController extends Controller
     // Enable Social initiative
     public function enableDigitalService($id = null)
     {
-        // abort_if(Gate::denies('social_initiative_enable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_enable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!empty($id)) {
             InstaCampaigns::where('id', $id)->update(['status' => 1]);
@@ -417,7 +417,7 @@ class InstaCampController extends Controller
     // Disable Social initiative
     public function disablDigitalService($id = null)
     {
-        // abort_if(Gate::denies('social_initiative_disable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('digital_service_disable'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!empty($id)) {
             InstaCampaigns::where('id', $id)->update(['status' => 0]);

@@ -288,7 +288,7 @@
                                         </div>
                                         <div class="col-xl-6 col-lg-8">
                                             <div class="input-group">
-                                                <span class="input-group-addon">AED</i>
+                                                <span class="input-group-addon">$</i>
                                                 </span>
                                                 <input type="text" name="budget" id="budget" class="form-control"
                                                     value="{{ old('budget') }}" required>

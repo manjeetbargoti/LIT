@@ -115,6 +115,8 @@ class SocialInitiativeController extends Controller
 
         $requestData = $request->all();
 
+        // dd($requestData);
+
         $user_id = Auth::user()->id;
 
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['initiative_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));

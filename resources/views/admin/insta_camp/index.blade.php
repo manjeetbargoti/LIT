@@ -63,7 +63,7 @@
                                         </td>
                                         <td>{{ $item->beneficiaries }}</td>
                                         <td>{{ $item->duration }} months</td>
-                                        <td>AED {{ $item->budget }}</td>
+                                        <td>USD {{ $item->budget }}</td>
                                         <td>{{ $item->city }}, {{ $item->country }}</td>
                                         <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white" href="{{ url('/admin/digital-service/'.$item->id.'/disable') }}">Enable</a> @else <a class="btn btn-sm btn-danger text-white" href="{{ url('/admin/digital-service/'.$item->id.'/enable') }}">Disable</a> @endif</td>
                                         <td>

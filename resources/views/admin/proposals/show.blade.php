@@ -107,7 +107,7 @@
                                     </tr>
                                     <tr>
                                         <th> Budget </th>
-                                        <td> {!! $proposals->budget !!} </td>
+                                        <td>USD {!! $proposals->budget !!} </td>
                                     </tr>
                                     <tr>
                                         <th> Social Impact Points </th>

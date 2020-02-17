@@ -68,7 +68,7 @@
                                     </tr>
                                     <tr>
                                         <th> Budget </th>
-                                        <td> AED {{ $socialInitiative->budget }} </td>
+                                        <td> USD {{ $socialInitiative->budget }} </td>
                                     </tr>
                                     <tr>
                                         <th> Address </th>

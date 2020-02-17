@@ -22,7 +22,7 @@ tr td a {
 	line-height: 2;
 }
 .pagination {
-	display: inline-block;
+	/*display: inline-block;*/
 	padding-left: 0;
 	margin: 0 !important ;
 	border-radius: 4px;

@@ -75,7 +75,7 @@
                                     {!! $errors->first('content', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-sm-4 {{ $errors->has('meta_title') ? 'has-error' : ''}}">
                                     <label for="Meta Title" class="control-label">{{ 'Meta Title' }}</label>
                                     <input class="form-control" name="meta_title" type="text" id="MetaTitle"
@@ -103,7 +103,7 @@
                                         rows="2">{{ isset($page->meta_description) ? $page->meta_description : ''}}</textarea>
                                     {!! $errors->first('meta_description', '<p class="help-block">:message</p>') !!}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <div class="col-sm-4">
                                     <label for="Feature Image" class="control-label">{{ 'Feature Image' }}</label>

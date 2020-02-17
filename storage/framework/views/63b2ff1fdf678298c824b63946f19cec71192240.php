@@ -194,16 +194,20 @@
                             <i class="fa fa-angle-right"></i> &nbsp; Proposals (RFP)
                         </a>
                     </li>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('activist_access')): ?>
                     <li class="<?php echo e((request()->is('admin/social-impact/activity-job*')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/social-impact/activity-job')); ?>">
-                            <i class="fa fa-angle-right"></i> &nbsp; Volunteers
+                            <i class="fa fa-angle-right"></i> &nbsp; Volunteers Job
                         </a>
                     </li>
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('digital_service_access')): ?>
                     <li class="<?php echo e((request()->is('admin/social-impact/digital-service*')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/social-impact/digital-service')); ?>">
                             <i class="fa fa-angle-right"></i> &nbsp; 360 Digital Marketing Services
                         </a>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </li>
             <!-- /.Product Management -->

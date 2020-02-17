@@ -68,7 +68,7 @@
                                     </tr>
                                     <tr>
                                         <th> Budget </th>
-                                        <td> AED {{ $instaCamp->budget }} </td>
+                                        <td> USD {{ $instaCamp->budget }} </td>
                                     </tr>
                                     <tr>
                                         <th> Address </th>

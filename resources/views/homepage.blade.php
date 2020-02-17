@@ -68,6 +68,7 @@
                                             <select class="form-control search-slt" name="budget"
                                                 value="{{ request('budget') }}" id="exampleFormControlSelect1">
                                                 <option value=""> -- Budget -- </option>
+                                                <option value="0,5000">$0-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>
@@ -121,6 +122,7 @@
                                             <select class="form-control search-slt" name="budget"
                                                 value="{{ request('budget') }}" id="exampleFormControlSelect1">
                                                 <option value=""> -- Budget -- </option>
+                                                <option value="0,5000">$0-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>
@@ -182,6 +184,7 @@
                                             <select class="form-control search-slt" name="budget"
                                                 value="{{ request('budget') }}" id="exampleFormControlSelect1">
                                                 <option value=""> -- Budget -- </option>
+                                                <option value="0,5000">$0-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>

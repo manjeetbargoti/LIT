@@ -46,7 +46,7 @@
                                     <h4 class="h4">
                                         @if(!empty($d->initiative_name)){{ $d->initiative_name }}@elseif(!empty($d->service_name))@endif
                                     </h4>
-                                    <h5 class="h5">{{ $d->budget }} AED </h5>
+                                    <h5 class="h5">USD {{ $d->budget }} </h5>
                                     <ul class="p-0">
                                         <li> <b>Beneficiaries</b>: {{ $d->beneficiaries }}</li>
                                         <li> <b>Duration</b>: {{ $d->duration }}</li>
@@ -90,7 +90,7 @@
                                     <h4 class="h4">
                                         @if(!empty($d->initiative_name)){{ $d->initiative_name }}@elseif(!empty($d->service_name))@endif
                                     </h4>
-                                    <h5 class="h5">{{ $d->budget }} AED </h5>
+                                    <h5 class="h5">USD {{ $d->budget }}</h5>
                                     <ul class="p-0">
                                         <li> <b>Beneficiaries</b>: {{ $d->beneficiaries }}</li>
                                         <li> <b>Duration</b>: {{ $d->duration }}</li>

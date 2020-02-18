@@ -13,6 +13,8 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Image;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProposalController extends Controller
@@ -92,6 +94,10 @@ class ProposalController extends Controller
     {
         // abort_if(Gate::denies('proposal_project_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $request->validate([
+            'brochure_pdf' => 'mimes:pdf,doc,docx|max:5120',
+        ]);
+
         $requestData = $request->all();
 
         $user_id = Auth::user()->id;
@@ -101,6 +107,22 @@ class ProposalController extends Controller
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));
 
         // dd($slug);
+
+        // Trade Licence Image
+        if ($request->hasFile('brochure_pdf')) {
+
+            $file_array = Input::file('brochure_pdf');
+            $file_name = $file_array->getClientOriginalName();
+            $file_size = $file_array->getClientSize();
+            $extension = $file_array->getClientOriginalExtension();
+            $filename = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))).'_brochure_' . rand(0, 9999999) . '.' . $extension;
+            // $large_file_path = public_path('/images/tradeLicense/large/' . $filename);
+            $request->brochure_pdf->move(public_path('/images/brochure/large/'), $filename);
+            // Storing image in folder
+            // $request->move($large_file_path);
+
+            $requestData['brochure_pdf'] = $filename;
+        }
 
         $requestData['slug'] = $slug;
         $requestData['user_id'] = $user_id;
@@ -244,6 +266,20 @@ class ProposalController extends Controller
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));
 
         // dd($slug);
+
+        // Trade Licence Image
+        if ($request->hasFile('brochure_pdf')) {
+
+            $file_array = Input::file('brochure_pdf');
+            $file_name = $file_array->getClientOriginalName();
+            $file_size = $file_array->getClientSize();
+            $extension = $file_array->getClientOriginalExtension();
+            $filename = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['project_name']))).'_brochure_' . rand(0, 9999999) . '.' . $extension;
+            // $large_file_path = public_path('/images/tradeLicense/large/' . $filename);
+            $request->brochure_pdf->move(public_path('/images/brochure/large/'), $filename);
+
+            $requestData['brochure_pdf'] = $filename;
+        }
 
         $requestData['slug'] = $slug;
 

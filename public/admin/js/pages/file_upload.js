@@ -10,6 +10,16 @@ $(document).ready(function () {
 
 
     });
+    $("#input-21-2").fileinput({
+        theme: "fa",
+        previewFileType: "pdf",
+        browseClass: "btn btn-success",
+        browseLabel: "Pick Brochure",
+        removeClass: "btn btn-danger",
+        removeLabel: "Delete"
+
+
+    });
     $("#input-4").fileinput({showCaption: false,
         theme: "fa"});
     $("#ProductImages").fileinput({

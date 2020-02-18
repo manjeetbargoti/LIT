@@ -126,6 +126,10 @@
                                         <td> {!! $proposals->city !!} </td>
                                     </tr>
                                     <tr>
+                                        <th> PDF Brochure </th>
+                                        <td> <a href="{{ url('/images/brochure/large/'.$proposals->brochure_pdf) }}" target="_blank" style="margin-top: 1em !important;"><img src="{{ url('/images/pdf.png') }}" width="20"> Brochure</a> </td>
+                                    </tr>
+                                    <tr>
                                         <th> Add By </th>
                                         <td> @foreach(App\User::where('id', $proposals->user_id)->get() as $addBy) {{ $addBy->first_name }} {{ $addBy->last_name }} @endforeach </td>
                                     </tr>

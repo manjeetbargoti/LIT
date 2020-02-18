@@ -415,6 +415,17 @@
                                     </div>
                                     <!-- /. City name -->
 
+                                    <!-- PDF Brochure -->
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 text-lg-right">
+                                            <label for="Upload Brochure" class="col-form-label">Upload Brochure *</label>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-8">
+                                            <input id="input-21-2" type="file" accept="application/pdf" name="brochure_pdf" class="form-control file-loading" value="{{ old('brochure_pdf') }}">
+                                        </div>
+                                    </div>
+                                    <!-- /. PDF Brochure -->
+
                                     <div class="form-group row">
                                         <div class="col-lg-6 m-auto">
                                             <button class="btn btn-warning" type="reset" id="clear">

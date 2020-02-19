@@ -240,6 +240,11 @@
                         <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
                     </a>
                 </li>
+                <li class="{{ (request()->is('admin/support/activist-query*')) ? 'active':'' }}">
+                    <a href="{{ url('admin/support/activist-query') }}">
+                        <i class="fa fa-angle-right"></i> &nbsp; Activist Request
+                    </a>
+                </li>
             </ul>
         </li>
         <!-- /.Support Center -->

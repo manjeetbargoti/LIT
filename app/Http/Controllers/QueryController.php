@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Query;
 use App\ProposalQuery;
+use App\ActivistQuery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -61,5 +62,15 @@ class QueryController extends Controller
                     ->latest('proposal_queries.created_at')->paginate($perPage);
 
         return view('admin.queries.proposal_submit', compact('data'));
+    }
+
+    // Get submitted request
+    public function activistQuery()
+    {
+        $perPage = 24;
+        $data = ActivistQuery::leftJoin('users','users.id','=','activist_queries.activist_id')
+                    ->latest('activist_queries.created_at')->paginate($perPage);
+
+        return view('admin.activist_query.index', compact('data'));
     }
 }

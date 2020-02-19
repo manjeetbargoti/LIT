@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Submited Proposals
     Route::get('admin/support/submit-proposals', 'QueryController@proposals');
     Route::get('admin/support/initiative-query', 'QueryController@initiativeQuery');
+    Route::get('admin/support/activist-query', 'QueryController@activistQuery');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');

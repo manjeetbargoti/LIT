@@ -53,7 +53,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" method="Post">
+            <form action="{{ url('/users/activists/'.$data->id) }}" method="Post">
             {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="form-group">
@@ -74,13 +74,10 @@
                     <div class="form-group d-none">
                         <input type="text" name="activist_id" class="form-control" value="{{ $data->id }}">
                     </div>
-                    <!-- <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-info pull-right" value="Submit">
                 </div>
             </form>
         </div>

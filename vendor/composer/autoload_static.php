@@ -424,12 +424,14 @@ class ComposerStaticInit98b447fc725e821a3453818d4a7033e1
     );
 
     public static $classMap = array (
+        'App\\ActivistQuery' => __DIR__ . '/../..' . '/app/ActivistQuery.php',
         'App\\BusinessInfo' => __DIR__ . '/../..' . '/app/BusinessInfo.php',
         'App\\Cart' => __DIR__ . '/../..' . '/app/Cart.php',
         'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Country' => __DIR__ . '/../..' . '/app/Country.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\ActivistController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActivistController.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Admin\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/PermissionController.php',
         'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',

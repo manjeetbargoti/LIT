@@ -51,7 +51,8 @@
 
 
     <!-- jQuery first then Bootstrap JS -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="<?php echo e(asset('front/dist/js/bootstrap.min.js')); ?>"></script>
     <script src="<?php echo e(asset('front/dist/js/custom.js')); ?>"></script>
 
@@ -333,6 +334,36 @@
             });
         } else {
             $("#city3").empty();
+        }
+    });
+    </script>
+
+
+    <script>
+    $('#budgetList').change(function() {
+        var budgetID = $(this).val();
+        // alert(budgetID);
+        if (budgetID) {
+            $.ajax({
+                type: "GET",
+                url:'/program/get-budget-data?budgetID=' + budgetID,
+                data: {budgetList : budgetList},
+                processData: false, 
+                contentType: false,
+                success: function(resp){
+                    // alert(resp);
+                    $('#budg_id').html(resp['id']);
+                    $('#budg_ben').html(resp['beneficiaries']);
+                    $('#budg_dur').html(resp['duration']);
+                    $('#budg_tp').html(resp['time_period']);
+                    $('#budg_sd').html(resp['start_date']);
+                    $('#budg_ed').html(resp['end_date']);
+                    $('#budg_ed').html(resp['end_date']);
+                    $('#budg_outreach').html(resp['outreach']);
+                },error: function(){
+                    alert("Error!");
+                }
+            });
         }
     });
     </script>

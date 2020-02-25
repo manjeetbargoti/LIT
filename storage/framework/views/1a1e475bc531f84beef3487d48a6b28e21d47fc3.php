@@ -89,7 +89,7 @@
                         <?php endif; ?>
 
                         <form method="POST" action="<?php echo e(url('/admin/social-impact/initiatives')); ?>"
-                            accept-charset="UTF-8" class="form-horizontal login_validator" enctype="multipart/form-data"
+                            accept-charset="UTF-8" class="form-horizontal login_validator repeater-form" enctype="multipart/form-data"
                             id="form_inline_validator">
                             <?php echo e(csrf_field()); ?>
 
@@ -117,13 +117,16 @@ if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('area_impact_sdg'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        name="area_impact_sdg" id="area_impact_sdg" value="<?php echo e(old('area_impact_sdg')); ?>" required>
+                                        name="area_impact_sdg" id="area_impact_sdg" value="<?php echo e(old('area_impact_sdg')); ?>"
+                                        required>
                                         <option value=""> -- Select SDG -- </option>
                                         <?php $__currentLoopData = $sdgs->where('sdg_category','Onground'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($s->sdg_name); ?>"><?php echo e($loop->iteration); ?>. <?php echo e($s->sdg_name); ?> </option>
+                                        <option value="<?php echo e($s->sdg_name); ?>"><?php echo e($loop->iteration); ?>. <?php echo e($s->sdg_name); ?>
+
+                                        </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <select>
-                                    <?php echo $errors->first('area_impact_sdg', '<p class="help-block">:message</p>'); ?>
+                                        <select>
+                                            <?php echo $errors->first('area_impact_sdg', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
                             </div>
@@ -146,114 +149,139 @@ endif; ?>"
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label"><?php echo e(__('Time Duration *')); ?></label>
+                            <div class="dynamic_field" id="repeater">
+                                <div class="repeater-heading" align="left">
+                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More Budget</button>
                                 </div>
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('start_date') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">Start</span>
-                                    <input class="form-control <?php if ($errors->has('start_date')) :
+                                <div class="items">
+                                    <div class="item-content">
+                                        <div class="form-group row first_line">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label"><?php echo e(__('Time Duration *')); ?></label>
+                                            </div>
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('start_date') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">Start</span>
+                                                <input class="form-control <?php if ($errors->has('start_date')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('start_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        name="start_date" type="text" data-date-format="yyyy-mm-dd" id="dp2"
-                                        value="<?php echo e(old('start_date')); ?>" placeholder="Start Date" required>
-                                    <?php echo $errors->first('start_date', '<p class="help-block">:message</p>'); ?>
+                                                    name="start_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2"
+                                                    value="<?php echo e(old('start_date')); ?>" placeholder="Start Date" required>
+                                                <?php echo $errors->first('start_date', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('end_date') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">End</span>
-                                    <input class="form-control <?php if ($errors->has('end_date')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('end_date') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">End</span>
+                                                <input class="form-control <?php if ($errors->has('end_date')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('end_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="end_date" type="text" data-date-format="yyyy-mm-dd" id="dp2-1" value="<?php echo e(old('end_date')); ?>" placeholder="End Date"
-                                        required>
-                                    <?php echo $errors->first('end_date', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                    name="end_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2-1"
+                                                    value="<?php echo e(old('end_date')); ?>" placeholder="End Date" required>
+                                                <?php echo $errors->first('end_date', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
-                                    <!-- <span class="input-group-addon">months</span> -->
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Out Reach</span>
-                                        <input class="form-control <?php if ($errors->has('outreach')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
+                                                <!-- <span class="input-group-addon">months</span> -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Out Reach</span>
+                                                    <input class="form-control <?php if ($errors->has('outreach')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('outreach'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="outreach"
-                                        type="text" id="outreach" value="<?php echo e(old('outreach')); ?>" placeholder="No. of People"
-                                        required>
-                                    </div>
-                                    <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                        name="outreach[]" type="text" id="outreach"
+                                                        value="<?php echo e(old('outreach')); ?>" placeholder="No. of People" required>
+                                                </div>
+                                                <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
-                            </div>
+                                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label"><?php echo e(__('Initiative info *')); ?></label>
-                                </div>
-                                <div class="col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
-                                    <input class="form-control <?php if ($errors->has('beneficiaries')) :
+                                            <div class="col-xl-1">
+                                                <button type="button" onclick="$(this).parents('.items').remove()"
+                                                    name="remove" id="remove" id="remove-btn" class="btn btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label"><?php echo e(__('Initiative info *')); ?></label>
+                                            </div>
+                                            <div class="col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
+                                                <input class="form-control <?php if ($errors->has('beneficiaries')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('beneficiaries'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        name="beneficiaries" type="text" id="Beneficiaries"
-                                        value="<?php echo e(old('beneficiaries')); ?>" placeholder="no. of Beneficieries" required>
-                                    <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>'); ?>
+                                                    name="beneficiaries[]" type="text" id="Beneficiaries"
+                                                    value="<?php echo e(old('beneficiaries')); ?>" placeholder="no. of Beneficieries"
+                                                    required>
+                                                <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">$</span>
-                                    <input class="form-control <?php if ($errors->has('budget')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">$</span>
+                                                <input class="form-control <?php if ($errors->has('budget')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('budget'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="budget"
-                                        type="text" id="Budget" value="<?php echo e(old('budget')); ?>" placeholder="Budget"
-                                        required>
-                                    <?php echo $errors->first('budget', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                    name="budget[]" type="text" id="Budget" value="<?php echo e(old('budget')); ?>"
+                                                    placeholder="Budget" required>
+                                                <?php echo $errors->first('budget', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
-                                    <!-- <span class="input-group-addon">months</span> -->
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <select class="time-period" name="time_period">
-                                                <option value="Days">Days</option>
-                                                <option value="Month">Months</option>
-                                                <option value="Year">Year</option>
-                                            </select>
-                                        </div>
-                                        <input class="form-control <?php if ($errors->has('duration')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
+                                                <!-- <span class="input-group-addon">months</span> -->
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <select class="time-period" name="time_period[]">
+                                                            <option value="Days">Days</option>
+                                                            <option value="Month">Months</option>
+                                                            <option value="Year">Year</option>
+                                                        </select>
+                                                    </div>
+                                                    <input class="form-control <?php if ($errors->has('duration')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('duration'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="duration"
-                                        type="text" id="Duration" value="<?php echo e(old('duration')); ?>" placeholder="Duration"
-                                        required>
-                                    </div>
-                                    <?php echo $errors->first('duration', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                        name="duration[]" type="text" id="Duration"
+                                                        value="<?php echo e(old('duration')); ?>" placeholder="Duration" required>
+                                                </div>
+                                                <?php echo $errors->first('duration', '<p class="help-block">:message</p>'); ?>
 
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
                                 </div>
+
                             </div>
+
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image"
-                                        class="col-form-label"><?php echo e(__('')); ?></label>
+                                    <label for="Featured Image" class="col-form-label"><?php echo e(__('')); ?></label>
                                 </div>
                                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                                     <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" value="1">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership"
+                                            value="1">
                                         <label class="label-checkbox100" for="ckb1">
                                             In kind Partnership.
                                         </label>
@@ -341,30 +369,32 @@ endif; ?>"
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
-                                    <label for="Youtube Video"
-                                        class="col-form-label"><?php echo e(__('Video URL')); ?></label>
+                                    <label for="Youtube Video" class="col-form-label"><?php echo e(__('Video URL')); ?></label>
                                 </div>
                                 <div class="col-xl-9 <?php echo e($errors->has('video_link') ? 'has-error' : ''); ?>">
-                                    <input type="text" id="video_link" class="form-control <?php if ($errors->has('video_link')) :
+                                    <input type="text" id="video_link"
+                                        class="form-control <?php if ($errors->has('video_link')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('video_link'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        value="<?php echo e(old('video_link')); ?>" name="video_link" placeholder="Youtube video link" />
+                                        value="<?php echo e(old('video_link')); ?>" name="video_link"
+                                        placeholder="Youtube video link" />
                                     <!-- <i class="fas fa-camera"></i> -->
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image"
-                                        class="col-form-label"><?php echo e(__('')); ?></label>
+                                    <label for="Featured Image" class="col-form-label"><?php echo e(__('')); ?></label>
                                 </div>
                                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                                     <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb2" type="checkbox" name="promote" value="1">
+                                        <input class="input-checkbox100" id="ckb2" type="checkbox" name="promote"
+                                            value="1">
                                         <label class="label-checkbox100" for="ckb2">
-                                            I would like to promote the program to encourage participation and registration.
+                                            I would like to promote the program to encourage participation and
+                                            registration.
                                         </label>
                                     </div>
                                 </div>
@@ -399,7 +429,8 @@ endif; ?>"
         </div>
     </div>
 </div>
+
+
+
 <?php $__env->stopSection(); ?>
-
-
 <?php echo $__env->make('layouts.panel.design', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\GITHUB\LIT\resources\views/admin/social_initiative/create.blade.php ENDPATH**/ ?>

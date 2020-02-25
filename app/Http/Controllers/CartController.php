@@ -8,6 +8,7 @@ use App\SocialInitiative;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\InstaCampaigns;
+use App\MultiBudget;
 
 class CartController extends Controller
 {
@@ -81,7 +82,59 @@ class CartController extends Controller
     {
         $addInitiative = SocialInitiative::find($id);
 
+        $budgetData = MultiBudget::where('social_init_id', $id)->first();
+
+        if(!empty($addInitiative->beneficiaries))
+        {
+            $addInitiative->beneficiaries = $addInitiative['beneficiaries'];
+        }else{
+            $addInitiative->beneficiaries = $budgetData['beneficiaries'];
+        }
+
+        if(!empty($addInitiative->budget))
+        {
+            $addInitiative->budget = $addInitiative['budget'];
+        }else{
+            $addInitiative->budget = $budgetData['budget'];
+        }
+
+        if(!empty($addInitiative->duration))
+        {
+            $addInitiative->duration = $addInitiative['duration'];
+        }else{
+            $addInitiative->duration = $budgetData['duration'];
+        }
+
+        if(!empty($addInitiative->time_period))
+        {
+            $addInitiative->time_period = $addInitiative['time_period'];
+        }else{
+            $addInitiative->time_period = $budgetData['time_period'];
+        }
+
+        if(!empty($addInitiative->outreach))
+        {
+            $addInitiative->outreach = $addInitiative['outreach'];
+        }else{
+            $addInitiative->outreach = $budgetData['outreach'];
+        }
+
+        if(!empty($addInitiative->start_date))
+        {
+            $addInitiative->start_date = $addInitiative['start_date'];
+        }else{
+            $addInitiative->start_date = $budgetData['start_date'];
+        }
+
+        if(!empty($addInitiative->end_date))
+        {
+            $addInitiative->end_date = $addInitiative['end_date'];
+        }else{
+            $addInitiative->end_date = $budgetData['end_date'];
+        }
+
         // dd($addInitiative);
+        
 
         if(!$addInitiative) {
  
@@ -143,6 +196,57 @@ class CartController extends Controller
     public function addToCart360($id)
     {
         $addInitiative = InstaCampaigns::find($id);
+
+        $budgetData = MultiBudget::where('insta_camp_id', $id)->first();
+
+        if(!empty($addInitiative->beneficiaries))
+        {
+            $addInitiative->beneficiaries = $addInitiative['beneficiaries'];
+        }else{
+            $addInitiative->beneficiaries = $budgetData['beneficiaries'];
+        }
+
+        if(!empty($addInitiative->budget))
+        {
+            $addInitiative->budget = $addInitiative['budget'];
+        }else{
+            $addInitiative->budget = $budgetData['budget'];
+        }
+
+        if(!empty($addInitiative->duration))
+        {
+            $addInitiative->duration = $addInitiative['duration'];
+        }else{
+            $addInitiative->duration = $budgetData['duration'];
+        }
+
+        if(!empty($addInitiative->time_period))
+        {
+            $addInitiative->time_period = $addInitiative['time_period'];
+        }else{
+            $addInitiative->time_period = $budgetData['time_period'];
+        }
+
+        if(!empty($addInitiative->outreach))
+        {
+            $addInitiative->outreach = $addInitiative['outreach'];
+        }else{
+            $addInitiative->outreach = $budgetData['outreach'];
+        }
+
+        if(!empty($addInitiative->start_date))
+        {
+            $addInitiative->start_date = $addInitiative['start_date'];
+        }else{
+            $addInitiative->start_date = $budgetData['start_date'];
+        }
+
+        if(!empty($addInitiative->end_date))
+        {
+            $addInitiative->end_date = $addInitiative['end_date'];
+        }else{
+            $addInitiative->end_date = $budgetData['end_date'];
+        }
 
         // dd($addInitiative);
 

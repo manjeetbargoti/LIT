@@ -125,8 +125,8 @@ Route::get('/get-city', 'AdminController@getCityList');
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
 
 // Add to cart functionality
-Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addToCart');
-Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addToCart360');
+Route::match(['get','post'], '/social-initiative/add-to-cart/{id}/{budget_id}', 'CartController@addToCart');
+Route::match(['get','post'], '/digital-service/add-to-cart/{id}/{budget_id}', 'CartController@addToCart360');
 Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');
 
 // Query form submission
@@ -142,3 +142,7 @@ Route::match(['get','post'], '/{url}', 'PagesController@singlePage');
 // Activists
 Route::match(['get','post'], '/users/activists', 'ActivistController@index');
 Route::match(['get','post'], '/users/activists/{id}', 'ActivistController@singleActivist');
+Route::match(['get','post'], '/users/find/activists/result', 'ActivistController@activistFilter');
+
+// Budget Data Routes
+Route::get('/program/get-budget-data', 'HomeController@getBudgetData');

@@ -414,7 +414,7 @@
                                     </div>
                                     <!-- /. City name -->
 
-                                    <!-- Trade License Image -->
+                                    <!-- PDF Brochure -->
                                     <div class="form-group row">
                                         <div class="col-lg-3 text-lg-right">
                                             <label for="Upload Brochure" class="col-form-label">Upload Brochure *</label>
@@ -423,7 +423,7 @@
                                             <input id="input-21-2" type="file" accept="application/pdf" name="brochure_pdf" class="form-control file-loading" value="<?php echo e(old('brochure_pdf')); ?>">
                                         </div>
                                     </div>
-                                    <!-- /. Trade License Image -->
+                                    <!-- /. PDF Brochure -->
 
                                     <div class="form-group row">
                                         <div class="col-lg-6 m-auto">

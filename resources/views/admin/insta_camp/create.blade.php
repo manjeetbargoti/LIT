@@ -133,72 +133,87 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label">{{ __('Time Duration *') }}</label>
+                            <div class="dynamic_field" id="repeater">
+                                <div class="repeater-heading" align="left">
+                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More Budget</button>
                                 </div>
-                                <div class="input-group col-xl-3 {{ $errors->has('start_date') ? 'has-error' : ''}}">
-                                    <span class="input-group-addon">Start</span>
-                                    <input class="form-control @error('start_date') is-invalid @enderror"
-                                        name="start_date" type="text" data-date-format="yyyy-mm-dd" id="dp2"
-                                        value="{{ old('start_date') }}" placeholder="Start Date" required>
-                                    {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
-                                </div>
+                                <div class="items">
+                                    <div class="item-content">
+                                        <div class="form-group row first_line">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label">{{ __('Time Duration *') }}</label>
+                                            </div>
+                                            <div class="input-group col-xl-3 {{ $errors->has('start_date') ? 'has-error' : ''}}">
+                                                <span class="input-group-addon">Start</span>
+                                                <input class="form-control @error('start_date') is-invalid @enderror"
+                                                    name="start_date[]" type="date" data-date-format="yyyy-mm-dd" id="dp2"
+                                                    value="{{ old('start_date') }}" placeholder="Start Date" required>
+                                                {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
+                                            </div>
 
-                                <div class="input-group col-xl-3 {{ $errors->has('end_date') ? 'has-error' : ''}}">
-                                    <span class="input-group-addon">End</span>
-                                    <input class="form-control @error('end_date') is-invalid @enderror" name="end_date" type="text" data-date-format="yyyy-mm-dd" id="dp2-1" value="{{ old('end_date') }}" placeholder="End Date"
-                                        required>
-                                    {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
-                                </div>
+                                            <div class="input-group col-xl-3 {{ $errors->has('end_date') ? 'has-error' : ''}}">
+                                                <span class="input-group-addon">End</span>
+                                                <input class="form-control @error('end_date') is-invalid @enderror" name="end_date[]" type="date" data-date-format="yyyy-mm-dd" id="dp2-1" value="{{ old('end_date') }}" placeholder="End Date"
+                                                    required>
+                                                {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
+                                            </div>
 
-                                <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
-                                    <!-- <span class="input-group-addon">months</span> -->
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Out Reach</span>
-                                        <input class="form-control @error('outreach') is-invalid @enderror" name="outreach"
-                                        type="text" id="outreach" value="{{ old('outreach') }}" placeholder="No. of People"
-                                        required>
-                                    </div>
-                                    {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div>
+                                            <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
+                                                <!-- <span class="input-group-addon">months</span> -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Out Reach</span>
+                                                    <input class="form-control @error('outreach') is-invalid @enderror" name="outreach[]"
+                                                    type="text" id="outreach" value="{{ old('outreach') }}" placeholder="No. of People"
+                                                    required>
+                                                </div>
+                                                {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
+                                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label">{{ __('Service info *') }}</label>
-                                </div>
-                                <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
-                                    <input class="form-control @error('beneficiaries') is-invalid @enderror"
-                                        name="beneficiaries" type="text" id="Beneficiaries"
-                                        value="{{ old('beneficiaries') }}" placeholder="no. of Beneficieries" required>
-                                    {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>') !!}
-                                </div>
-
-                                <div class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}">
-                                    <span class="input-group-addon">$</span>
-                                    <input class="form-control @error('budget') is-invalid @enderror" name="budget"
-                                        type="text" id="Budget" value="{{ old('budget') }}" placeholder="Budget"
-                                        required>
-                                    {!! $errors->first('budget', '<p class="help-block">:message</p>') !!}
-                                </div>
-
-                                <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <select class="time-period" name="time_period">
-                                                <option value="Days">Days</option>
-                                                <option value="Month">Months</option>
-                                                <option value="Year">Year</option>
-                                            </select>
+                                            <div class="col-xl-1">
+                                                <button type="button" onclick="$(this).parents('.items').remove()"
+                                                    name="remove" id="remove" id="remove-btn" class="btn btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
                                         </div>
-                                        <input class="form-control @error('duration') is-invalid @enderror" name="duration"
-                                        type="text" id="Duration" value="{{ old('duration') }}" placeholder="Duration"
-                                        required>
+
+                                        <div class="form-group row">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label">{{ __('Service info *') }}</label>
+                                            </div>
+                                            <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
+                                                <input class="form-control @error('beneficiaries') is-invalid @enderror"
+                                                    name="beneficiaries[]" type="text" id="Beneficiaries"
+                                                    value="{{ old('beneficiaries') }}" placeholder="no. of Beneficieries" required>
+                                                {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>') !!}
+                                            </div>
+
+                                            <div class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}">
+                                                <span class="input-group-addon">$</span>
+                                                <input class="form-control @error('budget') is-invalid @enderror" name="budget[]"
+                                                    type="text" id="Budget" value="{{ old('budget') }}" placeholder="Budget"
+                                                    required>
+                                                {!! $errors->first('budget', '<p class="help-block">:message</p>') !!}
+                                            </div>
+
+                                            <div class="input-group col-xl-3 {{ $errors->has('duration') ? 'has-error' : ''}}">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <select class="time-period" name="time_period[]">
+                                                            <option value="Days">Days</option>
+                                                            <option value="Month">Months</option>
+                                                            <option value="Year">Year</option>
+                                                        </select>
+                                                    </div>
+                                                    <input class="form-control @error('duration') is-invalid @enderror" name="duration[]"
+                                                    type="text" id="Duration" value="{{ old('duration') }}" placeholder="Duration"
+                                                    required>
+                                                </div>
+                                                {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
+                                            </div>
+                                        </div>
                                     </div>
-                                    {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
 

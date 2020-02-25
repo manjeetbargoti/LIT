@@ -81,7 +81,7 @@
                                         </span> -->
                                         <div class="carttext">
                                             <h5><?php echo e($loop->iteration); ?>. <?php echo e($details['name']); ?>, <?php echo e($details['beneficiaries']); ?> Beneficiaries, Duration: <?php echo e($details['duration']); ?> Months </h5>
-                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED <?php echo e($details['budget']); ?></p>
+                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> USD <?php echo e($details['budget']); ?></p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> <?php echo e($details['beneficiaries']); ?></p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> <?php echo e($total); ?></p> -->
                                             <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($details['duration']); ?> Months</p>

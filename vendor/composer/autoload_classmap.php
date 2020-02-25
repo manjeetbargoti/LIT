@@ -46,6 +46,7 @@ return array(
     'App\\InstaCampImages' => $baseDir . '/app/InstaCampImages.php',
     'App\\InstaCampaigns' => $baseDir . '/app/InstaCampaigns.php',
     'App\\InstaPlans' => $baseDir . '/app/InstaPlans.php',
+    'App\\MultiBudget' => $baseDir . '/app/MultiBudget.php',
     'App\\Option' => $baseDir . '/app/Option.php',
     'App\\Page' => $baseDir . '/app/Page.php',
     'App\\Proposal' => $baseDir . '/app/Proposal.php',

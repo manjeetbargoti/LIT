@@ -22,7 +22,7 @@
         <div class="row">
         	<div class="col-sm-3 col-md-3 col-lg-3 mb-5">
         		<div class="filter-section">
-        			<form method="POST" action="#">
+        			<form method="POST" action="<?php echo e(url('/users/activists')); ?>">
         				<?php echo csrf_field(); ?>
         				<div class="form-group">
         					<h5 style="background: #e62240;color: #fff;padding: 0.5em;border-radius: 5px;">Filter by Location</h5>
@@ -32,7 +32,7 @@
         					<select class="form-control" name="country" id="country">
         						<option value="">Select Country</option>
         						<?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cntry): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        							<option value="<?php echo e($cntry->name); ?>"><?php echo e($cntry->name); ?></option>
+        							<option value="<?php echo e($cntry->name); ?>" <?php if(!empty($countryname)): ?><?php if($cntry->name == $countryname): ?> selected <?php endif; ?> <?php endif; ?>><?php echo e($cntry->name); ?></option>
         						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         					</select>
         				</div>
@@ -58,6 +58,13 @@
         		</div>
         	</div>
         	<div class="col-sm-9 col-md-9 col-lg-9 mb-5">
+				<div class="col-sm-12">
+					<?php if($data->count() == 0): ?>
+					<p class="text-center">Sorry! no result found for your search.</p>
+					<p><?php echo $data['country']; ?></p>
+					<?php endif; ?>
+				</div>
+
         		<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	            <div class="col-md-4 col-lg-4 mb-5">
 	                <div class="box">

@@ -464,6 +464,7 @@ class ComposerStaticInit98b447fc725e821a3453818d4a7033e1
         'App\\InstaCampImages' => __DIR__ . '/../..' . '/app/InstaCampImages.php',
         'App\\InstaCampaigns' => __DIR__ . '/../..' . '/app/InstaCampaigns.php',
         'App\\InstaPlans' => __DIR__ . '/../..' . '/app/InstaPlans.php',
+        'App\\MultiBudget' => __DIR__ . '/../..' . '/app/MultiBudget.php',
         'App\\Option' => __DIR__ . '/../..' . '/app/Option.php',
         'App\\Page' => __DIR__ . '/../..' . '/app/Page.php',
         'App\\Proposal' => __DIR__ . '/../..' . '/app/Proposal.php',

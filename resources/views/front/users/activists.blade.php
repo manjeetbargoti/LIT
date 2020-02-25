@@ -23,7 +23,7 @@
         <div class="row">
         	<div class="col-sm-3 col-md-3 col-lg-3 mb-5">
         		<div class="filter-section">
-        			<form method="POST" action="#">
+        			<form method="POST" action="{{ url('/users/activists') }}">
         				@csrf
         				<div class="form-group">
         					<h5 style="background: #e62240;color: #fff;padding: 0.5em;border-radius: 5px;">Filter by Location</h5>
@@ -33,7 +33,7 @@
         					<select class="form-control" name="country" id="country">
         						<option value="">Select Country</option>
         						@foreach($country as $cntry)
-        							<option value="{{ $cntry->name }}">{{ $cntry->name }}</option>
+        							<option value="{{ $cntry->name }}" @if(!empty($countryname))@if($cntry->name == $countryname) selected @endif @endif>{{ $cntry->name }}</option>
         						@endforeach
         					</select>
         				</div>
@@ -59,6 +59,13 @@
         		</div>
         	</div>
         	<div class="col-sm-9 col-md-9 col-lg-9 mb-5">
+				<div class="col-sm-12">
+					@if($data->count() == 0)
+					<p class="text-center">Sorry! no result found for your search.</p>
+					<p><?php echo $data['country']; ?></p>
+					@endif
+				</div>
+
         		@foreach($data as $d)
 	            <div class="col-md-4 col-lg-4 mb-5">
 	                <div class="box">

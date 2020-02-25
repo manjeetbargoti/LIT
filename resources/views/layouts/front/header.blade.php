@@ -80,7 +80,7 @@
                                         </span> -->
                                         <div class="carttext">
                                             <h5>{{ $loop->iteration }}. {{ $details['name'] }}, {{ $details['beneficiaries'] }} Beneficiaries, Duration: {{ $details['duration'] }} Months </h5>
-                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> AED {{ $details['budget'] }}</p>
+                                            <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> USD {{ $details['budget'] }}</p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $details['beneficiaries'] }}</p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> {{ $total }}</p> -->
                                             <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $details['duration'] }} Months</p>

@@ -62,9 +62,9 @@
     <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/blueimp_file_upload/css/jquery.fileupload-ui.css')); ?>" />
 
     <!-- Date & Time picker -->
-    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/daterangepicker/css/daterangepicker.css')); ?>"/>
-    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/datepicker/css/bootstrap-datepicker.min.css')); ?>"/>
-    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/inputlimiter/css/jquery.inputlimiter.css')); ?>"/>
+    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/daterangepicker/css/daterangepicker.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/datepicker/css/bootstrap-datepicker.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('admin/vendors/inputlimiter/css/jquery.inputlimiter.css')); ?>" />
 
     <link rel="stylesheet" href="<?php echo e(asset('admin/css/pages/profile.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('admin/css/pages/gallery.css')); ?>" />
@@ -189,6 +189,8 @@
 
     <script src="<?php echo e(asset('admin/js/pages/file_upload.js')); ?>"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+    <script src="<?php echo e(asset('js/repeater.js')); ?>"></script>
 
     <script>
     $(document).ready(function() {
@@ -508,6 +510,12 @@
         } else {
             $("#city").empty();
         }
+    });
+    </script>
+
+    <script>
+    $(document).ready(function() {
+        $('#repeater').createRepeater();
     });
     </script>
 

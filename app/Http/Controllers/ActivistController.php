@@ -13,19 +13,52 @@ use Illuminate\Support\Facades\Mail;
 class ActivistController extends Controller
 {
     // List all activists
-    public function index()
+    public function index(Request $request)
     {
     	$perPage = 24;
 
-    	// $roles = Role::get();
+        // $roles = Role::get();
+        $countryname = '';
+        
+        if($request->isMethod('POST') && !empty($request['country']))
+        {
+            $requestData = $request->all();
 
-    	$data = User::where('status', 1)
+            if(!empty($requestData['country'])){
+                $countryname = $requestData['country'];
+            }else{
+                $countryname = '';
+            }
+            
+            $state = $requestData['state'];
+            $city = $requestData['city'];
+
+            $data = User::where('status', 1)
+                        ->where('country', 'LIKE', "%" . $countryname . "%")
+                        ->whereHas("roles", function($q){ $q->where("name", "Activist"); });
+
+            if ($countryname) {
+                $data = $data->where('country', 'LIKE', "%" . $countryname . "%");
+            }
+            if ($state) {
+                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+            }
+
+            $data = $data->latest()->paginate($perPage);
+
+            // dd($data);
+        }else{
+            $data = User::where('status', 1)
     					->whereHas("roles", function($q){ $q->where("name", "Activist"); })
     					->latest()->paginate($perPage);
+        }
 
-    	$country = Country::orderBy('name', 'asc')->get();
+        $country = Country::orderBy('name', 'asc')->get();
 
-    	return view('front.users.activists', compact('data','country'));
+    	return view('front.users.activists', compact('data','country','countryname'));
     }
 
     // Single Activist
@@ -63,6 +96,28 @@ class ActivistController extends Controller
 
     	// dd($data);
 
-    	return view('front.users.singleActivist', compact('data'));
+        return view('front.users.singleActivist', compact('data'));
+    }
+
+    // Activist Filter
+    public function activistFilter(Request $request)
+    {
+        $data = $request->all();
+
+        $country = $data['country'];
+        $state = $data['state'];
+        $city = $data['city'];
+
+        dd($data);
+
+        if ($country) {
+            $data = $data->where('country', 'LIKE', "%" . $country . "%");
+        }
+        if ($state) {
+            $data = $data->where('state', 'LIKE', "%" . $state . "%");
+        }
+        if ($city) {
+            $data = $data->where('city', 'LIKE', "%" . $city . "%");
+        }
     }
 }

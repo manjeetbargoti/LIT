@@ -9,6 +9,7 @@ use App\InstaCampaigns;
 use App\InstaCampImages;
 use App\State;
 use App\User;
+use App\MultiBudget;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
@@ -130,6 +131,35 @@ class InstaCampController extends Controller
         try {
 
             $instaCamp = InstaCampaigns::create($requestData);
+
+            $start_date = $requestData['start_date'];
+            $end_date = $requestData['end_date'];
+            $outreach = $requestData['outreach'];
+            $beneficiaries = $requestData['beneficiaries'];
+            $budget = $requestData['budget'];
+            $duration = $requestData['duration'];
+            $time_period = $requestData['time_period'];
+            $insta_init_id = $instaCamp->id;
+
+            for ($count = 0; $count < count($budget); $count++) {
+                $data = array(
+                    'start_date' => $start_date[$count],
+                    'end_date' => $end_date[$count],
+                    'outreach' => $outreach[$count],
+                    'beneficiaries' => $beneficiaries[$count],
+                    'budget' => $budget[$count],
+                    'duration' => $duration[$count],
+                    'time_period' => $time_period[$count],
+                    'insta_camp_id'    => $insta_init_id
+                );
+
+                $insertData[] = $data;
+
+                // dd($insertData);
+            }
+
+            // dd($insertData);
+            MultiBudget::insert($insertData);
 
         } catch (ValidationException $e) {
             DB::rollback();

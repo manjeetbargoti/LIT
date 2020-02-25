@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Country;
+use App\MultiBudget;
 use App\SDGs;
 use App\SocialInitiative;
 use App\SocialInitiativeImages;
 use App\State;
 use App\User;
 use DB;
-use Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Image;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -55,8 +55,8 @@ class SocialInitiativeController extends Controller
             }
         } else {
             if (!empty($keyword)) {
-                $socialInitiative = SocialInitiative::where(['user_id'=>$userData->id, 'status'=>1])
-                    ->where(function ($query) use ($keyword){
+                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id, 'status' => 1])
+                    ->where(function ($query) use ($keyword) {
                         $query->where('initiative_name', 'LIKE', "%$keyword%")
                             ->orWhere('initiative_description', 'LIKE', "%$keyword%")
                             ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
@@ -66,11 +66,11 @@ class SocialInitiativeController extends Controller
                             ->orWhere('country', 'LIKE', "%$keyword%")
                             ->orWhere('state', 'LIKE', "%$keyword%")
                             ->orWhere('city', 'LIKE', "%$keyword%");
-                    })                    
+                    })
                     ->latest()->paginate($perPage);
                 // dd($socialInitiative);
             } else {
-                $socialInitiative = SocialInitiative::where(['user_id'=>$userData->id, 'status'=>1])->latest()->paginate($perPage);
+                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id, 'status' => 1])->latest()->paginate($perPage);
             }
         }
 
@@ -97,9 +97,9 @@ class SocialInitiativeController extends Controller
         // abort_if(Gate::denies('social_initiative_add'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $country = Country::orderBy('name', 'asc')->get();
-        $sdgs = SDGs::where('status',1)->get();
+        $sdgs = SDGs::where('status', 1)->get();
 
-        return view('admin.social_initiative.create', compact('country','sdgs'));
+        return view('admin.social_initiative.create', compact('country', 'sdgs'));
     }
 
     /**
@@ -131,6 +131,35 @@ class SocialInitiativeController extends Controller
         try {
 
             $socialInitiative = SocialInitiative::create($requestData);
+
+            $start_date = $requestData['start_date'];
+            $end_date = $requestData['end_date'];
+            $outreach = $requestData['outreach'];
+            $beneficiaries = $requestData['beneficiaries'];
+            $budget = $requestData['budget'];
+            $duration = $requestData['duration'];
+            $time_period = $requestData['time_period'];
+            $social_init_id = $socialInitiative->id;
+
+            for ($count = 0; $count < count($budget); $count++) {
+                $data = array(
+                    'start_date' => $start_date[$count],
+                    'end_date' => $end_date[$count],
+                    'outreach' => $outreach[$count],
+                    'beneficiaries' => $beneficiaries[$count],
+                    'budget' => $budget[$count],
+                    'duration' => $duration[$count],
+                    'time_period' => $time_period[$count],
+                    'social_init_id'    => $social_init_id
+                );
+
+                $insertData[] = $data;
+
+                // dd($insertData);
+            }
+
+            // dd($insertData);
+            MultiBudget::insert($insertData);
 
         } catch (ValidationException $e) {
             DB::rollback();
@@ -280,7 +309,7 @@ class SocialInitiativeController extends Controller
             $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
         }
 
-        $sdgs = SDGs::where('status',1)->get();
+        $sdgs = SDGs::where('status', 1)->get();
 
         return view('admin.social_initiative.edit', compact('socialInitiative', 'sdgs', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
     }

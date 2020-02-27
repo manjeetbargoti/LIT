@@ -6,7 +6,7 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/about/banner.jpg')); ?>" alt="First slide">
-            <h3> Project Detail </h3>
+            <h3> Project Info </h3>
         </div>
     </div>
 </div>
@@ -53,11 +53,13 @@
                     <?php if(!empty($data->initiative_name)): ?>
                     <a href="<?php echo e(url('/social-initiative/add-to-cart/'.$data->id)); ?>"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                    <a href="<?php echo e(url('/initiative-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
                     <?php elseif(!empty($data->service_name)): ?>
                     <a href="<?php echo e(url('/digital-service/add-to-cart/'.$data->id)); ?>"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
+                    <a href="<?php echo e(url('/digital-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
                     <?php endif; ?>
-                    <a href="#" class="btn btn-primary text-uppercase"> Learn More</a>
+                    
                 </div>
             </div>
         </div>

@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/front/css/main.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/front/css/tail.select-default.css') }}" />
 
 </head>
 
@@ -65,6 +66,7 @@
     <script src="{{ asset('front/vendor/countdowntime/countdowntime.js') }}"></script>
     <script src="{{ asset('front/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script src="{{ asset('front/js/tail.select.min.js') }}"></script>
 
     <script>
     // Iterate over each select element
@@ -366,6 +368,26 @@
             });
         }
     });
+    </script>
+
+    <script>
+        tail.select('#MultiSelect1', {
+            search: true,
+            deselect: true,
+        });
+        tail.select('#MultiSelect2', {
+            search: true,
+            deselect: true,
+        });
+        tail.select('#MultiSelect3', {
+            search: true,
+            deselect: true,
+        });
+        tail.select('#MultiSelect4', {
+            search: true,
+            deselect: true,
+        });
+
     </script>
 </body>
 

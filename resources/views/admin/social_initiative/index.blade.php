@@ -59,7 +59,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>@if(!empty($item->feature_image))<img src="{{ url('/images/initiative/large/'.$item->feature_image) }}" width="60">@else <img src="{{ url('/images/logo/'.config('app.logo')) }}" width="60"> @endif</td>
-                                        <td><a href="{{ url('/initiatives/'.$item->slug) }}" target="_blank">{{ $item->initiative_name }}</a>
+                                        <td><a href="{{ url('/social-initiative/'.$item->slug) }}" target="_blank">{{ $item->initiative_name }}</a>
                                         </td>
                                         <td>{{ $item->beneficiaries }}</td>
                                         <td>{{ $item->duration }} months</td>

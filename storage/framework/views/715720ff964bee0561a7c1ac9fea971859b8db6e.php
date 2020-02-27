@@ -45,10 +45,10 @@
                                     <h4 class="h4">
                                         <?php if(!empty($d->initiative_name)): ?><?php echo e($d->initiative_name); ?><?php elseif(!empty($d->service_name)): ?><?php endif; ?>
                                     </h4>
-                                    <h5 class="h5"><?php echo e($d->budget); ?> AED </h5>
+                                    <h5 class="h5">USD <?php echo e($d->budget); ?> </h5>
                                     <ul class="p-0">
                                         <li> <b>Beneficiaries</b>: <?php echo e($d->beneficiaries); ?></li>
-                                        <li> <b>Duration</b>: <?php echo e($d->duration); ?></li>
+                                        <li> <b>Duration</b>: <?php echo e($d->duration); ?> <?php echo e($d->time_period); ?></li>
                                     </ul>
                                     <?php if(!empty($d->initiative_name)): ?>
                                     <a href="<?php echo e(url('/social-initiative/'.$d->slug)); ?>"
@@ -89,10 +89,10 @@
                                     <h4 class="h4">
                                         <?php if(!empty($d->initiative_name)): ?><?php echo e($d->initiative_name); ?><?php elseif(!empty($d->service_name)): ?><?php endif; ?>
                                     </h4>
-                                    <h5 class="h5"><?php echo e($d->budget); ?> AED </h5>
+                                    <h5 class="h5">USD <?php echo e($d->budget); ?></h5>
                                     <ul class="p-0">
                                         <li> <b>Beneficiaries</b>: <?php echo e($d->beneficiaries); ?></li>
-                                        <li> <b>Duration</b>: <?php echo e($d->duration); ?></li>
+                                        <li> <b>Duration</b>: <?php echo e($d->duration); ?> <?php echo e($d->time_period); ?></li>
                                     </ul>
                                     <?php if(!empty($d->initiative_name)): ?>
                                     <a href="<?php echo e(url('/social-initiative/'.$d->slug)); ?>"

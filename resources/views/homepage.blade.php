@@ -56,9 +56,9 @@
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" name="sdgs"
-                                                value="{{ request('sdgs') }}" id="exampleFormControlSelect1">
-                                                <option value=""> Select Area of Impact </option>
+                                            <select class="form-control" name="sdgs[]"
+                                                value="{{ request('sdgs') }}" id="MultiSelect1" multiple data-placeholder="Select SDGs">
+                                                <!-- <option value=""> Select Area of Impact </option> -->
                                                 @foreach($sdgs->where('sdg_category', 'Onground') as $sdg)
                                                 <option value="{{ $sdg->sdg_name }}">{{ $sdg->sdg_name }}</option>
                                                 @endforeach
@@ -66,8 +66,8 @@
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="budget"
-                                                value="{{ request('budget') }}" id="exampleFormControlSelect1">
-                                                <option value=""> -- Budget -- </option>
+                                                value="{{ request('budget') }}" id="budget">
+                                                <option value="">Select Budget</option>
                                                 <option value="0,5000">$0-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="country"
-                                                value="{{ request('country') }}" id="country">
+                                                value="{{ request('country') }}" id="country" data-placeholder="Select Country">
                                                 <option value=""> -- Select Country -- </option>
                                                 @foreach($country as $c)
                                                 <option value="{{ $c->name }}">{{ $c->name }}</option>
@@ -88,18 +88,18 @@
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="state" id="state"
-                                                value="{{ request('state') }}">
+                                                value="{{ request('state') }}" data-placeholder="Select State">
                                                 <option value=""> -- Select State -- </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="city" id="city"
-                                                value="{{ request('city') }}">
+                                                value="{{ request('city') }}" data-placeholder="Select City">
                                                 <option value="">City</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-1 col-md-1 col-sm-12 pl-0 pr-0">
-                                            <button type="submit" class="btn btn-primary wrn-btn">Search</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -110,9 +110,9 @@
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" name="sdgs"
-                                                value="{{ request('sdgs') }}" id="exampleFormControlSelect1">
-                                                <option value=""> Select Campaign </option>
+                                            <select class="form-control" name="sdgs[]"
+                                                value="{{ request('sdgs') }}" id="MultiSelect2" multiple data-placeholder="Select Campaign">
+                                                <!-- <option value=""> Select Campaign </option> -->
                                                 @foreach($sdgs->where('sdg_category', '360') as $sdg)
                                                 <option value="{{ $sdg->sdg_name }}">{{ $sdg->sdg_name }}</option>
                                                 @endforeach
@@ -153,7 +153,7 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-1 col-md-1 col-sm-12 pl-0 pr-0">
-                                            <button type="submit" class="btn btn-primary wrn-btn">Search</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -163,18 +163,18 @@
                                     {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" name="sdgs"
-                                                value="{{ request('sdgs') }}" id="exampleFormControlSelect1">
-                                                <option value=""> Select area of impact </option>
+                                            <select class="form-control search-slt" name="sdgs[]"
+                                                value="{{ request('sdgs') }}" id="MultiSelect3" multiple data-placeholder="Select area of impact">
+                                                <!-- <option value=""> Select area of impact </option> -->
                                                 @foreach($sdgs->where('sdg_category', 'Onground') as $sdg)
                                                 <option value="{{ $sdg->sdg_name }}">{{ $sdg->sdg_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
-                                            <select class="form-control search-slt" name="sdgs2"
-                                                value="{{ request('sdgs2') }}" id="exampleFormControlSelect1">
-                                                <option value=""> Select 360 Digital Service </option>
+                                            <select class="form-control search-slt" name="sdgs2[]"
+                                                value="{{ request('sdgs2') }}" id="MultiSelect4" multiple data-placeholder="Select 360 Digital Service">
+                                                <!-- <option value=""> Select 360 Digital Service </option> -->
                                                 @foreach($sdgs->where('sdg_category', '360') as $sdg)
                                                 <option value="{{ $sdg->sdg_name }}">{{ $sdg->sdg_name }}</option>
                                                 @endforeach
@@ -217,7 +217,7 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-1 col-md-1 col-sm-12 pl-0 pr-0">
-                                            <button type="submit" class="btn btn-primary wrn-btn">Search</button>
+                                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
                                         </div>
                                     </div>
                             </div>
@@ -300,7 +300,7 @@
             <div class="carousel-inner">
                 @foreach($social_initiatives as $si)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                    <span class="aed">{{ $si->budget }} AED</span>
+                    <span class="aed">USD {{ $si->budget }}</span>
                     <h3 class="h3"> {{ $si->initiative_name }} </h3>
                     <ul>
                         <li> Beneficiaries: {{ $si->beneficiaries }} </li>

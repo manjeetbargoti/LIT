@@ -51,14 +51,14 @@
                                     <tr>
                                         <th> Name </th>
                                         <td> <a class="text-primary"
-                                                href="<?php echo e(url('/initiatives/'.$socialInitiative->slug)); ?>" target="_blank"><?php echo e($socialInitiative->initiative_name); ?></a>
+                                                href="<?php echo e(url('/social-initiative/'.$socialInitiative->slug)); ?>" target="_blank"><?php echo e($socialInitiative->initiative_name); ?></a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th> Impact SDG </th>
                                         <td class="text-success"> <?php echo e($socialInitiative->area_impact_sdg); ?> </td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <th> Beneficiaries </th>
                                         <td> <?php echo e($socialInitiative->beneficiaries); ?> </td>
                                     </tr>
@@ -69,7 +69,7 @@
                                     <tr>
                                         <th> Duration </th>
                                         <td> <?php echo e($socialInitiative->duration); ?> <?php echo e($socialInitiative->time_period); ?> </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <th> Start Date </th>
                                         <td class="text-success"> <?php echo e(date('l, j F Y', strtotime($socialInitiative->start_date))); ?> </td>
@@ -77,10 +77,6 @@
                                     <tr>
                                         <th> End Date </th>
                                         <td class="text-success"> <?php echo e(date('l, j F Y', strtotime($socialInitiative->end_date))); ?> </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Budget </th>
-                                        <td> USD <?php echo e($socialInitiative->budget); ?> </td>
                                     </tr>
                                     <tr>
                                         <th> Address </th>
@@ -100,6 +96,36 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="row">
+                            <?php $__currentLoopData = $multiBudgetData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mbd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="col-12 col-sm-4 col-md-4 col-lg-4 mt-2">
+                                <h4 class="text-danger">Budget <?php echo e($loop->iteration); ?></h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th> Beneficiaries </th>
+                                                <td> <?php echo e($mbd->beneficiaries); ?> </td>
+                                            </tr>
+                                            <tr>
+                                                <th> Budget </th>
+                                                <td> USD <?php echo e($mbd->budget); ?> </td>
+                                            </tr>
+                                            <tr>
+                                                <th> Out Reach </th>
+                                                <td> <?php echo e($mbd->outreach); ?> </td>
+                                            </tr>
+                                            <tr>
+                                                <th> Duration </th>
+                                                <td> <?php echo e($mbd->duration); ?> <?php echo e($mbd->time_period); ?> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                 </div>

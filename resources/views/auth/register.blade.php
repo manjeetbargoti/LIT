@@ -20,7 +20,7 @@
                                 <option value="Social Enterprise">Social Enterprise</option>
                                 <option value="Corporate">Corporate</option>
                                 <option value="Government">Government</option>
-                                <option value="Activists">Activists</option>
+                                <option value="Activist">Activist</option>
                             </select>
                             @error('roles')
                             <span class="invalid-feedback" role="alert">

@@ -642,3 +642,14 @@ ul#respMenu .btn:hover {
   padding-right: 0px !important;
 }
 
+#On-ground .tail-select, #engagement .tail-select, #Both .tail-select {
+  width: 100%;
+  font-size: 14px;
+  height: calc(3rem + 2px) !important;
+}
+
+#On-ground .tail-select .select-label, #engagement .tail-select .select-label, #Both .tail-select .select-label {
+  height: calc(3rem + 2px) !important;
+  line-height: 2.5;
+}
+

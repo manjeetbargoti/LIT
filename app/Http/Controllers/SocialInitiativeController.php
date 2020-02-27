@@ -42,9 +42,6 @@ class SocialInitiativeController extends Controller
             if (!empty($keyword)) {
                 $socialInitiative = SocialInitiative::where('initiative_name', 'LIKE', "%$keyword%")
                     ->orWhere('initiative_description', 'LIKE', "%$keyword%")
-                    ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
-                    ->orWhere('duration', 'LIKE', "%$keyword%")
-                    ->orWhere('budget', 'LIKE', "%$keyword%")
                     ->orWhere('region', 'LIKE', "%$keyword%")
                     ->orWhere('country', 'LIKE', "%$keyword%")
                     ->orWhere('state', 'LIKE', "%$keyword%")
@@ -59,9 +56,6 @@ class SocialInitiativeController extends Controller
                     ->where(function ($query) use ($keyword) {
                         $query->where('initiative_name', 'LIKE', "%$keyword%")
                             ->orWhere('initiative_description', 'LIKE', "%$keyword%")
-                            ->orWhere('beneficiaries', 'LIKE', "%$keyword%")
-                            ->orWhere('duration', 'LIKE', "%$keyword%")
-                            ->orWhere('budget', 'LIKE', "%$keyword%")
                             ->orWhere('region', 'LIKE', "%$keyword%")
                             ->orWhere('country', 'LIKE', "%$keyword%")
                             ->orWhere('state', 'LIKE', "%$keyword%")
@@ -80,6 +74,15 @@ class SocialInitiativeController extends Controller
         foreach ($socialInitiative as $key => $val) {
             $initiativeImages = SocialInitiativeImages::where('social_initiative_id', $val->id)->first();
             $socialInitiative[$key]->feature_image = $initiativeImages['image_name'];
+
+            $multibudget = MultiBudget::where('social_init_id',$val->id)->first();
+            $socialInitiative[$key]->budget = $multibudget->budget;
+            $socialInitiative[$key]->duration = $multibudget->duration;
+            $socialInitiative[$key]->time_period = $multibudget->time_period;
+            $socialInitiative[$key]->start_date = $multibudget->start_date;
+            $socialInitiative[$key]->end_date = $multibudget->end_date;
+            $socialInitiative[$key]->outreach = $multibudget->outreach;
+            $socialInitiative[$key]->beneficiaries = $multibudget->beneficiaries;
 
             // dd($initiativeImages);
         }
@@ -249,13 +252,15 @@ class SocialInitiativeController extends Controller
     {
         $socialInitiative = SocialInitiative::findOrFail($id);
 
+        $multiBudgetData = MultiBudget::where('social_init_id', $socialInitiative->id)->get();
+
         $userData = User::findOrFail($socialInitiative['user_id']);
 
         $userRole = $userData->roles->pluck('name')->toArray();
 
-        // dd($userData);
+        // dd($multiBudgetData);
 
-        return view('admin.social_initiative.show', compact('socialInitiative', 'userData', 'userRole'));
+        return view('admin.social_initiative.show', compact('socialInitiative', 'userData', 'userRole','multiBudgetData'));
     }
 
     /**

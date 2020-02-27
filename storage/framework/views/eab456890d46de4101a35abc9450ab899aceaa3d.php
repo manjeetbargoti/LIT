@@ -57,7 +57,7 @@
                                     <tr>
                                         <td><?php echo e($loop->iteration); ?></td>
                                         <td><?php if(!empty($item->feature_image)): ?><img src="<?php echo e(url('/images/initiative/large/'.$item->feature_image)); ?>" width="60"><?php else: ?> <img src="<?php echo e(url('/images/logo/'.config('app.logo'))); ?>" width="60"> <?php endif; ?></td>
-                                        <td><a href="<?php echo e(url('/initiatives/'.$item->slug)); ?>" target="_blank"><?php echo e($item->initiative_name); ?></a>
+                                        <td><a href="<?php echo e(url('/social-initiative/'.$item->slug)); ?>" target="_blank"><?php echo e($item->initiative_name); ?></a>
                                         </td>
                                         <td><?php echo e($item->beneficiaries); ?></td>
                                         <td><?php echo e($item->duration); ?> months</td>

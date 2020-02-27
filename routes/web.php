@@ -115,7 +115,9 @@ Route::match(['get', 'post'], '/digital-service/search', 'HomeController@homeDig
 Route::match(['get', 'post'], '/all-search/result', 'HomeController@allSearchModule');
 
 Route::match(['get','post'], '/social-initiative/{url}', 'HomeController@detailSocialInitiative');
+Route::match(['get','post'], '/initiative-programs/{url}', 'HomeController@learnSocialInitiative');
 Route::match(['get','post'], '/digital-service/{url}', 'HomeController@detailDigitalService');
+Route::match(['get','post'], '/digital-programs/{url}', 'HomeController@learnDigitalService');
 
 // Get State City List
 Route::get('/get-state', 'AdminController@getStateList');
@@ -125,8 +127,8 @@ Route::get('/get-city', 'AdminController@getCityList');
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
 
 // Add to cart functionality
-Route::match(['get','post'], '/social-initiative/add-to-cart/{id}/{budget_id}', 'CartController@addToCart');
-Route::match(['get','post'], '/digital-service/add-to-cart/{id}/{budget_id}', 'CartController@addToCart360');
+Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addToCart');
+Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addToCart360');
 Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');
 
 // Query form submission

@@ -189,6 +189,8 @@ class UserController extends Controller
     public function profileEdit(Request $request, $id)
     {
 
+        $auth_user = Auth::user();
+
         if ($request->isMethod('post')) {
 
             $requestData = $request->all();
@@ -259,46 +261,63 @@ class UserController extends Controller
 
         $roleName = implode(', ', $user->getRoleNames()->toArray());
 
-        // Country Dropdown
-        $countryname = Country::get();
-        $country_dropdown = "<option selected value=''>Select Country</option>";
-        foreach ($countryname as $cont) {
-            if ($cont->name == $user['country']) {
-                $selected = "selected";
-            } else {
-                $selected = "";
+        if(!empty($user->country))
+        {
+            // Country Dropdown
+            $countryname = Country::get();
+            $country_dropdown = "<option selected value=''>Select Country</option>";
+            foreach ($countryname as $cont) {
+                if ($cont->name == $user->country) {
+                    $selected = "selected";
+                } else {
+                    $selected = "";
+                }
+                $country_dropdown .= "<option value='" . $cont->name . "' " . $selected . ">" . $cont->name . "</option>";
             }
-            $country_dropdown .= "<option value='" . $cont->name . "' " . $selected . ">" . $cont->name . "</option>";
+        }else{
+            $country_dropdown = '';
         }
 
-        // State Dropdown
-        // $countryname = Country::where('name', $user['country'])->first();
-        // $statename = State::where(['country_id' => $countryname->id])->get();
-        // $state_dropdown = "<option selected value=''>Select State</option>";
-        // foreach ($statename as $stn) {
-        //     if ($stn->name == $user['state']) {
-        //         $selected = "selected";
-        //     } else {
-        //         $selected = "";
-        //     }
-        //     $state_dropdown .= "<option value='" . $stn->name . "' " . $selected . ">" . $stn->name . "</option>";
-        // }
+        // dd($country_dropdown);
+        if(!empty($user->state))
+        {
+            // State Dropdown
+            $countryname = Country::where('name', $user['country'])->first();
+            $statename = State::where(['country_id' => $countryname->id])->get();
+            $state_dropdown = "<option selected value=''>Select State</option>";
+            foreach ($statename as $stn) {
+                if ($stn->name == $user['state']) {
+                    $selected = "selected";
+                } else {
+                    $selected = "";
+                }
+                $state_dropdown .= "<option value='" . $stn->name . "' " . $selected . ">" . $stn->name . "</option>";
+            }
+        }else{
+            $state_dropdown = '';
+        }
 
-        // City Dropdown
-        // $statename = State::where('name', $user['state'])->first();
-        // $cityname = City::where(['state_id' => $statename->id])->get();
-        // $city_dropdown = "<option selected value=''>Select City</option>";
-        // foreach ($cityname as $city) {
-        //     if ($city->name == $user['city']) {
-        //         $selected = "selected";
-        //     } else {
-        //         $selected = "";
-        //     }
-        //     $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
-        // }
+        if(!empty($user->city))
+        {
+            // City Dropdown
+            $statename = State::where('name', $user['state'])->first();
+            $cityname = City::where(['state_id' => $statename->id])->get();
+            $city_dropdown = "<option selected value=''>Select City</option>";
+            foreach ($cityname as $city) {
+                if ($city->name == $user['city']) {
+                    $selected = "selected";
+                } else {
+                    $selected = "";
+                }
+                $city_dropdown .= "<option value='" . $city->name . "' " . $selected . ">" . $city->name . "</option>";
+            }
+        }else{
+            $city_dropdown = '';
+        }
+        
 
         $country = Country::get();
 
-        return view('admin.profile.edit', compact('user', 'roleName', 'country'));
+        return view('admin.profile.edit', compact('user', 'roleName', 'country', 'country_dropdown', 'state_dropdown','city_dropdown'));
     }
 }

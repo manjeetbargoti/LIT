@@ -194,7 +194,7 @@
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-file-o text-primary"></i></span>
                                                 <textarea placeholder=" " rows="2" id="bio" name="bio"
-                                                    class="form-control" value="<?php echo e($user->bio); ?>"></textarea>
+                                                    class="form-control"><?php echo e($user->bio); ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -210,10 +210,14 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="country" name="country"
                                                     class="form-control" value="<?php echo e($user->country); ?>">
-                                                    <option value="">Select Country</option>
-                                                    <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ctry): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <option value="<?php echo e($ctry->name); ?>"><?php echo e($ctry->name); ?></option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if(!empty($country_dropdown)): ?>
+                                                        <?php echo $country_dropdown; ?>
+                                                    <?php else: ?>
+                                                        <option value="">Select Country</option>
+                                                        <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ctry): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value="<?php echo e($ctry->name); ?>"><?php echo e($ctry->name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -229,7 +233,11 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="state" name="state"
                                                     class="form-control" value="<?php echo e($user->state); ?>">
-                                                    <option value="">Select State</option>
+                                                    <?php if(!empty($state_dropdown)): ?>
+                                                        <?php echo $state_dropdown; ?>
+                                                    <?php else: ?>
+                                                        <option value="">Select State</option>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -245,7 +253,11 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="city" name="city"
                                                     class="form-control" value="<?php echo e($user->city); ?>">
-                                                    <option value="">Select City</option>
+                                                    <?php if(!empty($city_dropdown)): ?>
+                                                        <?php echo $city_dropdown; ?>
+                                                    <?php else: ?>
+                                                        <option value="">Select City</option>
+                                                    <?php endif; ?>
                                                 </select>
                                             </div>
                                         </div>

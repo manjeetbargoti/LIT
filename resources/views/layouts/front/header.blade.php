@@ -16,7 +16,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <a href="{{ url('/') }}">
-                        <img class="default_logo" src="{{ asset('front/dist/img/logo.png') }}" alt="">
+                        <img class="default_logo" src="{{ asset('/images/logo/'.config('app.logo')) }}" alt="">
                     </a>
                 </div>
                 <div class="col-lg-10">

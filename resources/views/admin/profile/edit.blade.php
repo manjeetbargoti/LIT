@@ -211,10 +211,14 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="country" name="country"
                                                     class="form-control" value="{{ $user->country }}">
-                                                    <option value="">Select Country</option>
-                                                    @foreach($country as $ctry)
-                                                        <option value="{{ $ctry->name }}">{{ $ctry->name }}</option>
-                                                    @endforeach
+                                                    @if(!empty($country_dropdown))
+                                                        <?php echo $country_dropdown; ?>
+                                                    @else
+                                                        <option value="">Select Country</option>
+                                                        @foreach($country as $ctry)
+                                                            <option value="{{ $ctry->name }}">{{ $ctry->name }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -230,7 +234,11 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="state" name="state"
                                                     class="form-control" value="{{ $user->state }}">
-                                                    <option value="">Select State</option>
+                                                    @if(!empty($state_dropdown))
+                                                        <?php echo $state_dropdown; ?>
+                                                    @else
+                                                        <option value="">Select State</option>
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>
@@ -246,7 +254,11 @@
                                                         class="fa fa-globe text-primary"></i></span>
                                                 <select id="city" name="city"
                                                     class="form-control" value="{{ $user->city }}">
-                                                    <option value="">Select City</option>
+                                                    @if(!empty($city_dropdown))
+                                                        <?php echo $city_dropdown; ?>
+                                                    @else
+                                                        <option value="">Select City</option>
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>

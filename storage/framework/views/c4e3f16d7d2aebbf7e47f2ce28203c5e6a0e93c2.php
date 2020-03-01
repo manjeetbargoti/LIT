@@ -24,7 +24,7 @@ endif; ?>"
                                 <option value="Social Enterprise">Social Enterprise</option>
                                 <option value="Corporate">Corporate</option>
                                 <option value="Government">Government</option>
-                                <option value="Activists">Activists</option>
+                                <option value="Activist">Activist</option>
                             </select>
                             <?php if ($errors->has('roles')) :
 if (isset($message)) { $messageCache = $message; }

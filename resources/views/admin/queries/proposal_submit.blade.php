@@ -49,6 +49,7 @@
                                         <th>Phone</th>
                                         <th>Position</th>
                                         <th>Organization</th>
+                                        <th>Proposal PDF</th>
                                         <th>Proposal For</th>
                                         <th>Actions</th>
                                     </tr>
@@ -62,6 +63,7 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->position }}</td>
                                         <td>{{ $item->organization }}</td>
+                                        <td>@if(!empty($item->proposal_pdf))<a href="{{ url('/images/query/proposals/'.$item->proposal_pdf) }}" target="_blank"><img src="{{ url('/images/pdf.png') }}" width="20"> Proposal</a>@endif</td>
                                         <td><a href="{{ url('/admin/social-impact/proposals/' . $item->id) }}" title="View Proposal" class="text-primary">{{ $item->project_name }}</a></td>
                                         <td>
                                             <a href="#" title="View Proposal"><button

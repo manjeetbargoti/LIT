@@ -37,15 +37,15 @@
                                         role="tab" aria-controls="On-ground" aria-selected="true">Onground
                                         Sustainability Initiatives</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" id="engagement-tab" data-toggle="tab" href="#engagement"
                                         role="tab" aria-controls="engagement" aria-selected="false">360<sup>o</sup>
                                         Digital Marketing Services</a>
-                                </li>
-                                <li class="nav-item">
+                                </li> -->
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" id="Both-tab" data-toggle="tab" href="#Both" role="tab"
                                         aria-controls="Both" aria-selected="false">Both</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="tab-content w-100" id="myTabContent">
@@ -68,7 +68,8 @@
                                             <select class="form-control search-slt" name="budget"
                                                 value="<?php echo e(request('budget')); ?>" id="budget">
                                                 <option value="">Select Budget</option>
-                                                <option value="0,5000">$0-$5,000</option>
+                                                <option value="0,0">In kind partnerships</option>
+                                                <option value="1,5000">$1-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>
@@ -77,7 +78,7 @@
                                                 <option value="50000,100000">$50,000 and Above</option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="country"
                                                 value="<?php echo e(request('country')); ?>" id="country" data-placeholder="Select Country">
                                                 <option value=""> -- Select Country -- </option>
@@ -86,13 +87,13 @@
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                        <!-- <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="state" id="state"
                                                 value="<?php echo e(request('state')); ?>" data-placeholder="Select State">
                                                 <option value=""> -- Select State -- </option>
                                             </select>
-                                        </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-12 pl-0 pr-1">
+                                        </div> -->
+                                        <div class="col-lg-3 col-md-3 col-sm-12 pl-0 pr-1">
                                             <select class="form-control search-slt" name="city" id="city"
                                                 value="<?php echo e(request('city')); ?>" data-placeholder="Select City">
                                                 <option value="">City</option>

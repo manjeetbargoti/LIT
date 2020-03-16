@@ -26,12 +26,14 @@
                         <a href="<?php echo e(url('/admin/profile/' . $user->id . '/edit')); ?>" title="Edit user"><button
                                 class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit</button></a>
+                        <?php if(!auth()->check() || ! auth()->user()->hasRole('Activist')): ?>
                         <?php if($businessData_count > 0): ?>
                             <a href="<?php echo e(url('/admin/profile/business/' . $businessData->id . '/update')); ?>" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
                                     class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
                         <?php else: ?>
                             <a href="<?php echo e(url('/admin/profile/add-business')); ?>" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
                                     class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
+                        <?php endif; ?>
                         <?php endif; ?>
                         <a href="<?php echo e(url('/admin/profile/' . $user->id . '/change-password')); ?>"
                             title="Change Password"><button class="btn btn-primary btn-sm pull-right"><i

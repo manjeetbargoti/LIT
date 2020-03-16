@@ -118,7 +118,14 @@ class SocialInitiativeController extends Controller
 
         $requestData = $request->all();
 
-        // dd($requestData);
+        if(!empty($requestData['in_partnership']))
+        {
+            $in_partnership = 1;
+        }else{
+            $in_partnership = 0;
+        }
+
+        // dd($requestData['in_partnership']);
 
         $user_id = Auth::user()->id;
 
@@ -139,30 +146,60 @@ class SocialInitiativeController extends Controller
             $end_date = $requestData['end_date'];
             $outreach = $requestData['outreach'];
             $beneficiaries = $requestData['beneficiaries'];
-            $budget = $requestData['budget'];
+            if($in_partnership == 1)
+            {
+                $budget[] = 0;
+            }else{
+                $budget = $requestData['budget'];
+            }
             $duration = $requestData['duration'];
             $time_period = $requestData['time_period'];
             $social_init_id = $socialInitiative->id;
 
-            for ($count = 0; $count < count($budget); $count++) {
-                $data = array(
-                    'start_date' => $start_date[$count],
-                    'end_date' => $end_date[$count],
-                    'outreach' => $outreach[$count],
-                    'beneficiaries' => $beneficiaries[$count],
-                    'budget' => $budget[$count],
-                    'duration' => $duration[$count],
-                    'time_period' => $time_period[$count],
-                    'social_init_id'    => $social_init_id
-                );
-
-                $insertData[] = $data;
+            // dd($budget)
+;            
+            if($in_partnership == 0){
+                for ($count = 0; $count < count($budget); $count++) {
+                    $data = array(
+                        'start_date' => $start_date[$count],
+                        'end_date' => $end_date[$count],
+                        'outreach' => $outreach[$count],
+                        'beneficiaries' => $beneficiaries[$count],
+                        'budget' => $budget[$count],
+                        'duration' => $duration[$count],
+                        'time_period' => $time_period[$count],
+                        'social_init_id'    => $social_init_id
+                    );
+    
+                    $insertData[] = $data;
+    
+                    // dd($insertData);
+                }
 
                 // dd($insertData);
-            }
+                MultiBudget::insert($insertData);
 
-            // dd($insertData);
-            MultiBudget::insert($insertData);
+            }else{
+                for ($count = 0; $count < count($budget); $count++) {
+                    $data = array(
+                        'start_date' => $start_date[$count],
+                        'end_date' => $end_date[$count],
+                        'outreach' => $outreach[$count],
+                        'beneficiaries' => $beneficiaries[$count],
+                        'budget' => $budget[$count],
+                        'duration' => $duration[$count],
+                        'time_period' => $time_period[$count],
+                        'social_init_id'    => $social_init_id
+                    );
+
+                    // dd($data);
+        
+                    $insertData[] = $data;
+                }
+
+                // dd($insertData);
+                MultiBudget::insert($insertData);
+            }
 
         } catch (ValidationException $e) {
             DB::rollback();
@@ -478,5 +515,55 @@ class SocialInitiativeController extends Controller
 
             return redirect()->back()->with($notification);
         }
+    }
+
+    // Apply to program
+    public function applyToProgram()
+    {
+        $perPage = 24;
+
+        $data = SocialInitiative::where(['status'=> 1, 'promote'=> 1])->latest()->paginate($perPage);
+
+        foreach ($data as $key => $val) {
+            $initiativeImages = SocialInitiativeImages::where('social_initiative_id', $val->id)->first();
+            $data[$key]->feature_image = $initiativeImages['image_name'];
+
+            $multibudget = MultiBudget::where('social_init_id',$val->id)->first();
+            $data[$key]->budget = $multibudget->budget;
+            $data[$key]->duration = $multibudget->duration;
+            $data[$key]->time_period = $multibudget->time_period;
+            $data[$key]->start_date = $multibudget->start_date;
+            $data[$key]->end_date = $multibudget->end_date;
+            $data[$key]->outreach = $multibudget->outreach;
+            $data[$key]->beneficiaries = $multibudget->beneficiaries;
+
+            // dd($initiativeImages);
+        }
+
+        // dd($data);
+
+        $data_count = $data->count();
+
+        return view('front.apply-program.apply-program', compact('data','data_count'));
+    }
+
+    // Apply Program Deatils Page
+    public function detailApplyProgram(Request $request, $url = null)
+    {
+        $data = SocialInitiative::where('slug', $url)->first();
+
+        $data2 = MultiBudget::where('social_init_id', $data->id)->get();
+
+        $getFirstBudget = MultiBudget::where('social_init_id', $data->id)->first();
+
+        $data->budget_id = $getFirstBudget['id'];
+
+        $siImage_count = SocialInitiativeImages::where('social_initiative_id', $data->id)->count();
+
+        if ($siImage_count > 0) {
+            $siImage = SocialInitiativeImages::where('social_initiative_id', $data->id)->first();
+        }
+
+        return view('front.apply-program.apply-program-detail', compact('data', 'data2', 'siImage', 'getFirstBudget'));
     }
 }

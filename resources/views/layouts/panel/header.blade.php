@@ -15,6 +15,7 @@
             </div>
             <div class="navbar-toggleable-sm m-lg-auto d-none d-lg-flex top_menu" id="nav-content">
                 <ul class="nav navbar-nav flex-row top_menubar">
+                    @hasanyrole('Super Admin')
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ url('/admin/dashboard') }}">
                             <i class="fa fa-inbox"></i> <span class="quick_text">Dashboard</span>
@@ -35,11 +36,13 @@
                             <i class="fa fa-picture-o"></i> <span class="quick_text">Proposals (RFP)</span>
                         </a>
                     </li>
+                    @endhasanyrole
                     <li class="nav-item">
                         <a class="nav-link text-white" target="_blank" href="{{ url('/') }}">
                             <i class="fa fa-globe"></i>
                         </a>
                     </li>
+                    
                 </ul>
             </div>
             <div class="topnav dropdown-menu-right ml-auto">

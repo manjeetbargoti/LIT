@@ -173,34 +173,64 @@
     </script>
 
     <script>
+    // $('#country').change(function() {
+    //     var countryID = $(this).val();
+    //     var _token = $('input[name="_token"]').val();
+    //     if (countryID) {
+    //         $.ajax({
+    //             type: "get",
+    //             url: "/get-city?country_name=" + countryID,
+    //             data: {
+    //                 _token: _token
+    //             },
+    //             success: function(res) {
+    //                 if (res) {
+    //                     $("#state").empty();
+    //                     $("#state").append('<option value="">Select State</option>');
+    //                     $.each(res, function(key, value) {
+    //                         $("#state").append('<option value="' + key + '">' + value +
+    //                             '</option>');
+    //                     });
+    //                 } else {
+    //                     $("#state").empty();
+    //                 }
+    //             }
+    //         });
+    //     } else {
+    //         $("#state").empty();
+    //         $("#city").empty();
+    //     }
+    // });
+
+    // Get City list based on country
     $('#country').change(function() {
         var countryID = $(this).val();
         var _token = $('input[name="_token"]').val();
         if (countryID) {
             $.ajax({
                 type: "get",
-                url: "/get-state?country_name=" + countryID,
+                url: "/get-country-city?country_name=" + countryID,
                 data: {
                     _token: _token
                 },
                 success: function(res) {
                     if (res) {
-                        $("#state").empty();
-                        $("#state").append('<option value="">Select State</option>');
+                        $("#city").empty();
+                        $("#city").append('<option value="">Select city</option>');
                         $.each(res, function(key, value) {
-                            $("#state").append('<option value="' + key + '">' + value +
+                            $("#city").append('<option value="' + key + '">' + value +
                                 '</option>');
                         });
                     } else {
-                        $("#state").empty();
+                        $("#city").empty();
                     }
                 }
             });
         } else {
-            $("#state").empty();
             $("#city").empty();
         }
     });
+
     // Get City List According to state
     $('#state').on('change', function() {
         var stateID = $(this).val();

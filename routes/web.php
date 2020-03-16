@@ -122,6 +122,7 @@ Route::match(['get','post'], '/digital-programs/{url}', 'HomeController@learnDig
 // Get State City List
 Route::get('/get-state', 'AdminController@getStateList');
 Route::get('/get-city', 'AdminController@getCityList');
+Route::get('/get-country-city', 'AdminController@getCountryCityList');
 
 // Success Stories
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
@@ -148,3 +149,7 @@ Route::match(['get','post'], '/users/find/activists/result', 'ActivistController
 
 // Budget Data Routes
 Route::get('/program/get-budget-data', 'HomeController@getBudgetData');
+
+// Apply to Program
+Route::get('/program/apply-to-program', 'SocialInitiativeController@applyToProgram');
+Route::get('/program/apply-to-program/{url}', 'SocialInitiativeController@detailApplyProgram');

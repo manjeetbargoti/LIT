@@ -129,7 +129,7 @@ class HomeController extends Controller
             $data = $data->where('city', 'LIKE', "%" . $city . "%");
         }
 
-        $data = $data->where('status', 1)->latest()->paginate($perPage);
+        $data = $data->where(['status' => 1, 'promote' => null])->latest()->paginate($perPage);
 
         $data_count = $data->count();
 

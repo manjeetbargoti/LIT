@@ -90,7 +90,8 @@
                                         <div class="col-lg-6 text-center text-lg-left">
                                             <p>@if(!empty($user->avatar))<img
                                                     src="{{ url('/images/user/large/'.$user->avatar) }}"
-                                                    alt="{{ $user->first_name }} {{ $user->last_name }}" width="100">@endif</p>
+                                                    alt="{{ $user->first_name }} {{ $user->last_name }}"
+                                                    width="100">@endif</p>
                                             <div class="add_image">
                                                 <input type="button" id="add_more" class="btn btn-info"
                                                     value="Add image" />
@@ -185,6 +186,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <div class="col-lg-3 text-lg-right">
                                             <label for="Bio" class="col-form-label">Bio
@@ -200,6 +202,282 @@
                                         </div>
                                     </div>
 
+                                    @hasrole('Activist')
+                                    <div class="social-activist" id="SocialActivistTab">
+                                        <div class="form-group row">
+                                            <div class="col-lg-3 text-lg-right">
+                                                <label for="Company / Individual with an idea?"
+                                                    class="col-form-label">Company / Individual with an idea?
+                                                    *</label>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i
+                                                            class="fa fa-globe text-primary"></i></span>
+                                                    <select id="StartupType" name="startup_type" class="form-control"
+                                                        value="{{ $user->startup_type }}" required>
+                                                        <option value="">Select Type</option>
+                                                        <option value="Individual" @if($user->startup_type == 'Individual') selected @endif>Individual</option>
+                                                        <option value="Company" @if($user->startup_type == 'Company') selected @endif>Company</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="company_info d-none" id="CompanyInfo">
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Are you registered? " class="col-form-label">Are you
+                                                        registered?
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-globe text-primary"></i></span>
+                                                        <select id="CompanyRegister" name="company_register"
+                                                            class="form-control" value="{{ $user->company_register }}"
+                                                            >
+                                                            <option value="">Select Registration Status</option>
+                                                            <option value="Yes" @if($user->company_register == 'Yes') selected @endif>Yes</option>
+                                                            <option value="No" @if($user->company_register == 'No') selected @endif>No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="How long have you been in the market? "
+                                                        class="col-form-label">How long have you been in the market?
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-globe text-primary"></i></span>
+                                                        <select id="InMarketTime" name="in_market" class="form-control"
+                                                            value="{{ $user->in_market }}" >
+                                                            <option value="">Select time in market</option>
+                                                            <option value="0-1" @if($user->in_market == '0-1') selected @endif>0-1 year</option>
+                                                            <option value="1-2" @if($user->in_market == '1-2') selected @endif>1-2 year</option>
+                                                            <option value="2-5" @if($user->in_market == '2-5') selected @endif>2-5 year</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Trade License Image -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Trade License Number" class="col-form-label">Upload
+                                                        Trade License *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <input id="input-21" type="file" accept="image/*"
+                                                        name="trade_license_image" class="form-control file-loading"
+                                                        value="{{ old('trade_license_image') }}">
+                                                        <img src="{{ url('/images/tradeLicense/large/'.$user->trade_license_image) }}" class="img-responsive" width="250" alt="{{ $user->project_title }}">
+                                                </div>
+                                            </div>
+                                            <!-- /. Trade License Image -->
+                                        </div>
+
+                                        <!-- Project Description -->
+                                        <div class="project_info" id="ProjectInfo">
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Social Project Title" class="col-form-label">Social
+                                                        Project Title
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-file text-primary"></i></span>
+                                                        <input type="text" placeholder=" " id="project_title"
+                                                            name="project_title" class="form-control"
+                                                            value="{{ $user->project_title }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Social Project Description"
+                                                        class="col-form-label">Social Project Description
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="project_description" name="project_description"
+                                                        class="form-control" maxlength="200">{{ $user->project_description }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Project Stage"
+                                                        class="col-form-label">Project Stage
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-globe text-primary"></i></span>
+                                                        <select id="ProjectStage" name="project_stage" class="form-control"
+                                                            value="{{ $user->project_stage }}" required>
+                                                            <option value="">Select project stage</option>
+                                                            <option value="Ideation" @if($user->project_stage == 'Ideation') selected @endif>Ideation</option>
+                                                            <option value="Prototype" @if($user->project_stage == 'Prototype') selected @endif>Prototype</option>
+                                                            <option value="Testing" @if($user->project_stage == 'Testing') selected @endif>Testing</option>
+                                                            <option value="Launch" @if($user->project_stage == 'Launch') selected @endif>Launch</option>
+                                                            <option value="Already in the Market" @if($user->project_stage == 'Already in the Market') selected @endif>Already in the Market</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Required Fund" class="col-form-label">Required Fund
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-dollar text-primary"></i></span>
+                                                        <input type="text" placeholder=" " id="fund_required"
+                                                            name="fund_required" class="form-control"
+                                                            value="{{ $user->fund_required }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Number of Beneficiaries" class="col-form-label">Number of Beneficiaries
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-users text-primary"></i></span>
+                                                        <input type="text" placeholder=" " id="Beneficiaries"
+                                                            name="beneficiaries" class="form-control"
+                                                            value="{{ $user->beneficiaries }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="SDG"
+                                                        class="col-form-label">SDG
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i
+                                                                class="fa fa-globe text-primary"></i></span>
+                                                        <select id="SDGs" name="project_sdg" class="form-control"
+                                                            value="{{ $user->project_sdg }}" required>
+                                                            <option value="">Select SDG</option>
+                                                            @foreach($sdgs as $sdg)
+                                                            <option value="{{ $sdg->sdg_name }}" @if($user->project_sdg == $sdg->sdg_name) selected @endif>{{ $sdg->sdg_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- What problem are you solving? -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="What problem are you solving?"
+                                                        class="col-form-label">What problem are you solving?
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="problem_solving" name="problem_solving"
+                                                        class="form-control" maxlength="200">{{ $user->problem_solving }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. What problem are you solving? -->
+
+                                            <!-- Describe the Solution -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Describe the Solution"
+                                                        class="col-form-label">Describe the Solution
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="solution" name="solution"
+                                                        class="form-control" maxlength="200">{{ $user->solution }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. Describe the Solution -->
+
+                                            <!-- Describe the scalability of this project -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Describe the scalability of this project"
+                                                        class="col-form-label">Describe the scalability of this project
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="scalability" name="scalability"
+                                                        class="form-control" maxlength="200">{{ $user->scalability }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. Describe the scalability of this project -->
+
+                                            <!-- Describe the project's relevance to the SDG's -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Describe the project's relevance to the SDG's"
+                                                        class="col-form-label">Describe the project's relevance to the SDG's
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="relevance_sdg" name="relevance_sdg"
+                                                        class="form-control" maxlength="200">{{ $user->relevance_sdg }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. Describe the project's relevance to the SDG's -->
+
+                                            <!-- Describe the project's relevance to National Agenda -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="Describe the project's relevance to National Agenda"
+                                                        class="col-form-label">Describe the project's relevance to National Agenda
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="relevance_agenda" name="relevance_agenda"
+                                                        class="form-control" maxlength="200">{{ $user->relevance_agenda }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. Describe the project's relevance to National Agenda -->
+
+                                            <!-- How innovative is the project? -->
+                                            <div class="form-group row">
+                                                <div class="col-lg-3 text-lg-right">
+                                                    <label for="How innovative is the project?"
+                                                        class="col-form-label">How innovative is the project?
+                                                        *</label>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-8">
+                                                    <textarea placeholder="max 200 words" rows="2" id="innovative" name="innovative"
+                                                        class="form-control" maxlength="200">{{ $user->innovative }}</textarea>
+                                                </div>
+                                            </div>
+                                            <!-- /. How innovative is the project? -->
+                                        </div>
+                                        <!-- /. Project Description -->
+                                    </div>
+                                    @endhasrole
+
                                     <div class="form-group row">
                                         <div class="col-lg-3 text-lg-right">
                                             <label for="Country" class="col-form-label">Country
@@ -209,15 +487,15 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-globe text-primary"></i></span>
-                                                <select id="country" name="country"
-                                                    class="form-control" value="{{ $user->country }}">
+                                                <select id="country" name="country" class="form-control"
+                                                    value="{{ $user->country }}">
                                                     @if(!empty($country_dropdown))
-                                                        <?php echo $country_dropdown; ?>
+                                                    <?php echo $country_dropdown; ?>
                                                     @else
-                                                        <option value="">Select Country</option>
-                                                        @foreach($country as $ctry)
-                                                            <option value="{{ $ctry->name }}">{{ $ctry->name }}</option>
-                                                        @endforeach
+                                                    <option value="">Select Country</option>
+                                                    @foreach($country as $ctry)
+                                                    <option value="{{ $ctry->name }}">{{ $ctry->name }}</option>
+                                                    @endforeach
                                                     @endif
                                                 </select>
                                             </div>
@@ -232,12 +510,12 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-globe text-primary"></i></span>
-                                                <select id="state" name="state"
-                                                    class="form-control" value="{{ $user->state }}">
+                                                <select id="state" name="state" class="form-control"
+                                                    value="{{ $user->state }}">
                                                     @if(!empty($state_dropdown))
-                                                        <?php echo $state_dropdown; ?>
+                                                    <?php echo $state_dropdown; ?>
                                                     @else
-                                                        <option value="">Select State</option>
+                                                    <option value="">Select State</option>
                                                     @endif
                                                 </select>
                                             </div>
@@ -252,12 +530,12 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i
                                                         class="fa fa-globe text-primary"></i></span>
-                                                <select id="city" name="city"
-                                                    class="form-control" value="{{ $user->city }}">
+                                                <select id="city" name="city" class="form-control"
+                                                    value="{{ $user->city }}">
                                                     @if(!empty($city_dropdown))
-                                                        <?php echo $city_dropdown; ?>
+                                                    <?php echo $city_dropdown; ?>
                                                     @else
-                                                        <option value="">Select City</option>
+                                                    <option value="">Select City</option>
                                                     @endif
                                                 </select>
                                             </div>

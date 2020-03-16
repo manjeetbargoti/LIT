@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-6 float-left px-0">
-                <img class="d-block w-100" src="{{ asset('images/initiative/large/'.$siImage->image_name) }}"
+                <img class="d-block img-responsive m-auto" width="300" src="{{ asset('images/initiative/large/'.$siImage->image_name) }}"
                     alt="Second slide">
             </div>
             <div class="col-md-12 col-lg-6 pl-4">

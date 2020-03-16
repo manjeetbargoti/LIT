@@ -138,6 +138,135 @@
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
+                                    <label for="Project Scalability"
+                                        class="col-form-label">{{ __('Describe the scalability of this project *') }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('project_scalability') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('project_scalability') is-invalid @enderror"
+                                        name="project_scalability" id="project_scalability"
+                                        value="{{ old('project_scalability') }}" rows='3' required maxlength="200"
+                                        placeholder="Max 200 words">{{ $socialInitiative->project_scalability }}</textarea>
+                                    {!! $errors->first('project_scalability', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project SDG Relevance"
+                                        class="col-form-label">{{ __("Describe the project's relevance to the SDG's *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('sdg_relevance') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('sdg_relevance') is-invalid @enderror"
+                                        name="sdg_relevance" id="sdg_relevance" value="{{ old('sdg_relevance') }}"
+                                        rows="3" required maxlength="200" placeholder="Max 200 words">{{ $socialInitiative->sdg_relevance }}</textarea>
+                                    {!! $errors->first('sdg_relevance', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Relevance to National Agenda"
+                                        class="col-form-label">{{ __("Describe the project's relevance to National Agenda *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('relevance_national_agenda') ? 'has-error' : ''}}">
+                                    <textarea
+                                        class="form-control @error('relevance_national_agenda') is-invalid @enderror"
+                                        name="relevance_national_agenda" id="relevance_national_agenda"
+                                        value="{{ old('relevance_national_agenda') }}" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words">{{ $socialInitiative->relevance_national_agenda }}</textarea>
+                                    {!! $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
+                                    ')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project innovation"
+                                        class="col-form-label">{{ __("How innovative is the project? *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('project_innovation') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('project_innovation') is-invalid @enderror"
+                                        name="project_innovation" id="project_innovation"
+                                        value="{{ old('project_innovation') }}" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words">{{ $socialInitiative->project_innovation }}</textarea>
+                                    {!! $errors->first('project_innovation', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Benefits"
+                                        class="col-form-label">{{ __("List of benefits of the program *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('program_benefits') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('program_benefits') is-invalid @enderror"
+                                        name="program_benefits" id="program_benefits"
+                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="250"
+                                        placeholder="Max 250 words">{{ $socialInitiative->program_benefits }}</textarea>
+                                    {!! $errors->first('program_benefits', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Stage" class="col-form-label">{{ __("Program Stage *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-4 {{ $errors->has('program_stage') ? 'has-error' : ''}}">
+                                    <select class="form-control @error('program_stage') is-invalid @enderror"
+                                        name="program_stage" id="program_stage" value="{{ old('program_stage') }}"
+                                        required>
+                                        <option value="">Select Stage</option>
+                                        <option value="Ideation" @if($socialInitiative->program_stage == 'Ideation') selected @endif>Ideation</option>
+                                        <option value="Prototype" @if($socialInitiative->program_stage == 'Prototype') selected @endif>Prototype</option>
+                                        <option value="Testing" @if($socialInitiative->program_stage == 'Testing') selected @endif>Testing</option>
+                                        <option value="Launch/Already in the Market" @if($socialInitiative->program_stage == 'Launch/Already in the Market') selected @endif>Launch/ Already in the Market</option>
+                                    </select>
+                                    {!! $errors->first('program_stage', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image"
+                                        class="col-form-label">{{ __('') }}</label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" @if($socialInitiative->in_partnership == 1) checked @endif value="1">
+                                        <label class="label-checkbox100" for="ckb1">
+                                            In kind Partnership.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
                                     <label for="Initiative info"
                                         class="col-form-label">{{ __('Time Duration *') }}</label>
                                 </div>
@@ -203,21 +332,6 @@
                                         required>
                                     </div>
                                     {!! $errors->first('duration', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image"
-                                        class="col-form-label">{{ __('') }}</label>
-                                </div>
-                                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                                    <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" @if($socialInitiative->in_partnership == 1) checked @endif value="1">
-                                        <label class="label-checkbox100" for="ckb1">
-                                            In kind Partnership.
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
 

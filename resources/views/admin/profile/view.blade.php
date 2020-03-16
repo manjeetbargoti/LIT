@@ -26,6 +26,7 @@
                         <a href="{{ url('/admin/profile/' . $user->id . '/edit') }}" title="Edit user"><button
                                 class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit</button></a>
+                        @unlessrole('Activist')
                         @if($businessData_count > 0)
                             <a href="{{ url('/admin/profile/business/' . $businessData->id . '/update') }}" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
                                     class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
@@ -33,6 +34,7 @@
                             <a href="{{ url('/admin/profile/add-business') }}" title="Update Business Profile"><button class="btn btn-success btn-sm"><i
                                     class="fa fa-plus" aria-hidden="true"></i> Update Business Profile</button></a>
                         @endif
+                        @endunlessrole
                         <a href="{{ url('/admin/profile/' . $user->id . '/change-password') }}"
                             title="Change Password"><button class="btn btn-primary btn-sm pull-right"><i
                                     class="fa fa-pencil-square-o" aria-hidden="true"></i>

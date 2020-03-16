@@ -58,18 +58,6 @@
                                         <th> Impact SDG </th>
                                         <td class="text-success"> {{ $socialInitiative->area_impact_sdg }} </td>
                                     </tr>
-                                    <!-- <tr>
-                                        <th> Beneficiaries </th>
-                                        <td> {{ $socialInitiative->beneficiaries }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Out Reach </th>
-                                        <td> {{ $socialInitiative->outreach }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Duration </th>
-                                        <td> {{ $socialInitiative->duration }} {{ $socialInitiative->time_period }} </td>
-                                    </tr> -->
                                     <tr>
                                         <th> Start Date </th>
                                         <td class="text-success"> {{ date('l, j F Y', strtotime($socialInitiative->start_date)) }} </td>
@@ -79,16 +67,16 @@
                                         <td class="text-success"> {{ date('l, j F Y', strtotime($socialInitiative->end_date)) }} </td>
                                     </tr>
                                     <tr>
+                                        <th> Program Stage </th>
+                                        <td class="text-info"> {{ $socialInitiative->program_stage }} </td>
+                                    </tr>
+                                    <tr>
                                         <th> Address </th>
                                         <td> {{ $socialInitiative->street }}, {{ $socialInitiative->region }} </td>
                                     </tr>
                                     <tr>
                                         <th> Location </th>
                                         <td> {{ $socialInitiative->city }}, {{ $socialInitiative->state }}, {{ $socialInitiative->country }} </td>
-                                    </tr>
-                                    <tr>
-                                        <th> Description </th>
-                                        <td> {!! strip_tags($socialInitiative->initiative_description) !!} </td>
                                     </tr>
                                     <tr>
                                         <th> Add by </th>
@@ -111,7 +99,7 @@
                                             </tr>
                                             <tr>
                                                 <th> Budget </th>
-                                                <td> USD {{ $mbd->budget }} </td>
+                                                <td> USD {{ $mbd->budget }} <br>@if(!empty($socialInitiative->in_partnership)) <span class="small text-success">[In Kind Partnership]</span> @endif</td>
                                             </tr>
                                             <tr>
                                                 <th> Out Reach </th>
@@ -126,6 +114,37 @@
                                 </div>
                             </div>
                             @endforeach
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th> Project Description </th>
+                                        <td> {!! strip_tags($socialInitiative->initiative_description) !!} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Project Scalability </th>
+                                        <td> {!! strip_tags($socialInitiative->project_scalability) !!} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Project Relevance to SDG </th>
+                                        <td> {!! strip_tags($socialInitiative->sdg_relevance) !!} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Relevance to National Agenda </th>
+                                        <td> {!! strip_tags($socialInitiative->relevance_national_agenda) !!} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Innovation in Project </th>
+                                        <td> {!! strip_tags($socialInitiative->project_innovation) !!} </td>
+                                    </tr>
+                                    <tr>
+                                        <th> Program Benefits </th>
+                                        <td> {!! strip_tags($socialInitiative->program_benefits) !!} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -653,3 +653,11 @@ ul#respMenu .btn:hover {
   line-height: 2.5;
 }
 
+
+.topnav .ace-responsive-menu > li > a {
+  padding: 38px 9px !important;
+}
+
+.topnav ul#respMenu .btn {
+  padding: 1em 0.8em !important;
+}

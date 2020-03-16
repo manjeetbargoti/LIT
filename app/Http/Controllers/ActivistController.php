@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\SDGs;
 use App\Country;
 use App\ActivistQuery;
 use Illuminate\Http\Request;
@@ -24,6 +25,8 @@ class ActivistController extends Controller
         {
             $requestData = $request->all();
 
+            dd($requestData);
+
             if(!empty($requestData['country'])){
                 $countryname = $requestData['country'];
             }else{
@@ -32,11 +35,15 @@ class ActivistController extends Controller
             
             $state = $requestData['state'];
             $city = $requestData['city'];
+            $sdg = $requestData['sdg'];
 
             $data = User::where('status', 1)
                         ->where('country', 'LIKE', "%" . $countryname . "%")
                         ->whereHas("roles", function($q){ $q->where("name", "Activist"); });
 
+            // if ($sdg) {
+            //     $data = $data->where('country', 'LIKE', "%" . $sdg . "%");
+            // }
             if ($countryname) {
                 $data = $data->where('country', 'LIKE', "%" . $countryname . "%");
             }
@@ -56,9 +63,10 @@ class ActivistController extends Controller
     					->latest()->paginate($perPage);
         }
 
+        $sdgs = SDGs::where(['sdg_category'=>'Onground', 'status'=>1])->get();
         $country = Country::orderBy('name', 'asc')->get();
 
-    	return view('front.users.activists', compact('data','country','countryname'));
+    	return view('front.users.activists', compact('data','country','countryname','sdgs'));
     }
 
     // Single Activist

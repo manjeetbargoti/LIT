@@ -78,7 +78,19 @@ class AdminController extends Controller
 
         // dd($state_id);
 
-        $cities = City::where("state_id", $state_id->id)->pluck("name", "name");
+        $cities = City::where("state_id", $state_id->id)->orderBy('name','asc')->pluck("name", "name");
+        // dd($cities);
+        return response()->json($cities);
+    }
+
+    // Getting City List according to Country
+    public function getCountryCityList(Request $request)
+    {
+        $country_id = Country::where('name', $request->country_name)->first();
+
+        // dd($country_id);
+
+        $cities = City::where("country_id", $country_id->id)->orderBy('name','asc')->pluck("name", "name");
         return response()->json($cities);
     }
 }

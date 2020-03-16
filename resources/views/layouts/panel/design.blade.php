@@ -519,6 +519,115 @@
     });
     </script>
 
+    <script>
+    $(function() {
+
+        // Get the form fields and hidden div
+        var checkbox = $("#ckb1");
+        var hidebutton = $("#AddMoreButton");
+        var hideBudget = $("#budgetDiv");
+        var removeBtn = $("#deleteBtn");
+        var populate = $("#populate");
+
+        // Hide the fields.
+        // Use JS to do this in case the user doesn't have JS 
+        // enabled.
+        // hidden.hide();
+
+        // Setup an event listener for when the state of the 
+        // checkbox changes.
+        checkbox.change(function() {
+            // Check to see if the checkbox is checked.
+            // If it is, show the fields and populate the input.
+            // If not, hide the fields.
+            if (checkbox.is(':checked')) {
+                // Show the hidden fields.
+                hidebutton.hide();
+                hideBudget.hide();
+                removeBtn.hide();
+
+                // Populate the input.
+                // populate.val("Dude, this input got populated!");
+            } else {
+                // Make sure that the hidden fields are indeed
+                // hidden.
+                hidebutton.show();
+                hideBudget.show();
+                removeBtn.show();
+
+                // You may also want to clear the value of the 
+                // hidden fields here. Just in case somebody 
+                // shows the fields, enters data to them and then 
+                // unticks the checkbox.
+                //
+                // This would do the job:
+                //
+                // $("#hidden_field").val("");
+            }
+        });
+
+    });
+
+    $(function() {
+
+        // Get the form fields and hidden div
+        var checkbox = $("#ckb2");
+        var hideDiv = $("#showUrl");
+
+        // Hide the fields.
+        // Use JS to do this in case the user doesn't have JS 
+        // enabled.
+        hideDiv.hide();
+
+        // Setup an event listener for when the state of the 
+        // checkbox changes.
+        checkbox.change(function() {
+            // Check to see if the checkbox is checked.
+            // If it is, show the fields and populate the input.
+            // If not, hide the fields.
+            if (checkbox.is(':checked')) {
+                // Show the hidden fields.
+                hideDiv.show();
+
+                // Populate the input.
+                // populate.val("Dude, this input got populated!");
+            } else {
+                // Make sure that the hidden fields are indeed
+                // hidden.
+                hideDiv.hide();
+
+                // You may also want to clear the value of the 
+                // hidden fields here. Just in case somebody 
+                // shows the fields, enters data to them and then 
+                // unticks the checkbox.
+                //
+                // This would do the job:
+                //
+                // $("#hidden_field").val("");
+            }
+        });
+
+    });
+
+    $(function() {
+        $("#StartupType").change(function() {
+            if ($(this).val() == "Company") {
+                $("#CompanyInfo").show();
+                $('#CompanyInfo').removeClass('d-none').addClass('d-block');
+            } else {
+                $("#CompanyInfo").hide();
+            }
+            if ($(this).val() == "Individual") {
+                $("#CompanyInfo").hide();
+                $('#CompanyInfo').removeClass('d-block').addClass('d-none');
+            } else {
+                $("#CompanyInfo").show();
+            }
+        })
+    });
+    </script>
+
+
 </body>
 
 </html>

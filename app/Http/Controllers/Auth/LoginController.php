@@ -47,6 +47,40 @@ class LoginController extends Controller
         ];
     }
 
+
+    protected function redirectTo()
+    {
+        // User role
+        $role = Auth::user()->roles[0]->name;
+
+        // return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
+
+        // Check user role
+        switch ($role) {
+            case 'Super Admin':
+                return '/admin/dashboard';
+                break;
+            case 'NGO':
+                return '/admin/profile';
+                break;
+            case 'Activist':
+                return '/admin/profile';
+                break;
+            case 'Social Enterprise':
+                return '/admin/profile';
+                break;
+            case 'Corporate':
+                return '/admin/profile';
+                break;
+            case 'Government':
+                return '/admin/profile';
+                break;
+            default:
+                return '/';
+                break;
+        }
+    }
+
     /**
      * Create a new controller instance.
      *

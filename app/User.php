@@ -18,7 +18,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','first_name','last_name','title','email','phone','password','avatar','bio','country','state','city','sip_points'
+        'username','first_name','last_name','title','email','phone','password','avatar','bio','country','state','city','sip_points',
+        'startup_type','company_register','in_market','trade_license_image','project_title','project_description','project_stage',
+        'fund_required','beneficiaries','project_sdg','problem_solving','solution','scalability','relevance_sdg','relevance_agenda',
+        'innovative'
     ];
 
     /**

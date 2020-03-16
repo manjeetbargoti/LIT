@@ -20,6 +20,7 @@
         </div>
         <!-- #menu -->
         <ul id="menu">
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
             <!-- Dashboard -->
             <li class="<?php echo e((request()->is('admin/dashboard')) ? 'active':''); ?>">
                 <a href="<?php echo e(route('dashboard')); ?>">
@@ -28,6 +29,7 @@
                 </a>
             </li>
             <!-- /.Dashboard -->
+            <?php endif; ?>
 
             <!-- User Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/profile*')) ? 'active':''); ?>">
@@ -42,11 +44,13 @@
                             <i class="fa fa-angle-right"></i> &nbsp; My Profile
                         </a>
                     </li>
+                    <?php if(auth()->check() && auth()->user()->hasAnyRole('Super Admin|Social Enterprise|Corporate|Government')): ?>
                     <li class="<?php echo e((request()->is('admin/profile/company')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/profile/company')); ?>">
                             <i class="fa fa-angle-right"></i> &nbsp; Company Profile
                         </a>
                     </li>
+                    <?php endif; ?>
                     <li class="<?php echo e((request()->is('admin/profile/address')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/profile/address')); ?>">
                             <i class="fa fa-angle-right"></i>
@@ -57,6 +61,7 @@
             </li>
             <!-- /.User Management -->
 
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
             <!-- System Settings -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/system*')) ? 'active':''); ?>">
                 <a href="<?php echo e(url('/admin/system')); ?>">
@@ -107,7 +112,9 @@
                 </ul>
             </li>
             <!-- /.System Settings -->
+            <?php endif; ?>
 
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
             <!-- User Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/user*')) ? 'active':''); ?>">
                 <a href="<?php echo e(url('/admin/users')); ?>">
@@ -135,7 +142,9 @@
                 </ul>
             </li>
             <!-- /.User Management -->
+            <?php endif; ?>
 
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
             <!-- Page Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/pages*')) ? 'active':''); ?>">
                 <a href="<?php echo e(url('/admin/pages')); ?>">
@@ -158,7 +167,9 @@
                 </ul>
             </li>
             <!-- /.Page Management -->
+            <?php endif; ?>
 
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
             <!-- Social Goals Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/sdgs*')) ? 'active':''); ?>">
                 <a href="<?php echo e(url('/admin/sdgs')); ?>">
@@ -175,7 +186,9 @@
                 </ul>
             </li>
             <!-- /.Social Goals Management -->
+            <?php endif; ?>
 
+            <?php if(auth()->check() && auth()->user()->hasAnyRole('Super Admin|NGO|Social Enterprise|Corporate|Government')): ?>
             <!-- Product Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/social-impact*')) ? 'active':''); ?>">
                 <a href="<?php echo e(url('/admin/social-impact')); ?>">
@@ -195,22 +208,23 @@
                         </a>
                     </li>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('activist_access')): ?>
-                    <li class="<?php echo e((request()->is('admin/social-impact/activity-job*')) ? 'active':''); ?>">
+                    <!-- <li class="<?php echo e((request()->is('admin/social-impact/activity-job*')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/social-impact/activity-job')); ?>">
                             <i class="fa fa-angle-right"></i> &nbsp; Volunteers Job
                         </a>
-                    </li>
+                    </li> -->
                     <?php endif; ?>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('digital_service_access')): ?>
-                    <li class="<?php echo e((request()->is('admin/social-impact/digital-service*')) ? 'active':''); ?>">
+                    <!-- <li class="<?php echo e((request()->is('admin/social-impact/digital-service*')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/social-impact/digital-service')); ?>">
                             <i class="fa fa-angle-right"></i> &nbsp; 360 Digital Marketing Services
                         </a>
-                    </li>
+                    </li> -->
                     <?php endif; ?>
                 </ul>
             </li>
             <!-- /.Product Management -->
+            <?php endif; ?>
 
             <!-- Success Story Management -->
             <li class="dropdown_menu <?php echo e((request()->is('admin/success-stories*')) ? 'active':''); ?>">
@@ -223,6 +237,7 @@
             <!-- /.Page Management -->
 
         <!-- Support Center -->
+        <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
         <li class="dropdown_menu <?php echo e((request()->is('admin/support*')) ? 'active':''); ?>">
             <a href="<?php echo e(url('/admin/supports')); ?>">
                 <i class="fa fa-file-text-o"></i>
@@ -232,7 +247,7 @@
             <ul>
                 <li class="<?php echo e((request()->is('admin/support/submit-proposals*')) ? 'active':''); ?>">
                     <a href="<?php echo e(url('admin/support/submit-proposals')); ?>">
-                        <i class="fa fa-angle-right"></i> &nbsp; Submit Proposals
+                        <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
                     </a>
                 </li>
                 <li class="<?php echo e((request()->is('admin/support/initiative-query*')) ? 'active':''); ?>">
@@ -242,11 +257,12 @@
                 </li>
                 <li class="<?php echo e((request()->is('admin/support/activist-query*')) ? 'active':''); ?>">
                     <a href="<?php echo e(url('admin/support/activist-query')); ?>">
-                        <i class="fa fa-angle-right"></i> &nbsp; Activist Request
+                        <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
                     </a>
                 </li>
             </ul>
         </li>
+        <?php endif; ?>
         <!-- /.Support Center -->
         </ul>
         <!-- /#menu -->

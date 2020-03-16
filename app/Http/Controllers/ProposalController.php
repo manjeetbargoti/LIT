@@ -267,7 +267,7 @@ class ProposalController extends Controller
 
         // dd($slug);
 
-        // Trade Licence Image
+        // Brochure PDF
         if ($request->hasFile('brochure_pdf')) {
 
             $file_array = Input::file('brochure_pdf');

@@ -98,7 +98,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="<?php echo e(url('/csr-market/submit-proposal')); ?>" method="Post">
+                                    <form action="<?php echo e(url('/csr-market/submit-proposal')); ?>" method="Post" enctype="multipart/form-data">
                                         <?php echo e(csrf_field()); ?>
 
                                         <div class="form-group">
@@ -124,6 +124,10 @@
                                         <div class="form-group d-none">
                                             <input type="text" name="proposal_id" class="form-control"
                                                 value="<?php echo e($d->id); ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Attach a file</label>
+                                            <input type="file" name="proposal_pdf" class="form-control" accept=".pdf,.doc,.docx">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Submit">

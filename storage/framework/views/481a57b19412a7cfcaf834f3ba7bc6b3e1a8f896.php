@@ -10,20 +10,48 @@
                 </span>
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required">
-                    <input class="input100" type="text" name="email" id="EmailAddress">
+                    <input class="input100 <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" type="text" name="email" id="EmailAddress">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Email</span>
+
+                    <?php if ($errors->has('email')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('email'); ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($message); ?></strong>
+                        </span>
+                    <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input100" type="password" name="password" id="Password">
+                    <input class="input100 <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>" type="password" name="password" id="Password">
                     <span class="focus-input100"></span>
                     <span class="label-input100">Password</span>
+
+                    <?php if ($errors->has('password')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('password'); ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($message); ?></strong>
+                        </span>
+                    <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>
                 </div>
 
                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                     <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" <?php echo e(old('remember') ? 'checked' : ''); ?>>
                         <label class="label-checkbox100" for="ckb1">
                             Remember me
                         </label>

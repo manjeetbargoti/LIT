@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\SDGs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Response;
@@ -196,6 +197,24 @@ class UserController extends Controller
             $requestData = $request->all();
             // dd($requestData);
 
+            // Trade Licence Image
+            if ($request->hasFile('trade_license_image')) {
+
+                $file_array = Input::file('trade_license_image');
+                $file_name = $file_array->getClientOriginalName();
+                $file_size = $file_array->getClientSize();
+                $extension = $file_array->getClientOriginalExtension();
+                $filename = 'social_startup_'.strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['first_name']))).'_tradeLicense_' . rand(0, 9999999) . '.' . $extension;
+                // $large_file_path = public_path('/images/tradeLicense/large/' . $filename);
+                $request->trade_license_image->move(public_path('/images/tradeLicense/large/'), $filename);
+                // Storing image in folder
+                // $request->move($large_file_path);
+
+                $requestData['trade_license_image'] = $filename;
+            }
+
+            // dd($requestData);
+
             if ($request->hasFile('file')) {
                 $image_array = Input::file('file');
                 // if($image_array->isValid()){
@@ -317,7 +336,8 @@ class UserController extends Controller
         
 
         $country = Country::get();
+        $sdgs = SDGs::where('status', 1)->get();
 
-        return view('admin.profile.edit', compact('user', 'roleName', 'country', 'country_dropdown', 'state_dropdown','city_dropdown'));
+        return view('admin.profile.edit', compact('user','sdgs','roleName','country','country_dropdown','state_dropdown','city_dropdown'));
     }
 }

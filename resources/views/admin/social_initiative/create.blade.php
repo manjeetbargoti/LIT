@@ -91,8 +91,8 @@
                         @endif
 
                         <form method="POST" action="{{ url('/admin/social-impact/initiatives') }}"
-                            accept-charset="UTF-8" class="form-horizontal login_validator repeater-form" enctype="multipart/form-data"
-                            id="form_inline_validator">
+                            accept-charset="UTF-8" class="form-horizontal login_validator repeater-form"
+                            enctype="multipart/form-data" id="form_inline_validator">
                             {{ csrf_field() }}
 
                             <div class="form-group row">
@@ -125,20 +125,154 @@
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
                                     <label for="Initiative Description"
-                                        class="col-form-label">{{ __('Initiative Description *') }}</label>
+                                        class="col-form-label">{{ __('Initiative Description *') }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
                                 </div>
                                 <div class="col-xl-9 {{ $errors->has('initiative_description') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('initiative_description') is-invalid @enderror"
                                         name="initiative_description" id="initiative_description"
-                                        value="{{ old('initiative_description') }}" required></textarea>
+                                        value="{{ old('initiative_description') }}" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
                                     {!! $errors->first('initiative_description', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project Scalability"
+                                        class="col-form-label">{{ __('Describe the scalability of this project *') }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('project_scalability') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('project_scalability') is-invalid @enderror"
+                                        name="project_scalability" id="project_scalability"
+                                        value="{{ old('project_scalability') }}" rows='3' required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    {!! $errors->first('project_scalability', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project SDG Relevance"
+                                        class="col-form-label">{{ __("Describe the project's relevance to the SDG's *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('sdg_relevance') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('sdg_relevance') is-invalid @enderror"
+                                        name="sdg_relevance" id="sdg_relevance" value="{{ old('sdg_relevance') }}"
+                                        rows="3" required maxlength="200" placeholder="Max 200 words"></textarea>
+                                    {!! $errors->first('sdg_relevance', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Relevance to National Agenda"
+                                        class="col-form-label">{{ __("Describe the project's relevance to National Agenda *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('relevance_national_agenda') ? 'has-error' : ''}}">
+                                    <textarea
+                                        class="form-control @error('relevance_national_agenda') is-invalid @enderror"
+                                        name="relevance_national_agenda" id="relevance_national_agenda"
+                                        value="{{ old('relevance_national_agenda') }}" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    {!! $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
+                                    ')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project innovation"
+                                        class="col-form-label">{{ __("How innovative is the project? *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('project_innovation') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('project_innovation') is-invalid @enderror"
+                                        name="project_innovation" id="project_innovation"
+                                        value="{{ old('project_innovation') }}" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    {!! $errors->first('project_innovation', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Benefits"
+                                        class="col-form-label">{{ __("List of benefits of the program *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('program_benefits') ? 'has-error' : ''}}">
+                                    <textarea class="form-control @error('program_benefits') is-invalid @enderror"
+                                        name="program_benefits" id="program_benefits"
+                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="250"
+                                        placeholder="Max 250 words"></textarea>
+                                    {!! $errors->first('program_benefits', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Stage" class="col-form-label">{{ __("Program Stage *") }}
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-4 {{ $errors->has('program_stage') ? 'has-error' : ''}}">
+                                    <select class="form-control @error('program_stage') is-invalid @enderror"
+                                        name="program_stage" id="program_stage" value="{{ old('program_stage') }}"
+                                        required>
+                                        <option value="">Select Stage</option>
+                                        <option value="Ideation">Ideation</option>
+                                        <option value="Prototype">Prototype</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Launch/ Already in the Market">Launch/ Already in the Market</option>
+                                    </select>
+                                    {!! $errors->first('program_stage', '<p class="help-block">:message</p>')
+                                    !!}
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image" class="col-form-label">{{ __('') }}</label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership"
+                                            value="1">
+                                        <label class="label-checkbox100" for="ckb1">
+                                            In kind Partnership.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
                             <div class="dynamic_field" id="repeater">
-                                <div class="repeater-heading" align="left">
-                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More Budget</button>
+                                <div class="repeater-heading" align="left" id="AddMoreButton">
+                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More
+                                        Budget</button>
                                 </div>
                                 <div class="items">
                                     <div class="item-content">
@@ -151,17 +285,20 @@
                                                 class="input-group col-xl-3 {{ $errors->has('start_date') ? 'has-error' : ''}}">
                                                 <span class="input-group-addon">Start</span>
                                                 <input class="form-control @error('start_date') is-invalid @enderror"
-                                                    name="start_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2"
-                                                    value="{{ old('start_date') }}" placeholder="Start Date" required>
-                                                {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
+                                                    name="start_date[]" type="date" data-date-format="yyyy-mm-dd"
+                                                    id="dp2" value="{{ old('start_date') }}" placeholder="Start Date"
+                                                    required>
+                                                {!! $errors->first('start_date', '<p class="help-block">:message</p>')
+                                                !!}
                                             </div>
 
                                             <div
                                                 class="input-group col-xl-3 {{ $errors->has('end_date') ? 'has-error' : ''}}">
                                                 <span class="input-group-addon">End</span>
                                                 <input class="form-control @error('end_date') is-invalid @enderror"
-                                                    name="end_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2-1"
-                                                    value="{{ old('end_date') }}" placeholder="End Date" required>
+                                                    name="end_date[]" type="date" data-date-format="yyyy-mm-dd"
+                                                    id="dp2-1" value="{{ old('end_date') }}" placeholder="End Date"
+                                                    required>
                                                 {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
                                             </div>
 
@@ -172,12 +309,13 @@
                                                     <span class="input-group-addon">Out Reach</span>
                                                     <input class="form-control @error('outreach') is-invalid @enderror"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="{{ old('outreach') }}" placeholder="No. of People" required>
+                                                        value="{{ old('outreach') }}" placeholder="No. of People"
+                                                        required>
                                                 </div>
                                                 {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
                                             </div>
 
-                                            <div class="col-xl-1">
+                                            <div class="col-xl-1" id="deleteBtn">
                                                 <button type="button" onclick="$(this).parents('.items').remove()"
                                                     name="remove" id="remove" id="remove-btn" class="btn btn-danger"><i
                                                         class="fa fa-trash"></i></button>
@@ -192,14 +330,15 @@
                                             <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
                                                 <input class="form-control @error('beneficiaries') is-invalid @enderror"
                                                     name="beneficiaries[]" type="text" id="Beneficiaries"
-                                                    value="{{ old('beneficiaries') }}" placeholder="no. of Beneficieries"
-                                                    required>
-                                                {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>')
+                                                    value="{{ old('beneficiaries') }}"
+                                                    placeholder="no. of Beneficieries" required>
+                                                {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>
+                                                ')
                                                 !!}
                                             </div>
 
-                                            <div
-                                                class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}">
+                                            <div class="input-group col-xl-3 {{ $errors->has('budget') ? 'has-error' : ''}}"
+                                                id="budgetDiv">
                                                 <span class="input-group-addon">$</span>
                                                 <input class="form-control @error('budget') is-invalid @enderror"
                                                     name="budget[]" type="text" id="Budget" value="{{ old('budget') }}"
@@ -229,22 +368,6 @@
                                     </div>
                                 </div>
 
-                            </div>
-
-
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image" class="col-form-label">{{ __('') }}</label>
-                                </div>
-                                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                                    <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership"
-                                            value="1">
-                                        <label class="label-checkbox100" for="ckb1">
-                                            In kind Partnership.
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -326,6 +449,19 @@
                                             registration.
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="showUrl">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Promotion url" class="col-form-label">{{ __('Promotion URL') }}</label>
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('promote_url') ? 'has-error' : ''}}">
+                                    <input type="text" id="promote_url"
+                                        class="form-control @error('promote_url') is-invalid @enderror"
+                                        value="{{ old('promote_url') }}" name="promote_url"
+                                        placeholder="Add your program page url here" />
+                                    <!-- <i class="fas fa-camera"></i> -->
                                 </div>
                             </div>
 

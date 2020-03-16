@@ -89,8 +89,8 @@
                         <?php endif; ?>
 
                         <form method="POST" action="<?php echo e(url('/admin/social-impact/initiatives')); ?>"
-                            accept-charset="UTF-8" class="form-horizontal login_validator repeater-form" enctype="multipart/form-data"
-                            id="form_inline_validator">
+                            accept-charset="UTF-8" class="form-horizontal login_validator repeater-form"
+                            enctype="multipart/form-data" id="form_inline_validator">
                             <?php echo e(csrf_field()); ?>
 
 
@@ -134,7 +134,10 @@ endif; ?>"
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
                                     <label for="Initiative Description"
-                                        class="col-form-label"><?php echo e(__('Initiative Description *')); ?></label>
+                                        class="col-form-label"><?php echo e(__('Initiative Description *')); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
                                 </div>
                                 <div class="col-xl-9 <?php echo e($errors->has('initiative_description') ? 'has-error' : ''); ?>">
                                     <textarea class="form-control <?php if ($errors->has('initiative_description')) :
@@ -143,15 +146,177 @@ $message = $errors->first('initiative_description'); ?> is-invalid <?php unset($
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="initiative_description" id="initiative_description"
-                                        value="<?php echo e(old('initiative_description')); ?>" required></textarea>
+                                        value="<?php echo e(old('initiative_description')); ?>" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
                                     <?php echo $errors->first('initiative_description', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project Scalability"
+                                        class="col-form-label"><?php echo e(__('Describe the scalability of this project *')); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('project_scalability') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('project_scalability')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('project_scalability'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="project_scalability" id="project_scalability"
+                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    <?php echo $errors->first('project_scalability', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project SDG Relevance"
+                                        class="col-form-label"><?php echo e(__("Describe the project's relevance to the SDG's *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('sdg_relevance') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('sdg_relevance')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('sdg_relevance'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="sdg_relevance" id="sdg_relevance" value="<?php echo e(old('sdg_relevance')); ?>"
+                                        rows="3" required maxlength="200" placeholder="Max 200 words"></textarea>
+                                    <?php echo $errors->first('sdg_relevance', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Relevance to National Agenda"
+                                        class="col-form-label"><?php echo e(__("Describe the project's relevance to National Agenda *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('relevance_national_agenda') ? 'has-error' : ''); ?>">
+                                    <textarea
+                                        class="form-control <?php if ($errors->has('relevance_national_agenda')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('relevance_national_agenda'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="relevance_national_agenda" id="relevance_national_agenda"
+                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    <?php echo $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
+                                    '); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project innovation"
+                                        class="col-form-label"><?php echo e(__("How innovative is the project? *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('project_innovation') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('project_innovation')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('project_innovation'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="project_innovation" id="project_innovation"
+                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"></textarea>
+                                    <?php echo $errors->first('project_innovation', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Benefits"
+                                        class="col-form-label"><?php echo e(__("List of benefits of the program *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('program_benefits') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('program_benefits')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('program_benefits'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="program_benefits" id="program_benefits"
+                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="250"
+                                        placeholder="Max 250 words"></textarea>
+                                    <?php echo $errors->first('program_benefits', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Stage" class="col-form-label"><?php echo e(__("Program Stage *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-4 <?php echo e($errors->has('program_stage') ? 'has-error' : ''); ?>">
+                                    <select class="form-control <?php if ($errors->has('program_stage')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('program_stage'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="program_stage" id="program_stage" value="<?php echo e(old('program_stage')); ?>"
+                                        required>
+                                        <option value="">Select Stage</option>
+                                        <option value="Ideation">Ideation</option>
+                                        <option value="Prototype">Prototype</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Launch/ Already in the Market">Launch/ Already in the Market</option>
+                                    </select>
+                                    <?php echo $errors->first('program_stage', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image" class="col-form-label"><?php echo e(__('')); ?></label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership"
+                                            value="1">
+                                        <label class="label-checkbox100" for="ckb1">
+                                            In kind Partnership.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
                             <div class="dynamic_field" id="repeater">
-                                <div class="repeater-heading" align="left">
-                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More Budget</button>
+                                <div class="repeater-heading" align="left" id="AddMoreButton">
+                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More
+                                        Budget</button>
                                 </div>
                                 <div class="items">
                                     <div class="item-content">
@@ -168,8 +333,9 @@ if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('start_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                                    name="start_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2"
-                                                    value="<?php echo e(old('start_date')); ?>" placeholder="Start Date" required>
+                                                    name="start_date[]" type="date" data-date-format="yyyy-mm-dd"
+                                                    id="dp2" value="<?php echo e(old('start_date')); ?>" placeholder="Start Date"
+                                                    required>
                                                 <?php echo $errors->first('start_date', '<p class="help-block">:message</p>'); ?>
 
                                             </div>
@@ -182,8 +348,9 @@ if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('end_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                                    name="end_date[]" type="text" data-date-format="yyyy-mm-dd" id="dp2-1"
-                                                    value="<?php echo e(old('end_date')); ?>" placeholder="End Date" required>
+                                                    name="end_date[]" type="date" data-date-format="yyyy-mm-dd"
+                                                    id="dp2-1" value="<?php echo e(old('end_date')); ?>" placeholder="End Date"
+                                                    required>
                                                 <?php echo $errors->first('end_date', '<p class="help-block">:message</p>'); ?>
 
                                             </div>
@@ -199,13 +366,14 @@ $message = $errors->first('outreach'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="<?php echo e(old('outreach')); ?>" placeholder="No. of People" required>
+                                                        value="<?php echo e(old('outreach')); ?>" placeholder="No. of People"
+                                                        required>
                                                 </div>
                                                 <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
 
                                             </div>
 
-                                            <div class="col-xl-1">
+                                            <div class="col-xl-1" id="deleteBtn">
                                                 <button type="button" onclick="$(this).parents('.items').remove()"
                                                     name="remove" id="remove" id="remove-btn" class="btn btn-danger"><i
                                                         class="fa fa-trash"></i></button>
@@ -224,14 +392,15 @@ $message = $errors->first('beneficiaries'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                                     name="beneficiaries[]" type="text" id="Beneficiaries"
-                                                    value="<?php echo e(old('beneficiaries')); ?>" placeholder="no. of Beneficieries"
-                                                    required>
-                                                <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>'); ?>
+                                                    value="<?php echo e(old('beneficiaries')); ?>"
+                                                    placeholder="no. of Beneficieries" required>
+                                                <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>
+                                                '); ?>
 
                                             </div>
 
-                                            <div
-                                                class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>">
+                                            <div class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>"
+                                                id="budgetDiv">
                                                 <span class="input-group-addon">$</span>
                                                 <input class="form-control <?php if ($errors->has('budget')) :
 if (isset($message)) { $messageCache = $message; }
@@ -271,22 +440,6 @@ endif; ?>"
                                     </div>
                                 </div>
 
-                            </div>
-
-
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image" class="col-form-label"><?php echo e(__('')); ?></label>
-                                </div>
-                                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                                    <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership"
-                                            value="1">
-                                        <label class="label-checkbox100" for="ckb1">
-                                            In kind Partnership.
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -397,6 +550,23 @@ endif; ?>"
                                             registration.
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="showUrl">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Promotion url" class="col-form-label"><?php echo e(__('Promotion URL')); ?></label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('promote_url') ? 'has-error' : ''); ?>">
+                                    <input type="text" id="promote_url"
+                                        class="form-control <?php if ($errors->has('promote_url')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('promote_url'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        value="<?php echo e(old('promote_url')); ?>" name="promote_url"
+                                        placeholder="Add your program page url here" />
+                                    <!-- <i class="fas fa-camera"></i> -->
                                 </div>
                             </div>
 

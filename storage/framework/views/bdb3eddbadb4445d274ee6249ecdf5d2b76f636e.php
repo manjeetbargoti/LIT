@@ -152,6 +152,165 @@ endif; ?>"
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
+                                    <label for="Project Scalability"
+                                        class="col-form-label"><?php echo e(__('Describe the scalability of this project *')); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('project_scalability') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('project_scalability')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('project_scalability'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="project_scalability" id="project_scalability"
+                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="200"
+                                        placeholder="Max 200 words"><?php echo e($socialInitiative->project_scalability); ?></textarea>
+                                    <?php echo $errors->first('project_scalability', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project SDG Relevance"
+                                        class="col-form-label"><?php echo e(__("Describe the project's relevance to the SDG's *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('sdg_relevance') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('sdg_relevance')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('sdg_relevance'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="sdg_relevance" id="sdg_relevance" value="<?php echo e(old('sdg_relevance')); ?>"
+                                        rows="3" required maxlength="200" placeholder="Max 200 words"><?php echo e($socialInitiative->sdg_relevance); ?></textarea>
+                                    <?php echo $errors->first('sdg_relevance', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Relevance to National Agenda"
+                                        class="col-form-label"><?php echo e(__("Describe the project's relevance to National Agenda *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('relevance_national_agenda') ? 'has-error' : ''); ?>">
+                                    <textarea
+                                        class="form-control <?php if ($errors->has('relevance_national_agenda')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('relevance_national_agenda'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="relevance_national_agenda" id="relevance_national_agenda"
+                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"><?php echo e($socialInitiative->relevance_national_agenda); ?></textarea>
+                                    <?php echo $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
+                                    '); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Project innovation"
+                                        class="col-form-label"><?php echo e(__("How innovative is the project? *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('project_innovation') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('project_innovation')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('project_innovation'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="project_innovation" id="project_innovation"
+                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="200"
+                                        placeholder="Max 200 words"><?php echo e($socialInitiative->project_innovation); ?></textarea>
+                                    <?php echo $errors->first('project_innovation', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Benefits"
+                                        class="col-form-label"><?php echo e(__("List of benefits of the program *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('program_benefits') ? 'has-error' : ''); ?>">
+                                    <textarea class="form-control <?php if ($errors->has('program_benefits')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('program_benefits'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="program_benefits" id="program_benefits"
+                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="250"
+                                        placeholder="Max 250 words"><?php echo e($socialInitiative->program_benefits); ?></textarea>
+                                    <?php echo $errors->first('program_benefits', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Program Stage" class="col-form-label"><?php echo e(__("Program Stage *")); ?>
+
+                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                    </label>
+
+                                </div>
+                                <div class="col-xl-4 <?php echo e($errors->has('program_stage') ? 'has-error' : ''); ?>">
+                                    <select class="form-control <?php if ($errors->has('program_stage')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('program_stage'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        name="program_stage" id="program_stage" value="<?php echo e(old('program_stage')); ?>"
+                                        required>
+                                        <option value="">Select Stage</option>
+                                        <option value="Ideation" <?php if($socialInitiative->program_stage == 'Ideation'): ?> selected <?php endif; ?>>Ideation</option>
+                                        <option value="Prototype" <?php if($socialInitiative->program_stage == 'Prototype'): ?> selected <?php endif; ?>>Prototype</option>
+                                        <option value="Testing" <?php if($socialInitiative->program_stage == 'Testing'): ?> selected <?php endif; ?>>Testing</option>
+                                        <option value="Launch/Already in the Market" <?php if($socialInitiative->program_stage == 'Launch/Already in the Market'): ?> selected <?php endif; ?>>Launch/ Already in the Market</option>
+                                    </select>
+                                    <?php echo $errors->first('program_stage', '<p class="help-block">:message</p>'); ?>
+
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image"
+                                        class="col-form-label"><?php echo e(__('')); ?></label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" <?php if($socialInitiative->in_partnership == 1): ?> checked <?php endif; ?> value="1">
+                                        <label class="label-checkbox100" for="ckb1">
+                                            In kind Partnership.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
                                     <label for="Initiative info"
                                         class="col-form-label"><?php echo e(__('Time Duration *')); ?></label>
                                 </div>
@@ -247,21 +406,6 @@ endif; ?>" name="duration"
                                     </div>
                                     <?php echo $errors->first('duration', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Featured Image"
-                                        class="col-form-label"><?php echo e(__('')); ?></label>
-                                </div>
-                                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                                    <div class="contact100-form-checkbox">
-                                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="in_partnership" <?php if($socialInitiative->in_partnership == 1): ?> checked <?php endif; ?> value="1">
-                                        <label class="label-checkbox100" for="ckb1">
-                                            In kind Partnership.
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
 

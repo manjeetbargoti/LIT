@@ -20,6 +20,7 @@
         </div>
         <!-- #menu -->
         <ul id="menu">
+            @role('Super Admin')
             <!-- Dashboard -->
             <li class="{{ (request()->is('admin/dashboard')) ? 'active':'' }}">
                 <a href="{{ route('dashboard') }}">
@@ -28,6 +29,7 @@
                 </a>
             </li>
             <!-- /.Dashboard -->
+            @endrole
 
             <!-- User Management -->
             <li class="dropdown_menu {{ (request()->is('admin/profile*')) ? 'active':'' }}">
@@ -42,11 +44,13 @@
                             <i class="fa fa-angle-right"></i> &nbsp; My Profile
                         </a>
                     </li>
+                    @hasanyrole('Super Admin|Social Enterprise|Corporate|Government')
                     <li class="{{ (request()->is('admin/profile/company')) ? 'active':'' }}">
                         <a href="{{ url('admin/profile/company') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; Company Profile
                         </a>
                     </li>
+                    @endhasanyrole
                     <li class="{{ (request()->is('admin/profile/address')) ? 'active':'' }}">
                         <a href="{{ url('admin/profile/address') }}">
                             <i class="fa fa-angle-right"></i>
@@ -57,6 +61,7 @@
             </li>
             <!-- /.User Management -->
 
+            @role('Super Admin')
             <!-- System Settings -->
             <li class="dropdown_menu {{ (request()->is('admin/system*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/system') }}">
@@ -107,7 +112,9 @@
                 </ul>
             </li>
             <!-- /.System Settings -->
+            @endrole
 
+            @role('Super Admin')
             <!-- User Management -->
             <li class="dropdown_menu {{ (request()->is('admin/user*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/users') }}">
@@ -135,7 +142,9 @@
                 </ul>
             </li>
             <!-- /.User Management -->
+            @endrole
 
+            @role('Super Admin')
             <!-- Page Management -->
             <li class="dropdown_menu {{ (request()->is('admin/pages*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/pages') }}">
@@ -158,7 +167,9 @@
                 </ul>
             </li>
             <!-- /.Page Management -->
+            @endrole
 
+            @role('Super Admin')
             <!-- Social Goals Management -->
             <li class="dropdown_menu {{ (request()->is('admin/sdgs*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/sdgs') }}">
@@ -175,7 +186,9 @@
                 </ul>
             </li>
             <!-- /.Social Goals Management -->
+            @endrole
 
+            @hasanyrole('Super Admin|NGO|Social Enterprise|Corporate|Government')
             <!-- Product Management -->
             <li class="dropdown_menu {{ (request()->is('admin/social-impact*')) ? 'active':'' }}">
                 <a href="{{ url('/admin/social-impact') }}">
@@ -195,22 +208,23 @@
                         </a>
                     </li>
                     @can('activist_access')
-                    <li class="{{ (request()->is('admin/social-impact/activity-job*')) ? 'active':'' }}">
+                    <!-- <li class="{{ (request()->is('admin/social-impact/activity-job*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/activity-job') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; Volunteers Job
                         </a>
-                    </li>
+                    </li> -->
                     @endcan
                     @can('digital_service_access')
-                    <li class="{{ (request()->is('admin/social-impact/digital-service*')) ? 'active':'' }}">
+                    <!-- <li class="{{ (request()->is('admin/social-impact/digital-service*')) ? 'active':'' }}">
                         <a href="{{ url('admin/social-impact/digital-service') }}">
                             <i class="fa fa-angle-right"></i> &nbsp; 360 Digital Marketing Services
                         </a>
-                    </li>
+                    </li> -->
                     @endcan
                 </ul>
             </li>
             <!-- /.Product Management -->
+            @endhasanyrole
 
             <!-- Success Story Management -->
             <li class="dropdown_menu {{ (request()->is('admin/success-stories*')) ? 'active':'' }}">
@@ -223,6 +237,7 @@
             <!-- /.Page Management -->
 
         <!-- Support Center -->
+        @role('Super Admin')
         <li class="dropdown_menu {{ (request()->is('admin/support*')) ? 'active':'' }}">
             <a href="{{ url('/admin/supports') }}">
                 <i class="fa fa-file-text-o"></i>
@@ -232,7 +247,7 @@
             <ul>
                 <li class="{{ (request()->is('admin/support/submit-proposals*')) ? 'active':'' }}">
                     <a href="{{ url('admin/support/submit-proposals') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Submit Proposals
+                        <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
                     </a>
                 </li>
                 <li class="{{ (request()->is('admin/support/initiative-query*')) ? 'active':'' }}">
@@ -242,11 +257,12 @@
                 </li>
                 <li class="{{ (request()->is('admin/support/activist-query*')) ? 'active':'' }}">
                     <a href="{{ url('admin/support/activist-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Activist Request
+                        <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
                     </a>
                 </li>
             </ul>
         </li>
+        @endrole
         <!-- /.Support Center -->
         </ul>
         <!-- /#menu -->

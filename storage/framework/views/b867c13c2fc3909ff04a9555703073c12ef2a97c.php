@@ -69,18 +69,19 @@
                             <div class="row">
                                 <div class="col-sm-9">
                                     <h4 class="h4"><?php echo e($d->project_name); ?></h4>
-                                    <h4 class="h6">Company: <strong class="text-primary">
-                                            <?php $__currentLoopData = \App\BusinessInfo::where('id', $d->business_id)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php echo e($b->business_name); ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></strong> | Location: <span
-                                            class="text-success"><?php echo e($d->city); ?>,
-                                            <?php echo e($d->state); ?>, <?php echo e($d->country); ?></span></h4>
+                                    <h4 class="h6">Company: <strong>
+                                            <?php $__currentLoopData = \App\BusinessInfo::where('id', $d->business_id)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php echo e($b->business_name); ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></strong> | Location: <?php echo e($d->city); ?>,
+                                            <?php echo e($d->state); ?>, <?php echo e($d->country); ?></h4>
                                     <p class="h6">Budget: USD <?php echo e($d->budget); ?> | Submission Date</b>:
                                         <?php echo e($d->submission_time); ?> | Duration</b>: <?php echo e($d->project_timeline); ?>
 
                                         <?php echo e($d->time_period); ?> | Social Impact Points: <?php echo e($d->social_impact_points); ?></p>
                                 </div>
-                                <div class="col-sm-2">
-                                    <a href="#" data-toggle="modal" data-target="#submitProposal-<?php echo e($d->id); ?>"
-                                        class="btn btn-primary text-uppercase">Submit Proposal</a>
+                                <div class="col-sm-2" style="margin: auto;">
+                                    <p><a href="#" data-toggle="modal" data-target="#submitProposal-<?php echo e($d->id); ?>"
+                                        class="btn btn-primary text-uppercase">Submit Proposal</a></p>
+                                        
+                                    <p style="text-align:center;"><a href="<?php echo e(url('/csr-market-place/'.$d->id)); ?>" class="btn btn-primary text-uppercase bg-info border-info">View Details</a></p>
                                 </div>
                             </div>
                         </div>

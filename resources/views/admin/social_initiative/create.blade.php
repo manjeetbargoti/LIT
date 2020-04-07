@@ -222,8 +222,8 @@
                                 <div class="col-xl-9 {{ $errors->has('program_benefits') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('program_benefits') is-invalid @enderror"
                                         name="program_benefits" id="program_benefits"
-                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="250"
-                                        placeholder="Max 250 words"></textarea>
+                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="500"
+                                        placeholder="Max 500 words"></textarea>
                                     {!! $errors->first('program_benefits', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -309,7 +309,7 @@
                                                     <span class="input-group-addon">Out Reach</span>
                                                     <input class="form-control @error('outreach') is-invalid @enderror"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="{{ old('outreach') }}" placeholder="No. of People"
+                                                        value="{{ old('outreach') }}" placeholder="Number of Beneficieries"
                                                         required>
                                                 </div>
                                                 {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
@@ -329,9 +329,9 @@
                                             </div>
                                             <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
                                                 <input class="form-control @error('beneficiaries') is-invalid @enderror"
-                                                    name="beneficiaries[]" type="text" id="Beneficiaries"
+                                                    name="beneficiaries[]" type="number" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="Beneficiaries"
                                                     value="{{ old('beneficiaries') }}"
-                                                    placeholder="no. of Beneficieries" required>
+                                                    placeholder="number of Beneficieries" required>
                                                 {!! $errors->first('beneficiaries', '<p class="help-block">:message</p>
                                                 ')
                                                 !!}

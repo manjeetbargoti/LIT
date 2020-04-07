@@ -126,6 +126,7 @@ Route::get('/get-country-city', 'AdminController@getCountryCityList');
 
 // Success Stories
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
+Route::match(['get', 'post'], '/success-story/{url}', 'SuccessStoryController@singleStories');
 
 // Add to cart functionality
 Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addToCart');
@@ -137,7 +138,8 @@ Route::match(['get','post'], '/submit-query', 'QueryController@submitQuery');
 Route::match(['get','post'], '/csr-market/submit-proposal', 'QueryController@submitProposal');
 
 // List all CSR
-Route::match(['get','post'], 'csr-market-place', 'HomeController@csrList');
+Route::match(['get','post'], 'csr-market-place', 'ProposalController@csrList');
+Route::match(['get','post'], '/csr-market-place/{id}', 'ProposalController@singleCsrProposal');
 
 // CMS Pages
 Route::match(['get','post'], '/{url}', 'PagesController@singlePage');

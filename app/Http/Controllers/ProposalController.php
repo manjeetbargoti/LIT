@@ -361,5 +361,62 @@ class ProposalController extends Controller
         }
     }
 
+    // CSR Market Place List
+    public function csrList(Request $request)
+    {
+        $perPage = 25;
+
+        $countryname = '';
+        
+        if($request->isMethod('POST') && !empty($request['country']))
+        {
+            $requestData = $request->all();
+
+            if(!empty($requestData['country'])){
+                $countryname = $requestData['country'];
+            }else{
+                $countryname = '';
+            }
+            
+            $state = $requestData['state'];
+            $city = $requestData['city'];
+
+            $data = Proposal::where('status', 1);
+
+            if ($countryname) {
+                $data = $data->where('country', 'LIKE', "%" . $countryname . "%");
+            }
+            if ($state) {
+                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+            }
+
+            $data = $data->latest()->paginate($perPage);
+
+            // dd($data);
+        }else{
+
+            $data = Proposal::where('status', 1)->latest()->paginate($perPage);
+        }
+        // dd($data);
+
+        $country = Country::orderBy('name', 'asc')->get();
+
+        return view('front.csr.list_csr',compact('data','country'));
+    }
+
+    // Single CSR Market Proposal
+    public function singleCsrProposal($id=null)
+    {
+        $data = Proposal::where('id', $id)->first();
+
+        $bData = BusinessInfo::where('id', $data->business_id)->first();
+
+        // dd($bData);
+
+        return view('front.csr.single_csr',compact('data','bData'));
+    }
     
 }

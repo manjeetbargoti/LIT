@@ -353,7 +353,11 @@ class SocialInitiativeController extends Controller
 
         $sdgs = SDGs::where('status', 1)->get();
 
-        return view('admin.social_initiative.edit', compact('socialInitiative', 'sdgs', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
+        $multibudget = MultiBudget::where('social_init_id', $id)->get();
+
+        // dd($multibudget);
+
+        return view('admin.social_initiative.edit', compact('socialInitiative', 'sdgs', 'multibudget', 'country_dropdown', 'state_dropdown', 'city_dropdown'));
     }
 
     /**
@@ -370,6 +374,13 @@ class SocialInitiativeController extends Controller
 
         $requestData = $request->all();
 
+        if(!empty($requestData['in_partnership']))
+        {
+            $in_partnership = 1;
+        }else{
+            $in_partnership = 0;
+        }
+
         // dd($requestData);
 
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['initiative_name']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['city']))) . '-' . strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $requestData['country'])));
@@ -384,6 +395,72 @@ class SocialInitiativeController extends Controller
 
             $socialInitiative = SocialInitiative::findOrFail($id);
             $socialInitiative->update($requestData);
+
+            $bid = $requestData['bid'];
+            $start_date = $requestData['start_date'];
+            $end_date = $requestData['end_date'];
+            $outreach = $requestData['outreach'];
+            $beneficiaries = $requestData['beneficiaries'];
+            if($in_partnership == 1)
+            {
+                $budget[] = 0;
+            }else{
+                $budget = $requestData['budget'];
+            }
+            $duration = $requestData['duration'];
+            $time_period = $requestData['time_period'];
+            $social_init_id = $socialInitiative->id;
+
+            if($in_partnership == 0){
+                for ($count = 0; $count < count($bid); $count++) {
+                    $data = array(
+                        'start_date' => $start_date[$count],
+                        'end_date' => $end_date[$count],
+                        'outreach' => $outreach[$count],
+                        'beneficiaries' => $beneficiaries[$count],
+                        'budget' => $budget[$count],
+                        'duration' => $duration[$count],
+                        'time_period' => $time_period[$count],
+                        'social_init_id'    => $social_init_id
+                    );
+    
+                    $insertData[] = $data;
+    
+                    // dd($insertData);
+                    MultiBudget::where('id',$bid[$count])->update($data);
+                }
+
+                // dd($bid);
+                // for ($count = 0; $count < count($bid); $count++) {
+
+                //     MultiBudget::where('id',$bid[$count])->update($data);
+                // }
+
+            }else{
+                for ($count = 0; $count < count($bid); $count++) {
+                    $data = array(
+                        'start_date' => $start_date[$count],
+                        'end_date' => $end_date[$count],
+                        'outreach' => $outreach[$count],
+                        'beneficiaries' => $beneficiaries[$count],
+                        'budget' => $budget[$count],
+                        'duration' => $duration[$count],
+                        'time_period' => $time_period[$count],
+                        'social_init_id'    => $social_init_id
+                    );
+
+                    // dd($data);
+        
+                    $insertData[] = $data;
+
+                    MultiBudget::where('id',$bid[$count])->update($data);
+                }
+
+                // dd($insertData);
+                // for ($count = 0; $count < count($bid); $count++) {
+                //     MultiBudget::where('id',$bid[$count])->update($data);
+                // }
+            }
 
         } catch (ValidationException $e) {
             DB::rollback();

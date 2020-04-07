@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Gate;
 use Image;
+use App\User;
 use App\SuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -199,5 +200,17 @@ class SuccessStoryController extends Controller
         $data = SuccessStory::where('status', 1)->get();
 
         return view('front.success-story.all_story', compact('data'));
+    }
+
+    // Single Success Story
+    public function singleStories($url=null)
+    {
+        $data = SuccessStory::where('slug', $url)->first();
+
+        $uData = User::where('id', $data->add_by)->first();
+
+        // dd($data);
+
+        return view('front.success-story.single_story', compact('data','uData'));
     }
 }

@@ -17,7 +17,7 @@
 <section id="projectdetl">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-lg-6 float-left px-0">
+            <div class="col-md-12 col-lg-6 float-left px-0 m-auto">
                 <img class="d-block img-responsive m-auto" width="300" src="{{ asset('images/initiative/large/'.$siImage->image_name) }}"
                     alt="Second slide">
             </div>
@@ -42,13 +42,6 @@
                     </li>
                     <li> <b>Location</b>: {{ $data->city }}, {{ $data->state }}, {{ $data->country }}</li>
                     <li class="d-none"> <b>Budget ID</b>: <span id="budg_id">{{ $data->budget_id }}</span> </li>
-                    <li> <b>Beneficiaries</b>: <span id="budg_ben">{{ $data->beneficiaries }}</span> </li>
-                    <li> <b>Duration</b>: <span id="budg_dur">{{ $data->duration }}</span> <span id="budg_tp">{{ $data->time_period }}</span> </li>
-                    <li> <b>Out-Reach</b>: <span id="budg_outreach">{{ $data->outreach }}</span> </li>
-                    <li> <b>SDG</b>: {{ $data->area_impact_sdg }}</li>
-                    <li> <b>Description</b>:
-                        @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name))@endif
-                    </li>
                 </ul>
                 <div class="btnbx">
                     @if(!empty($data->initiative_name))
@@ -64,24 +57,36 @@
 
         <div class="row">
             <div class="col-sm-12 mt-4">
-                <ul class="p-0">
-                    <li>
-                        <h5><strong><u>Description:</u></strong></h5>
-                        @if(!empty($data->initiative_name))
-                        <p>{!! $data->initiative_description !!}</p>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Beneficiaries</th>
+                    <td id="budg_ben">{{ $data->beneficiaries }}</td>
+                </tr>
+                <tr>
+                    <th>SDG</th>
+                    <td>{{ $data->area_impact_sdg }}</td>
+                </tr>
+                <tr>
+                    <th>Initiative Duration</th>
+                    <td><span id="budg_dur">{{ $data->duration }}</span> <span id="budg_tp">{{ $data->time_period }}</span></td>
+                </tr>
+                <tr>
+                    <th>Out-Reach</th>
+                    <td><span id="budg_outreach">{{ $data->outreach }}</span></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>@if(!empty($data->initiative_name))
+                         {!! $data->initiative_description !!}
                         @elseif(!empty($data->service_name))
-                        <p>{!! $data->service_description !!}</p>
-                        @endif
-                    </li>
-                    <li>
-                        <h5><strong><u>Address:</u></strong></h5>
-                        <p><b>Street</b>: {{ $data->street }}</p>
-                        <p><b>Region</b>: {{ $data->region }}</p>
-                        <p><b>City</b>: {{ $data->city }}</p>
-                        <p><b>State</b>: {{ $data->state }}</p>
-                        <p><b>Country</b>: {{ $data->country }}</p>
-                    </li>
-                </ul>
+                        {!! $data->service_description !!}
+                        @endif</td>
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ $data->street }}, {{ $data->region }},{{ $data->city }}, {{ $data->state }}, {{ $data->country }}</td>
+                </tr>
+            </table>
             </div>
         </div>
     </div>

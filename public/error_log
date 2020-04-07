@@ -1,0 +1,3 @@
+[01-Apr-2020 15:39:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 16384 bytes) in /home/ztzyf5nasjwr/public_html/lit.burnthickory.net/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[02-Apr-2020 09:22:58 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 16384 bytes) in /home/ztzyf5nasjwr/public_html/lit.burnthickory.net/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138
+[02-Apr-2020 09:32:34 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 16384 bytes) in /home/ztzyf5nasjwr/public_html/lit.burnthickory.net/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php on line 138

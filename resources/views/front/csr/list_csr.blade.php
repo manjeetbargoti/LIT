@@ -70,18 +70,19 @@
                             <div class="row">
                                 <div class="col-sm-9">
                                     <h4 class="h4">{{ $d->project_name }}</h4>
-                                    <h4 class="h6">Company: <strong class="text-primary">
+                                    <h4 class="h6">Company: <strong>
                                             @foreach(\App\BusinessInfo::where('id', $d->business_id)->get() as
-                                            $b){{ $b->business_name }}@endforeach</strong> | Location: <span
-                                            class="text-success">{{ $d->city }},
-                                            {{ $d->state }}, {{ $d->country }}</span></h4>
+                                            $b){{ $b->business_name }}@endforeach</strong> | Location: {{ $d->city }},
+                                            {{ $d->state }}, {{ $d->country }}</h4>
                                     <p class="h6">Budget: USD {{ $d->budget }} | Submission Date</b>:
                                         {{ $d->submission_time }} | Duration</b>: {{ $d->project_timeline }}
                                         {{ $d->time_period }} | Social Impact Points: {{ $d->social_impact_points }}</p>
                                 </div>
-                                <div class="col-sm-2">
-                                    <a href="#" data-toggle="modal" data-target="#submitProposal-{{ $d->id }}"
-                                        class="btn btn-primary text-uppercase">Submit Proposal</a>
+                                <div class="col-sm-2" style="margin: auto;">
+                                    <p><a href="#" data-toggle="modal" data-target="#submitProposal-{{ $d->id }}"
+                                        class="btn btn-primary text-uppercase">Submit Proposal</a></p>
+                                        
+                                    <p style="text-align:center;"><a href="{{ url('/csr-market-place/'.$d->id) }}" class="btn btn-primary text-uppercase bg-info border-info">View Details</a></p>
                                 </div>
                             </div>
                         </div>

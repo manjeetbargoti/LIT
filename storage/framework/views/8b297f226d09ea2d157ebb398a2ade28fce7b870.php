@@ -16,7 +16,7 @@
 <section id="projectdetl">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-lg-6 float-left px-0">
+            <div class="col-md-12 col-lg-6 float-left px-0 m-auto">
                 <img class="d-block img-responsive m-auto" width="300" src="<?php echo e(asset('images/initiative/large/'.$siImage->image_name)); ?>"
                     alt="Second slide">
             </div>

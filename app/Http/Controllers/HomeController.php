@@ -51,6 +51,8 @@ class HomeController extends Controller
         $count = 6;
         $userid = '8736863878';
         $instaImages = rudr_instagram_api_curl_connect('https://api.instagram.com/v1/users/' . $userid . '/media/recent?access_token=' . $access_token . '&count=' . $count);
+        
+        // dd($instaImages);
 
         $country = Country::get();
         $sdgs = SDGs::where(['status' =>  1])->get();
@@ -156,7 +158,11 @@ class HomeController extends Controller
 
         // dd($data);
 
-        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count'));
+        $countryList = Country::get();
+        $allSDG = SDGs::where(['status' =>  1])->get();
+
+        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count', 'allSDG', 'countryList', 'sdgs', 'country','budget','sdgs'));
+
 
     }
 
@@ -525,52 +531,6 @@ class HomeController extends Controller
         }
 
         return view('front.social_initiatives.detail_page', compact('data','siImage','getFirstBudget','data2'));
-    }
-
-    // CSR Market Place List
-    public function csrList(Request $request)
-    {
-        $perPage = 25;
-
-        $countryname = '';
-        
-        if($request->isMethod('POST') && !empty($request['country']))
-        {
-            $requestData = $request->all();
-
-            if(!empty($requestData['country'])){
-                $countryname = $requestData['country'];
-            }else{
-                $countryname = '';
-            }
-            
-            $state = $requestData['state'];
-            $city = $requestData['city'];
-
-            $data = Proposal::where('status', 1);
-
-            if ($countryname) {
-                $data = $data->where('country', 'LIKE', "%" . $countryname . "%");
-            }
-            if ($state) {
-                $data = $data->where('state', 'LIKE', "%" . $state . "%");
-            }
-            if ($city) {
-                $data = $data->where('city', 'LIKE', "%" . $city . "%");
-            }
-
-            $data = $data->latest()->paginate($perPage);
-
-            // dd($data);
-        }else{
-
-            $data = Proposal::where('status', 1)->latest()->paginate($perPage);
-        }
-        // dd($data);
-
-        $country = Country::orderBy('name', 'asc')->get();
-
-        return view('front.csr.list_csr',compact('data','country'));
     }
 
     // Get Budget Data

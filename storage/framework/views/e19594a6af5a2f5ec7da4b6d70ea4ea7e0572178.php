@@ -244,6 +244,7 @@
             <div class="col-md-6 col-lg-6 pb-3 px-2 instabg">
                 <h2 class="h2"> Lightup with LIT </h2>
             </div>
+            <?php if(!empty($instaImages->data)): ?>
             <?php $__currentLoopData = $instaImages->data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $instaImg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <!-- <div class="col-md-6 col-lg-3 pb-3 px-2"><a href="<?php echo e($instaImg->link); ?>" target="_blank"><img
                         src="<?php echo e($instaImg->images->low_resolution->url); ?>" class="img-fluid" /></a></div> -->
@@ -261,6 +262,26 @@
                 </div>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            
+            <?php else: ?>
+            
+            <?php for($i=1; $i < 7; $i++): ?>
+            <div class="col-md-6 col-lg-3 pb-3 px-2">
+                <div class="insta_imgbox">
+                    <a href="#" target="_blank">
+                        <img src="<?php echo e(asset('/admin/img/gallery/full/'.$i.'.jpg')); ?>" class="img-fluid" />
+                        <div class="likecomment">
+                            <a class="like_left" href="#"><i class="fa fa-thumbs-up">
+                                </i><span>Insta image</span></a>
+                            <a class="comment_right" href="#"><i class="fa fa-comments">
+                                </i><span><?php echo e($i); ?></span></a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endfor; ?>
+            
+            <?php endif; ?>
 
         </div>
     </div>

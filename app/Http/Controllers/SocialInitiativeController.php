@@ -52,7 +52,7 @@ class SocialInitiativeController extends Controller
             }
         } else {
             if (!empty($keyword)) {
-                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id, 'status' => 1])
+                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id])
                     ->where(function ($query) use ($keyword) {
                         $query->where('initiative_name', 'LIKE', "%$keyword%")
                             ->orWhere('initiative_description', 'LIKE', "%$keyword%")
@@ -64,7 +64,7 @@ class SocialInitiativeController extends Controller
                     ->latest()->paginate($perPage);
                 // dd($socialInitiative);
             } else {
-                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id, 'status' => 1])->latest()->paginate($perPage);
+                $socialInitiative = SocialInitiative::where(['user_id' => $userData->id])->latest()->paginate($perPage);
             }
         }
 
@@ -629,9 +629,13 @@ class SocialInitiativeController extends Controller
     {
         $data = SocialInitiative::where('slug', $url)->first();
 
+        // dd($data);
+
         $data2 = MultiBudget::where('social_init_id', $data->id)->get();
 
         $getFirstBudget = MultiBudget::where('social_init_id', $data->id)->first();
+
+        // dd($getFirstBudget);
 
         $data->budget_id = $getFirstBudget['id'];
 

@@ -49,7 +49,8 @@
                         <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php endif; ?>
                     </li>
                 </ul>
-                <div class="btnbx">
+                <?php if($data->promote == null): ?>
+                <div class="btnbx mt-2">
                     <?php if(!empty($data->initiative_name)): ?>
                     <a href="<?php echo e(url('/social-initiative/add-to-cart/'.$data->id)); ?>"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
@@ -59,8 +60,11 @@
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
                     <a href="<?php echo e(url('/digital-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
                     <?php endif; ?>
-                    
                 </div>
+                <?php else: ?>
+                <a href="<?php echo e($data->promote_url); ?>" class="btn btn-primary text-uppercase"> Apply to Program</a>
+                <a href="<?php echo e(url('/program/apply-to-program/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

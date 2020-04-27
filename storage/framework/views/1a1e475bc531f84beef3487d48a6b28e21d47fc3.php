@@ -146,8 +146,8 @@ $message = $errors->first('initiative_description'); ?> is-invalid <?php unset($
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="initiative_description" id="initiative_description"
-                                        value="<?php echo e(old('initiative_description')); ?>" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="<?php echo e(old('initiative_description')); ?>" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('initiative_description', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -168,8 +168,8 @@ $message = $errors->first('project_scalability'); ?> is-invalid <?php unset($mes
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="project_scalability" id="project_scalability"
-                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('project_scalability', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -191,7 +191,7 @@ $message = $errors->first('sdg_relevance'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="sdg_relevance" id="sdg_relevance" value="<?php echo e(old('sdg_relevance')); ?>"
-                                        rows="3" required maxlength="200" placeholder="Max 200 words"></textarea>
+                                        rows="3" required maxlength="1000" placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('sdg_relevance', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -214,8 +214,8 @@ $message = $errors->first('relevance_national_agenda'); ?> is-invalid <?php unse
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="relevance_national_agenda" id="relevance_national_agenda"
-                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
                                     '); ?>
 
@@ -227,7 +227,7 @@ endif; ?>"
                                     <label for="Project innovation"
                                         class="col-form-label"><?php echo e(__("How innovative is the project? *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -238,8 +238,8 @@ $message = $errors->first('project_innovation'); ?> is-invalid <?php unset($mess
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="project_innovation" id="project_innovation"
-                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('project_innovation', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -261,8 +261,8 @@ $message = $errors->first('program_benefits'); ?> is-invalid <?php unset($messag
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="program_benefits" id="program_benefits"
-                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="250"
-                                        placeholder="Max 250 words"></textarea>
+                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     <?php echo $errors->first('program_benefits', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -366,7 +366,7 @@ $message = $errors->first('outreach'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="<?php echo e(old('outreach')); ?>" placeholder="No. of People"
+                                                        value="<?php echo e(old('outreach')); ?>" placeholder="Number of Beneficieries"
                                                         required>
                                                 </div>
                                                 <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
@@ -391,9 +391,9 @@ if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('beneficiaries'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                                    name="beneficiaries[]" type="text" id="Beneficiaries"
+                                                    name="beneficiaries[]" type="number" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="Beneficiaries"
                                                     value="<?php echo e(old('beneficiaries')); ?>"
-                                                    placeholder="no. of Beneficieries" required>
+                                                    placeholder="number of Beneficieries" required>
                                                 <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>
                                                 '); ?>
 

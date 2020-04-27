@@ -132,8 +132,8 @@
                                 <div class="col-xl-9 {{ $errors->has('initiative_description') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('initiative_description') is-invalid @enderror"
                                         name="initiative_description" id="initiative_description"
-                                        value="{{ old('initiative_description') }}" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="{{ old('initiative_description') }}" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('initiative_description', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -149,8 +149,8 @@
                                 <div class="col-xl-9 {{ $errors->has('project_scalability') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('project_scalability') is-invalid @enderror"
                                         name="project_scalability" id="project_scalability"
-                                        value="{{ old('project_scalability') }}" rows='3' required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="{{ old('project_scalability') }}" rows='3' required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('project_scalability', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -167,7 +167,7 @@
                                 <div class="col-xl-9 {{ $errors->has('sdg_relevance') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('sdg_relevance') is-invalid @enderror"
                                         name="sdg_relevance" id="sdg_relevance" value="{{ old('sdg_relevance') }}"
-                                        rows="3" required maxlength="200" placeholder="Max 200 words"></textarea>
+                                        rows="3" required maxlength="1000" placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('sdg_relevance', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -185,8 +185,8 @@
                                     <textarea
                                         class="form-control @error('relevance_national_agenda') is-invalid @enderror"
                                         name="relevance_national_agenda" id="relevance_national_agenda"
-                                        value="{{ old('relevance_national_agenda') }}" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="{{ old('relevance_national_agenda') }}" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
                                     ')
                                     !!}
@@ -197,15 +197,15 @@
                                 <div class="col-xl-2 text-xl-right">
                                     <label for="Project innovation"
                                         class="col-form-label">{{ __("How innovative is the project? *") }}
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
                                 <div class="col-xl-9 {{ $errors->has('project_innovation') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('project_innovation') is-invalid @enderror"
                                         name="project_innovation" id="project_innovation"
-                                        value="{{ old('project_innovation') }}" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"></textarea>
+                                        value="{{ old('project_innovation') }}" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('project_innovation', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>
@@ -222,8 +222,8 @@
                                 <div class="col-xl-9 {{ $errors->has('program_benefits') ? 'has-error' : ''}}">
                                     <textarea class="form-control @error('program_benefits') is-invalid @enderror"
                                         name="program_benefits" id="program_benefits"
-                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="500"
-                                        placeholder="Max 500 words"></textarea>
+                                        value="{{ old('program_benefits') }}" rows="5" required maxlength="1000"
+                                        placeholder="Max 1000 words"></textarea>
                                     {!! $errors->first('program_benefits', '<p class="help-block">:message</p>')
                                     !!}
                                 </div>

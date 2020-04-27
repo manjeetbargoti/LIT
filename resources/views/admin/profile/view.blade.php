@@ -83,16 +83,16 @@
                                                 aria-expanded="true">User Details</a>
                                         </li>
                                         @if($roleName == "NGO")
-                                        <li class="nav-item card_nav_hover">
+                                        <!-- <li class="nav-item card_nav_hover">
                                             <a class="nav-link" href="#business" id="hats-tab"
                                                 data-toggle="tab">Business
                                                 info</a>
-                                        </li>
+                                        </li> -->
                                         @endif
-                                        <li class="nav-item card_nav_hover">
+                                        <!-- <li class="nav-item card_nav_hover">
                                             <a class="nav-link" href="#address" id="followers"
                                                 data-toggle="tab">Address</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                     <div id="clothing-nav-content" class="tab-content m-t-10">
                                         <div role="tabpanel" class="tab-pane fade show active" id="user">
@@ -136,7 +136,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="business">
+                                        <!-- <div role="tabpanel" class="tab-pane fade" id="business">
                                             <div class="card_nav_body_padding">
                                                 <table class="table" id="users">
                                                     <tr>
@@ -268,7 +268,7 @@
                                                         Address</a>@endif
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <div class="card m-t-35">
                     <div class="card-header bg-white">
                         <div>
@@ -407,22 +407,10 @@
                                 </div>
                                 @endif
                             </div>
-                            <!-- <ul>
-                                <li>
-                                    <h5>
-                                        test
-                                    </h5>
-                                    <p>
-                                        Mail received from
-                                        <strong>John</strong> .
-                                    </p>
-                                    <i>1 hr back</i>
-                                </li>
-                            </ul> -->
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -47,13 +47,68 @@
                     <!-- <li> <b>Duration</b>: <span id="budg_dur">{{ $data->duration }}</span> <span id="budg_tp">{{ $data->time_period }}</span> </li> -->
                     <!-- <li> <b>Out-Reach</b>: <span id="budg_outreach">{{ $data->outreach }}</span> </li> -->
                     <li> <b>SDG</b>: {{ $data->area_impact_sdg }}</li>
-                    <li> <b>Description</b>:
-                        @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name))@endif
+                    <li> <b>Program Stage</b>:
+                        @if(!empty($data->initiative_name)){{ $data->program_stage }}@elseif(!empty($data->service_name))@endif
                     </li>
                 </ul>
-                <div class="btnbx">
+                <div class="btnbx mt-3">
                     <a href="{{ $data->promote_url }}" class="btn btn-primary text-uppercase"> Apply to Program</a>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 mt-4">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Beneficiaries</th>
+                    <td id="budg_ben">{{ $getFirstBudget->beneficiaries }}</td>
+                </tr>
+                <tr>
+                    <th>SDG</th>
+                    <td>{{ $data->area_impact_sdg }}</td>
+                </tr>
+                <tr>
+                    <th>Initiative Duration</th>
+                    <td><span id="budg_dur">{{ $getFirstBudget->duration }}</span> <span id="budg_tp">{{ $getFirstBudget->time_period }}</span></td>
+                </tr>
+                <tr>
+                    <th>Out-Reach</th>
+                    <td><span id="budg_outreach">{{ $getFirstBudget->outreach }}</span></td>
+                </tr>
+                <tr>
+                    <th>Initiative Description</th>
+                    <td>{!! $data->initiative_description !!}
+                </tr>
+                <tr>
+                    <th>Scalability of this project</th>
+                    <td>{!! $data->project_scalability !!}
+                </tr>
+                <tr>
+                    <th>Project's relevance to the SDG's</th>
+                    <td>{!! $data->sdg_relevance !!}
+                </tr>
+                <tr>
+                    <th>Project's relevance to National Agenda</th>
+                    <td>{!! $data->relevance_national_agenda !!}
+                </tr>
+                <tr>
+                    <th>How innovative is the project? </th>
+                    <td>{!! $data->project_innovation !!}
+                </tr>
+                <tr>
+                    <th>List of benefits of the program * </th>
+                    <td>{!! $data->program_benefits !!}
+                </tr>
+                <tr>
+                    <th>Program Stage</th>
+                    <td>{!! $data->program_stage !!}
+                </tr>
+                <tr>
+                    <th>Location</th>
+                    <td>{{ $data->street }}, {{ $data->region }},{{ $data->city }}, {{ $data->state }}, {{ $data->country }}</td>
+                </tr>
+            </table>
             </div>
         </div>
 

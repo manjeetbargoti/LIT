@@ -7,7 +7,6 @@ use App\Country;
 use App\InstaCampaigns;
 use App\InstaCampImages;
 use App\MultiBudget;
-use App\Proposal;
 use App\SDGs;
 use App\SocialInitiative;
 use App\SocialInitiativeImages;
@@ -51,17 +50,16 @@ class HomeController extends Controller
         $count = 6;
         $userid = '8736863878';
         $instaImages = rudr_instagram_api_curl_connect('https://api.instagram.com/v1/users/' . $userid . '/media/recent?access_token=' . $access_token . '&count=' . $count);
-        
+
         // dd($instaImages);
 
         $country = Country::get();
-        $sdgs = SDGs::where(['status' =>  1])->get();
+        $sdgs = SDGs::where(['status' => 1])->get();
 
-        $social_initiatives = SocialInitiative::where('status',1)->latest()->limit(3)->get();
+        $social_initiatives = SocialInitiative::where('status', 1)->latest()->limit(3)->get();
 
-        foreach($social_initiatives as $key => $val)
-        {
-            $multibudget = MultiBudget::where('social_init_id',$val->id)->first();
+        foreach ($social_initiatives as $key => $val) {
+            $multibudget = MultiBudget::where('social_init_id', $val->id)->first();
             $social_initiatives[$key]->budget = $multibudget->budget;
             $social_initiatives[$key]->duration = $multibudget->duration;
             $social_initiatives[$key]->time_period = $multibudget->time_period;
@@ -72,11 +70,11 @@ class HomeController extends Controller
             // dd($social_initiatives);
         }
 
-        $success_story = SuccessStory::select('success_stories.title','success_stories.short_content','success_stories.feature_image','users.first_name','users.last_name')->where('success_stories.status', 1)
-                            ->leftJoin('users', 'users.id','=','success_stories.add_by')
-                            ->latest('success_stories.created_at')->limit(2)->get();
+        $success_story = SuccessStory::select('success_stories.title', 'success_stories.short_content', 'success_stories.feature_image', 'users.first_name', 'users.last_name')->where('success_stories.status', 1)
+            ->leftJoin('users', 'users.id', '=', 'success_stories.add_by')
+            ->latest('success_stories.created_at')->limit(2)->get();
 
-        return view('homepage', compact('instaImages','country','sdgs','social_initiatives','success_story'));
+        return view('homepage', compact('instaImages', 'country', 'sdgs', 'social_initiatives', 'success_story'));
     }
 
     /**
@@ -94,46 +92,94 @@ class HomeController extends Controller
         $budget = $request['budget'];
         $country = $request['country'];
         $state = $request['state'];
-        $city = $request['city']; 
-        
+        $city = $request['city'];
+
         // $sdgs = implode(',', $sdgs);
 
-        // dd($sdgs);
+        // dd($budget);
 
-        if (!empty($budget)) {
+        if (!empty($budget) && $budget != "in-kind") {
 
             $budget = explode(',', $budget);
 
             $b1 = (int) $budget[0];
             $b2 = (int) $budget[1];
+
+            $data = DB::table('social_initiatives');
+
+            // dd($data);
+
+            if ($sdgs) {
+                $data = $data->whereIn('area_impact_sdg', $sdgs);
+            }
+            if ($budget) {
+                $data = $data->whereBetween('budget', [$b1, $b2]);
+            }
+            if ($country) {
+                $data = $data->where('country', 'LIKE', "%" . $country . "%");
+            }
+            if ($state) {
+                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+            }
+
+            $data = $data->where(['status' => 1])->latest()->paginate($perPage);
+
+            $data_count = $data->count();
+
+        } elseif ($budget == "in-kind") {
+            // echo "test";
+
+            $data = DB::table('social_initiatives');
+
+            // dd($data);
+
+            if ($sdgs) {
+                $data = $data->whereIn('area_impact_sdg', $sdgs);
+            }
+            if ($country) {
+                $data = $data->where('country', 'LIKE', "%" . $country . "%");
+            }
+            if ($state) {
+                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+            }
+
+            $data = $data->where(['status' => 1, 'in_partnership' => 1])->latest()->paginate($perPage);
+
+            $data_count = $data->count();
         } else {
             $b1 = 0;
             $b2 = 10000000000000;
-        }
 
-        $data = DB::table('social_initiatives');
+            $data = DB::table('social_initiatives');
 
-        // dd($data);
+            // dd($data);
 
-        if ($sdgs) {
-            $data = $data->whereIn('area_impact_sdg', $sdgs);
-        }
-        if ($budget) {
-            $data = $data->whereBetween('budget', [$b1, $b2]);
-        }
-        if ($country) {
-            $data = $data->where('country', 'LIKE', "%" . $country . "%");
-        }
-        if ($state) {
-            $data = $data->where('state', 'LIKE', "%" . $state . "%");
-        }
-        if ($city) {
-            $data = $data->where('city', 'LIKE', "%" . $city . "%");
-        }
+            if ($sdgs) {
+                $data = $data->whereIn('area_impact_sdg', $sdgs);
+            }
+            if ($budget) {
+                $data = $data->whereBetween('budget', [$b1, $b2]);
+            }
+            if ($country) {
+                $data = $data->where('country', 'LIKE', "%" . $country . "%");
+            }
+            if ($state) {
+                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+            }
 
-        $data = $data->where(['status' => 1, 'promote' => null])->latest()->paginate($perPage);
+            $data = $data->where(['status' => 1])->latest()->paginate($perPage);
 
-        $data_count = $data->count();
+            $data_count = $data->count();
+        }
 
         // dd($data_count);
 
@@ -146,7 +192,7 @@ class HomeController extends Controller
                 $data[$key]->image = $socialInitiativeImage->image_name;
             }
 
-            $multibudget = MultiBudget::where('social_init_id',$val->id)->first();
+            $multibudget = MultiBudget::where('social_init_id', $val->id)->first();
             $data[$key]->budget = $multibudget->budget;
             $data[$key]->duration = $multibudget->duration;
             $data[$key]->time_period = $multibudget->time_period;
@@ -159,10 +205,9 @@ class HomeController extends Controller
         // dd($data);
 
         $countryList = Country::get();
-        $allSDG = SDGs::where(['status' =>  1])->get();
+        $allSDG = SDGs::where(['status' => 1])->get();
 
-        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count', 'allSDG', 'countryList', 'sdgs', 'country','budget','sdgs'));
-
+        return view('front.social_initiatives.search_result_initiatives', compact('data', 'data_count', 'allSDG', 'countryList', 'sdgs', 'country', 'budget', 'sdgs'));
 
     }
 
@@ -230,7 +275,7 @@ class HomeController extends Controller
                 $data[$key]->image = $instaCampImage->image_name;
             }
 
-            $multibudget = MultiBudget::where('insta_camp_id',$val->id)->first();
+            $multibudget = MultiBudget::where('insta_camp_id', $val->id)->first();
             $data[$key]->budget = $multibudget->budget;
             $data[$key]->duration = $multibudget->duration;
             $data[$key]->time_period = $multibudget->time_period;
@@ -242,7 +287,7 @@ class HomeController extends Controller
 
         // dd($data);
 
-        return view('front.social_initiatives.search_result_initiatives', compact('data','data_count'));
+        return view('front.social_initiatives.search_result_initiatives', compact('data', 'data_count'));
 
     }
 
@@ -307,7 +352,7 @@ class HomeController extends Controller
                 $data[$key]->image = $socialInitiativeImage->image_name;
             }
 
-            $multibudget = MultiBudget::where('social_init_id',$val->id)->first();
+            $multibudget = MultiBudget::where('social_init_id', $val->id)->first();
             $data[$key]->budget = $multibudget->budget;
             $data[$key]->duration = $multibudget->duration;
             $data[$key]->time_period = $multibudget->time_period;
@@ -351,7 +396,7 @@ class HomeController extends Controller
                 $data2[$key]->image = $instaCampImage->image_name;
             }
 
-            $multibudget = MultiBudget::where('insta_camp_id',$val->id)->first();
+            $multibudget = MultiBudget::where('insta_camp_id', $val->id)->first();
             $data2[$key]->budget = $multibudget->budget;
             $data2[$key]->duration = $multibudget->duration;
             $data2[$key]->time_period = $multibudget->time_period;
@@ -363,7 +408,7 @@ class HomeController extends Controller
 
         // dd($data);
 
-        return view('front.social_initiatives.all_search_result', compact('data','data_count','data2','data2_count'));
+        return view('front.social_initiatives.all_search_result', compact('data', 'data_count', 'data2', 'data2_count'));
 
     }
 
@@ -401,37 +446,32 @@ class HomeController extends Controller
 
         $data->budget_id = $getFirstBudget['id'];
 
-        if(!empty($data['beneficiaries']))
-        {
+        if (!empty($data['beneficiaries'])) {
             $data->beneficiaries = $data['beneficiaries'];
-        }else{
+        } else {
             $data->beneficiaries = $getFirstBudget['beneficiaries'];
         }
-        if(!empty($data['duration']))
-        {
+        if (!empty($data['duration'])) {
             $data->duration = $data['duration'];
-        }else{
+        } else {
             $data->duration = $getFirstBudget['duration'];
         }
-        
-        if(!empty($data['time_period']))
-        {
+
+        if (!empty($data['time_period'])) {
             $data->time_period = $data['time_period'];
-        }else{
+        } else {
             $data->time_period = $getFirstBudget['time_period'];
         }
-        if(!empty($data['outreach']))
-        {
+        if (!empty($data['outreach'])) {
             $data->outreach = $data['outreach'];
-        }else{
+        } else {
             $data->outreach = $getFirstBudget['outreach'];
         }
 
-        if(!empty($data['budget']))
-        {
+        if (!empty($data['budget'])) {
             $data->outreach = $data['budget'];
         }
-        
+
         // $data->beneficiaries = $getFirstBudget['beneficiaries'];
 
         // dd($data);
@@ -502,7 +542,7 @@ class HomeController extends Controller
             $siImage = InstaCampImages::where('insta_camp_id', $data->id)->first();
         }
 
-        return view('front.social_initiatives.single_initiative', compact('data','siImage','getFirstBudget','data2'));
+        return view('front.social_initiatives.single_initiative', compact('data', 'siImage', 'getFirstBudget', 'data2'));
     }
 
     // Learn More Digital Service
@@ -530,7 +570,7 @@ class HomeController extends Controller
             $siImage = InstaCampImages::where('insta_camp_id', $data->id)->first();
         }
 
-        return view('front.social_initiatives.detail_page', compact('data','siImage','getFirstBudget','data2'));
+        return view('front.social_initiatives.detail_page', compact('data', 'siImage', 'getFirstBudget', 'data2'));
     }
 
     // Get Budget Data

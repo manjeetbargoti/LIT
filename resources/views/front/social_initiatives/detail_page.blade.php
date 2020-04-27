@@ -23,8 +23,9 @@
             </div>
             <div class="col-md-12 col-lg-6 pl-4">
                 <img src="{{ asset('front/dist/img/home/heading-icon.png') }}" class="mb-2 mx-auto" alt="">
-                <h2> @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif
+                <h2 class="mb-2"> @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif
                 </h2>
+                @if($data->promote == null)
                 <span class="col-12 col-lg-3">
                     <select name="budget" id="budgetList" class="form-control col-sm-3">
                         @if(empty($data->budget))
@@ -36,14 +37,21 @@
                         @endif
                     </select>
                 </span>
+                @else
+                <span class="pt-2">
+                <li> <b>Location</b>: {{ $data->city }}, {{ $data->state }}, {{ $data->country }}</li>
+                </span>
+                @endif
                 <ul class="p-0">
                     <li> <b>Title</b>:
                         @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name)){{ $data->service_name }}@endif
                     </li>
-                    <li> <b>Location</b>: {{ $data->city }}, {{ $data->state }}, {{ $data->country }}</li>
+                    <li> <b>Program Stage</b>: {{ $data->program_stage }}
+                    </li>
                     <li class="d-none"> <b>Budget ID</b>: <span id="budg_id">{{ $data->budget_id }}</span> </li>
                 </ul>
-                <div class="btnbx">
+                @if($data->promote == null)
+                <div class="btnbx mt-2">
                     @if(!empty($data->initiative_name))
                     <a href="{{ url('/social-initiative/add-to-cart/'.$data->id) }}"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
@@ -52,6 +60,11 @@
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
                     @endif
                 </div>
+                @else
+                <div class="btnbx mt-2">
+                    <a href="{{ $data->promote_url }}" class="btn btn-primary text-uppercase"> Apply to Program</a>
+                </div>
+                @endif
             </div>
         </div>
 
@@ -75,12 +88,32 @@
                     <td><span id="budg_outreach">{{ $data->outreach }}</span></td>
                 </tr>
                 <tr>
-                    <th>Description</th>
-                    <td>@if(!empty($data->initiative_name))
-                         {!! $data->initiative_description !!}
-                        @elseif(!empty($data->service_name))
-                        {!! $data->service_description !!}
-                        @endif</td>
+                    <th>Initiative Description</th>
+                    <td>{!! $data->initiative_description !!}
+                </tr>
+                <tr>
+                    <th>Scalability of this project</th>
+                    <td>{!! $data->project_scalability !!}
+                </tr>
+                <tr>
+                    <th>Project's relevance to the SDG's</th>
+                    <td>{!! $data->sdg_relevance !!}
+                </tr>
+                <tr>
+                    <th>Project's relevance to National Agenda</th>
+                    <td>{!! $data->relevance_national_agenda !!}
+                </tr>
+                <tr>
+                    <th>How innovative is the project? </th>
+                    <td>{!! $data->project_innovation !!}
+                </tr>
+                <tr>
+                    <th>List of benefits of the program * </th>
+                    <td>{!! $data->program_benefits !!}
+                </tr>
+                <tr>
+                    <th>Program Stage</th>
+                    <td>{!! $data->program_stage !!}
                 </tr>
                 <tr>
                     <th>Location</th>

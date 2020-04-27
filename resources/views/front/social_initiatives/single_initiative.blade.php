@@ -50,7 +50,8 @@
                         @if(!empty($data->initiative_name)){{ $data->initiative_name }}@elseif(!empty($data->service_name))@endif
                     </li>
                 </ul>
-                <div class="btnbx">
+                @if($data->promote == null)
+                <div class="btnbx mt-2">
                     @if(!empty($data->initiative_name))
                     <a href="{{ url('/social-initiative/add-to-cart/'.$data->id) }}"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
@@ -60,8 +61,11 @@
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
                     <a href="{{ url('/digital-programs/'.$data->slug) }}" class="btn btn-primary text-uppercase"> Learn More</a>
                     @endif
-                    
                 </div>
+                @else
+                <a href="{{ $data->promote_url }}" class="btn btn-primary text-uppercase"> Apply to Program</a>
+                <a href="{{ url('/program/apply-to-program/'.$data->slug) }}" class="btn btn-primary text-uppercase"> Learn More</a>
+                @endif
             </div>
         </div>
     </div>

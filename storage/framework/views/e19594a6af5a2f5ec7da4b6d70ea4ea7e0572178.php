@@ -68,7 +68,7 @@
                                             <select class="form-control search-slt" name="budget"
                                                 value="<?php echo e(request('budget')); ?>" id="budget">
                                                 <option value="">Select Budget</option>
-                                                <option value="0,0">In kind partnerships</option>
+                                                <option value="in-kind">In kind partnerships</option>
                                                 <option value="1,5000">$1-$5,000</option>
                                                 <option value="5000,1000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>

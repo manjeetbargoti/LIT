@@ -19,7 +19,7 @@
                 <img src="{{ asset('front/dist/img/home/heading-icon.png') }}" class="mb-2 mx-auto" alt="">
                 <h3> Programs </h3>
             </div>
-            <div class="col-md-3 col-lg-3 text-center mb-5">
+            <!-- <div class="col-md-3 col-lg-3 text-center mb-5">
                 <div class="range mt-3">
                     <form>
                         <label for="customRange">Budget</label>
@@ -28,9 +28,9 @@
                     <div id="result"> <span> <b></b> USD</span> </div>
                     <div id="end"> <span> <b>10,000</b> USD</span></div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-md-9 col-lg-9 mb-5">
+            <div class="col-md-12 col-lg-12 mb-5">
                 <div class="row">
                     @if($data_count == 0)
                     <div class="col-md-12 col-lg-12 mb-4">

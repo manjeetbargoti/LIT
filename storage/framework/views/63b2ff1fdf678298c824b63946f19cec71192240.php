@@ -51,12 +51,12 @@
                         </a>
                     </li>
                     <?php endif; ?>
-                    <li class="<?php echo e((request()->is('admin/profile/address')) ? 'active':''); ?>">
+                    <!-- <li class="<?php echo e((request()->is('admin/profile/address')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/profile/address')); ?>">
                             <i class="fa fa-angle-right"></i>
                             <span class="link-title"> &nbsp; Address</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <!-- /.User Management -->

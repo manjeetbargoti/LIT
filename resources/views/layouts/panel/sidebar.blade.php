@@ -51,12 +51,12 @@
                         </a>
                     </li>
                     @endhasanyrole
-                    <li class="{{ (request()->is('admin/profile/address')) ? 'active':'' }}">
+                    <!-- <li class="{{ (request()->is('admin/profile/address')) ? 'active':'' }}">
                         <a href="{{ url('admin/profile/address') }}">
                             <i class="fa fa-angle-right"></i>
                             <span class="link-title"> &nbsp; Address</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <!-- /.User Management -->

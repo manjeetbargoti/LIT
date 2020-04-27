@@ -65,7 +65,7 @@
                                         <td>{{ $item->duration }} months</td>
                                         <td>USD {{ $item->budget }}</td>
                                         <td>{{ $item->city }}, {{ $item->country }}</td>
-                                        <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white" href="{{ url('/admin/initiative/'.$item->id.'/disable') }}">Enable</a> @else <a class="btn btn-sm btn-danger text-white" href="{{ url('/admin/initiative/'.$item->id.'/enable') }}">Disable</a> @endif</td>
+                                        <td>@if($item->status == 1) <a class="btn btn-sm btn-success text-white" href="#">Approved</a> @else <a class="btn btn-sm btn-danger text-white" href="#">Pending</a> @endif</td>
                                         <td>
                                             <a href="{{ url('/admin/social-impact/initiatives/' . $item->id) }}" title="View Initiative"><button
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"

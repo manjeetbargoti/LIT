@@ -40,11 +40,12 @@ class Cart
 
         $storedItem['qty']++;
         $storedItem['price'] = $item->price * $storedItem['qty'];
-        // $storedItem['duration'] = $item->duration;
+        $storedItem['duration'] = $item->duration;
         $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += preg_replace('/[ ,]+/', '', $item->budget);
         $this->totalDuration = $item->duration;
+        $this->time_period = $item->time_period;
         $this->totalBeneficiaries = $item->beneficiaries;
     }
 }

@@ -105,12 +105,12 @@
                             <!-- Pinterest Input Field -->
                             <div class="form-group row">
                                 <div class="col-xl-4 text-xl-right">
-                                    <label for="Pinterest" class="col-form-label">{{ __('Pinterest') }}</label>
+                                    <label for="Tiktok" class="col-form-label">{{ __('Tiktok') }}</label>
                                 </div>
                                 <div class="col-xl-4">
-                                    <input type="tel" id="pinterest" name="pinterest"
-                                        class="form-control @error('pinterest') is-invalid @enderror"
-                                        value="{{ config('app.pinterest') }}">
+                                    <input type="tel" id="tiktok" name="tiktok"
+                                        class="form-control @error('tiktok') is-invalid @enderror"
+                                        value="{{ config('app.tiktok') }}">
                                 </div>
                             </div>
                             <!-- /.Pinterest Input Field -->

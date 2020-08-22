@@ -108,10 +108,9 @@
                                 </div>
 
                                 <div class="col-xl-4 {{ $errors->has('area_impact_sdg') ? 'has-error' : ''}}">
-                                    <select class="form-control @error('area_impact_sdg') is-invalid @enderror"
-                                        name="area_impact_sdg" id="area_impact_sdg" value="{{ old('area_impact_sdg') }}"
-                                        required>
-                                        <option value=""> -- Select SDG -- </option>
+                                    <select class="form-control @error('area_impact_sdg') is-invalid @enderror chzn-select"
+                                        name="area_impact_sdg[]" id="area_impact_sdg" multiple value="{{ old('area_impact_sdg') }}"
+                                        required data-placeholder="-- Select SDG --">
                                         @foreach($sdgs->where('sdg_category','Onground') as $s)
                                         <option value="{{ $s->sdg_name }}">{{ $loop->iteration }}. {{ $s->sdg_name }}
                                         </option>
@@ -309,7 +308,7 @@
                                                     <span class="input-group-addon">Out Reach</span>
                                                     <input class="form-control @error('outreach') is-invalid @enderror"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="{{ old('outreach') }}" placeholder="Number of Beneficieries"
+                                                        value="{{ old('outreach') }}" placeholder="Number of Out Reach"
                                                         required>
                                                 </div>
                                                 {!! $errors->first('outreach', '<p class="help-block">:message</p>') !!}
@@ -325,9 +324,10 @@
                                         <div class="form-group row">
                                             <div class="col-xl-2 text-xl-right">
                                                 <label for="Initiative info"
-                                                    class="col-form-label">{{ __('Initiative info *') }}</label>
+                                                    class="col-form-label">{{ __('') }}</label>
                                             </div>
-                                            <div class="col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
+                                            <div class="input-group col-xl-3 {{ $errors->has('beneficiaries') ? 'has-error' : ''}}">
+                                                <span class="input-group-addon">Beneficieries</span>
                                                 <input class="form-control @error('beneficiaries') is-invalid @enderror"
                                                     name="beneficiaries[]" type="number" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="Beneficiaries"
                                                     value="{{ old('beneficiaries') }}"
@@ -478,6 +478,18 @@
                                 </div>
                             </div>
 
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Program"
+                                        class="col-form-label">{{ __('Featured (Suggest this program) *') }}</label>
+                                </div>
+                                <div class="col-xl-9 {{ $errors->has('featured') ? 'has-error' : ''}}">
+                                    <div class="add_image">
+                                        <input type="checkbox" id="featured" name="featured" value="1" />
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-group">

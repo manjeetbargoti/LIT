@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Country">Country</label>
-                            <select class="form-control" name="country" id="country">
+                            <select class="form-control" name="country" id="actcountry">
                                 <option value="">Select Country</option>
                                 <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cntry): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option value="<?php echo e($cntry->name); ?>" <?php if(!empty($countryname)): ?><?php if($cntry->name ==
@@ -48,16 +48,16 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="State">State</label>
                             <select class="form-control" name="state" id="state">
                                 <option value="">Select State</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="City">City</label>
-                            <select class="form-control" name="city" id="city">
+                            <select class="form-control" name="city" id="actcity">
                                 <option value="">Select City</option>
                             </select>
                         </div>

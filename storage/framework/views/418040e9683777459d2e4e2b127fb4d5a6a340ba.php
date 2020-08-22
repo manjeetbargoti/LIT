@@ -129,12 +129,11 @@
                                                 <span class="input-group-addon"> <i
                                                         class="fa fa-chevron-down text-primary"></i>
                                                 </span>
-                                                <select name="priority_sdg" id="PrioritySDG" class="form-control"
-                                                    value="<?php echo e(old('priority_sdg')); ?>" required>
-                                                    <option value=""> -- Select SDG's -- </option>
+                                                <select name="priority_sdg[]" id="PrioritySDG" multiple class="form-control chzn-select"
+                                                    value="<?php echo e(old('priority_sdg')); ?>" required data-placeholder="-- Select SDG --">
                                                     <?php $__currentLoopData = $sdg; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($s->sdg_name); ?>" <?php if($s->sdg_name ==
-                                                        $businessData->priority_sdg): ?> selected <?php endif; ?>><?php echo e($s->sdg_name); ?>
+                                                    <option value="<?php echo e($s->sdg_name); ?>" <?php $__currentLoopData = $businessData->priority_sdg; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $selectSDG): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php if($s->sdg_name ==
+                                                        $selectSDG): ?> selected <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>><?php echo e($s->sdg_name); ?>
 
                                                     </option>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

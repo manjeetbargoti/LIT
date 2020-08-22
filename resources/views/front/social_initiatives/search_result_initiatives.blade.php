@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="SDGs">SDG's</label>
+                            <label for="SDGs">SDGs</label>
                             <select class="form-control" name="sdgs[]" id="MultiSelect1" multiple
                                 data-placeholder="Select SDGs" style="width: 200px !important;">
                                 <!-- <option value=""> Select Area of Impact </option> -->
@@ -105,7 +105,7 @@
                             <h4 class="h4">
                                 @if(!empty($d->initiative_name)){{ $d->initiative_name }}@elseif(!empty($d->service_name))@endif
                             </h4>
-                            <h5 class="h5">USD {{ $d->budget }}</h5>
+                            <h5 class="h5">@if($d->max_budget == $d->min_budget) USD {{ $d->budget }} @elseif($d->max_budget != $d->min_budget) USD {{ $d->min_budget }} - {{ $d->max_budget }} @endif</h5>
                             <ul class="p-0">
                                 <li> <b>Beneficiaries</b>: {{ $d->beneficiaries }}</li>
                                 <li> <b>Duration</b>: {{ $d->duration }} {{ $d->time_period }}</li>

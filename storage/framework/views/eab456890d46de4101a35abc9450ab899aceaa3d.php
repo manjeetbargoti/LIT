@@ -63,7 +63,7 @@
                                         <td><?php echo e($item->duration); ?> months</td>
                                         <td>USD <?php echo e($item->budget); ?></td>
                                         <td><?php echo e($item->city); ?>, <?php echo e($item->country); ?></td>
-                                        <td><?php if($item->status == 1): ?> <a class="btn btn-sm btn-success text-white" href="<?php echo e(url('/admin/initiative/'.$item->id.'/disable')); ?>">Enable</a> <?php else: ?> <a class="btn btn-sm btn-danger text-white" href="<?php echo e(url('/admin/initiative/'.$item->id.'/enable')); ?>">Disable</a> <?php endif; ?></td>
+                                        <td><?php if($item->status == 1): ?> <a class="btn btn-sm btn-success text-white" href="#">Approved</a> <?php else: ?> <a class="btn btn-sm btn-danger text-white" href="#">Pending</a> <?php endif; ?></td>
                                         <td>
                                             <a href="<?php echo e(url('/admin/social-impact/initiatives/' . $item->id)); ?>" title="View Initiative"><button
                                                     class="btn btn-info btn-sm"><i class="fa fa-eye"

@@ -3,15 +3,11 @@
 <!-- slider start -->
 <div id="litslider" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/home/slide.jpg')); ?>" alt="First slide">
+        <?php $__currentLoopData = $banners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $im): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="carousel-item <?php if($key == 0): ?>active <?php endif; ?> <?php echo $key; ?>">
+            <img class="d-block w-100" src="<?php echo e(asset('images/banners/'.$im->image)); ?>" alt="First slide">
         </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/home/slide.jpg')); ?>" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/home/slide.jpg')); ?>" alt="Third slide">
-        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
     <a class="carousel-control-prev" href="#litslider" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,7 +66,7 @@
                                                 <option value="">Select Budget</option>
                                                 <option value="in-kind">In kind partnerships</option>
                                                 <option value="1,5000">$1-$5,000</option>
-                                                <option value="5000,1000">$5,000-$10,000</option>
+                                                <option value="5000,10000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>
                                                 <option value="20001,25000">$20,001-$25,000</option>
@@ -319,12 +315,12 @@
         <img class="d-block w-100" src="<?php echo e(asset('front/dist/img/home/program.jpg')); ?>" alt="Second slide">
     </div>
     <div class="col-md-12 col-lg-7 offset-lg-5 px-0 projbg">
-        <h2 class="h2"> Social Impact Programs </h2>
+        <h2 class="h2"> <?php echo e(__('')); ?> </h2>
         <div id="projslider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <?php $__currentLoopData = $social_initiatives; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $si): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="carousel-item <?php echo e($loop->first ? 'active' : ''); ?>">
-                    <span class="aed">USD <?php echo e($si->budget); ?></span>
+                    <span class="aed"><?php if($si->max_budget == $si->min_budget): ?> USD <?php echo e($si->budget); ?> <?php elseif($si->max_budget != $si->min_budget): ?> USD <?php echo e($si->min_budget); ?> - <?php echo e($si->max_budget); ?> <?php endif; ?></span>
                     <h3 class="h3"> <?php echo e($si->initiative_name); ?> </h3>
                     <ul>
                         <li> Beneficiaries: <?php echo e($si->beneficiaries); ?> </li>

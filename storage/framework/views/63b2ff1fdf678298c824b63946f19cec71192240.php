@@ -51,6 +51,21 @@
                         </a>
                     </li>
                     <?php endif; ?>
+                    <li class="<?php echo e((request()->is('admin/banner*'))  ? 'active':''); ?>">
+                        <a href="#"><i class="fa fa-angle-right"></i> &nbsp; Banners
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul>
+                            <li class="<?php echo e((request()->is('admin/banner')) ? 'active' : ''); ?>"><a
+                                    href="<?php echo e(url('/admin/banner')); ?>"><i class="fa fa-angle-right text-aqua"></i> &nbsp; All
+                                    Banners</a></li>
+                            <li class="<?php echo e((request()->is('admin/banner/add')) ? 'active' : ''); ?>"><a
+                                    href="<?php echo e(url('/admin/banner/add')); ?>"><i class="fa fa-plus text-aqua"></i> &nbsp; Add
+                                    Banner</a></li>
+                        </ul>
+                    </li>
                     <!-- <li class="<?php echo e((request()->is('admin/profile/address')) ? 'active':''); ?>">
                         <a href="<?php echo e(url('admin/profile/address')); ?>">
                             <i class="fa fa-angle-right"></i>
@@ -236,34 +251,34 @@
             </li>
             <!-- /.Page Management -->
 
-        <!-- Support Center -->
-        <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
-        <li class="dropdown_menu <?php echo e((request()->is('admin/support*')) ? 'active':''); ?>">
-            <a href="<?php echo e(url('/admin/supports')); ?>">
-                <i class="fa fa-file-text-o"></i>
-                <span class="link-title menu_hide">&nbsp; Support Center</span>
-                <span class="fa arrow menu_hide"></span>
-            </a>
-            <ul>
-                <li class="<?php echo e((request()->is('admin/support/submit-proposals*')) ? 'active':''); ?>">
-                    <a href="<?php echo e(url('admin/support/submit-proposals')); ?>">
-                        <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
-                    </a>
-                </li>
-                <li class="<?php echo e((request()->is('admin/support/initiative-query*')) ? 'active':''); ?>">
-                    <a href="<?php echo e(url('admin/support/initiative-query')); ?>">
-                        <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
-                    </a>
-                </li>
-                <li class="<?php echo e((request()->is('admin/support/activist-query*')) ? 'active':''); ?>">
-                    <a href="<?php echo e(url('admin/support/activist-query')); ?>">
-                        <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <?php endif; ?>
-        <!-- /.Support Center -->
+            <!-- Support Center -->
+            <?php if(auth()->check() && auth()->user()->hasRole('Super Admin')): ?>
+            <li class="dropdown_menu <?php echo e((request()->is('admin/support*')) ? 'active':''); ?>">
+                <a href="<?php echo e(url('/admin/supports')); ?>">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="link-title menu_hide">&nbsp; Support Center</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+                <ul>
+                    <li class="<?php echo e((request()->is('admin/support/submit-proposals*')) ? 'active':''); ?>">
+                        <a href="<?php echo e(url('admin/support/submit-proposals')); ?>">
+                            <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
+                        </a>
+                    </li>
+                    <li class="<?php echo e((request()->is('admin/support/initiative-query*')) ? 'active':''); ?>">
+                        <a href="<?php echo e(url('admin/support/initiative-query')); ?>">
+                            <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
+                        </a>
+                    </li>
+                    <li class="<?php echo e((request()->is('admin/support/activist-query*')) ? 'active':''); ?>">
+                        <a href="<?php echo e(url('admin/support/activist-query')); ?>">
+                            <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <?php endif; ?>
+            <!-- /.Support Center -->
         </ul>
         <!-- /#menu -->
     </div>

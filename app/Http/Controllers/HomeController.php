@@ -13,6 +13,7 @@ use App\SocialInitiativeImages;
 use App\State;
 use App\SuccessStory;
 use DB;
+use App\Banner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -56,9 +57,15 @@ class HomeController extends Controller
         $country = Country::get();
         $sdgs = SDGs::where(['status' => 1])->get();
 
-        $social_initiatives = SocialInitiative::where('status', 1)->latest()->limit(3)->get();
+        $social_initiatives = SocialInitiative::where(['status' => 1, 'featured'=>1])->latest()->limit(5)->get();
 
         foreach ($social_initiatives as $key => $val) {
+            
+            $maxBudget = MultiBudget::where('social_init_id', $val->id)->orderBy('budget','asc')->pluck('budget');
+            $minBudget = MultiBudget::where('social_init_id', $val->id)->orderBy('budget','desc')->pluck('budget');
+            $social_initiatives[$key]->max_budget = $maxBudget[0];
+            $social_initiatives[$key]->min_budget = $minBudget[0];
+
             $multibudget = MultiBudget::where('social_init_id', $val->id)->first();
             $social_initiatives[$key]->budget = $multibudget->budget;
             $social_initiatives[$key]->duration = $multibudget->duration;
@@ -70,11 +77,13 @@ class HomeController extends Controller
             // dd($social_initiatives);
         }
 
+        $banners = Banner::where(['status' => 1])->get();
+
         $success_story = SuccessStory::select('success_stories.title', 'success_stories.short_content', 'success_stories.feature_image', 'users.first_name', 'users.last_name')->where('success_stories.status', 1)
             ->leftJoin('users', 'users.id', '=', 'success_stories.add_by')
             ->latest('success_stories.created_at')->limit(2)->get();
 
-        return view('homepage', compact('instaImages', 'country', 'sdgs', 'social_initiatives', 'success_story'));
+        return view('homepage', compact('instaImages', 'country', 'sdgs', 'social_initiatives', 'success_story','banners'));
     }
 
     /**
@@ -96,7 +105,7 @@ class HomeController extends Controller
 
         // $sdgs = implode(',', $sdgs);
 
-        // dd($budget);
+        // dd($sdgs);
 
         if (!empty($budget) && $budget != "in-kind") {
 
@@ -107,49 +116,112 @@ class HomeController extends Controller
 
             $data = DB::table('social_initiatives');
 
-            // dd($data);
+            $mbData = DB::table('multi_budgets')->whereBetween('budget', [$b1, $b2])->pluck('social_init_id');
+
+            $mbData = json_decode($mbData);
+            $mbData = array_unique($mbData);
+
+            $mbData = array_filter($mbData);
+
+            // $mbData = implode(',', $mbData);
+
+            // $mbData = (int) $mbData;
+
+            // dd($mbData);
+            $newData = DB::table('social_initiatives');
 
             if ($sdgs) {
-                $data = $data->whereIn('area_impact_sdg', $sdgs);
-            }
-            if ($budget) {
-                $data = $data->whereBetween('budget', [$b1, $b2]);
-            }
-            if ($country) {
-                $data = $data->where('country', 'LIKE', "%" . $country . "%");
-            }
-            if ($state) {
-                $data = $data->where('state', 'LIKE', "%" . $state . "%");
-            }
-            if ($city) {
-                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+                $i = 0;
+                foreach ($sdgs as $s) {
+                    if (!empty($s)) {
+                        $sdg = SocialInitiative::where('area_impact_sdg', 'LIKE', "%" . $s . "%")->pluck('id');
+                        $sdgid[$i] = $sdg;
+                        $i++;
+                    }
+                }
+                $sdids = implode(',', $sdgid);
+                $sdids = preg_replace('/[^a-zA-Z0-9,\{}:]/', '', $sdids);
+                $sdids = explode(',', $sdids);
+                $sdids = array_unique($sdids);
+                $sdids = array_filter($sdids);
+
+                $newData = $newData->WhereIn('id', $sdids);
             }
 
-            $data = $data->where(['status' => 1])->latest()->paginate($perPage);
+            // if ($sdgs) {
+            //     $data = $data->whereIn('area_impact_sdg', $sdgs);
+            // }
+            if ($budget) {
+                // $data = $data->whereBetween('budget', [$b1, $b2]);
+                $newData = $newData->whereIn('id', $mbData)->orWhere('in_partnership', 1);
+            }
+            if ($country) {
+                $newData = $newData->where('country', 'LIKE', "%" . $country . "%");
+            }
+            if ($state) {
+                $newData = $newData->where('state', 'LIKE', "%" . $state . "%");
+            }
+            if ($city) {
+                $newData = $newData->where('city', 'LIKE', "%" . $city . "%");
+            }
+
+            $data = $newData->where(['status' => 1])->latest()->paginate($perPage);
 
             $data_count = $data->count();
 
         } elseif ($budget == "in-kind") {
             // echo "test";
 
-            $data = DB::table('social_initiatives');
+            // $data = DB::table('social_initiatives');
+
+            $newData = DB::table('social_initiatives');
+
+            if ($sdgs) {
+                $i = 0;
+                foreach ($sdgs as $s) {
+                    if (!empty($s)) {
+                        $sdg = SocialInitiative::where('area_impact_sdg', 'LIKE', "%" . $s . "%")->pluck('id');
+                        $sdgid[$i] = $sdg;
+                        $i++;
+                    }
+                }
+                $sdids = implode(',', $sdgid);
+                $sdids = preg_replace('/[^a-zA-Z0-9,\{}:]/', '', $sdids);
+                $sdids = explode(',', $sdids);
+                $sdids = array_unique($sdids);
+                $sdids = array_filter($sdids);
+                $k = 0;
+                foreach ($sdids as $sd) {
+                    if (!empty($sd)) {
+                        $sdd = $sd;
+                        $sdd = json_decode($sd);
+                        $sdl[$k] = $sdd;
+                        $k++;
+                    }
+                }
+                // dd($sdl);
+
+                // $newData = DB::table('social_initiatives');
+
+                $newData = $newData->WhereIn('id', $sdids);
+            }
 
             // dd($data);
 
-            if ($sdgs) {
-                $data = $data->whereIn('area_impact_sdg', $sdgs);
-            }
+            // if ($sdgs) {
+            //     $data = $data->whereIn('area_impact_sdg', $sdgs);
+            // }
             if ($country) {
-                $data = $data->where('country', 'LIKE', "%" . $country . "%");
+                $newData = $newData->where('country', 'LIKE', "%" . $country . "%");
             }
             if ($state) {
-                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+                $newData = $newData->where('state', 'LIKE', "%" . $state . "%");
             }
             if ($city) {
-                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+                $newData = $newData->where('city', 'LIKE', "%" . $city . "%");
             }
 
-            $data = $data->where(['status' => 1, 'in_partnership' => 1])->latest()->paginate($perPage);
+            $data = $newData->where(['status' => 1, 'in_partnership' => 1])->latest()->paginate($perPage);
 
             $data_count = $data->count();
         } else {
@@ -158,25 +230,61 @@ class HomeController extends Controller
 
             $data = DB::table('social_initiatives');
 
-            // dd($data);
+            // $sdgData = explode(', ', $data);
+
+            $mbData = DB::table('multi_budgets')->whereBetween('budget', [$b1, $b2])->pluck('social_init_id');
+
+            $mbData = json_decode($mbData);
+            $mbData = array_unique($mbData);
+
+            $mbData = array_filter($mbData);
+
+            // $mbData = implode(',', $mbData);
+
+            // $sdgs = json_encode($sdgs);
+            // dd($mbData);
+
+            $newData = DB::table('social_initiatives');
 
             if ($sdgs) {
-                $data = $data->whereIn('area_impact_sdg', $sdgs);
+                
+                // dd($sdgs);
+
+                $i = 0;
+                foreach ($sdgs as $s) {
+                    if (!empty($s)) {
+                        $sdg = SocialInitiative::where('area_impact_sdg', 'LIKE', "%" . $s . "%")->pluck('id');
+                        $sdgid[$i] = $sdg;
+                        $i++;
+                    }
+                    // echo "<pre>";print_r($sdgid);
+                }
+                // die;
+
+                $sdids = implode(',', $sdgid);
+                $sdids = preg_replace('/[^a-zA-Z0-9,\{}:]/', '', $sdids);
+                $sdids = explode(',', $sdids);
+                $sdids = array_unique($sdids);
+                $sdids = array_filter($sdids);
+                // dd($sdids);
+
+                $newData = $newData->WhereIn('id', $sdids);
+                // dd($newData);
             }
             if ($budget) {
-                $data = $data->whereBetween('budget', [$b1, $b2]);
+                $newData = $newData->whereIn('id', $mbData)->orWhere('in_partnership', 1);
             }
             if ($country) {
-                $data = $data->where('country', 'LIKE', "%" . $country . "%");
-            }
+                $newData = $newData->where('country', 'LIKE', "%" . $country . "%");
+            }   
             if ($state) {
-                $data = $data->where('state', 'LIKE', "%" . $state . "%");
+                $newData = $newData->where('state', 'LIKE', "%" . $state . "%");
             }
             if ($city) {
-                $data = $data->where('city', 'LIKE', "%" . $city . "%");
+                $newData = $newData->where('city', 'LIKE', "%" . $city . "%");
             }
 
-            $data = $data->where(['status' => 1])->latest()->paginate($perPage);
+            $data = $newData->where(['status' => 1])->latest()->paginate($perPage);
 
             $data_count = $data->count();
         }
@@ -191,6 +299,11 @@ class HomeController extends Controller
                 $socialInitiativeImage = SocialInitiativeImages::where('social_initiative_id', $val->id)->first();
                 $data[$key]->image = $socialInitiativeImage->image_name;
             }
+
+            $maxBudget = MultiBudget::where('social_init_id', $val->id)->orderBy('budget','asc')->pluck('budget');
+            $minBudget = MultiBudget::where('social_init_id', $val->id)->orderBy('budget','desc')->pluck('budget');
+            $data[$key]->max_budget = $maxBudget[0];
+            $data[$key]->min_budget = $minBudget[0];
 
             $multibudget = MultiBudget::where('social_init_id', $val->id)->first();
             $data[$key]->budget = $multibudget->budget;
@@ -366,7 +479,7 @@ class HomeController extends Controller
         $data2 = DB::table('insta_campaigns');
 
         if ($sdgs2) {
-            $data2 = $data2->whereIn('area_impact_sdg', $sdgs2);
+            $data2 = $data2->whereIn('area_impact_sdg', 'LIKE', "%" . $sdgs2 . "%");
         }
         if ($budget) {
             $data2 = $data2->whereBetween('budget', [$b1, $b2]);
@@ -444,6 +557,10 @@ class HomeController extends Controller
 
         $getFirstBudget = MultiBudget::where('social_init_id', $data->id)->first();
 
+        // $getBudgets = MultiBudget::where('social_init_id', $data->id)->get();
+
+        // dd($getBudgets);
+
         $data->budget_id = $getFirstBudget['id'];
 
         if (!empty($data['beneficiaries'])) {
@@ -502,11 +619,34 @@ class HomeController extends Controller
         $getFirstBudget = MultiBudget::where('social_init_id', $data->id)->first();
 
         $data->budget_id = $getFirstBudget['id'];
-        $data->beneficiaries = $getFirstBudget['beneficiaries'];
-        $data->duration = $getFirstBudget['duration'];
-        $data->time_period = $getFirstBudget['time_period'];
-        $data->outreach = $getFirstBudget['outreach'];
-        $data->budget = $getFirstBudget['budget'];
+
+        // dd($data);
+
+        if (!empty($data['beneficiaries'])) {
+            $data->beneficiaries = $data['beneficiaries'];
+        } else {
+            $data->beneficiaries = $getFirstBudget['beneficiaries'];
+        }
+        if (!empty($data['duration'])) {
+            $data->duration = $data['duration'];
+        } else {
+            $data->duration = $getFirstBudget['duration'];
+        }
+
+        if (!empty($data['time_period'])) {
+            $data->time_period = $data['time_period'];
+        } else {
+            $data->time_period = $getFirstBudget['time_period'];
+        }
+        if (!empty($data['outreach'])) {
+            $data->outreach = $data['outreach'];
+        } else {
+            $data->outreach = $getFirstBudget['outreach'];
+        }
+
+        if (!empty($data['budget'])) {
+            $data->outreach = $data['budget'];
+        }
 
         $siImage_count = SocialInitiativeImages::where('social_initiative_id', $data->id)->count();
 

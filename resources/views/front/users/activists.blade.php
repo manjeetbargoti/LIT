@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Country">Country</label>
-                            <select class="form-control" name="country" id="country">
+                            <select class="form-control" name="country" id="actcountry">
                                 <option value="">Select Country</option>
                                 @foreach($country as $cntry)
                                 <option value="{{ $cntry->name }}" @if(!empty($countryname))@if($cntry->name ==
@@ -49,16 +49,16 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="State">State</label>
                             <select class="form-control" name="state" id="state">
                                 <option value="">Select State</option>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="City">City</label>
-                            <select class="form-control" name="city" id="city">
+                            <select class="form-control" name="city" id="actcity">
                                 <option value="">Select City</option>
                             </select>
                         </div>

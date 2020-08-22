@@ -25,7 +25,7 @@ class ActivistController extends Controller
         {
             $requestData = $request->all();
 
-            dd($requestData);
+            // dd($requestData);
 
             if(!empty($requestData['country'])){
                 $countryname = $requestData['country'];
@@ -33,7 +33,7 @@ class ActivistController extends Controller
                 $countryname = '';
             }
             
-            $state = $requestData['state'];
+            // $state = $requestData['state'];
             $city = $requestData['city'];
             $sdg = $requestData['sdg'];
 
@@ -41,15 +41,15 @@ class ActivistController extends Controller
                         ->where('country', 'LIKE', "%" . $countryname . "%")
                         ->whereHas("roles", function($q){ $q->where("name", "Activist"); });
 
-            // if ($sdg) {
-            //     $data = $data->where('country', 'LIKE', "%" . $sdg . "%");
-            // }
+            if ($sdg) {
+                $data = $data->where('country', 'LIKE', "%" . $sdg . "%");
+            }
             if ($countryname) {
                 $data = $data->where('country', 'LIKE', "%" . $countryname . "%");
             }
-            if ($state) {
-                $data = $data->where('state', 'LIKE', "%" . $state . "%");
-            }
+            // if ($state) {
+            //     $data = $data->where('state', 'LIKE', "%" . $state . "%");
+            // }
             if ($city) {
                 $data = $data->where('city', 'LIKE', "%" . $city . "%");
             }

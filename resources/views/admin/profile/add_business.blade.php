@@ -129,9 +129,8 @@
                                                 <span class="input-group-addon"> <i
                                                         class="fa fa-chevron-down text-primary"></i>
                                                 </span>
-                                                <select name="priority_sdg" id="PrioritySDG" class="form-control"
-                                                    value="{{ old('priority_sdg') }}" required>
-                                                    <option value=""> -- Select SDG's -- </option>
+                                                <select name="priority_sdg[]" id="PrioritySDG" multiple class="form-control chzn-select"
+                                                    value="{{ old('priority_sdg') }}" required data-placeholder="-- Select SDG --">
                                                     @foreach($sdg as $s)
                                                         <option value="{{ $s->sdg_name }}">{{ $s->sdg_name }}</option>
                                                     @endforeach

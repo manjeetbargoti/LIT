@@ -17,8 +17,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-6 float-left px-0 m-auto">
-                <img class="d-block img-responsive m-auto" width="300" src="<?php echo e(asset('images/initiative/large/'.$siImage->image_name)); ?>"
-                    alt="Second slide">
+                <img class="d-block img-responsive m-auto" width="300"
+                    src="<?php echo e(asset('images/initiative/large/'.$siImage->image_name)); ?>" alt="Second slide">
             </div>
             <div class="col-md-12 col-lg-6 pl-4">
                 <img src="<?php echo e(asset('front/dist/img/home/heading-icon.png')); ?>" class="mb-2 mx-auto" alt="">
@@ -27,11 +27,11 @@
                 <span class="col-12 col-lg-3">
                     <select name="budget" id="budgetList" class="form-control col-sm-3">
                         <?php if(empty($data->budget)): ?>
-                            <?php $__currentLoopData = $data2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <option value="<?php echo e($d2->id); ?>">USD <?php echo e($d2->budget); ?></option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $data2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $d2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($d2->id); ?>">USD <?php echo e($d2->budget); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php else: ?>
-                            <option>USD <?php echo e($data->budget); ?></option>
+                        <option>USD <?php echo e($data->budget); ?></option>
                         <?php endif; ?>
                     </select>
                 </span>
@@ -41,30 +41,35 @@
                     </li>
                     <li> <b>Location</b>: <?php echo e($data->city); ?>, <?php echo e($data->state); ?>, <?php echo e($data->country); ?></li>
                     <li class="d-none"> <b>Budget ID</b>: <span id="budg_id"><?php echo e($data->budget_id); ?></span> </li>
+                    <li class="d-none"> <b>Initiative ID</b>: <input type="hidden" id="inti_ID" value="<?php echo e($data->id); ?>"></li>
                     <li> <b>Beneficiaries</b>: <span id="budg_ben"><?php echo e($data->beneficiaries); ?></span> </li>
-                    <li> <b>Duration</b>: <span id="budg_dur"><?php echo e($data->duration); ?></span> <span id="budg_tp"><?php echo e($data->time_period); ?></span> </li>
+                    <li> <b>Duration</b>: <span id="budg_dur"><?php echo e($data->duration); ?></span> <span
+                            id="budg_tp"><?php echo e($data->time_period); ?></span> </li>
                     <li> <b>Out-Reach</b>: <span id="budg_outreach"><?php echo e($data->outreach); ?></span> </li>
                     <li> <b>SDG</b>: <?php echo e($data->area_impact_sdg); ?></li>
+                    <?php if($data->video_link): ?>
+                    <li><b>Video Link</b>: <a target="_blank" href="<?php echo e($data->video_link); ?>"><?php echo e($data->video_link); ?></a>
+                    </li>
+                    <?php endif; ?>
                     <li> <b>Description</b>:
                         <?php if(!empty($data->initiative_name)): ?><?php echo e($data->initiative_name); ?><?php elseif(!empty($data->service_name)): ?><?php endif; ?>
                     </li>
                 </ul>
-                <?php if($data->promote == null): ?>
+
                 <div class="btnbx mt-2">
                     <?php if(!empty($data->initiative_name)): ?>
-                    <a href="<?php echo e(url('/social-initiative/add-to-cart/'.$data->id)); ?>"
+                    <a id="budget_href" href="<?php echo e(url('/social-initiative/add-to-cart/'.$data->id.'/'.$data->budget_id)); ?>"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
-                    <a href="<?php echo e(url('/initiative-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
+                    
+                    <a href="<?php echo e(url('/initiative-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase">
+                        Learn More</a>
                     <?php elseif(!empty($data->service_name)): ?>
-                    <a href="<?php echo e(url('/digital-service/add-to-cart/'.$data->id)); ?>"
+                    <a id="budg_id" href="<?php echo e(url('/digital-service/add-to-cart/'.$data->id.'/'.$data->budget_id)); ?>"
                         class="btn btn-primary text-uppercase"> Add to Impact Box</a>
-                    <a href="<?php echo e(url('/digital-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
+                    <a href="<?php echo e(url('/digital-programs/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn
+                        More</a>
                     <?php endif; ?>
                 </div>
-                <?php else: ?>
-                <a href="<?php echo e($data->promote_url); ?>" class="btn btn-primary text-uppercase"> Apply to Program</a>
-                <a href="<?php echo e(url('/program/apply-to-program/'.$data->slug)); ?>" class="btn btn-primary text-uppercase"> Learn More</a>
-                <?php endif; ?>
             </div>
         </div>
     </div>

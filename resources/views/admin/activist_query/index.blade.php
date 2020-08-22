@@ -72,14 +72,10 @@
                                                         class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </button></a>
 
-                                            <form method="POST" action="#"
-                                                accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete"
+                                                <a href="{{ url('/admin/support/activist-query/'.$item->id.'/delete') }}" class="btn btn-danger btn-sm" title="Delete"
                                                     onclick="return confirm('Confirm delete?')"><i
-                                                        class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                            </form>
+                                                        class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

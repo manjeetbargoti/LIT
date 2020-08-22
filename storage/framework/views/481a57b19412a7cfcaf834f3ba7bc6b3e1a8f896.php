@@ -3,20 +3,20 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" method="POST" action="<?php echo e(route('login')); ?>">
+            <form class="login100-form login-form" method="POST" action="<?php echo e(route('login')); ?>">
                 <?php echo csrf_field(); ?>
                 <span class="login100-form-title p-b-20">
                     LOGIN
                 </span>
 
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required">
-                    <input class="input100 <?php if ($errors->has('email')) :
+                <div class="form-group validate-input" data-validate="Valid email is required">
+                    <input class="form-control <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('email'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" type="text" name="email" id="EmailAddress">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Email</span>
+endif; ?>" type="text" name="email" placeholder="Email Address" id="EmailAddress" required autofocus>
+                    <!-- <span class="focus-input100"></span> -->
+                    <!-- <span class="label-input100">Email</span> -->
 
                     <?php if ($errors->has('email')) :
 if (isset($message)) { $messageCache = $message; }
@@ -29,14 +29,14 @@ if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input100 <?php if ($errors->has('password')) :
+                <div class="form-group validate-input" data-validate="Password is required">
+                    <input class="form-control <?php if ($errors->has('password')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('password'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" type="password" name="password" id="Password">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Password</span>
+endif; ?>" placeholder="Password" type="password" name="password" id="Password" required>
+                    <!-- <span class="focus-input100"></span> -->
+                    <!-- <span class="label-input100">Password</span> -->
 
                     <?php if ($errors->has('password')) :
 if (isset($message)) { $messageCache = $message; }

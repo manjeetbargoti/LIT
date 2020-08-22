@@ -4,15 +4,11 @@
 <!-- slider start -->
 <div id="litslider" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block w-100" src="{{ asset('front/dist/img/home/slide.jpg') }}" alt="First slide">
+        @foreach($banners as $key => $im)
+        <div class="carousel-item @if($key == 0)active @endif <?php echo $key; ?>">
+            <img class="d-block w-100" src="{{ asset('images/banners/'.$im->image) }}" alt="First slide">
         </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="{{ asset('front/dist/img/home/slide.jpg') }}" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="{{ asset('front/dist/img/home/slide.jpg') }}" alt="Third slide">
-        </div>
+        @endforeach
     </div>
     <a class="carousel-control-prev" href="#litslider" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -70,7 +66,7 @@
                                                 <option value="">Select Budget</option>
                                                 <option value="in-kind">In kind partnerships</option>
                                                 <option value="1,5000">$1-$5,000</option>
-                                                <option value="5000,1000">$5,000-$10,000</option>
+                                                <option value="5000,10000">$5,000-$10,000</option>
                                                 <option value="10001,15000">$10,001-$15,000</option>
                                                 <option value="15001,20000">$15,001-$20,000</option>
                                                 <option value="20001,25000">$20,001-$25,000</option>
@@ -317,12 +313,12 @@
         <img class="d-block w-100" src="{{ asset('front/dist/img/home/program.jpg') }}" alt="Second slide">
     </div>
     <div class="col-md-12 col-lg-7 offset-lg-5 px-0 projbg">
-        <h2 class="h2"> Social Impact Programs </h2>
+        <h2 class="h2"> {{ __('') }} </h2>
         <div id="projslider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 @foreach($social_initiatives as $si)
                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                    <span class="aed">USD {{ $si->budget }}</span>
+                    <span class="aed">@if($si->max_budget == $si->min_budget) USD {{ $si->budget }} @elseif($si->max_budget != $si->min_budget) USD {{ $si->min_budget }} - {{ $si->max_budget }} @endif</span>
                     <h3 class="h3"> {{ $si->initiative_name }} </h3>
                     <ul>
                         <li> Beneficiaries: {{ $si->beneficiaries }} </li>

@@ -207,8 +207,8 @@ class SystemController extends Controller
         $option->value = $request->linkedin ?: $option->value;
         $option->save();
 
-        $option = Option::where('key', '=', 'app.pinterest')->first();
-        $option->value = $request->pinterest ?: $option->value;
+        $option = Option::where('key', '=', 'app.tiktok')->first();
+        $option->value = $request->tiktok ?: $option->value;
         $option->save();
 
         return back()->with(['flash_message_success' => 'Updated!']);

@@ -28,16 +28,16 @@
                             <a href="<?php echo e(url('/csr-market-place')); ?>"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
-                            <a href="<?php echo e(url('/program/apply-to-program')); ?>"><span class="title">Apply Program</span></a>
+                            <a href="<?php echo e(url('/program/apply-to-program')); ?>"><span class="title">Apply to Programs</span></a>
                         </li>
                         <li>
-                            <a href="<?php echo e(url('/users/activists')); ?>"><span class="title">SOCIAL STRATUPS</span></a>
+                            <a href="<?php echo e(url('/users/activists')); ?>"><span class="title">SOCIAL STARTUPS</span></a>
                         </li>
                         <li>
                             <a href="<?php echo e(url('/success-stories')); ?>"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
-                            <a href="<?php echo e(url('/contact-us')); ?>"><span class="title">CONTACT US</span></a>
+                            <a href="<?php echo e(url('/help/contact-us')); ?>"><span class="title">CONTACT US</span></a>
                         </li>
                         <?php if(auth()->guard()->guest()): ?>
                         <li>
@@ -83,11 +83,11 @@
                                             <img src="<?php echo e(asset('front/dist/img/home/blog2.jpg')); ?>">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5><?php echo e($loop->iteration); ?>. <?php echo e($details['name']); ?>, <?php echo e($details['beneficiaries']); ?> Beneficiaries, Duration: <?php echo e($details['duration']); ?> Months </h5>
+                                            <h5><?php echo e($loop->iteration); ?>. <?php echo e($details['name']); ?>, <?php echo e($details['beneficiaries']); ?> Beneficiaries, Duration: <?php echo e($details['duration']); ?> <?php echo e($details['period']); ?> </h5>
                                             <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> USD <?php echo e($details['budget']); ?></p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> <?php echo e($details['beneficiaries']); ?></p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> <?php echo e($total); ?></p> -->
-                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($details['duration']); ?> Months</p>
+                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> <?php echo e($details['duration']); ?> <?php echo e($details['period']); ?></p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> <?php echo e(number_format(preg_replace('/[ ,]+/', '', $details['budget']) / $details['beneficiaries'] / preg_replace('/[ ,]+/', '', $details['duration']), 2)); ?> per person/month</p> -->
                                             <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm<?php echo e($details['rid']); ?>">Express Interest</a>
                                             <a href="<?php echo e(url('/cart-item/'.$details['rid'].'/remove/')); ?>" class="button_link btn-danger pull-right">Remove</a>

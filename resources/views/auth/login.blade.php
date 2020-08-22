@@ -4,16 +4,16 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+            <form class="login100-form login-form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <span class="login100-form-title p-b-20">
                     LOGIN
                 </span>
 
-                <div class="wrap-input100 validate-input" data-validate="Valid email is required">
-                    <input class="input100 @error('email') is-invalid @enderror" type="text" name="email" id="EmailAddress">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Email</span>
+                <div class="form-group validate-input" data-validate="Valid email is required">
+                    <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email Address" id="EmailAddress" required autofocus>
+                    <!-- <span class="focus-input100"></span> -->
+                    <!-- <span class="label-input100">Email</span> -->
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -22,10 +22,10 @@
                     @enderror
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input100 @error('password') is-invalid @enderror" type="password" name="password" id="Password">
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Password</span>
+                <div class="form-group validate-input" data-validate="Password is required">
+                    <input class="form-control @error('password') is-invalid @enderror" placeholder="Password" type="password" name="password" id="Password" required>
+                    <!-- <span class="focus-input100"></span> -->
+                    <!-- <span class="label-input100">Password</span> -->
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">

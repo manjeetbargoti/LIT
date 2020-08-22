@@ -116,10 +116,9 @@ endif; ?>"
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('area_impact_sdg'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"
-                                        name="area_impact_sdg" id="area_impact_sdg" value="<?php echo e(old('area_impact_sdg')); ?>"
-                                        required>
-                                        <option value=""> -- Select SDG -- </option>
+endif; ?> chzn-select"
+                                        name="area_impact_sdg[]" id="area_impact_sdg" multiple value="<?php echo e(old('area_impact_sdg')); ?>"
+                                        required data-placeholder="-- Select SDG --">
                                         <?php $__currentLoopData = $sdgs->where('sdg_category','Onground'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($s->sdg_name); ?>"><?php echo e($loop->iteration); ?>. <?php echo e($s->sdg_name); ?>
 
@@ -366,7 +365,7 @@ $message = $errors->first('outreach'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                                         name="outreach[]" type="text" id="outreach"
-                                                        value="<?php echo e(old('outreach')); ?>" placeholder="Number of Beneficieries"
+                                                        value="<?php echo e(old('outreach')); ?>" placeholder="Number of Out Reach"
                                                         required>
                                                 </div>
                                                 <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
@@ -383,9 +382,10 @@ endif; ?>"
                                         <div class="form-group row">
                                             <div class="col-xl-2 text-xl-right">
                                                 <label for="Initiative info"
-                                                    class="col-form-label"><?php echo e(__('Initiative info *')); ?></label>
+                                                    class="col-form-label"><?php echo e(__('')); ?></label>
                                             </div>
-                                            <div class="col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
+                                            <div class="input-group col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">Beneficieries</span>
                                                 <input class="form-control <?php if ($errors->has('beneficiaries')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('beneficiaries'); ?> is-invalid <?php unset($message);
@@ -583,6 +583,18 @@ endif; ?>"
                                 </div>
                             </div>
 
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Program"
+                                        class="col-form-label"><?php echo e(__('Featured (Suggest this program) *')); ?></label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('featured') ? 'has-error' : ''); ?>">
+                                    <div class="add_image">
+                                        <input type="checkbox" id="featured" name="featured" value="1" />
+                                    </div>
+                                </div>
+                            </div>
                             <hr>
 
                             <div class="form-group">

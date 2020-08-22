@@ -47,6 +47,11 @@ class BusinessInfoController extends Controller
         if ($request->isMethod('post')) {
             $requestData = $request->all();
 
+            $sdgs = $requestData['priority_sdg'];
+            $sdgs = implode(', ',$sdgs);
+
+            $requestData['priority_sdg'] = $sdgs;
+
             // Trade Licence Image
             if ($request->hasFile('trade_license_image')) {
                 $image_array = Input::file('trade_license_image');
@@ -85,6 +90,7 @@ class BusinessInfoController extends Controller
      */
     public function updateBusinessInfo(Request $request, $id=null)
     {
+
         $sdg = SDGs::where('status', 1)->get();
 
         // $country = Country::get();
@@ -93,10 +99,21 @@ class BusinessInfoController extends Controller
 
         $businessData = BusinessInfo::where('id', $id)->first();
 
+        $getSdg = $businessData->priority_sdg;
+
+        $businessData->priority_sdg = explode(', ', $getSdg);
+
         // dd($businessData);
 
         if ($request->isMethod('post')) {
             $requestData = $request->except('_token');
+
+            $sdgs = $requestData['priority_sdg'];
+            $sdgs = implode(', ',$sdgs);
+
+            $requestData['priority_sdg'] = $sdgs;
+
+            // dd($requestData);
 
             // Trade Licence Image
             if ($request->hasFile('trade_license_image')) {

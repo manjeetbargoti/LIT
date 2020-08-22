@@ -35,17 +35,25 @@ class LoginController extends Controller
         return Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],[
+            'email.required' => 'The email is required.',
+            'email.email' => 'The email needs to have a valid format.',
+            'email.exists' => 'The email is not registered in the system.',
+       ]);
     }
 
-    protected function credentials(Request $request)
-    {
-        return [
-            'email' => $request->{$this->username()},
-            'password' => $request->password,
-            'status' => '1',
-        ];
-    }
+    // protected function credentials(Request $request)
+    // {
+    //     return [
+    //         'email' => $request->{$this->username()},
+    //         'password' => $request->password,
+    //         'status' => '1',
+    //     ];
+    // }
+
+    protected function credentials(Request $request) {
+        return array_merge($request->only($this->username(), 'password'), ['status' => 1]);
+      }
 
 
     protected function redirectTo()

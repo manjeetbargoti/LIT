@@ -147,4 +147,10 @@ class PagesController extends Controller
 
         return view('front.pages.single', compact('data'));
     }
+
+    // Contact Page Controller
+    public function contactPage()
+    {
+        return view('front.pages.contact');
+    }
 }

@@ -119,11 +119,11 @@ endif; ?>"
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('area_impact_sdg'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>"
-                                        name="area_impact_sdg" id="area_impact_sdg" value="<?php echo e(old('area_impact_sdg')); ?>" required>
+endif; ?> chzn-select"
+                                        name="area_impact_sdg[]" id="area_impact_sdg" value="<?php echo e(old('area_impact_sdg')); ?>" multiple required data-placeholder="-- Select SDG --">
                                         <option value=""> -- Select SDG -- </option>
                                         <?php $__currentLoopData = $sdgs->where('sdg_category','Onground'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($s->sdg_name); ?>" <?php if($s->sdg_name == $socialInitiative->area_impact_sdg): ?> selected <?php endif; ?>><?php echo e($loop->iteration); ?>. <?php echo e($s->sdg_name); ?> </option>
+                                        <option value="<?php echo e($s->sdg_name); ?>" <?php $__currentLoopData = $socialInitiative->area_impact_sdg; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rsdgs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> <?php if($s->sdg_name == $rsdgs): ?> selected <?php endif; ?> <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>><?php echo e($loop->iteration); ?>. <?php echo e($s->sdg_name); ?> </option>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <select>
                                     <?php echo $errors->first('area_impact_sdg', '<p class="help-block">:message</p>'); ?>
@@ -155,7 +155,7 @@ endif; ?>"
                                     <label for="Project Scalability"
                                         class="col-form-label"><?php echo e(__('Describe the scalability of this project *')); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
                                 </div>
                                 <div class="col-xl-9 <?php echo e($errors->has('project_scalability') ? 'has-error' : ''); ?>">
@@ -165,8 +165,8 @@ $message = $errors->first('project_scalability'); ?> is-invalid <?php unset($mes
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="project_scalability" id="project_scalability"
-                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="200"
-                                        placeholder="Max 200 words"><?php echo e($socialInitiative->project_scalability); ?></textarea>
+                                        value="<?php echo e(old('project_scalability')); ?>" rows='3' required maxlength="1000"
+                                        placeholder="Max 1000 words"><?php echo e($socialInitiative->project_scalability); ?></textarea>
                                     <?php echo $errors->first('project_scalability', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -177,7 +177,7 @@ endif; ?>"
                                     <label for="Project SDG Relevance"
                                         class="col-form-label"><?php echo e(__("Describe the project's relevance to the SDG's *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -188,7 +188,7 @@ $message = $errors->first('sdg_relevance'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="sdg_relevance" id="sdg_relevance" value="<?php echo e(old('sdg_relevance')); ?>"
-                                        rows="3" required maxlength="200" placeholder="Max 200 words"><?php echo e($socialInitiative->sdg_relevance); ?></textarea>
+                                        rows="3" required maxlength="1000" placeholder="Max 1000 words"><?php echo e($socialInitiative->sdg_relevance); ?></textarea>
                                     <?php echo $errors->first('sdg_relevance', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -199,7 +199,7 @@ endif; ?>"
                                     <label for="Relevance to National Agenda"
                                         class="col-form-label"><?php echo e(__("Describe the project's relevance to National Agenda *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -211,8 +211,8 @@ $message = $errors->first('relevance_national_agenda'); ?> is-invalid <?php unse
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="relevance_national_agenda" id="relevance_national_agenda"
-                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"><?php echo e($socialInitiative->relevance_national_agenda); ?></textarea>
+                                        value="<?php echo e(old('relevance_national_agenda')); ?>" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"><?php echo e($socialInitiative->relevance_national_agenda); ?></textarea>
                                     <?php echo $errors->first('relevance_national_agenda', '<p class="help-block">:message</p>
                                     '); ?>
 
@@ -224,7 +224,7 @@ endif; ?>"
                                     <label for="Project innovation"
                                         class="col-form-label"><?php echo e(__("How innovative is the project? *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -235,8 +235,8 @@ $message = $errors->first('project_innovation'); ?> is-invalid <?php unset($mess
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="project_innovation" id="project_innovation"
-                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="200"
-                                        placeholder="Max 200 words"><?php echo e($socialInitiative->project_innovation); ?></textarea>
+                                        value="<?php echo e(old('project_innovation')); ?>" rows="3" required maxlength="1000"
+                                        placeholder="Max 1000 words"><?php echo e($socialInitiative->project_innovation); ?></textarea>
                                     <?php echo $errors->first('project_innovation', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -247,7 +247,7 @@ endif; ?>"
                                     <label for="Program Benefits"
                                         class="col-form-label"><?php echo e(__("List of benefits of the program *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -258,8 +258,8 @@ $message = $errors->first('program_benefits'); ?> is-invalid <?php unset($messag
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
                                         name="program_benefits" id="program_benefits"
-                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="250"
-                                        placeholder="Max 250 words"><?php echo e($socialInitiative->program_benefits); ?></textarea>
+                                        value="<?php echo e(old('program_benefits')); ?>" rows="5" required maxlength="1000"
+                                        placeholder="Max 1000 words"><?php echo e($socialInitiative->program_benefits); ?></textarea>
                                     <?php echo $errors->first('program_benefits', '<p class="help-block">:message</p>'); ?>
 
                                 </div>
@@ -269,7 +269,7 @@ endif; ?>"
                                 <div class="col-xl-2 text-xl-right">
                                     <label for="Program Stage" class="col-form-label"><?php echo e(__("Program Stage *")); ?>
 
-                                        <!-- <span class="small text-info">(Max 200 words)</span> -->
+                                        <!-- <span class="small text-info">(Max 1000 words)</span> -->
                                     </label>
 
                                 </div>
@@ -309,104 +309,151 @@ endif; ?>"
                             </div>
                             <hr>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label"><?php echo e(__('Time Duration *')); ?></label>
+                            <div class="dynamic_field" id="repeater">
+                                <div class="repeater-heading" align="left" id="AddMoreButton">
+                                    <button type="button" class="btn btn-primary repeater-add-btn">Add More
+                                        Budget</button>
                                 </div>
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('start_date') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">Start</span>
-                                    <input class="form-control <?php if ($errors->has('start_date')) :
+                                
+                                <div class="items">
+                                <?php $__currentLoopData = $multibudget; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mb): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="item-content">
+                                        <div class="form-group row first_line">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label"><?php echo e(__('Time Duration *')); ?></label>
+                                            </div>
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('bid') ? 'has-error' : ''); ?> d-none">
+                                                <span class="input-group-addon">Budget id</span>
+                                                <input class="form-control <?php if ($errors->has('bid')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('bid'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                                    name="bid[]" type="text"
+                                                    id="bid" value="<?php echo e($mb->id); ?>" placeholder="Budget ID"
+                                                    required>
+                                                <?php echo $errors->first('bid', '<p class="help-block">:message</p>'); ?>
+
+                                            </div>
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('start_date') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">Start</span>
+                                                <input class="form-control <?php if ($errors->has('start_date')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('start_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        name="start_date" type="text" data-date-format="yyyy-mm-dd" id="dp2"
-                                        value="<?php echo e($socialInitiative->start_date); ?>" placeholder="Start Date" required>
-                                    <?php echo $errors->first('start_date', '<p class="help-block">:message</p>'); ?>
+                                                    name="start_date[]" type="date"
+                                                    id="dp<?php echo e($loop->iteration+1); ?>" value="<?php echo e($mb->start_date); ?>" placeholder="Start Date"
+                                                    required>
+                                                <?php echo $errors->first('start_date', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('end_date') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">End</span>
-                                    <input class="form-control <?php if ($errors->has('end_date')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('end_date') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">End</span>
+                                                <input class="form-control <?php if ($errors->has('end_date')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('end_date'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="end_date" type="text" data-date-format="yyyy-mm-dd" id="dp2-1" value="<?php echo e($socialInitiative->end_date); ?>" placeholder="End Date"
-                                        required>
-                                    <?php echo $errors->first('end_date', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                    name="end_date[]" type="date" data-date-format="yyyy-mm-dd"
+                                                    id="dp2-1" value="<?php echo e($mb->end_date); ?>" placeholder="End Date"
+                                                    required>
+                                                <?php echo $errors->first('end_date', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
-                                    <!-- <span class="input-group-addon">months</span> -->
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Out Reach</span>
-                                        <input class="form-control <?php if ($errors->has('outreach')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
+                                                <!-- <span class="input-group-addon">months</span> -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Out Reach</span>
+                                                    <input class="form-control <?php if ($errors->has('outreach')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('outreach'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="outreach"
-                                        type="text" id="outreach" value="<?php echo e($socialInitiative->outreach); ?>" placeholder="No. of People"
-                                        required>
-                                    </div>
-                                    <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                        name="outreach[]" type="text" id="outreach"
+                                                        value="<?php echo e($mb->outreach); ?>" placeholder="Number of Out Reach"
+                                                        required>
+                                                </div>
+                                                <?php echo $errors->first('outreach', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
-                            </div>
+                                            </div>
 
-                            <div class="form-group row">
-                                <div class="col-xl-2 text-xl-right">
-                                    <label for="Initiative info"
-                                        class="col-form-label"><?php echo e(__('Initiative info *')); ?></label>
-                                </div>
-                                <div class="col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
-                                    <input class="form-control <?php if ($errors->has('beneficiaries')) :
+                                            <div class="col-xl-1" id="deleteBtn">
+                                                <button type="button" onclick="$(this).parents('.items').remove()"
+                                                    name="remove" id="remove" id="remove-btn" class="btn btn-danger"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-xl-2 text-xl-right">
+                                                <label for="Initiative info"
+                                                    class="col-form-label"><?php echo e(__('')); ?></label>
+                                            </div>
+                                            <div class="input-group col-xl-3 <?php echo e($errors->has('beneficiaries') ? 'has-error' : ''); ?>">
+                                                <span class="input-group-addon">Beneficieries</span>
+                                                <input class="form-control <?php if ($errors->has('beneficiaries')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('beneficiaries'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
 endif; ?>"
-                                        name="beneficiaries" type="text" id="Beneficiaries"
-                                        value="<?php echo e($socialInitiative->beneficiaries); ?>"
-                                        placeholder="no. of Beneficieries" required>
-                                    <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>'); ?>
+                                                    name="beneficiaries[]" type="number" pattern="[-+]?[0-9]*[.,]?[0-9]+" id="Beneficiaries"
+                                                    value="<?php echo e($mb->beneficiaries); ?>"
+                                                    placeholder="number of Beneficieries" required>
+                                                <?php echo $errors->first('beneficiaries', '<p class="help-block">:message</p>
+                                                '); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>">
-                                    <span class="input-group-addon">$</span>
-                                    <input class="form-control <?php if ($errors->has('budget')) :
+                                            <div class="input-group col-xl-3 <?php echo e($errors->has('budget') ? 'has-error' : ''); ?>"
+                                                id="budgetDiv">
+                                                <span class="input-group-addon">$</span>
+                                                <input class="form-control <?php if ($errors->has('budget')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('budget'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="budget"
-                                        type="text" id="Budget" value="<?php echo e($socialInitiative->budget); ?>"
-                                        placeholder="Budget" required>
-                                    <?php echo $errors->first('budget', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                    name="budget[]" type="text" id="Budget" value="<?php echo e($mb->budget); ?>"
+                                                    placeholder="Budget" required>
+                                                <?php echo $errors->first('budget', '<p class="help-block">:message</p>'); ?>
 
-                                </div>
+                                            </div>
 
-                                <div class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <select class="time-period" name="time_period">
-                                                <option value="Days" <?php if($socialInitiative->time_period == 'Days'): ?> selected <?php endif; ?>>Days</option>
-                                                <option value="Month" <?php if($socialInitiative->time_period == 'Month'): ?> selected <?php endif; ?>>Months</option>
-                                                <option value="Year" <?php if($socialInitiative->time_period == 'Year'): ?> selected <?php endif; ?>>Year</option>
-                                            </select>
-                                        </div>
-                                        <input class="form-control <?php if ($errors->has('duration')) :
+                                            <div
+                                                class="input-group col-xl-3 <?php echo e($errors->has('duration') ? 'has-error' : ''); ?>">
+                                                <!-- <span class="input-group-addon">months</span> -->
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <select class="time-period" name="time_period[]">
+                                                            <option value="Days" <?php if($mb->time_period == 'Days'): ?> selected <?php endif; ?>>Days</option>
+                                                            <option value="Month" <?php if($mb->time_period == 'Month'): ?> selected <?php endif; ?>>Months</option>
+                                                            <option value="Year" <?php if($mb->time_period == 'Year'): ?> selected <?php endif; ?>>Year</option>
+                                                        </select>
+                                                    </div>
+                                                    <input class="form-control <?php if ($errors->has('duration')) :
 if (isset($message)) { $messageCache = $message; }
 $message = $errors->first('duration'); ?> is-invalid <?php unset($message);
 if (isset($messageCache)) { $message = $messageCache; }
-endif; ?>" name="duration"
-                                        type="text" id="Duration" value="<?php echo e($socialInitiative->duration); ?>" placeholder="Duration"
-                                        required>
-                                    </div>
-                                    <?php echo $errors->first('duration', '<p class="help-block">:message</p>'); ?>
+endif; ?>"
+                                                        name="duration[]" type="text" id="Duration"
+                                                        value="<?php echo e($mb->duration); ?>" placeholder="Duration" required>
+                                                </div>
+                                                <?php echo $errors->first('duration', '<p class="help-block">:message</p>'); ?>
 
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
+                                
                             </div>
 
                             <div class="form-group row">
@@ -487,6 +534,56 @@ endif; ?>"
 
                             <div class="form-group row">
                                 <div class="col-xl-2 text-xl-right">
+                                    <label for="Youtube Video" class="col-form-label"><?php echo e(__('Video URL')); ?></label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('video_link') ? 'has-error' : ''); ?>">
+                                    <input type="text" id="video_link"
+                                        class="form-control <?php if ($errors->has('video_link')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('video_link'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        value="<?php echo e($socialInitiative->video_link); ?>" name="video_link"
+                                        placeholder="Youtube video link" />
+                                    <!-- <i class="fas fa-camera"></i> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Image" class="col-form-label"><?php echo e(__('')); ?></label>
+                                </div>
+                                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                                    <div class="contact100-form-checkbox">
+                                        <input class="input-checkbox100" id="ckb2" type="checkbox" <?php if($socialInitiative->promote == 1): ?> checked <?php endif; ?> name="promote"
+                                            value="1">
+                                        <label class="label-checkbox100" for="ckb2">
+                                            I would like to promote the program to encourage participation and
+                                            registration.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="showUrl">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Promotion url" class="col-form-label"><?php echo e(__('Promotion URL')); ?></label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('promote_url') ? 'has-error' : ''); ?>">
+                                    <input type="text" id="promote_url"
+                                        class="form-control <?php if ($errors->has('promote_url')) :
+if (isset($message)) { $messageCache = $message; }
+$message = $errors->first('promote_url'); ?> is-invalid <?php unset($message);
+if (isset($messageCache)) { $message = $messageCache; }
+endif; ?>"
+                                        value="<?php echo e($socialInitiative->promote_url); ?>" name="promote_url"
+                                        placeholder="Add your program page url here" />
+                                    <!-- <i class="fas fa-camera"></i> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
                                     <label for="Featured Image"
                                         class="col-form-label"><?php echo e(__('Initiative Images *')); ?></label>
                                 </div>
@@ -507,6 +604,18 @@ endif; ?>"
                                         <a href="<?php echo e(url('/admin/initiative/image/' . $sIimg->id . '/delete')); ?>"><i
                                                 id="close" alt="delete" class="fa fa-close"></i></a>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-xl-2 text-xl-right">
+                                    <label for="Featured Program"
+                                        class="col-form-label"><?php echo e(__('Featured (Suggest this program) *')); ?></label>
+                                </div>
+                                <div class="col-xl-9 <?php echo e($errors->has('featured') ? 'has-error' : ''); ?>">
+                                    <div class="add_image">
+                                        <input type="checkbox" id="featured" name="featured" value="1" <?php if($socialInitiative->featured == 1): ?> checked <?php endif; ?>/>
                                     </div>
                                 </div>
                             </div>

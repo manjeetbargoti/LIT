@@ -655,7 +655,8 @@ ul#respMenu .btn:hover {
 
 
 .topnav .ace-responsive-menu > li > a {
-  padding: 38px 9px !important;
+  padding: 38px 8px !important;
+  font-size: 11px;
 }
 
 .topnav ul#respMenu .btn {

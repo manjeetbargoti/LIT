@@ -28,16 +28,16 @@
                             <a href="{{ url('/csr-market-place') }}"><span class="title">CSR MARKET PLACE</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('/program/apply-to-program') }}"><span class="title">Apply Program</span></a>
+                            <a href="{{ url('/program/apply-to-program') }}"><span class="title">Apply to Programs</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('/users/activists') }}"><span class="title">SOCIAL STRATUPS</span></a>
+                            <a href="{{ url('/users/activists') }}"><span class="title">SOCIAL STARTUPS</span></a>
                         </li>
                         <li>
                             <a href="{{ url('/success-stories') }}"><span class="title">SUCCESS STORIES</span></a>
                         </li>
                         <li>
-                            <a href="{{ url('/contact-us') }}"><span class="title">CONTACT US</span></a>
+                            <a href="{{ url('/help/contact-us') }}"><span class="title">CONTACT US</span></a>
                         </li>
                         @guest
                         <li>
@@ -82,11 +82,11 @@
                                             <img src="{{ asset('front/dist/img/home/blog2.jpg') }}">
                                         </span> -->
                                         <div class="carttext">
-                                            <h5>{{ $loop->iteration }}. {{ $details['name'] }}, {{ $details['beneficiaries'] }} Beneficiaries, Duration: {{ $details['duration'] }} Months </h5>
+                                            <h5>{{ $loop->iteration }}. {{ $details['name'] }}, {{ $details['beneficiaries'] }} Beneficiaries, Duration: {{ $details['duration'] }} {{ $details['period'] }} </h5>
                                             <p><strong><i class="fa fa-hand-o-right"></i> Budget:</strong> USD {{ $details['budget'] }}</p>
                                             <p><strong><i class="fa fa-user"></i> Beneficiaries:</strong> {{ $details['beneficiaries'] }}</p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Quantity:</strong> {{ $total }}</p> -->
-                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $details['duration'] }} Months</p>
+                                            <p><strong><i class="fa fa-clock-o"></i> Duration:</strong> {{ $details['duration'] }} {{ $details['period'] }}</p>
                                             <!-- <p><strong><i class="fa fa-check-square-o"></i> Spend Per Person:</strong> {{ number_format(preg_replace('/[ ,]+/', '', $details['budget']) / $details['beneficiaries'] / preg_replace('/[ ,]+/', '', $details['duration']), 2) }} per person/month</p> -->
                                             <a href="javascript.void(0);" class="button_link" data-toggle="modal" data-target="#QueryForm{{ $details['rid'] }}">Express Interest</a>
                                             <a href="{{ url('/cart-item/'.$details['rid'].'/remove/') }}" class="button_link btn-danger pull-right">Remove</a>

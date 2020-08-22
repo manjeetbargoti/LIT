@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/support/submit-proposals', 'QueryController@proposals');
     Route::get('admin/support/initiative-query', 'QueryController@initiativeQuery');
     Route::get('admin/support/activist-query', 'QueryController@activistQuery');
+    Route::get('admin/support/activist-query/{id}/delete', 'QueryController@deleteActivistQuery');
 
     // Website System Setting Options Route
     Route::get('admin/system/options', 'SystemController@getOptions');
@@ -99,6 +100,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin/sdgs', 'SDGController');
     Route::match(['get','post'], '/admin/sdgs/{id}/disable', 'SDGController@disableSDG');
     Route::match(['get','post'], '/admin/sdgs/{id}/enable', 'SDGController@enableSDG');
+
+    // Homepage Banner Routes
+    Route::get('/admin/banner', 'BannerController@banners');
+    Route::match(['get','post'], '/admin/banner/add', 'BannerController@addBanner');
+    Route::match(['get','post'], '/admin/banner/{id}/edit', 'BannerController@editBanner');
+    Route::match(['get','post'], '/admin/banner/{id}/delete', 'BannerController@deleteBanner');
+    Route::match(['get','post'], '/admin/banner/{id}/enable', 'BannerController@enableBanner');
+    Route::match(['get','post'], '/admin/banner/{id}/disable', 'BannerController@disableBanner');
     
 });
 
@@ -123,13 +132,14 @@ Route::match(['get','post'], '/digital-programs/{url}', 'HomeController@learnDig
 Route::get('/get-state', 'AdminController@getStateList');
 Route::get('/get-city', 'AdminController@getCityList');
 Route::get('/get-country-city', 'AdminController@getCountryCityList');
+Route::get('/get-activist-city', 'AdminController@getCountryCityList');
 
 // Success Stories
 Route::match(['get', 'post'], '/success-stories', 'SuccessStoryController@listStories');
 Route::match(['get', 'post'], '/success-story/{url}', 'SuccessStoryController@singleStories');
 
 // Add to cart functionality
-Route::match(['get','post'], '/social-initiative/add-to-cart/{id}', 'CartController@addToCart');
+Route::match(['get','post'], '/social-initiative/add-to-cart/{id}/{budget_id}', 'CartController@addToCart');
 Route::match(['get','post'], '/digital-service/add-to-cart/{id}', 'CartController@addToCart360');
 Route::match(['get','post'], '/cart-item/{id}/remove', 'CartController@removeFromCart');
 
@@ -143,6 +153,8 @@ Route::match(['get','post'], '/csr-market-place/{id}', 'ProposalController@singl
 
 // CMS Pages
 Route::match(['get','post'], '/{url}', 'PagesController@singlePage');
+Route::match(['get','post'], '/help/contact-us', 'PagesController@contactPage');
+Route::match(['get','post'], '/contact-us/form', 'QueryController@contactUs');
 
 // Activists
 Route::match(['get','post'], '/users/activists', 'ActivistController@index');

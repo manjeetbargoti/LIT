@@ -28,7 +28,7 @@
                         </tr>
                         <tr>
                             <th>Project Description</th>
-                            <td>{{ $data->project_description }}</td>
+                            <td>{{ strip_tags($data->project_description) }}</td>
                         </tr>
                         <tr>
                             <th>Submission Date</th>
@@ -40,19 +40,19 @@
                         </tr>
                         <tr>
                             <th>Project Goals</th>
-                            <td>{{ $data->project_goals }}</td>
+                            <td>{{ strip_tags($data->project_goals) }}</td>
                         </tr>
                         <tr>
                             <th>Proposal Elements</th>
-                            <td>{{ $data->proposal_elements }}</td>
+                            <td>{{ strip_tags($data->proposal_elements) }}</td>
                         </tr>
                         <tr>
                             <th>Evolution Criteria</th>
-                            <td>{{ $data->evolution_criteria }}</td>
+                            <td>{{ strip_tags($data->evolution_criteria) }}</td>
                         </tr>
                         <tr>
                             <th>Possible Challanges</th>
-                            <td>{{ $data->possible_challanges }}</td>
+                            <td>{{ strip_tags($data->possible_challanges) }}</td>
                         </tr>
                         <tr>
                             <th>Project Budget</th>

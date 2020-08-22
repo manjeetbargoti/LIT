@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="SDGs">SDG's</label>
+                            <label for="SDGs">SDGs</label>
                             <select class="form-control" name="sdgs[]" id="MultiSelect1" multiple
                                 data-placeholder="Select SDGs" style="width: 200px !important;">
                                 <!-- <option value=""> Select Area of Impact </option> -->
@@ -105,7 +105,7 @@
                             <h4 class="h4">
                                 <?php if(!empty($d->initiative_name)): ?><?php echo e($d->initiative_name); ?><?php elseif(!empty($d->service_name)): ?><?php endif; ?>
                             </h4>
-                            <h5 class="h5">USD <?php echo e($d->budget); ?></h5>
+                            <h5 class="h5"><?php if($d->max_budget == $d->min_budget): ?> USD <?php echo e($d->budget); ?> <?php elseif($d->max_budget != $d->min_budget): ?> USD <?php echo e($d->min_budget); ?> - <?php echo e($d->max_budget); ?> <?php endif; ?></h5>
                             <ul class="p-0">
                                 <li> <b>Beneficiaries</b>: <?php echo e($d->beneficiaries); ?></li>
                                 <li> <b>Duration</b>: <?php echo e($d->duration); ?> <?php echo e($d->time_period); ?></li>

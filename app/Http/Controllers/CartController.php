@@ -17,7 +17,7 @@ class CartController extends Controller
     {
         $addInitiative = SocialInitiative::find($id);
 
-        // dd($addInitiative);
+        dd($addInitiative);
 
         if(!$addInitiative) {
  
@@ -78,11 +78,13 @@ class CartController extends Controller
     }
 
     // Add to Cart (On-ground Initiative)
-    public function addToCart($id)
+    public function addToCart($id, $budget_id)
     {
         $addInitiative = SocialInitiative::find($id);
 
-        $budgetData = MultiBudget::where('social_init_id', $id)->first();
+        $budgetData = MultiBudget::find($budget_id);
+
+        // dd($budgetData);
 
         if(!empty($addInitiative->beneficiaries))
         {
@@ -155,6 +157,7 @@ class CartController extends Controller
                     'name' => $addInitiative->initiative_name,
                     'budget' => $addInitiative->budget,
                     'duration' => $addInitiative->duration,
+                    'period' => $addInitiative->time_period,
                     'beneficiaries' => $addInitiative->beneficiaries,
                     'qty' => 1
                 ]
@@ -183,6 +186,7 @@ class CartController extends Controller
             'name' => $addInitiative->initiative_name,
             'budget' => $addInitiative->budget,
             'duration' => $addInitiative->duration,
+            'period' => $addInitiative->time_period,
             'beneficiaries' => $addInitiative->beneficiaries,
             'qty' => 1
         ];

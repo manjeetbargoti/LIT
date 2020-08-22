@@ -256,6 +256,32 @@
             $("#city").empty();
         }
     });
+
+    $('#actcountry').on('change', function() {
+        var countryID = $(this).val();
+        var _token = $('input[name="_token"]').val();
+        if (countryID) {
+            $.ajax({
+                type: "GET",
+                url: "/get-activist-city?country_name=" + countryID,
+                success: function(res) {
+                    if (res) {
+                        $("#actcity").empty();
+                        $("#actcity").append('<option value="">Select City</option>');
+                        $.each(res, function(key, value) {
+                            $("#actcity").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+
+                    } else {
+                        $("#actcity").empty();
+                    }
+                }
+            });
+        } else {
+            $("#city").empty();
+        }
+    });
     </script>
 
     <script>
@@ -374,6 +400,7 @@
     <script>
     $('#budgetList').change(function() {
         var budgetID = $(this).val();
+        var initiativeID = $('#inti_ID').val();
         // alert(budgetID);
         if (budgetID) {
             $.ajax({
@@ -391,6 +418,7 @@
                     $('#budg_sd').html(resp['start_date']);
                     $('#budg_ed').html(resp['end_date']);
                     $('#budg_ed').html(resp['end_date']);
+                    $('#budget_href').attr('href', '/social-initiative/add-to-cart/' + initiativeID + '/'+resp['id']);
                     $('#budg_outreach').html(resp['outreach']);
                 },error: function(){
                     alert("Error!");
@@ -404,18 +432,22 @@
         tail.select('#MultiSelect1', {
             search: true,
             deselect: true,
+            multiSelectAll: true,
         });
         tail.select('#MultiSelect2', {
             search: true,
             deselect: true,
+            multiSelectAll: true,
         });
         tail.select('#MultiSelect3', {
             search: true,
             deselect: true,
+            multiSelectAll: true,
         });
         tail.select('#MultiSelect4', {
             search: true,
             deselect: true,
+            multiSelectAll: true,
         });
 
     </script>

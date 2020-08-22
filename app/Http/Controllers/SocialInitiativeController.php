@@ -118,6 +118,12 @@ class SocialInitiativeController extends Controller
 
         $requestData = $request->all();
 
+        $getSDG = $requestData['area_impact_sdg'];
+
+        $requestData['area_impact_sdg'] = implode(', ', $getSDG);
+
+        // dd($requestData);
+
         if(!empty($requestData['in_partnership']))
         {
             $in_partnership = 1;
@@ -125,7 +131,14 @@ class SocialInitiativeController extends Controller
             $in_partnership = 0;
         }
 
-        // dd($requestData['in_partnership']);
+        if(!empty($requestData['featured']))
+        {
+            $requestData['featured'] = 1;
+        }else{
+            $requestData['featured'] = 0;
+        }
+
+        // dd($requestData);
 
         $user_id = Auth::user()->id;
 
@@ -223,7 +236,7 @@ class SocialInitiativeController extends Controller
                     $filename = 'lit_initiative_' . rand(1, 99999) . '.' . $extension;
                     $large_image_path = public_path('images/initiative/large/' . $filename);
                     // Resize image
-                    Image::make($image_array[$i])->save($large_image_path);
+                    Image::make($image_array[$i])->resize(512, 512)->save($large_image_path);
 
                     // dd($product->id);
 
@@ -313,6 +326,12 @@ class SocialInitiativeController extends Controller
 
         $socialInitiative = SocialInitiative::findOrFail($id);
 
+        $getSDG = $socialInitiative->area_impact_sdg;
+
+        $socialInitiative->area_impact_sdg = explode(', ', $getSDG);
+
+        // dd($getSDG);
+
         // Country Dropdown
         $countryname = Country::get();
         $country_dropdown = "<option selected value=''>Select Country</option>";
@@ -374,11 +393,28 @@ class SocialInitiativeController extends Controller
 
         $requestData = $request->all();
 
+        // dd($requestData);
+
+        $sdgs = $requestData['area_impact_sdg'];
+
+        $sdgs = implode(', ', $sdgs);
+
+        $requestData['area_impact_sdg'] = $sdgs;
+
+        // dd($sdgs);
+
         if(!empty($requestData['in_partnership']))
         {
-            $in_partnership = 1;
+            $requestData['in_partnership'] = 1;
         }else{
-            $in_partnership = 0;
+            $requestData['in_partnership'] = 0;
+        }
+
+        if(!empty($requestData['featured']))
+        {
+            $requestData['featured'] = 1;
+        }else{
+            $requestData['featured'] = 0;
         }
 
         // dd($requestData);
@@ -401,7 +437,7 @@ class SocialInitiativeController extends Controller
             $end_date = $requestData['end_date'];
             $outreach = $requestData['outreach'];
             $beneficiaries = $requestData['beneficiaries'];
-            if($in_partnership == 1)
+            if($requestData['in_partnership'] == 1)
             {
                 $budget[] = 0;
             }else{
@@ -411,7 +447,9 @@ class SocialInitiativeController extends Controller
             $time_period = $requestData['time_period'];
             $social_init_id = $socialInitiative->id;
 
-            if($in_partnership == 0){
+            // dd($requestData);
+
+            if($requestData['in_partnership'] == 0){
                 for ($count = 0; $count < count($bid); $count++) {
                     $data = array(
                         'start_date' => $start_date[$count],
@@ -426,15 +464,14 @@ class SocialInitiativeController extends Controller
     
                     $insertData[] = $data;
     
-                    // dd($insertData);
-                    MultiBudget::where('id',$bid[$count])->update($data);
+                    
+                    MultiBudget::where('id',$bid[$count])->delete();
                 }
 
-                // dd($bid);
-                // for ($count = 0; $count < count($bid); $count++) {
+                // MultiBudget::where('id',$bid[$count])->update($insertData);
+                MultiBudget::insert($insertData);
 
-                //     MultiBudget::where('id',$bid[$count])->update($data);
-                // }
+                // dd($requestData);
 
             }else{
                 for ($count = 0; $count < count($bid); $count++) {
@@ -453,13 +490,11 @@ class SocialInitiativeController extends Controller
         
                     $insertData[] = $data;
 
-                    MultiBudget::where('id',$bid[$count])->update($data);
+                    // MultiBudget::where('id',$bid[$count])->update($data);
+                    MultiBudget::where('id',$bid[$count])->delete();
                 }
 
-                // dd($insertData);
-                // for ($count = 0; $count < count($bid); $count++) {
-                //     MultiBudget::where('id',$bid[$count])->update($data);
-                // }
+                MultiBudget::insert($insertData);
             }
 
         } catch (ValidationException $e) {
@@ -484,7 +519,7 @@ class SocialInitiativeController extends Controller
                     $filename = 'lit_initiative_' . rand(1, 99999) . '.' . $extension;
                     $large_image_path = public_path('images/initiative/large/' . $filename);
                     // Resize image
-                    Image::make($image_array[$i])->save($large_image_path);
+                    Image::make($image_array[$i])->resize(512, 512)->save($large_image_path);
 
                     // dd($product->id);
 
@@ -497,13 +532,18 @@ class SocialInitiativeController extends Controller
                     // }
                 }
             } else {
-                $filename = "default.png";
-                // $property->image = "default.jpg";
-                SocialInitiativeImages::create([
-                    'image_name' => $filename,
-                    'image_size' => '7.4',
-                    'social_initiative_id' => $id,
-                ]);
+
+                $imageCount = SocialInitiativeImages::where('social_initiative_id', $id)->count();
+                if($imageCount == 0)
+                {
+                    $filename = "default.png";
+                    // $property->image = "default.jpg";
+                    SocialInitiativeImages::create([
+                        'image_name' => $filename,
+                        'image_size' => '7.4',
+                        'social_initiative_id' => $id,
+                    ]);
+                }
             }
 
         } catch (ValidationException $e) {

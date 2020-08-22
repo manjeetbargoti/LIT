@@ -19,7 +19,7 @@
                 <h3> CSR Market Place </h3>
             </div>
             <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3 mb-5">
+                <div class="col-sm-4 col-md-4 col-lg-4 mb-5">
                     <div class="filter-section">
                         <form method="POST" action="<?php echo e(url('/csr-market-place')); ?>">
                             <?php echo csrf_field(); ?>
@@ -57,7 +57,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-sm-9 col-md-9 col-lg-9 mb-5">
+                <div class="col-sm-8 col-md-8 col-lg-8 mb-5">
                     <div>
                         <?php if($data->count() == 0): ?>
                         <p class="text-center">Sorry! no result found for your search.</p>

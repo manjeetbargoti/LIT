@@ -51,6 +51,21 @@
                         </a>
                     </li>
                     @endhasanyrole
+                    <li class="{{ (request()->is('admin/banner*'))  ? 'active':'' }}">
+                        <a href="#"><i class="fa fa-angle-right"></i> &nbsp; Banners
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul>
+                            <li class="{{ (request()->is('admin/banner')) ? 'active' : '' }}"><a
+                                    href="{{ url('/admin/banner') }}"><i class="fa fa-angle-right text-aqua"></i> &nbsp; All
+                                    Banners</a></li>
+                            <li class="{{ (request()->is('admin/banner/add')) ? 'active' : '' }}"><a
+                                    href="{{ url('/admin/banner/add') }}"><i class="fa fa-plus text-aqua"></i> &nbsp; Add
+                                    Banner</a></li>
+                        </ul>
+                    </li>
                     <!-- <li class="{{ (request()->is('admin/profile/address')) ? 'active':'' }}">
                         <a href="{{ url('admin/profile/address') }}">
                             <i class="fa fa-angle-right"></i>
@@ -236,34 +251,34 @@
             </li>
             <!-- /.Page Management -->
 
-        <!-- Support Center -->
-        @role('Super Admin')
-        <li class="dropdown_menu {{ (request()->is('admin/support*')) ? 'active':'' }}">
-            <a href="{{ url('/admin/supports') }}">
-                <i class="fa fa-file-text-o"></i>
-                <span class="link-title menu_hide">&nbsp; Support Center</span>
-                <span class="fa arrow menu_hide"></span>
-            </a>
-            <ul>
-                <li class="{{ (request()->is('admin/support/submit-proposals*')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/submit-proposals') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
-                    </a>
-                </li>
-                <li class="{{ (request()->is('admin/support/initiative-query*')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/initiative-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
-                    </a>
-                </li>
-                <li class="{{ (request()->is('admin/support/activist-query*')) ? 'active':'' }}">
-                    <a href="{{ url('admin/support/activist-query') }}">
-                        <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endrole
-        <!-- /.Support Center -->
+            <!-- Support Center -->
+            @role('Super Admin')
+            <li class="dropdown_menu {{ (request()->is('admin/support*')) ? 'active':'' }}">
+                <a href="{{ url('/admin/supports') }}">
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="link-title menu_hide">&nbsp; Support Center</span>
+                    <span class="fa arrow menu_hide"></span>
+                </a>
+                <ul>
+                    <li class="{{ (request()->is('admin/support/submit-proposals*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/support/submit-proposals') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Proposals Query
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/support/initiative-query*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/support/initiative-query') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Initiative Query
+                        </a>
+                    </li>
+                    <li class="{{ (request()->is('admin/support/activist-query*')) ? 'active':'' }}">
+                        <a href="{{ url('admin/support/activist-query') }}">
+                            <i class="fa fa-angle-right"></i> &nbsp; Social Startup Query
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endrole
+            <!-- /.Support Center -->
         </ul>
         <!-- /#menu -->
     </div>

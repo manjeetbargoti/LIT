@@ -22,8 +22,8 @@
 
                 <h5 class="h5"> Follow: </h5>
                 <ul class="social">
-                    <li> <a href="<?php echo e(config('app.twitter')); ?>"> <i class="fa fa-twitter"> </i> </a> </li>
-                    <li> <a href="<?php echo e(config('app.fb')); ?>"> <i class="fa fa-facebook"> </i> </a> </li>
+                    <li> <a href="<?php echo e(config('app.linkedin')); ?>"> <i class="fa fa-linkedin"> </i> </a> </li>
+                    <li> <a href="<?php echo e(config('app.tiktok')); ?>"> <i><img src="<?php echo e(asset('/images/tiktok1.png')); ?>" width="18"> </i> </a> </li>
                     <li> <a href="<?php echo e(config('app.insta')); ?>"> <i class="fa fa-instagram"> </i> </a> </li>
                 </ul>
             </div>
